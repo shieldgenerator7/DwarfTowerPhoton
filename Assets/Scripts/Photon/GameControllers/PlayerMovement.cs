@@ -12,8 +12,8 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PV = GetComponent<PhotonView>();
-        myCC = GetComponent<CharacterController>();
+        PV = GetComponentInParent<PhotonView>();
+        myCC = GetComponentInParent<CharacterController>();
     }
 
     // Update is called once per frame
