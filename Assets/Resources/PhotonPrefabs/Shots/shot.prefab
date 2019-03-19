@@ -138,6 +138,7 @@ MonoBehaviour:
   stunDuration: 5
   knockbackDistance: 10
   maxHealth: 1
+  health: 0
   parentGC: {fileID: 0}
 --- !u!114 &8562558233965792213
 MonoBehaviour:

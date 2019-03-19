@@ -52,9 +52,6 @@ public class GunController : PlayerAbility
                 );
             shot.GetComponent<ShotController>().parentGC = this;
 
-            //shot.transform.position = ;
-            //shot.transform.up = ;
-
             //On Shot Fired Delegate
             if (onShotFired != null)
             {

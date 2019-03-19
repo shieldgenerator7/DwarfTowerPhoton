@@ -34,6 +34,7 @@ public class ShotController : MonoBehaviour
     // Runtime Vars
     //
 
+    [SerializeField]
     private float health;
     protected float Health
     {
@@ -65,6 +66,14 @@ public class ShotController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        processCollision(collision);
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        processCollision(collision);
+    }
+
+    void processCollision(Collider2D collision) { 
         if (HitsObjects)
         {
             ShotController sc = collision.gameObject.GetComponent<ShotController>();
@@ -84,6 +93,6 @@ public class ShotController : MonoBehaviour
 
     public void addHealth(float health)
     {
-        health += health;
+        this.Health += health;
     }
 }
