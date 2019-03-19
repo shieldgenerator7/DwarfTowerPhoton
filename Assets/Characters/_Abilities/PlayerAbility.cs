@@ -20,7 +20,6 @@ public abstract class PlayerAbility : MonoBehaviour
     /// Options: Look in Edit->Project Settings->Input
     /// </summary>
     public string buttonName = "ability1";
-
     /// <summary>
     /// Whether or not this ability prevents any further abilities from activating
     /// </summary>

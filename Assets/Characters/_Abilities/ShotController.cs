@@ -53,6 +53,7 @@ public class ShotController : MonoBehaviour
     //
 
     private Rigidbody2D rb2d;
+    public GunController parentGC;
 
     // Start is called before the first frame update
     void Start()

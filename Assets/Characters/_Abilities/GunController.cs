@@ -50,6 +50,7 @@ public class GunController : PlayerAbility
                 playerPos + (targetDir * spawnBuffer),
                 Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, targetDir))
                 );
+            shot.GetComponent<ShotController>().parentGC = this;
 
             //shot.transform.position = ;
             //shot.transform.up = ;
@@ -57,7 +58,7 @@ public class GunController : PlayerAbility
             //On Shot Fired Delegate
             if (onShotFired != null)
             {
-                onShotFired(targetPos, targetDir);
+                onShotFired(shot, targetPos, targetDir);
             }
         }
     }
@@ -67,7 +68,7 @@ public class GunController : PlayerAbility
     /// </summary>
     /// <param name="targetPos">The position targetted by this shot</param>
     /// <param name="targetDir">The direction from the player to the target pos, normalized</param>
-    public delegate void OnShotFired(Vector2 targetPos, Vector2 targetDir);
+    public delegate void OnShotFired(GameObject shot, Vector2 targetPos, Vector2 targetDir);
     public OnShotFired onShotFired;
 
 }
