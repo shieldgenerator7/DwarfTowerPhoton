@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 50
-  buttonName: Fire2
+  buttonName: Ability2
   hidesOtherInputs: 0
   fireDelay: 2
   shotPrefabName: turret
@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 5
-  buttonName: Fire1
+  buttonName: Ability1
   hidesOtherInputs: 0
   fireDelay: 0.5
   shotPrefabName: shot
