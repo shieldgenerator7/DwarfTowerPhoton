@@ -1,15 +1,29 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public float maxAmina = 100;
+    [SerializeField]
+    private float amina;//basically mana
+    public float Amina
+    {
+        get { return amina; }
+        private set { amina = value; }
+    }
+
     public List<PlayerAbility> abilities = new List<PlayerAbility>();
 
     // Start is called before the first frame update
     void Start()
     {
-
+        if (GetComponentInParent<PhotonView>().IsMine)
+        {
+            Amina = maxAmina;
+            FindObjectOfType<AminaMeterController>().FocusPlayerController = this;
+        }
     }
 
     // Update is called once per frame
