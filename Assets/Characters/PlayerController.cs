@@ -13,6 +13,13 @@ public class PlayerController : MonoBehaviour
         get { return amina; }
         set { amina = Mathf.Clamp(value, 0, maxAmina); }
     }
+    [SerializeField]
+    private float reservedAmina;//amina reserved for a specific ability that requires charge time
+    public float ReservedAmina
+    {
+        get { return reservedAmina; }
+        private set { reservedAmina = Mathf.Clamp(value, 0, maxAmina); }
+    }
 
     public AminaReloader aminaReloader;//ability called by default when the player runs out of amina
     public List<PlayerAbility> abilities = new List<PlayerAbility>();
@@ -63,13 +70,14 @@ public class PlayerController : MonoBehaviour
         //Ability Inputs
         foreach (PlayerAbility ability in abilities)
         {
-            if (Input.GetButton(ability.buttonName))
+            bool buttonUp = Input.GetButtonUp(ability.buttonName);
+            if (Input.GetButton(ability.buttonName) || buttonUp)
             {
                 if (Input.GetButtonDown(ability.buttonName))
                 {
                     ability.OnButtonDown();
                 }
-                else if (Input.GetButtonUp(ability.buttonName))
+                else if (buttonUp)
                 {
                     ability.OnButtonUp();
                 }
@@ -106,6 +114,24 @@ public class PlayerController : MonoBehaviour
             return amount;
         }
         return 0;
+    }
+
+    public void reserveAmina(float amount)
+    {
+        ReservedAmina += requestAmina(amount);
+    }
+
+    public float collectReservedAmina()
+    {
+        float reserves = ReservedAmina;
+        ReservedAmina = 0;
+        return reserves;
+    }
+
+    public void cancelReservedAmina()
+    {
+        rechargeAmina(ReservedAmina);
+        ReservedAmina = 0;
     }
 
     public void rechargeAmina(float amount)

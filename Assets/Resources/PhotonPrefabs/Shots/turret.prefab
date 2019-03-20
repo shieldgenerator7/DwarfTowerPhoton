@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 506}
   - component: {fileID: 572}
   - component: {fileID: 570}
-  - component: {fileID: 568}
+  - component: {fileID: 8423462684164734678}
   m_Layer: 0
   m_Name: turret
   m_TagString: Untagged
@@ -159,7 +159,7 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
---- !u!114 &568
+--- !u!114 &8423462684164734678
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 246}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95401923689b5e04ba705f1bf93961a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 839612296d1b84f40bdcaa568ab44222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
@@ -178,7 +178,12 @@ MonoBehaviour:
   knockbackDistance: 0
   maxHealth: 100
   health: 0
-  parentGC: {fileID: 0}
+  speedChargeMultiplier: 0
+  initialDamageChargeMultiplier: 1
+  damagePerSecondChargeMultiplier: 0.25
+  stunDurationChargeMultiplier: 0
+  knockbackDistanceChargeMultiplier: 0
+  maxHealthChargeMultiplier: 2
 --- !u!1 &247
 GameObject:
   m_ObjectHideFlags: 0

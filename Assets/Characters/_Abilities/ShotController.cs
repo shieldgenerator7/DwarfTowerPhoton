@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -55,16 +56,17 @@ public class ShotController : MonoBehaviour
     //
 
     private Rigidbody2D rb2d;
-    public GunController parentGC;
+    protected PhotonView PV;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         if (rb2d)
         {
             rb2d.velocity = transform.up * speed;
         }
+        PV = GetComponent<PhotonView>();
         health = maxHealth;
     }
 

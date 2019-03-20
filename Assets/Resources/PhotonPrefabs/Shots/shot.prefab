@@ -140,7 +140,6 @@ MonoBehaviour:
   knockbackDistance: 10
   maxHealth: 1
   health: 0
-  parentGC: {fileID: 0}
 --- !u!114 &571
 MonoBehaviour:
   m_ObjectHideFlags: 0

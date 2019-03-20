@@ -15,28 +15,25 @@ public class AminaMeterController : MonoBehaviour
         set { focusPC = value; }
     }
 
-    private Image image;
-
-    private void Start()
-    {
-        image = GetComponent<Image>();
-    }
-
+    public Image aminaMeter;
+    public Image aminaReserveMeter;
+    
     private void Update()
     {
         if (focusPC)
         {
-            updateMeter(focusPC.Amina, focusPC.maxAmina);
+            updateMeter(focusPC.Amina, focusPC.maxAmina, focusPC.ReservedAmina);
         }
         else
         {
-            updateMeter(0, 1);
+            updateMeter(0, 1, 0);
         }
         transform.position = Input.mousePosition;
     }
 
-    void updateMeter(float amina, float maxAnima)
+    void updateMeter(float amina, float maxAmina, float reservedAmina)
     {
-        image.fillAmount = amina / maxAnima;
+        aminaMeter.fillAmount = amina / maxAmina;
+        aminaReserveMeter.fillAmount = (amina + reservedAmina) / maxAmina;
     }
 }
