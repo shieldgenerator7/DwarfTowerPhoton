@@ -10,9 +10,31 @@ public class ChargedGunController : PlayerAbility
     public float expectedAnimaReserved = 10;
     public float minAminaReserved = 5.1f;
     public string shotPrefabName;
-    public float spawnBuffer = 1;//how far away from the player the shots spawn
+    public float defaultSpawnBuffer = 1;//how far away from the player the shots spawn
+    public float minSpawnBuffer = 0;
+    public float maxSpawnBuffer = 2;
     public bool rotateShot = true;//rotates shot to face the direction it's traveling
     public GameObject previewPrefab;
+
+    public float SpawnBuffer
+    {
+        get
+        {
+            if (preview)
+            {
+                Vector2 playerPos = transform.position;
+                Vector2 targetPos = Utility.MouseWorldPos;
+                Vector2 targetDir = (targetPos - playerPos);
+                float magnitude = targetDir.magnitude;
+                magnitude = Mathf.Clamp(magnitude, minSpawnBuffer, maxSpawnBuffer);
+                return magnitude;
+            }
+            else
+            {
+                return defaultSpawnBuffer;
+            }
+        }
+    }
 
     private GameObject preview;
     private Collider2D previewCollider;
@@ -95,7 +117,7 @@ public class ChargedGunController : PlayerAbility
             Vector2 targetDir = (targetPos - playerPos).normalized;
             GameObject shot = PhotonNetwork.Instantiate(
                 Path.Combine("PhotonPrefabs", "Shots", shotPrefabName),
-                playerPos + (targetDir * spawnBuffer),
+                playerPos + (targetDir * SpawnBuffer),
                 (rotateShot) ? Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, targetDir)) : Quaternion.Euler(0, 0, 0)
                 );
             shot.GetComponent<ChargedShotController>().chargeStats(aminaMultiplier);
@@ -125,7 +147,7 @@ public class ChargedGunController : PlayerAbility
         Vector2 playerPos = transform.position;
         Vector2 targetPos = Utility.MouseWorldPos;
         Vector2 targetDir = (targetPos - playerPos).normalized;
-        Vector2 pos = playerPos + (targetDir * spawnBuffer);
+        Vector2 pos = playerPos + (targetDir * SpawnBuffer);
         return getPreviewState(pos);
     }
 
