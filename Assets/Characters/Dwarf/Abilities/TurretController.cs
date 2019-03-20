@@ -12,7 +12,6 @@ public class TurretController : GunController
     {
         base.Start();
         sc = GetComponentInParent<ShotController>();
-        transform.up = Vector2.up;
     }
 
     public void fireInDirection(GameObject shot, Vector2 targetPos, Vector2 targetDir)

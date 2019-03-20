@@ -227,3 +227,4 @@ MonoBehaviour:
   fireDelay: 0.1
   shotPrefabName: shot
   spawnBuffer: 1
+  rotateShot: 1

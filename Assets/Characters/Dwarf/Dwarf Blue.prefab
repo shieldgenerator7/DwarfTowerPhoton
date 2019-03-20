@@ -214,6 +214,7 @@ MonoBehaviour:
   fireDelay: 2
   shotPrefabName: turret
   spawnBuffer: 1
+  rotateShot: 0
   turretFireTrigger: {fileID: 5500888993561376432}
 --- !u!1 &7577088886736187312
 GameObject:
@@ -264,3 +265,4 @@ MonoBehaviour:
   fireDelay: 0.5
   shotPrefabName: shot
   spawnBuffer: 1.5
+  rotateShot: 1

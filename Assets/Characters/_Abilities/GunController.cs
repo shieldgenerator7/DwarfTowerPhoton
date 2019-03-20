@@ -10,6 +10,7 @@ public class GunController : PlayerAbility
     public float fireDelay = 0.1f;//seconds between shots
     public string shotPrefabName;
     public float spawnBuffer = 1;//how far away from the player the shots spawn
+    public bool rotateShot = true;//rotates shot to face the direction it's traveling
 
     //Runtime Vars
     private float lastFireTime = 0;
@@ -48,7 +49,7 @@ public class GunController : PlayerAbility
             GameObject shot = PhotonNetwork.Instantiate(
                 Path.Combine("PhotonPrefabs", "Shots", shotPrefabName),
                 playerPos + (targetDir * spawnBuffer),
-                Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, targetDir))
+                (rotateShot) ? Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, targetDir)) : Quaternion.Euler(0, 0, 0)
                 );
             shot.GetComponent<ShotController>().parentGC = this;
 
