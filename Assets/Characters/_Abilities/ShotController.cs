@@ -8,6 +8,7 @@ public class ShotController : MonoBehaviour
     // Settings
     //
     public float speed = 3;//how fast it travels (units/sec)
+    public float initialDamage = 10;//damage dealt upon initial contact
     public float damagePerSecond = 10;//damage per second in seconds
     public float stunDuration = 5;//how long hit players will be stunned for
     public float knockbackDistance = 10;//how far (in total) hit players will be knocked back
@@ -69,20 +70,28 @@ public class ShotController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        processCollision(collision);
+        processCollision(collision, true);
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        processCollision(collision);
+        processCollision(collision, false);
     }
 
-    void processCollision(Collider2D collision) { 
+    void processCollision(Collider2D collision, bool useInitialDamage = false)
+    {
         if (HitsObjects)
         {
             ShotController sc = collision.gameObject.GetComponent<ShotController>();
             if (sc)
             {
-                sc.addHealth(-damagePerSecond * Time.deltaTime);
+                if (useInitialDamage)
+                {
+                    sc.addHealth(-initialDamage);
+                }
+                else
+                {
+                    sc.addHealth(-damagePerSecond * Time.deltaTime);
+                }
             }
         }
         if (HitsPlayer)

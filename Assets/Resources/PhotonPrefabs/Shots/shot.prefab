@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  initialDamage: 10
   damagePerSecond: 10
   stunDuration: 5
   knockbackDistance: 10
