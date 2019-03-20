@@ -6,6 +6,25 @@ public class TurretController : GunController
 {
 
     private ShotController sc;
+    private GunController turretFireTrigger;//the gun controller that causes the turrets to fire
+    public GunController Trigger
+    {
+        get { return turretFireTrigger; }
+        set
+        {
+            //Remove previous trigger (if exists)
+            if (turretFireTrigger)
+            {
+                turretFireTrigger.onShotFired -= fireInDirection;
+            }
+            turretFireTrigger = value;
+            //Add new trigger (if exists)
+            if (turretFireTrigger)
+            {
+                turretFireTrigger.onShotFired += fireInDirection;
+            }
+        }
+    }
 
     // Start is called before the first frame update
     protected override void Start()
@@ -14,8 +33,13 @@ public class TurretController : GunController
         sc = GetComponentInParent<ShotController>();
     }
 
-    public void fireInDirection(GameObject shot, Vector2 targetPos, Vector2 targetDir)
+    private void fireInDirection(GameObject shot, Vector2 targetPos, Vector2 targetDir)
     {
         fireShot(transform.position, (Vector2)transform.position + targetDir);
+    }
+
+    private void OnDestroy()
+    {
+        Trigger = null;
     }
 }

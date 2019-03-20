@@ -14,6 +14,6 @@ public class TurretLauncher : ChargedGunController
 
     public void addTurretTrigger(GameObject shot, Vector2 targetPos, Vector2 targetDir)
     {
-        turretFireTrigger.onShotFired += shot.GetComponentInChildren<TurretController>().fireInDirection;
+        shot.GetComponentInChildren<TurretController>().Trigger = turretFireTrigger;
     }
 }
