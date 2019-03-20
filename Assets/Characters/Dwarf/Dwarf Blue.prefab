@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 9144531418077418824}
   - component: {fileID: 3158633092025413174}
   - component: {fileID: 3369071877670158181}
-  - component: {fileID: 358465149532029998}
   m_Layer: 0
   m_Name: Dwarf Blue
   m_TagString: Untagged
@@ -190,20 +189,6 @@ MonoBehaviour:
   buttonName: Reload
   hidesOtherInputs: 1
   reloadDuration: 2
---- !u!114 &358465149532029998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532201618779257096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90c84324157417744a760960dd61b69c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teamCaptain: {fileID: 358465149532029998}
-  owner: {fileID: 358465149532029998}
 --- !u!1 &2299017120802892305
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,7 +239,9 @@ MonoBehaviour:
   expectedAnimaReserved: 10
   minAminaReserved: 5.1
   shotPrefabName: turret
-  spawnBuffer: 1.2
+  defaultSpawnBuffer: 1
+  minSpawnBuffer: 0
+  maxSpawnBuffer: 2
   rotateShot: 0
   previewPrefab: {fileID: 3363737750353282456, guid: c61aa5d8c6dad3f43806362e06c103e5,
     type: 3}
@@ -309,7 +296,9 @@ MonoBehaviour:
   expectedAnimaReserved: 10
   minAminaReserved: 0.1
   shotPrefabName: barricade
-  spawnBuffer: 1.3
+  defaultSpawnBuffer: 1
+  minSpawnBuffer: 0
+  maxSpawnBuffer: 2
   rotateShot: 0
   previewPrefab: {fileID: 4883769523225080588, guid: b262c7e4978b83d4da6bd142ea06f830,
     type: 3}

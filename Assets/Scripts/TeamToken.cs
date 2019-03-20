@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ public class TeamToken : MonoBehaviour
 {
     public TeamToken teamCaptain;
     public TeamToken owner;
+
+    private PhotonView PV;
 
     private void Start()
     {
@@ -23,6 +26,22 @@ public class TeamToken : MonoBehaviour
         {
             cgc.onShotFired += recruitShot;
         }
+        //If there's no owner,
+        if (!owner)
+        {
+            //it owns itself
+            owner = this;
+        }
+        initPV();
+    }
+
+    void initPV()
+    {
+        PV = GetComponent<PhotonView>();
+        if (!PV)
+        {
+            PV = GetComponentInParent<PhotonView>();
+        }
     }
 
     public TeamToken recruit(GameObject go)
@@ -32,14 +51,46 @@ public class TeamToken : MonoBehaviour
         {
             tt = go.AddComponent<TeamToken>();
         }
-        tt.teamCaptain = this.teamCaptain;
+        recruit(tt);
         return tt;
+    }
+
+    public void recruit(TeamToken tt)
+    {
+        tt.teamCaptain = this.teamCaptain;
     }
 
     public void recruitOwnedObject(GameObject go)
     {
         TeamToken tt = recruit(go);
         tt.owner = this;
+    }
+
+    public void seeRecruiter(GameObject go)
+    {
+        TeamToken tt = go.GetComponent<TeamToken>();
+        if (!tt)
+        {
+            tt = GetComponentInParent<TeamToken>();
+        }
+        string teamCaptainName = tt.teamCaptain.name;
+        if (!PV)
+        {
+            initPV();
+        }
+        PV.RPC("RPC_SeeRecruiter", RpcTarget.AllBufferedViaServer, teamCaptainName);
+    }
+
+    [PunRPC]
+    void RPC_SeeRecruiter(string teamCaptainName)
+    {
+        foreach (TeamToken tt in FindObjectsOfType<TeamToken>())
+        {
+            if (tt.name == teamCaptainName)
+            {
+                tt.recruit(this);
+            }
+        }
     }
 
     public bool onSameTeam(TeamToken other)
@@ -127,5 +178,19 @@ public class TeamToken : MonoBehaviour
             //therefore not owned by same player
             return false;
         }
+    }
+
+    public static TeamToken getTeamToken(GameObject go, bool addIfNone = false)
+    {
+        TeamToken tt = go.GetComponent<TeamToken>();
+        if (!tt)
+        {
+            tt = go.GetComponentInParent<TeamToken>();
+        }
+        if (!tt && addIfNone)
+        {
+            tt = go.AddComponent<TeamToken>();
+        }
+        return tt;
     }
 }

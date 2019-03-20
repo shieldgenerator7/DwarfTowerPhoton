@@ -36,5 +36,6 @@ MonoBehaviour:
   - RPC_LoadedGameScene
   - RPC_AddCharacter
   - RPC_ChargeStats
+  - RPC_SeeRecruiter
   DisableAutoOpenWizard: 1
   ShowSettings: 1
