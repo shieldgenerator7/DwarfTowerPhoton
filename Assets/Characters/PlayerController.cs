@@ -11,10 +11,13 @@ public class PlayerController : MonoBehaviour
     public float Amina
     {
         get { return amina; }
-        private set { amina = value; }
+        set { amina = Mathf.Clamp(value, 0, maxAmina); }
     }
 
+    public AminaReloader aminaReloader;//ability called by default when the player runs out of amina
     public List<PlayerAbility> abilities = new List<PlayerAbility>();
+
+    private List<PlayerAbility> processingAbilities = new List<PlayerAbility>();//used for abilities that have lasting effects
 
     private PhotonView PV;
 
@@ -36,6 +39,28 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
+        //Auto-Reloading
+        if (Amina == 0 && !aminaReloader.Reloading)
+        {
+            aminaReloader.reload();
+        }
+        //Processing Abilities
+        bool processingHidesInputs = false;
+        for (int i = processingAbilities.Count - 1; i >= 0; i--)
+        {
+            PlayerAbility ability = processingAbilities[i];
+            ability.OnContinuedProcessing();
+            if (ability.hidesOtherInputs)
+            {
+                processingHidesInputs = true;
+            }
+        }
+        if (processingHidesInputs)
+        {
+            //don't do process the player inputs
+            return;
+        }
+        //Ability Inputs
         foreach (PlayerAbility ability in abilities)
         {
             if (Input.GetButton(ability.buttonName))
@@ -81,5 +106,22 @@ public class PlayerController : MonoBehaviour
             return amount;
         }
         return 0;
+    }
+
+    public void rechargeAmina(float amount)
+    {
+        Amina += amount;
+    }
+
+    public void processAbility(PlayerAbility ability, bool process = true)
+    {
+        if (process)
+        {
+            processingAbilities.Add(ability);
+        }
+        else
+        {
+            processingAbilities.Remove(ability);
+        }
     }
 }

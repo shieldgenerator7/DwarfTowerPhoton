@@ -19,7 +19,7 @@ public abstract class PlayerAbility : MonoBehaviour
     /// The name of the button that activates this ability
     /// Options: Look in Edit->Project Settings->Input
     /// </summary>
-    public string buttonName = "ability1";
+    public string buttonName = "Ability1";
     /// <summary>
     /// Whether or not this ability prevents any further abilities from activating
     /// </summary>
@@ -88,5 +88,13 @@ public abstract class PlayerAbility : MonoBehaviour
     public virtual void OnButtonUp()
     {
         buttonHoldEndTime = Time.time;
+    }
+
+    /// <summary>
+    /// Processing that happens even after the button is not pressed until the ability's effect ends
+    /// </summary>
+    public virtual void OnContinuedProcessing()
+    {
+        throw new System.NotImplementedException("PlayerAbility.OnContinuedProcessing() is not implemented in subtype " + this.GetType());
     }
 }
