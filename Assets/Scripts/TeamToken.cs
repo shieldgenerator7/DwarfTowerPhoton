@@ -9,6 +9,7 @@ using UnityEngine;
 public class TeamToken : MonoBehaviour
 {
     public TeamToken teamCaptain;
+    public TeamToken owner;
 
     private void Start()
     {
@@ -24,7 +25,7 @@ public class TeamToken : MonoBehaviour
         }
     }
 
-    public void recruit(GameObject go)
+    public TeamToken recruit(GameObject go)
     {
         TeamToken tt = go.GetComponent<TeamToken>();
         if (!tt)
@@ -32,6 +33,13 @@ public class TeamToken : MonoBehaviour
             tt = go.AddComponent<TeamToken>();
         }
         tt.teamCaptain = this.teamCaptain;
+        return tt;
+    }
+
+    public void recruitOwnedObject(GameObject go)
+    {
+        TeamToken tt = recruit(go);
+        tt.owner = this;
     }
 
     public bool onSameTeam(TeamToken other)
@@ -77,6 +85,47 @@ public class TeamToken : MonoBehaviour
 
     private void recruitShot(GameObject shot, Vector2 targetPos, Vector2 targetDir)
     {
-        recruit(shot);
+        recruitOwnedObject(shot);
+    }
+
+    public bool ownedBySamePlayer(TeamToken other)
+    {
+        return this.owner == other.owner;
+    }
+
+    public static bool ownedBySamePlayer(GameObject go1, GameObject go2)
+    {//2019-03-20: copied from onSameTeam()
+
+        //Get go1's team token
+        TeamToken tt1 = go1.GetComponent<TeamToken>();
+        if (!tt1)
+        {
+            tt1 = go1.GetComponentInParent<TeamToken>();
+        }
+        //Get go2's team token
+        TeamToken tt2 = go2.GetComponent<TeamToken>();
+        if (!tt2)
+        {
+            tt2 = go2.GetComponentInParent<TeamToken>();
+        }
+        //If both have a team token
+        if (tt1 && tt2)
+        {
+            //easy, just compare their owners
+            return tt1.ownedBySamePlayer(tt2);
+        }
+        //If neither has a team token
+        else if (!tt1 && !tt2)
+        {
+            //not owned at all
+            return false;
+        }
+        //If one or either has a team token, but not both
+        else
+        {
+            //one's not owned at all,
+            //therefore not owned by same player
+            return false;
+        }
     }
 }

@@ -203,6 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamCaptain: {fileID: 358465149532029998}
+  owner: {fileID: 358465149532029998}
 --- !u!1 &2299017120802892305
 GameObject:
   m_ObjectHideFlags: 0
