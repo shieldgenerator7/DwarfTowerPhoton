@@ -81,6 +81,11 @@ public class ShotController : MonoBehaviour
 
     void processCollision(Collider2D collision, bool useInitialDamage = false)
     {
+        if (TeamToken.onSameTeam(gameObject, collision.gameObject))
+        {
+            //don't damage teammates
+            return;
+        }
         if (HitsObjects)
         {
             ShotController sc = collision.gameObject.GetComponent<ShotController>();
