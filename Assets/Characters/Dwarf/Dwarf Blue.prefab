@@ -113,10 +113,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxAmina: 100
   amina: 0
+  reservedAmina: 0
   aminaReloader: {fileID: 3369071877670158181}
   abilities:
-  - {fileID: 5500888993561376432}
   - {fileID: 7133168848261502530}
+  - {fileID: 5500888993561376432}
   - {fileID: 3369071877670158181}
 --- !u!61 &9144531418077418824
 BoxCollider2D:
@@ -231,8 +232,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manaCost: 50
   buttonName: Ability2
-  hidesOtherInputs: 0
-  fireDelay: 2
+  hidesOtherInputs: 1
+  aminaReservedPerSecond: 5
+  expectedAnimaReserved: 10
+  minAminaReserved: 5.1
   shotPrefabName: turret
   spawnBuffer: 1
   rotateShot: 0
