@@ -16,15 +16,19 @@ public class TeamToken : MonoBehaviour
 
     private void Start()
     {
-        //Make sure all guns register their launched objects
-        foreach (GunController gc in GetComponentsInChildren<GunController>())
+        initPV();
+        if (PV.IsMine)
         {
-            gc.onShotFired += recruitShot;
-        }
-        //Make sure all guns register their launched objects
-        foreach (ChargedGunController cgc in GetComponentsInChildren<ChargedGunController>())
-        {
-            cgc.onShotFired += recruitShot;
+            //Make sure all guns register their launched objects
+            foreach (GunController gc in GetComponentsInChildren<GunController>())
+            {
+                gc.onShotFired += recruitShot;
+            }
+            //Make sure all charged guns register their launched objects
+            foreach (ChargedGunController cgc in GetComponentsInChildren<ChargedGunController>())
+            {
+                cgc.onShotFired += recruitShot;
+            }
         }
         //If there's no owner,
         if (!owner)
@@ -32,7 +36,6 @@ public class TeamToken : MonoBehaviour
             //it owns itself
             owner = this;
         }
-        initPV();
     }
 
     void initPV()
