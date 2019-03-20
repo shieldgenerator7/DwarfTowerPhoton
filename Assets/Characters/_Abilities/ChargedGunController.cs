@@ -184,6 +184,10 @@ public class ChargedGunController : PlayerAbility
         {
             return PreviewDisplayer.PreviewState.NONE;
         }
+        if (playerController.ReservedAmina < minAminaReserved)
+        {
+            return PreviewDisplayer.PreviewState.NONE;
+        }
         return PreviewDisplayer.PreviewState.BUILD;
     }
 }
