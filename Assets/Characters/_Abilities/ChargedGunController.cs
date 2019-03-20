@@ -174,8 +174,9 @@ public class ChargedGunController : PlayerAbility
         for (int i = 0; i < count; i++)
         {
             RaycastHit2D rch2d = rch2ds[i];
-            Rigidbody2D rchRB2D = rch2d.collider.gameObject.GetComponent<Rigidbody2D>();
-            ShotController rchSC = rch2d.collider.gameObject.GetComponent<ShotController>();
+            GameObject rchGO = rch2d.collider.gameObject;
+            Rigidbody2D rchRB2D = rchGO.GetComponent<Rigidbody2D>();
+            ShotController rchSC = rchGO.GetComponent<ShotController>();
             //If the conflicting object is a regular moving shot,
             if (rchRB2D && rchSC)
             {
@@ -185,11 +186,22 @@ public class ChargedGunController : PlayerAbility
             //If the conflicting object is non-moving or is not a shot,
             else
             {
-                //it's conflicting
-                conflictingObject = rch2d.collider.gameObject;
-                coHasRB2D = rchRB2D;
-                coHasSC = rchSC;
-                break;
+                //Double-check to make sure the sprites overlap
+                SpriteRenderer coSR = rchGO.GetComponent<SpriteRenderer>();
+                SpriteRenderer pSR = preview.GetComponent<SpriteRenderer>();
+                bool overlap = coSR.bounds.Intersects(pSR.bounds);
+                if (overlap)
+                {
+                    //it's conflicting
+                    conflictingObject = rchGO;
+                    coHasRB2D = rchRB2D;
+                    coHasSC = rchSC;
+                    break;
+                }
+                else
+                {
+                    continue;
+                }
             }
         }
         if (conflictingObject)
@@ -202,6 +214,7 @@ public class ChargedGunController : PlayerAbility
                 {
                     //upgrade the one there
                     targetObject = conflictingObject;
+                    preview.transform.position = conflictingObject.transform.position;
                     return PreviewDisplayer.PreviewState.UPGRADE;
                 }
             }
