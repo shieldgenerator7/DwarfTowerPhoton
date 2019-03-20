@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         //Auto-Reloading
-        if (Amina == 0 && !aminaReloader.Reloading)
+        if (Amina == 0  && ReservedAmina == 0 && !aminaReloader.Reloading)
         {
             aminaReloader.reload();
         }
