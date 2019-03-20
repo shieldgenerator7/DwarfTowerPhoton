@@ -12,12 +12,22 @@ public class ChargedShotController : ShotController
     // 0.5 = half multiplier received
     // 1   = exact multiplier received
     // 2   = double multiplier received
-    public float speedChargeMultiplier = 1;
-    public float initialDamageChargeMultiplier = 1;
-    public float damagePerSecondChargeMultiplier = 1;
-    public float stunDurationChargeMultiplier = 1;
-    public float knockbackDistanceChargeMultiplier = 1;
-    public float maxHealthChargeMultiplier = 1;
+    [SerializeField]
+    private float speedChargeMultiplier = 1;
+    [SerializeField]
+    private float initialDamageChargeMultiplier = 1;
+    [SerializeField]
+    private float damagePerSecondChargeMultiplier = 1;
+    [SerializeField]
+    private float stunDurationChargeMultiplier = 1;
+    [SerializeField]
+    private float knockbackDistanceChargeMultiplier = 1;
+    [SerializeField]
+    private float maxHealthChargeMultiplier = 1;
+
+    private float multiplier = 0;
+
+    public Sprite previewSprite;//used for constructs that can be manually destroyed / upgraded
 
     protected override void Start()
     {
@@ -30,11 +40,13 @@ public class ChargedShotController : ShotController
         {
             Start();
         }
-        PV.RPC("RPC_ChargeStats", RpcTarget.All, multiplier);
+        this.multiplier = multiplier;
+        PV.RPC("RPC_ChargeStats", RpcTarget.All, this.multiplier);
     }
 
     [PunRPC]
-    public void RPC_ChargeStats(float multiplier) { 
+    public void RPC_ChargeStats(float multiplier)
+    {
         speed = chargeStat(speed, multiplier, speedChargeMultiplier);
         initialDamage = chargeStat(initialDamage, multiplier, initialDamageChargeMultiplier);
         damagePerSecond = chargeStat(damagePerSecond, multiplier, damagePerSecondChargeMultiplier);
@@ -61,9 +73,25 @@ public class ChargedShotController : ShotController
     /// <param name="statChargeMultiplier"></param>
     private float chargeStat(float stat, float multiplier, float statChargeMultiplier)
     {
+        if (stat == 0 && statChargeMultiplier > 0)
+        {
+            stat = 1;
+        }
         float newStat = stat * multiplier;
         float diff = (newStat - stat);
         float keptDiff = diff * statChargeMultiplier;
         return Mathf.Max(0, stat + keptDiff);
+    }
+
+    /// <summary>
+    /// Upgrades stats after the object has already been initially charged
+    /// </summary>
+    /// <param name="newMulitplier"></param>
+    public void upgradeStats(float newMulitplier)
+    {
+        float totalMulitplier = newMulitplier + this.multiplier;
+        float converterMultiplier = newMulitplier / this.multiplier;
+        chargeStats(converterMultiplier);
+        this.multiplier = totalMulitplier;
     }
 }

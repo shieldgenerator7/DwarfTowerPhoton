@@ -39,6 +39,7 @@ public class ChargedGunController : PlayerAbility
     private GameObject preview;
     private Collider2D previewCollider;
     private PreviewDisplayer previewDisplayer;
+    private GameObject targetObject;//if not building something new, this is the object to act on
 
     protected override void Start()
     {
@@ -77,23 +78,34 @@ public class ChargedGunController : PlayerAbility
     public override void OnButtonUp()
     {
         base.OnButtonUp();
-        bool previewHasClearLanding = true;
+        PreviewDisplayer.PreviewState buildAction = PreviewDisplayer.PreviewState.BUILD;
         if (preview)
         {
-            PreviewDisplayer.PreviewState state = getPreviewState();
-            previewHasClearLanding = state == PreviewDisplayer.PreviewState.BUILD;
+            buildAction = getPreviewState();
         }
-        if (playerController.ReservedAmina >= minAminaReserved
-            && previewHasClearLanding)
+        if (buildAction == PreviewDisplayer.PreviewState.BUILD)
+        {
+            if (playerController.ReservedAmina >= minAminaReserved)
+            {
+                float aminaObtained = playerController.collectReservedAmina();
+                fireShot(
+                    transform.position,
+                    Utility.MouseWorldPos,
+                    aminaObtained
+                    );
+            }
+            else
+            {
+                playerController.cancelReservedAmina();
+            }
+        }
+        else if (buildAction == PreviewDisplayer.PreviewState.UPGRADE)
         {
             float aminaObtained = playerController.collectReservedAmina();
-            fireShot(
-                transform.position,
-                Utility.MouseWorldPos,
-                aminaObtained
-                );
+            float aminaMultiplier = aminaObtained / expectedAnimaReserved;
+            targetObject.GetComponent<ChargedShotController>().upgradeStats(aminaMultiplier);
         }
-        else
+        else if (buildAction == PreviewDisplayer.PreviewState.NONE)
         {
             playerController.cancelReservedAmina();
         }
@@ -182,7 +194,22 @@ public class ChargedGunController : PlayerAbility
         }
         if (conflictingObject)
         {
+            //If this player owns the conflicting object,
+            if (TeamToken.ownedBySamePlayer(gameObject, conflictingObject))
+            {
+                //if they're the same type,
+                if (conflictingObject.name.Contains(shotPrefabName))
+                {
+                    //upgrade the one there
+                    targetObject = conflictingObject;
+                    return PreviewDisplayer.PreviewState.UPGRADE;
+                }
+            }
             return PreviewDisplayer.PreviewState.NONE;
+        }
+        else
+        {
+            targetObject = null;
         }
         if (playerController.ReservedAmina < minAminaReserved)
         {
