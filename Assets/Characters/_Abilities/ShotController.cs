@@ -60,7 +60,10 @@ public class ShotController : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        rb2d.velocity = transform.up * speed;
+        if (rb2d)
+        {
+            rb2d.velocity = transform.up * speed;
+        }
         health = maxHealth;
     }
 
