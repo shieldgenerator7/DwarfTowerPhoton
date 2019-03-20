@@ -155,4 +155,4 @@ MonoBehaviour:
   stunDurationChargeMultiplier: 0
   knockbackDistanceChargeMultiplier: 0
   maxHealthChargeMultiplier: 3
-  previewSprite: {fileID: 0}
+  previewSprite: {fileID: 21300000, guid: 73cc7530856002240a7109884895d36f, type: 3}

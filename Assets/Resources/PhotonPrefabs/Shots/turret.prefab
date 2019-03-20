@@ -146,6 +146,7 @@ MonoBehaviour:
   stunDurationChargeMultiplier: 0
   knockbackDistanceChargeMultiplier: 0
   maxHealthChargeMultiplier: 2
+  previewSprite: {fileID: 21300000, guid: 9ca2fae91a20d7647882925e6198aaaa, type: 3}
 --- !u!1 &247
 GameObject:
   m_ObjectHideFlags: 0

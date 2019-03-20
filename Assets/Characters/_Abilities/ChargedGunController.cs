@@ -39,6 +39,8 @@ public class ChargedGunController : PlayerAbility
     private GameObject preview;
     private Collider2D previewCollider;
     private PreviewDisplayer previewDisplayer;
+    private SpriteRenderer previewSpriteRenderer;
+    private Sprite previewSprite;
     private GameObject targetObject;//if not building something new, this is the object to act on
 
     protected override void Start()
@@ -48,6 +50,8 @@ public class ChargedGunController : PlayerAbility
         {
             preview = Instantiate(previewPrefab);
             preview.SetActive(false);
+            previewSpriteRenderer = preview.GetComponent<SpriteRenderer>();
+            previewSprite = previewSpriteRenderer.sprite;
             previewCollider = preview.GetComponent<Collider2D>();
             previewDisplayer = preview.GetComponent<PreviewDisplayer>();
         }
@@ -104,6 +108,11 @@ public class ChargedGunController : PlayerAbility
             float aminaObtained = playerController.collectReservedAmina();
             float aminaMultiplier = aminaObtained / expectedAnimaReserved;
             targetObject.GetComponent<ChargedShotController>().upgradeStats(aminaMultiplier);
+        }
+        else if (buildAction == PreviewDisplayer.PreviewState.DESTROY)
+        {
+            PhotonNetwork.Destroy(targetObject);
+            playerController.cancelReservedAmina();
         }
         else if (buildAction == PreviewDisplayer.PreviewState.NONE)
         {
@@ -166,6 +175,7 @@ public class ChargedGunController : PlayerAbility
     private PreviewDisplayer.PreviewState getPreviewState(Vector2 position)
     {
         preview.transform.position = position;
+        previewSpriteRenderer.sprite = previewSprite;
         GameObject conflictingObject = null;
         bool coHasRB2D = false;
         bool coHasSC = false;
@@ -188,8 +198,7 @@ public class ChargedGunController : PlayerAbility
             {
                 //Double-check to make sure the sprites overlap
                 SpriteRenderer coSR = rchGO.GetComponent<SpriteRenderer>();
-                SpriteRenderer pSR = preview.GetComponent<SpriteRenderer>();
-                bool overlap = coSR.bounds.Intersects(pSR.bounds);
+                bool overlap = coSR.bounds.Intersects(previewSpriteRenderer.bounds);
                 if (overlap)
                 {
                     //it's conflicting
@@ -216,6 +225,16 @@ public class ChargedGunController : PlayerAbility
                     targetObject = conflictingObject;
                     preview.transform.position = conflictingObject.transform.position;
                     return PreviewDisplayer.PreviewState.UPGRADE;
+                }
+                //else if they're not the same type,
+                //but still both constructs
+                else if (coHasSC)
+                {
+                    //delete the object already there
+                    targetObject = conflictingObject;
+                    preview.transform.position = conflictingObject.transform.position;
+                    previewSpriteRenderer.sprite = conflictingObject.GetComponent<ChargedShotController>().previewSprite;
+                    return PreviewDisplayer.PreviewState.DESTROY;
                 }
             }
             return PreviewDisplayer.PreviewState.NONE;
