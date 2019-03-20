@@ -114,4 +114,9 @@ public class ShotController : MonoBehaviour
     {
         this.Health += health;
     }
+
+    private void OnDestroy()
+    {
+        PhotonNetwork.Destroy(gameObject);
+    }
 }
