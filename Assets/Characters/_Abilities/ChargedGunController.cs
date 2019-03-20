@@ -158,7 +158,7 @@ public class ChargedGunController : PlayerAbility
         bool coHasRB2D = false;
         bool coHasSC = false;
         RaycastHit2D[] rch2ds = new RaycastHit2D[10];
-        int count = previewCollider.Cast(Vector2.zero, rch2ds, 0, true);
+        int count = previewCollider.Cast(Vector2.zero, rch2ds, 0, false);
         for (int i = 0; i < count; i++)
         {
             RaycastHit2D rch2d = rch2ds[i];
