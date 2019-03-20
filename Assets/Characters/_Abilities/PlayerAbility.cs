@@ -57,6 +57,10 @@ public abstract class PlayerAbility : MonoBehaviour
     protected virtual void Start()
     {
         playerController = GetComponent<PlayerController>();
+        if (!playerController)
+        {
+            playerController = GetComponentInParent<PlayerController>();
+        }
         PV = GetComponentInParent<PhotonView>();
     }
 

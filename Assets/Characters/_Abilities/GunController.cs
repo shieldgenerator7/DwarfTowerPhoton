@@ -31,8 +31,11 @@ public class GunController : PlayerAbility
         //base.OnButtonHeld();
         if (Time.time > lastFireTime + fireDelay)
         {
-            lastFireTime = lastFireTime + fireDelay;
-            fireShot(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            if (manaCost <= 0 || playerController.hasAmina(manaCost))
+            {
+                lastFireTime = lastFireTime + fireDelay;
+                fireShot(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            }
         }
     }
     public override void OnButtonUp()
@@ -45,6 +48,7 @@ public class GunController : PlayerAbility
     {
         if (PV.IsMine)
         {
+            float aminaMultiplier = (manaCost > 0) ? playerController.requestAmina(manaCost) / manaCost : 1;
             Vector2 targetDir = (targetPos - playerPos).normalized;
             GameObject shot = PhotonNetwork.Instantiate(
                 Path.Combine("PhotonPrefabs", "Shots", shotPrefabName),

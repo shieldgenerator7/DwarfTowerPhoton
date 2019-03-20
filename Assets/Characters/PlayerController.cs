@@ -16,10 +16,13 @@ public class PlayerController : MonoBehaviour
 
     public List<PlayerAbility> abilities = new List<PlayerAbility>();
 
+    private PhotonView PV;
+
     // Start is called before the first frame update
     void Start()
     {
-        if (GetComponentInParent<PhotonView>().IsMine)
+        PV = GetComponentInParent<PhotonView>();
+        if (PV.IsMine)
         {
             Amina = maxAmina;
             FindObjectOfType<AminaMeterController>().FocusPlayerController = this;
@@ -29,6 +32,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!PV.IsMine)
+        {
+            return;
+        }
         foreach (PlayerAbility ability in abilities)
         {
             if (Input.GetButton(ability.buttonName))
@@ -52,5 +59,27 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public bool hasAmina(float amount, bool acceptPartialAmount = true)
+    {
+        return Amina >= amount
+            || (acceptPartialAmount && Amina > 0);
+    }
+
+    public float requestAmina(float amount, bool acceptPartialAmount = true)
+    {
+        if (Amina - amount >= 0)
+        {
+            Amina -= amount;
+            return amount;
+        }
+        else if (acceptPartialAmount)
+        {
+            amount = Amina;
+            Amina = 0;
+            return amount;
+        }
+        return 0;
     }
 }

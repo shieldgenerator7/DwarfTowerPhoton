@@ -110,6 +110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23da9a48fa26f9543ac4db8ff387053f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxAmina: 100
+  amina: 0
   abilities:
   - {fileID: 5500888993561376432}
   - {fileID: 7133168848261502530}
@@ -208,7 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 410d7b1fe69fd9248838e7e67f6ada50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 0
+  manaCost: 50
   buttonName: Fire2
   hidesOtherInputs: 0
   fireDelay: 2
@@ -259,7 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83413c13fefadf64bab9596e5332f75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 0
+  manaCost: 5
   buttonName: Fire1
   hidesOtherInputs: 0
   fireDelay: 0.5
