@@ -24,7 +24,7 @@ public class PhotonPlayer : MonoBehaviour
                 spawn.transform.rotation,
                 0
                 );
-            myAvatar.GetComponent<TeamToken>().seeRecruiter(spawn);
+            myAvatar.GetComponent<TeamToken>().seeRecruiter(TeamToken.getTeamToken(spawn));
         }
     }
 

@@ -44,7 +44,7 @@ public class TeamToken : MonoBehaviour
         }
     }
 
-    public TeamToken recruit(GameObject go)
+    private TeamToken recruit(GameObject go)
     {
         TeamToken tt = go.GetComponent<TeamToken>();
         if (!tt)
@@ -55,40 +55,52 @@ public class TeamToken : MonoBehaviour
         return tt;
     }
 
-    public void recruit(TeamToken tt)
+    private void recruit(TeamToken tt)
     {
         tt.teamCaptain = this.teamCaptain;
     }
 
-    public void recruitOwnedObject(GameObject go)
+    private void recruitOwnedObject(GameObject go)
     {
-        TeamToken tt = recruit(go);
+        recruitOwnedObject(getTeamToken(go));
+    }
+    private void recruitOwnedObject(TeamToken tt)
+    {
+        recruit(tt);
         tt.owner = this;
     }
 
-    public void seeRecruiter(GameObject go)
+    public static void seeRecruiter(GameObject go, TeamToken recruiter, bool ownedObject = false)
     {
-        TeamToken tt = go.GetComponent<TeamToken>();
-        if (!tt)
-        {
-            tt = GetComponentInParent<TeamToken>();
-        }
-        string teamCaptainName = tt.teamCaptain.name;
+        TeamToken tt = getTeamToken(go, true);
+        tt.seeRecruiter(recruiter, ownedObject);
+    }
+
+    public void seeRecruiter(TeamToken recruiter, bool ownedObject = false)
+    {
+        string teamCaptainName = recruiter.teamCaptain.name;
         if (!PV)
         {
             initPV();
         }
-        PV.RPC("RPC_SeeRecruiter", RpcTarget.AllBufferedViaServer, teamCaptainName);
+        PV.RPC("RPC_SeeRecruiter", RpcTarget.AllBufferedViaServer, teamCaptainName, ownedObject);
     }
 
     [PunRPC]
-    void RPC_SeeRecruiter(string teamCaptainName)
+    void RPC_SeeRecruiter(string teamCaptainName, bool ownedObject)
     {
         foreach (TeamToken tt in FindObjectsOfType<TeamToken>())
         {
             if (tt.name == teamCaptainName)
             {
-                tt.recruit(this);
+                if (ownedObject)
+                {
+                    tt.recruitOwnedObject(this);
+                }
+                else
+                {
+                    tt.recruit(this);
+                }
             }
         }
     }
@@ -136,7 +148,7 @@ public class TeamToken : MonoBehaviour
 
     private void recruitShot(GameObject shot, Vector2 targetPos, Vector2 targetDir)
     {
-        recruitOwnedObject(shot);
+        seeRecruiter(shot, this, true);
     }
 
     public bool ownedBySamePlayer(TeamToken other)
