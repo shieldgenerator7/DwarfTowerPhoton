@@ -24,4 +24,18 @@ public class PreviewDisplayer : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
     }
 
+    public void updatePreview(PreviewState state)
+    {
+        if (!sr)
+        {
+            Start();
+        }
+        switch (state)
+        {
+            case PreviewState.BUILD: sr.color = buildColor; break;
+            case PreviewState.NONE: sr.color = invalidColor; break;
+            case PreviewState.DESTROY: sr.color = destroyColor; break;
+            case PreviewState.UPGRADE: sr.color = upgradeColor; break;
+        }
+    }
 }

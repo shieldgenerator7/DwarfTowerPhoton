@@ -254,7 +254,7 @@ MonoBehaviour:
   expectedAnimaReserved: 10
   minAminaReserved: 5.1
   shotPrefabName: turret
-  spawnBuffer: 1
+  spawnBuffer: 1.2
   rotateShot: 0
   previewPrefab: {fileID: 3363737750353282456, guid: c61aa5d8c6dad3f43806362e06c103e5,
     type: 3}
@@ -309,7 +309,7 @@ MonoBehaviour:
   expectedAnimaReserved: 10
   minAminaReserved: 0.1
   shotPrefabName: barricade
-  spawnBuffer: 1
+  spawnBuffer: 1.3
   rotateShot: 0
   previewPrefab: {fileID: 4883769523225080588, guid: b262c7e4978b83d4da6bd142ea06f830,
     type: 3}

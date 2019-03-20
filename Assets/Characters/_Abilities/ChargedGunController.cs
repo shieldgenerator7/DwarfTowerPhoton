@@ -47,18 +47,22 @@ public class ChargedGunController : PlayerAbility
         //Check to see if the preview collides with anything
         if (preview)
         {
-            Vector2 playerPos = transform.position;
-            Vector2 targetPos = Utility.MouseWorldPos;
-            Vector2 targetDir = (targetPos - playerPos).normalized;
-            Vector2 pos = playerPos + (targetDir * spawnBuffer);
-            PreviewDisplayer.PreviewState state = getPreviewState(pos);
+            PreviewDisplayer.PreviewState state = getPreviewState();
+            previewDisplayer.updatePreview(state);
         }
     }
 
     public override void OnButtonUp()
     {
         base.OnButtonUp();
-        if (playerController.ReservedAmina >= minAminaReserved)
+        bool previewHasClearLanding = true;
+        if (preview)
+        {
+            PreviewDisplayer.PreviewState state = getPreviewState();
+            previewHasClearLanding = state == PreviewDisplayer.PreviewState.BUILD;
+        }
+        if (playerController.ReservedAmina >= minAminaReserved
+            && previewHasClearLanding)
         {
             float aminaObtained = playerController.collectReservedAmina();
             fireShot(
@@ -112,9 +116,52 @@ public class ChargedGunController : PlayerAbility
     public delegate void OnShotFired(GameObject shot, Vector2 targetPos, Vector2 targetDir);
     public OnShotFired onShotFired;
 
+    /// <summary>
+    /// Returns the preview state of the updated preview location
+    /// </summary>
+    /// <returns></returns>
+    private PreviewDisplayer.PreviewState getPreviewState()
+    {
+        Vector2 playerPos = transform.position;
+        Vector2 targetPos = Utility.MouseWorldPos;
+        Vector2 targetDir = (targetPos - playerPos).normalized;
+        Vector2 pos = playerPos + (targetDir * spawnBuffer);
+        return getPreviewState(pos);
+    }
+
     private PreviewDisplayer.PreviewState getPreviewState(Vector2 position)
     {
         preview.transform.position = position;
+        GameObject conflictingObject = null;
+        bool coHasRB2D = false;
+        bool coHasSC = false;
+        RaycastHit2D[] rch2ds = new RaycastHit2D[10];
+        int count = previewCollider.Cast(Vector2.zero, rch2ds, 0, true);
+        for (int i = 0; i < count; i++)
+        {
+            RaycastHit2D rch2d = rch2ds[i];
+            Rigidbody2D rchRB2D = rch2d.collider.gameObject.GetComponent<Rigidbody2D>();
+            ShotController rchSC = rch2d.collider.gameObject.GetComponent<ShotController>();
+            //If the conflicting object is a regular moving shot,
+            if (rchRB2D && rchSC)
+            {
+                //You can build here anyway
+                continue;
+            }
+            //If the conflicting object is non-moving or is not a shot,
+            else
+            {
+                //it's conflicting
+                conflictingObject = rch2d.collider.gameObject;
+                coHasRB2D = rchRB2D;
+                coHasSC = rchSC;
+                break;
+            }
+        }
+        if (conflictingObject)
+        {
+            return PreviewDisplayer.PreviewState.NONE;
+        }
         return PreviewDisplayer.PreviewState.BUILD;
     }
 }
