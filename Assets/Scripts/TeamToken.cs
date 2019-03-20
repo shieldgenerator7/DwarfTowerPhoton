@@ -12,11 +12,24 @@ public class TeamToken : MonoBehaviour
     public TeamToken teamCaptain;
     public TeamToken owner;
 
-    private PhotonView PV;
+    private PhotonView photonView;
+    private PhotonView PV
+    {
+        get {
+            if (!photonView)
+            {
+                photonView = GetComponent<PhotonView>();
+                if (!photonView)
+                {
+                    photonView = GetComponentInParent<PhotonView>();
+                }
+            }
+            return photonView;
+        }
+    }
 
     private void Start()
     {
-        initPV();
         if (PV.IsMine)
         {
             //Make sure all guns register their launched objects
@@ -35,15 +48,6 @@ public class TeamToken : MonoBehaviour
         {
             //it owns itself
             owner = this;
-        }
-    }
-
-    void initPV()
-    {
-        PV = GetComponent<PhotonView>();
-        if (!PV)
-        {
-            PV = GetComponentInParent<PhotonView>();
         }
     }
 
@@ -81,20 +85,16 @@ public class TeamToken : MonoBehaviour
 
     public void seeRecruiter(TeamToken recruiter, bool ownedObject = false)
     {
-        string teamCaptainName = recruiter.teamCaptain.name;
-        if (!PV)
-        {
-            initPV();
-        }
-        PV.RPC("RPC_SeeRecruiter", RpcTarget.AllBufferedViaServer, teamCaptainName, ownedObject);
+        int recruiterID = recruiter.PV.ViewID;
+        PV.RPC("RPC_SeeRecruiter", RpcTarget.AllBufferedViaServer, recruiterID, ownedObject);
     }
 
     [PunRPC]
-    void RPC_SeeRecruiter(string teamCaptainName, bool ownedObject)
+    void RPC_SeeRecruiter(int recruiterID, bool ownedObject)
     {
         foreach (TeamToken tt in FindObjectsOfType<TeamToken>())
         {
-            if (tt.name == teamCaptainName)
+            if (tt.PV.ViewID == recruiterID)
             {
                 if (ownedObject)
                 {
@@ -104,6 +104,7 @@ public class TeamToken : MonoBehaviour
                 {
                     tt.recruit(this);
                 }
+                break;
             }
         }
     }
