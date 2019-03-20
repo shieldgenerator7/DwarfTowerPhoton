@@ -7,8 +7,8 @@ using UnityEngine;
 public class ChargedGunController : PlayerAbility
 {
     public float aminaReservedPerSecond = 5;//how much amina is reserved per second of charge
-    public float exptectedAnimaReserved = 10;
-    public float minChargeTime = 1.1f;
+    public float expectedAnimaReserved = 10;
+    public float minAminaReserved = 5.1f;
     public string shotPrefabName;
     public float spawnBuffer = 1;//how far away from the player the shots spawn
     public bool rotateShot = true;//rotates shot to face the direction it's traveling
@@ -28,7 +28,7 @@ public class ChargedGunController : PlayerAbility
     public override void OnButtonUp()
     {
         base.OnButtonUp();
-        if (ButtonHoldDuration >= minChargeTime)
+        if (playerController.ReservedAmina >= minAminaReserved)
         {
             float aminaObtained = playerController.collectReservedAmina();
             fireShot(
@@ -53,7 +53,7 @@ public class ChargedGunController : PlayerAbility
     {
         if (PV.IsMine)
         {
-            float aminaMultiplier = aminaObtained / exptectedAnimaReserved;
+            float aminaMultiplier = aminaObtained / expectedAnimaReserved;
             Vector2 targetDir = (targetPos - playerPos).normalized;
             GameObject shot = PhotonNetwork.Instantiate(
                 Path.Combine("PhotonPrefabs", "Shots", shotPrefabName),
