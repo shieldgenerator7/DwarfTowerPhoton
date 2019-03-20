@@ -12,10 +12,31 @@ public class ChargedGunController : PlayerAbility
     public string shotPrefabName;
     public float spawnBuffer = 1;//how far away from the player the shots spawn
     public bool rotateShot = true;//rotates shot to face the direction it's traveling
+    public GameObject previewPrefab;
+
+    private GameObject preview;
+    private Collider2D previewCollider;
+    private PreviewDisplayer previewDisplayer;
+
+    protected override void Start()
+    {
+        base.Start();
+        if (previewPrefab)
+        {
+            preview = Instantiate(previewPrefab);
+            preview.SetActive(false);
+            previewCollider = preview.GetComponent<Collider2D>();
+            previewDisplayer = preview.GetComponent<PreviewDisplayer>();
+        }
+    }
 
     public override void OnButtonDown()
     {
         base.OnButtonDown();
+        if (preview)
+        {
+            preview.SetActive(true);
+        }
         OnButtonHeld();
     }
 
@@ -23,6 +44,15 @@ public class ChargedGunController : PlayerAbility
     {
         base.OnButtonHeld();
         playerController.reserveAmina(aminaReservedPerSecond * Time.deltaTime);
+        //Check to see if the preview collides with anything
+        if (preview)
+        {
+            Vector2 playerPos = transform.position;
+            Vector2 targetPos = Utility.MouseWorldPos;
+            Vector2 targetDir = (targetPos - playerPos).normalized;
+            Vector2 pos = playerPos + (targetDir * spawnBuffer);
+            PreviewDisplayer.PreviewState state = getPreviewState(pos);
+        }
     }
 
     public override void OnButtonUp()
@@ -33,13 +63,17 @@ public class ChargedGunController : PlayerAbility
             float aminaObtained = playerController.collectReservedAmina();
             fireShot(
                 transform.position,
-                Camera.main.ScreenToWorldPoint(Input.mousePosition),
+                Utility.MouseWorldPos,
                 aminaObtained
                 );
         }
         else
         {
             playerController.cancelReservedAmina();
+        }
+        if (preview)
+        {
+            preview.SetActive(false);
         }
     }
 
@@ -77,4 +111,10 @@ public class ChargedGunController : PlayerAbility
     /// <param name="targetDir">The direction from the player to the target pos, normalized</param>
     public delegate void OnShotFired(GameObject shot, Vector2 targetPos, Vector2 targetDir);
     public OnShotFired onShotFired;
+
+    private PreviewDisplayer.PreviewState getPreviewState(Vector2 position)
+    {
+        preview.transform.position = position;
+        return PreviewDisplayer.PreviewState.BUILD;
+    }
 }

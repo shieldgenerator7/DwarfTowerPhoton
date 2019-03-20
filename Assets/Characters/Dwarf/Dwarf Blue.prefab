@@ -255,6 +255,8 @@ MonoBehaviour:
   shotPrefabName: turret
   spawnBuffer: 1
   rotateShot: 0
+  previewPrefab: {fileID: 3363737750353282456, guid: c61aa5d8c6dad3f43806362e06c103e5,
+    type: 3}
   turretFireTrigger: {fileID: 5500888993561376432}
 --- !u!1 &3107006109710722385
 GameObject:
@@ -308,6 +310,8 @@ MonoBehaviour:
   shotPrefabName: barricade
   spawnBuffer: 1
   rotateShot: 0
+  previewPrefab: {fileID: 4883769523225080588, guid: b262c7e4978b83d4da6bd142ea06f830,
+    type: 3}
 --- !u!1 &7577088886736187312
 GameObject:
   m_ObjectHideFlags: 0

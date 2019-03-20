@@ -34,7 +34,7 @@ public class GunController : PlayerAbility
             if (manaCost <= 0 || playerController.hasAmina(manaCost))
             {
                 lastFireTime = lastFireTime + fireDelay;
-                fireShot(transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                fireShot(transform.position, Utility.MouseWorldPos);
             }
         }
     }
