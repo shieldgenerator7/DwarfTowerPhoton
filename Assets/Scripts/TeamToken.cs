@@ -15,7 +15,8 @@ public class TeamToken : MonoBehaviour
     private PhotonView photonView;
     private PhotonView PV
     {
-        get {
+        get
+        {
             if (!photonView)
             {
                 photonView = GetComponent<PhotonView>();
@@ -208,5 +209,35 @@ public class TeamToken : MonoBehaviour
             tt = go.AddComponent<TeamToken>();
         }
         return tt;
+    }
+
+    public static TeamToken getTeamWithFewestPlayers()
+    {
+        //Get list of all team captains
+        Dictionary<TeamToken, int> teamCaptains = new Dictionary<TeamToken, int>();
+        foreach (TeamToken tt in FindObjectsOfType<TeamToken>())
+        {
+            int increment = (tt.CompareTag("Player")) ? 1 : 0;
+            if (!teamCaptains.ContainsKey(tt.teamCaptain))
+            {
+                teamCaptains.Add(tt.teamCaptain, increment);
+            }
+            else
+            {
+                teamCaptains[tt.teamCaptain] += increment;
+            }
+        }
+        //Find the team with the lowest number of team members
+        int minTeamMembers = int.MaxValue;
+        TeamToken minTeamCaptain = null;
+        foreach (TeamToken tc in teamCaptains.Keys)
+        {
+            if ((int)teamCaptains[tc] < minTeamMembers)
+            {
+                minTeamMembers = (int)teamCaptains[tc];
+                minTeamCaptain = tc;
+            }
+        }
+        return minTeamCaptain;
     }
 }

@@ -16,15 +16,24 @@ public class PhotonPlayer : MonoBehaviour
         PV = GetComponent<PhotonView>();
         if (PV.IsMine)
         {
-            int spawnPicker = Random.Range(0, GameSetup.instance.spawnPoints.Length);
-            GameObject spawn = GameSetup.instance.spawnPoints[spawnPicker];
+            TeamToken teamCaptain = TeamToken.getTeamWithFewestPlayers();
+            List<GameObject> teamSpawns = new List<GameObject>();
+            foreach(Transform t in teamCaptain.transform)
+            {
+                if (t.CompareTag("Respawn"))
+                {
+                    teamSpawns.Add(t.gameObject);
+                }
+            }
+            int spawnPickIndex = Random.Range(0, teamSpawns.Count);
+            GameObject spawn = teamSpawns[spawnPickIndex];
             myAvatar = PhotonNetwork.Instantiate(
                 Path.Combine("PhotonPrefabs", "PlayerAvatar"),
                 spawn.transform.position,
                 spawn.transform.rotation,
                 0
                 );
-            myAvatar.GetComponent<TeamToken>().seeRecruiter(TeamToken.getTeamToken(spawn));
+            myAvatar.GetComponent<TeamToken>().seeRecruiter(teamCaptain);
         }
     }
 
