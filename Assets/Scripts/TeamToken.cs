@@ -220,12 +220,9 @@ public class TeamToken : MonoBehaviour
             int increment = (tt.isPlayer()) ? 1 : 0;
             if (!teamCaptains.ContainsKey(tt.teamCaptain))
             {
-                teamCaptains.Add(tt.teamCaptain, increment);
+                teamCaptains.Add(tt.teamCaptain, 0);
             }
-            else
-            {
-                teamCaptains[tt.teamCaptain] += increment;
-            }
+            teamCaptains[tt.teamCaptain] += increment;
         }
         //Find the team with the lowest number of team members
         int minTeamMembers = int.MaxValue;
