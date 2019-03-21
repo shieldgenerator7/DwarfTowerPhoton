@@ -23,24 +23,31 @@ public class Stunnable : MonoBehaviour
 
     private void Update()
     {
-        if (PV.IsMine)
+        if (Stunned)
         {
-            if (Stunned)
+            stunDuration -= Time.deltaTime;
+            if (stunDuration <= 0)
             {
-                stunDuration -= Time.deltaTime;
-                if (stunDuration <= 0)
-                {
-                    rb2d.velocity = Vector2.zero;
-                    enableScripts(true);
-                    blinkEffect.Blinking = false;
-                }
+                rb2d.velocity = Vector2.zero;
+                enableScripts(true);
+                blinkEffect.Blinking = false;
             }
         }
     }
 
     public bool Stunned
     {
-        get { return stunDuration > 0; }
+        get
+        {
+            if (PV.IsMine)
+            {
+                return stunDuration > 0;
+            }
+            else
+            {
+                return blinkEffect.Blinking;
+            }
+        }
     }
 
     public void stun(float duration, float knockbackDistance)

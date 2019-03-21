@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 505}
   - component: {fileID: 566}
   - component: {fileID: 571}
-  - component: {fileID: 569}
+  - component: {fileID: 8902093542985066328}
   - component: {fileID: 508065936224665636}
   m_Layer: 0
   m_Name: shot
@@ -159,11 +159,11 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 569}
+  - {fileID: 8902093542985066328}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &569
+--- !u!114 &8902093542985066328
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,12 +172,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 245}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 0
-  m_SynchronizeScale: 0
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 0
+  m_TeleportEnabled: 1
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!114 &508065936224665636
 MonoBehaviour:
   m_ObjectHideFlags: 0

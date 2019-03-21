@@ -46,7 +46,14 @@ public class ShotController : MonoBehaviour
             health = value;
             if (health <= 0)
             {
-                Destroy(this.gameObject);
+                if (PV.IsMine)
+                {
+                    PhotonNetwork.Destroy(this.gameObject);
+                }
+                else
+                {
+                    GetComponent<Collider2D>().enabled = false;
+                }
             }
         }
     }
@@ -106,13 +113,10 @@ public class ShotController : MonoBehaviour
             Stunnable stunnable = collision.gameObject.GetComponent<Stunnable>();
             if (stunnable && !stunnable.Stunned)
             {
+                stunnable.stun(stunDuration, knockbackDistance);
                 if (PV.IsMine)
                 {
-                    PhotonNetwork.Destroy(this.gameObject);
-                }
-                if (stunnable.PV.IsMine)
-                {
-                    stunnable.stun(stunDuration, knockbackDistance);
+                    addHealth(-Health);
                 }
             }
         }
@@ -121,10 +125,5 @@ public class ShotController : MonoBehaviour
     public void addHealth(float health)
     {
         this.Health += health;
-    }
-
-    private void OnDestroy()
-    {
-        PhotonNetwork.Destroy(gameObject);
     }
 }
