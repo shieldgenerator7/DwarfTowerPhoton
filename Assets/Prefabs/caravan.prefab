@@ -236,3 +236,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxMoveSpeed: 3
+  detectionColl: {fileID: 6696323203719167965}

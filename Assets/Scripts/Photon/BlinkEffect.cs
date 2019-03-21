@@ -7,7 +7,7 @@ public class BlinkEffect : MonoBehaviour
 {
     [SerializeField]
     private float blinkSpeed = 0.1f;//time between blinks
-    private float lastBlinkTime;
+    private float lastBlinkTime = 0;
 
     public bool Blinking
     {

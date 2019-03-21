@@ -8,7 +8,7 @@ public class Stunnable : MonoBehaviour
     //the scripts to be turned off while stunned
     public List<MonoBehaviour> stunnableScripts = new List<MonoBehaviour>();
 
-    private float stunDuration;
+    private float stunDuration = 0;
 
     private Rigidbody2D rb2d;
     public PhotonView PV;

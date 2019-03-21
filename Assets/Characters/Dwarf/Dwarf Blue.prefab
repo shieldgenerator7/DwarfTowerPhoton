@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3369071877670158181}
   m_Layer: 0
   m_Name: Dwarf Blue
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,7 +137,6 @@ MonoBehaviour:
   stunnableScripts:
   - {fileID: 307085991090335124}
   - {fileID: 4517987756410504376}
-  blinkSpeed: 0.1
   PV: {fileID: 0}
 --- !u!61 &9144531418077418824
 BoxCollider2D:

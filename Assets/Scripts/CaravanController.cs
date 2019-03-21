@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,13 +9,18 @@ public class CaravanController : MonoBehaviour
     private float moveSpeed;
     private Vector2 direction;
 
+    public Collider2D detectionColl;//the collider that detects which players are pushing
+    private RaycastHit2D[] rch2ds = new RaycastHit2D[100];//used for detection
+
     private Dictionary<TeamToken, float> teamCaptains = new Dictionary<TeamToken, float>();
 
+    private PhotonView PV;
     private Rigidbody2D rb2d;
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        PV = GetComponent<PhotonView>();
         foreach (TeamToken tt in FindObjectsOfType<TeamToken>())
         {
             if (!teamCaptains.ContainsKey(tt.teamCaptain))
@@ -25,28 +31,39 @@ public class CaravanController : MonoBehaviour
         updateDirection();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Update()
     {
-        TeamToken tt = TeamToken.getTeamToken(collision.gameObject);
-        if (tt && tt.isPlayer())
+        if (PV.IsMine)
         {
-            updateDirection(tt.teamCaptain, 1);
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        TeamToken tt = TeamToken.getTeamToken(collision.gameObject);
-        if (tt && tt.isPlayer())
-        {
-            updateDirection(tt.teamCaptain, -1);
+            updatePushingPlayers();
         }
     }
 
-    void updateDirection(TeamToken teamCaptain, float amount)
+    void updatePushingPlayers()
     {
-        teamCaptains[teamCaptain] += amount;
+        teamCaptains.Clear();
+        int count = detectionColl.Cast(Vector2.zero, rch2ds, 0, true);
+        for (int i = 0; i < count; i++)
+        {
+            RaycastHit2D rch2d = rch2ds[i];
+            GameObject rchGO = rch2d.collider.gameObject;
+            if (rchGO.CompareTag("Player"))
+            {
+                TeamToken tt = TeamToken.getTeamToken(rchGO);
+                Stunnable stunnable = rchGO.GetComponentInChildren<Stunnable>();
+                if (!stunnable.Stunned)
+                {
+                    if (!teamCaptains.ContainsKey(tt.teamCaptain))
+                    {
+                        teamCaptains.Add(tt.teamCaptain, 0);
+                    }
+                    teamCaptains[tt.teamCaptain] += 1;
+                }
+            }
+        }
         updateDirection();
     }
+
     void updateDirection()
     {
         direction = Vector2.zero;
