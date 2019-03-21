@@ -9,6 +9,8 @@ public class CaravanController : MonoBehaviour
     private float moveSpeed;
     private Vector2 direction;
     public float maxAllowedDistance = 3;//how far a player can be away but still push it (must still be in trigger)
+    public float stunDuration = 1;
+    public float knockbackDistance = 5;
 
     public Collider2D detectionColl;//the collider that detects which players are pushing
     private RaycastHit2D[] rch2ds = new RaycastHit2D[100];//used for detection
@@ -89,6 +91,11 @@ public class CaravanController : MonoBehaviour
         if (sc)
         {
             sc.addHealth(-sc.maxHealth);
+        }
+        Stunnable stunnable = collision.gameObject.GetComponentInChildren<Stunnable>();
+        if (stunnable && !stunnable.Stunned)
+        {
+            stunnable.stun(stunDuration, knockbackDistance);
         }
     }
 }
