@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 251}
   - component: {fileID: 541}
-  - component: {fileID: 581}
+  - component: {fileID: 550}
   - component: {fileID: 503}
   - component: {fileID: 540}
-  - component: {fileID: 544}
-  - component: {fileID: 549}
+  - component: {fileID: 543}
+  - component: {fileID: 545}
   m_Layer: 0
   m_Name: PlayerAvatar
   m_TagString: Player
@@ -54,11 +54,11 @@ MonoBehaviour:
   Synchronization: 1
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 581}
+  - {fileID: 550}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &581
+--- !u!114 &550
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterValue: 0
   myCharacter: {fileID: 0}
---- !u!114 &544
+--- !u!114 &543
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamCaptain: {fileID: 0}
   owner: {fileID: 0}
---- !u!114 &549
+--- !u!114 &545
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

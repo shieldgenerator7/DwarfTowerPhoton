@@ -56,7 +56,7 @@ public class Stunnable : MonoBehaviour
         float knockbackPerSecond = knockbackDistance / stunDuration;
         TeamToken teamCaptain = TeamToken.getTeamToken(gameObject).teamCaptain;
         rb2d.velocity =
-            (teamCaptain.transform.position - transform.position).normalized
+            (transform.position - CaravanController.Caravan.transform.position).normalized
             * knockbackPerSecond;
         enableScripts(false);
 

@@ -17,11 +17,18 @@ public class CaravanController : MonoBehaviour
 
     private Dictionary<TeamToken, float> teamCaptains = new Dictionary<TeamToken, float>();
 
+    private static CaravanController instance;
+    public static CaravanController Caravan
+    {
+        get { return instance; }
+    }
+
     private PhotonView PV;
     private Rigidbody2D rb2d;
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         rb2d = GetComponent<Rigidbody2D>();
         PV = GetComponent<PhotonView>();
         foreach (TeamToken tt in FindObjectsOfType<TeamToken>())
