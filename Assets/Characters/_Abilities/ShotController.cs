@@ -103,9 +103,11 @@ public class ShotController : MonoBehaviour
         }
         if (HitsPlayer)
         {
-            if (collision.gameObject.CompareTag("Player"))
+            Stunnable stunnable = collision.gameObject.GetComponent<Stunnable>();
+            if (stunnable)
             {
                 Destroy(this.gameObject);
+                stunnable.stun(stunDuration, knockbackDistance);
             }
         }
     }

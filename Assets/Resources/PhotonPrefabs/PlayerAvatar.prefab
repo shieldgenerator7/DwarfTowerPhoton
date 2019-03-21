@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 541}
   - component: {fileID: 503}
   - component: {fileID: 540}
-  - component: {fileID: 6419873229338358793}
+  - component: {fileID: 581}
   m_Layer: 0
   m_Name: PlayerAvatar
   m_TagString: Player
@@ -107,7 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterValue: 0
   myCharacter: {fileID: 0}
---- !u!114 &6419873229338358793
+--- !u!114 &581
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
