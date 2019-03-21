@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 506}
   - component: {fileID: 572}
   - component: {fileID: 8423462684164734678}
+  - component: {fileID: 3748292705606818108}
   m_Layer: 0
   m_Name: turret
   m_TagString: Untagged
@@ -147,6 +148,20 @@ MonoBehaviour:
   knockbackDistanceChargeMultiplier: 0
   maxHealthChargeMultiplier: 2
   previewSprite: {fileID: 21300000, guid: 9ca2fae91a20d7647882925e6198aaaa, type: 3}
+--- !u!114 &3748292705606818108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90c84324157417744a760960dd61b69c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamCaptain: {fileID: 0}
+  owner: {fileID: 0}
 --- !u!1 &247
 GameObject:
   m_ObjectHideFlags: 0
