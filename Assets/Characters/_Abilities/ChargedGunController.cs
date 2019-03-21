@@ -46,14 +46,17 @@ public class ChargedGunController : PlayerAbility
     protected override void Start()
     {
         base.Start();
-        if (previewPrefab)
+        if (PV.IsMine)
         {
-            preview = Instantiate(previewPrefab);
-            preview.SetActive(false);
-            previewSpriteRenderer = preview.GetComponent<SpriteRenderer>();
-            previewSprite = previewSpriteRenderer.sprite;
-            previewCollider = preview.GetComponent<Collider2D>();
-            previewDisplayer = preview.GetComponent<PreviewDisplayer>();
+            if (previewPrefab)
+            {
+                preview = Instantiate(previewPrefab);
+                preview.SetActive(false);
+                previewSpriteRenderer = preview.GetComponent<SpriteRenderer>();
+                previewSprite = previewSpriteRenderer.sprite;
+                previewCollider = preview.GetComponent<Collider2D>();
+                previewDisplayer = preview.GetComponent<PreviewDisplayer>();
+            }
         }
     }
 
