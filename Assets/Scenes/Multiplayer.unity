@@ -672,8 +672,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoints:
   - {fileID: 1890506748892141931}
-  - {fileID: 1890506748892141930}
   - {fileID: 927808493}
+  - {fileID: 1890506748892141930}
   - {fileID: 927808492}
 --- !u!4 &1258869478
 Transform:
