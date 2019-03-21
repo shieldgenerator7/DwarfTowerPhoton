@@ -120,6 +120,17 @@ public class ShotController : MonoBehaviour
                 }
             }
         }
+        if (!collision.isTrigger)
+        {
+            CaravanController cc = collision.gameObject.GetComponent<CaravanController>();
+            if (cc)
+            {
+                if (PV.IsMine)
+                {
+                    addHealth(-Health);
+                }
+            }
+        }
     }
 
     public void addHealth(float health)
