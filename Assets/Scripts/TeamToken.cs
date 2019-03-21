@@ -217,7 +217,7 @@ public class TeamToken : MonoBehaviour
         Dictionary<TeamToken, int> teamCaptains = new Dictionary<TeamToken, int>();
         foreach (TeamToken tt in FindObjectsOfType<TeamToken>())
         {
-            int increment = (tt.CompareTag("Player")) ? 1 : 0;
+            int increment = (tt.isPlayer()) ? 1 : 0;
             if (!teamCaptains.ContainsKey(tt.teamCaptain))
             {
                 teamCaptains.Add(tt.teamCaptain, increment);
@@ -239,5 +239,10 @@ public class TeamToken : MonoBehaviour
             }
         }
         return minTeamCaptain;
+    }
+
+    public bool isPlayer()
+    {
+        return CompareTag("Player");
     }
 }

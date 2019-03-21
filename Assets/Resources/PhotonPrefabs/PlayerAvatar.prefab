@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 251}
-  - component: {fileID: 542}
-  - component: {fileID: 6785748923970159835}
+  - component: {fileID: 541}
+  - component: {fileID: 581}
   - component: {fileID: 503}
   - component: {fileID: 540}
-  - component: {fileID: 545}
-  - component: {fileID: 580}
+  - component: {fileID: 544}
+  - component: {fileID: 549}
   m_Layer: 0
   m_Name: PlayerAvatar
   m_TagString: Player
@@ -36,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &542
+--- !u!114 &541
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -54,11 +54,11 @@ MonoBehaviour:
   Synchronization: 1
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 6785748923970159835}
+  - {fileID: 581}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &6785748923970159835
+--- !u!114 &581
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterValue: 0
   myCharacter: {fileID: 0}
---- !u!114 &545
+--- !u!114 &544
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamCaptain: {fileID: 0}
   owner: {fileID: 0}
---- !u!114 &580
+--- !u!114 &549
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
