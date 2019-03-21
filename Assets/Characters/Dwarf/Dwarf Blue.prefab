@@ -137,6 +137,8 @@ MonoBehaviour:
   stunnableScripts:
   - {fileID: 307085991090335124}
   - {fileID: 4517987756410504376}
+  blinkSpeed: 0.1
+  PV: {fileID: 0}
 --- !u!61 &9144531418077418824
 BoxCollider2D:
   m_ObjectHideFlags: 0

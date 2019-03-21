@@ -7,16 +7,18 @@ public class Stunnable : MonoBehaviour
 {
     //the scripts to be turned off while stunned
     public List<MonoBehaviour> stunnableScripts = new List<MonoBehaviour>();
-    
+
     private float stunDuration;
 
     private Rigidbody2D rb2d;
     public PhotonView PV;
+    private BlinkEffect blinkEffect;
 
     private void Start()
     {
         rb2d = GetComponentInParent<Rigidbody2D>();
         PV = GetComponentInParent<PhotonView>();
+        blinkEffect = GetComponentInParent<BlinkEffect>();
     }
 
     private void Update()
@@ -28,6 +30,7 @@ public class Stunnable : MonoBehaviour
             {
                 rb2d.velocity = Vector2.zero;
                 enableScripts(true);
+                blinkEffect.Blinking = false;
             }
         }
     }
@@ -46,11 +49,13 @@ public class Stunnable : MonoBehaviour
             (teamCaptain.transform.position - transform.position).normalized
             * knockbackPerSecond;
         enableScripts(false);
+
+        blinkEffect.Blinking = true;
     }
 
     private void enableScripts(bool enable)
     {
-        foreach(MonoBehaviour mb in stunnableScripts)
+        foreach (MonoBehaviour mb in stunnableScripts)
         {
             mb.enabled = enable;
         }
