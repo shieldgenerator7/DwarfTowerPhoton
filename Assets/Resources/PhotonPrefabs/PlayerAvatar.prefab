@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 251}
   - component: {fileID: 541}
-  - component: {fileID: 550}
+  - component: {fileID: 546}
   - component: {fileID: 503}
   - component: {fileID: 540}
   - component: {fileID: 543}
@@ -54,11 +54,11 @@ MonoBehaviour:
   Synchronization: 1
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 550}
+  - {fileID: 546}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &550
+--- !u!114 &546
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
