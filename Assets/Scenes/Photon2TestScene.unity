@@ -1424,10 +1424,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mySelectedCharacter: 0
   allCharacters:
-  - {fileID: 532201618779257096, guid: 6c6afcb6b3c80e949b455e4e46a809b2, type: 3}
   - {fileID: 532201618779257096, guid: 69f122fe10f37864bb52a35fc112ba76, type: 3}
-  - {fileID: 532201618779257096, guid: b611ba22960caae43ad48236119ddeb1, type: 3}
-  - {fileID: 532201618779257096, guid: 118db008d0c81cc44824b7f63124cae8, type: 3}
+  - {fileID: 532201618779257096, guid: 69f122fe10f37864bb52a35fc112ba76, type: 3}
+  - {fileID: 532201618779257096, guid: 69f122fe10f37864bb52a35fc112ba76, type: 3}
+  - {fileID: 532201618779257096, guid: 69f122fe10f37864bb52a35fc112ba76, type: 3}
 --- !u!114 &1002606574
 MonoBehaviour:
   m_ObjectHideFlags: 0
