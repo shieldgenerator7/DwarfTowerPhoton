@@ -61,7 +61,7 @@ public class CaravanController : MonoBehaviour
                     float amount = 1;
                     //Add in distance to caravan
                     float distance = (rchGO.transform.position - transform.position).magnitude;
-                    float distanceMultiplier = 1 + ((maxAllowedDistance - distance) / maxAllowedDistance); 
+                    float distanceMultiplier = 1 + ((maxAllowedDistance - distance) / maxAllowedDistance);
                     //Update team captains dict
                     teamCaptains[tt.teamCaptain] += amount * distanceMultiplier;
                 }
@@ -81,5 +81,14 @@ public class CaravanController : MonoBehaviour
         float magnitude = direction.magnitude;
         magnitude = Mathf.Clamp(magnitude, 0, maxMoveSpeed);
         rb2d.velocity = direction.normalized * magnitude;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        ShotController sc = collision.gameObject.GetComponent<ShotController>();
+        if (sc)
+        {
+            sc.addHealth(-sc.maxHealth);
+        }
     }
 }
