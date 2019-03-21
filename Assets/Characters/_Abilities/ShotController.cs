@@ -104,10 +104,16 @@ public class ShotController : MonoBehaviour
         if (HitsPlayer)
         {
             Stunnable stunnable = collision.gameObject.GetComponent<Stunnable>();
-            if (stunnable && stunnable.PV.IsMine)
+            if (stunnable && !stunnable.Stunned)
             {
-                Destroy(this.gameObject);
-                stunnable.stun(stunDuration, knockbackDistance);
+                if (PV.IsMine)
+                {
+                    PhotonNetwork.Destroy(this.gameObject);
+                }
+                if (stunnable.PV.IsMine)
+                {
+                    stunnable.stun(stunDuration, knockbackDistance);
+                }
             }
         }
     }
