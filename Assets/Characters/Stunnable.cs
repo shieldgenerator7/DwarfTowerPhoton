@@ -23,14 +23,17 @@ public class Stunnable : MonoBehaviour
 
     private void Update()
     {
-        if (Stunned)
+        if (PV.IsMine)
         {
-            stunDuration -= Time.deltaTime;
-            if (stunDuration <= 0)
+            if (Stunned)
             {
-                rb2d.velocity = Vector2.zero;
-                enableScripts(true);
-                blinkEffect.Blinking = false;
+                stunDuration -= Time.deltaTime;
+                if (stunDuration <= 0)
+                {
+                    rb2d.velocity = Vector2.zero;
+                    enableScripts(true);
+                    blinkEffect.Blinking = false;
+                }
             }
         }
     }

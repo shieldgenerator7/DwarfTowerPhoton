@@ -14,10 +14,13 @@ public class BlinkEffect : MonoBehaviour
         get { return lastBlinkTime > 0; }
         set
         {
-            bool prevValue = Blinking;
-            if (prevValue != value)
+            if (PV.IsMine)
             {
-                PV.RPC("RPC_Blink", RpcTarget.All, value);
+                bool prevValue = Blinking;
+                if (prevValue != value)
+                {
+                    PV.RPC("RPC_Blink", RpcTarget.AllViaServer, value);
+                }
             }
         }
     }
