@@ -8,6 +8,7 @@ public class CaravanController : MonoBehaviour
     public float maxMoveSpeed = 3;
     private float moveSpeed;
     private Vector2 direction;
+    public float maxAllowedDistance = 3;//how far a player can be away but still push it (must still be in trigger)
 
     public Collider2D detectionColl;//the collider that detects which players are pushing
     private RaycastHit2D[] rch2ds = new RaycastHit2D[100];//used for detection
@@ -57,7 +58,12 @@ public class CaravanController : MonoBehaviour
                     {
                         teamCaptains.Add(tt.teamCaptain, 0);
                     }
-                    teamCaptains[tt.teamCaptain] += 1;
+                    float amount = 1;
+                    //Add in distance to caravan
+                    float distance = (rchGO.transform.position - transform.position).magnitude;
+                    float distanceMultiplier = 1 + ((maxAllowedDistance - distance) / maxAllowedDistance); 
+                    //Update team captains dict
+                    teamCaptains[tt.teamCaptain] += amount * distanceMultiplier;
                 }
             }
         }
