@@ -104,7 +104,7 @@ public class ShotController : MonoBehaviour
         if (HitsPlayer)
         {
             Stunnable stunnable = collision.gameObject.GetComponent<Stunnable>();
-            if (stunnable)
+            if (stunnable && stunnable.PV.IsMine)
             {
                 Destroy(this.gameObject);
                 stunnable.stun(stunDuration, knockbackDistance);

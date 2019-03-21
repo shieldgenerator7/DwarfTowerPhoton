@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,10 +11,12 @@ public class Stunnable : MonoBehaviour
     private float stunDuration;
 
     private Rigidbody2D rb2d;
+    public PhotonView PV;
 
     private void Start()
     {
         rb2d = GetComponentInParent<Rigidbody2D>();
+        PV = GetComponentInParent<PhotonView>();
     }
 
     private void Update()
