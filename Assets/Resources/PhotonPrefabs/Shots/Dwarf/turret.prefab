@@ -210,5 +210,6 @@ MonoBehaviour:
   hidesOtherInputs: 0
   fireDelay: 0.1
   shotPrefabName: shot
+  subfolderName: Dwarf
   spawnBuffer: 1
   rotateShot: 1

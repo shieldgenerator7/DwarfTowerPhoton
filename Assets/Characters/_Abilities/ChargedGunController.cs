@@ -10,6 +10,13 @@ public class ChargedGunController : PlayerAbility
     public float expectedAnimaReserved = 10;
     public float minAminaReserved = 5.1f;
     public string shotPrefabName;
+    /// <summary>
+    /// //the name of the subfolder of Resources/PhotonPrefabs/Shots that this is from
+    /// "!parent": get the subfolder name from the parent of this GameObject
+    /// "!this": get the subfolder name from this GameObject
+    /// null or "": defaults to parent
+    /// </summary>
+    public string subfolderName = "!parent";
     public float defaultSpawnBuffer = 1;//how far away from the player the shots spawn
     public float minSpawnBuffer = 0;
     public float maxSpawnBuffer = 2;
@@ -56,6 +63,18 @@ public class ChargedGunController : PlayerAbility
                 previewSprite = previewSpriteRenderer.sprite;
                 previewCollider = preview.GetComponent<Collider2D>();
                 previewDisplayer = preview.GetComponent<PreviewDisplayer>();
+            }
+            if (subfolderName == null || subfolderName == "")
+            {
+                subfolderName = "!parent";
+            }
+            if (subfolderName == "!parent")
+            {
+                subfolderName = transform.parent.gameObject.name.Replace("(Clone)","");
+            }
+            else if (subfolderName == "!this")
+            {
+                subfolderName = gameObject.name.Replace("(Clone)", "");
             }
         }
     }
@@ -140,7 +159,7 @@ public class ChargedGunController : PlayerAbility
             float aminaMultiplier = aminaObtained / expectedAnimaReserved;
             Vector2 targetDir = (targetPos - playerPos).normalized;
             GameObject shot = PhotonNetwork.Instantiate(
-                Path.Combine("PhotonPrefabs", "Shots", shotPrefabName),
+                Path.Combine("PhotonPrefabs", "Shots", subfolderName, shotPrefabName),
                 playerPos + (targetDir * SpawnBuffer),
                 (rotateShot) ? Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, targetDir)) : Quaternion.Euler(0, 0, 0)
                 );

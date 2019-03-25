@@ -9,6 +9,13 @@ public class GunController : PlayerAbility
     //Settings
     public float fireDelay = 0.1f;//seconds between shots
     public string shotPrefabName;
+    /// <summary>
+    /// //the name of the subfolder of Resources/PhotonPrefabs/Shots that this is from
+    /// "!parent": get the subfolder name from the parent of this GameObject
+    /// "!this": get the subfolder name from this GameObject
+    /// null or "": defaults to parent
+    /// </summary>
+    public string subfolderName = "!parent";
     public float spawnBuffer = 1;//how far away from the player the shots spawn
     public bool rotateShot = true;//rotates shot to face the direction it's traveling
 
@@ -18,6 +25,18 @@ public class GunController : PlayerAbility
     protected override void Start()
     {
         base.Start();
+        if (subfolderName == null || subfolderName == "")
+        {
+            subfolderName = "!parent";
+        }
+        if (subfolderName == "!parent")
+        {
+            subfolderName = transform.parent.gameObject.name.Replace("(Clone)", "");
+        }
+        else if (subfolderName == "!this")
+        {
+            subfolderName = gameObject.name.Replace("(Clone)", "");
+        }
     }
 
     public override void OnButtonDown()
@@ -51,7 +70,7 @@ public class GunController : PlayerAbility
             float aminaMultiplier = (manaCost > 0) ? playerController.requestAmina(manaCost) / manaCost : 1;
             Vector2 targetDir = (targetPos - playerPos).normalized;
             GameObject shot = PhotonNetwork.Instantiate(
-                Path.Combine("PhotonPrefabs", "Shots", shotPrefabName),
+                Path.Combine("PhotonPrefabs", "Shots", subfolderName, shotPrefabName),
                 playerPos + (targetDir * spawnBuffer),
                 (rotateShot) ? Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, targetDir)) : Quaternion.Euler(0, 0, 0)
                 );
