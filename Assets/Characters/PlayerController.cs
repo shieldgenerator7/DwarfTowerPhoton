@@ -22,7 +22,13 @@ public class PlayerController : MonoBehaviour
     }
 
     public AminaReloader aminaReloader;//ability called by default when the player runs out of amina
-    public List<PlayerAbility> abilities = new List<PlayerAbility>();
+    [SerializeField]
+    private AbilityContext abilityContext;
+    public AbilityContext AbilityContext
+    {
+        get { return abilityContext; }
+        set { abilityContext = value; }
+    }
 
     private List<PlayerAbility> processingAbilities = new List<PlayerAbility>();//used for abilities that have lasting effects
 
@@ -68,7 +74,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         //Ability Inputs
-        foreach (PlayerAbility ability in abilities)
+        foreach (PlayerAbility ability in abilityContext.abilities)
         {
             bool buttonUp = Input.GetButtonUp(ability.buttonName);
             if (Input.GetButton(ability.buttonName) || buttonUp)
