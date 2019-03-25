@@ -87,7 +87,7 @@ public class TeamToken : MonoBehaviour
     public void seeRecruiter(TeamToken recruiter, bool ownedObject = false)
     {
         int recruiterID = recruiter.PV.ViewID;
-        PV.RPC("RPC_SeeRecruiter", RpcTarget.AllBufferedViaServer, recruiterID, ownedObject);
+        PV.RPC("RPC_SeeRecruiter", RpcTarget.AllBuffered, recruiterID, ownedObject);
     }
 
     [PunRPC]
@@ -117,18 +117,8 @@ public class TeamToken : MonoBehaviour
 
     public static bool onSameTeam(GameObject go1, GameObject go2)
     {
-        //Get go1's team token
-        TeamToken tt1 = go1.GetComponent<TeamToken>();
-        if (!tt1)
-        {
-            tt1 = go1.GetComponentInParent<TeamToken>();
-        }
-        //Get go2's team token
-        TeamToken tt2 = go2.GetComponent<TeamToken>();
-        if (!tt2)
-        {
-            tt2 = go2.GetComponentInParent<TeamToken>();
-        }
+        TeamToken tt1 = getTeamToken(go1);
+        TeamToken tt2 = getTeamToken(go2);
         //If both have a team token
         if (tt1 && tt2)
         {

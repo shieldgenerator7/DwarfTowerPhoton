@@ -25,7 +25,7 @@ public class ChargedShotController : ShotController
     [SerializeField]
     private float maxHealthChargeMultiplier = 1;
 
-    private float multiplier = 0;
+    protected float multiplier = 0;
 
     public Sprite previewSprite;//used for constructs that can be manually destroyed / upgraded
 

@@ -37,7 +37,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6220889621231917683}
-  - {fileID: 1913788795788701171}
   - {fileID: 8736292213951035431}
   - {fileID: 5947632648880918540}
   m_Father: {fileID: 0}
@@ -238,63 +237,6 @@ MonoBehaviour:
   buttonName: Reload
   hidesOtherInputs: 1
   reloadDuration: 2
---- !u!1 &2299017120802892305
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1913788795788701171}
-  - component: {fileID: 7133168848261502530}
-  m_Layer: 0
-  m_Name: Turret Launcher
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1913788795788701171
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2299017120802892305}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1073061482865175048}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7133168848261502530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2299017120802892305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 410d7b1fe69fd9248838e7e67f6ada50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manaCost: 0
-  buttonName: Ability2
-  hidesOtherInputs: 1
-  aminaReservedPerSecond: 5
-  expectedAnimaReserved: 10
-  minAminaReserved: 5.1
-  shotPrefabName: turret
-  defaultSpawnBuffer: 1
-  minSpawnBuffer: 0
-  maxSpawnBuffer: 2
-  rotateShot: 0
-  previewPrefab: {fileID: 3363737750353282456, guid: c61aa5d8c6dad3f43806362e06c103e5,
-    type: 3}
-  turretFireTrigger: {fileID: 5500888993561376432}
 --- !u!1 &3103024714437739674
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,6 +248,7 @@ GameObject:
   - component: {fileID: 5947632648880918540}
   - component: {fileID: 5518924279983056713}
   - component: {fileID: 2980897293802834191}
+  - component: {fileID: 7366886583290664003}
   m_Layer: 0
   m_Name: Weapon Menu
   m_TagString: Untagged
@@ -325,7 +268,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1073061482865175048}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5518924279983056713
 MonoBehaviour:
@@ -340,6 +283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilities:
+  - {fileID: 7366886583290664003}
   - {fileID: 2980897293802834191}
 --- !u!114 &2980897293802834191
 MonoBehaviour:
@@ -357,6 +301,31 @@ MonoBehaviour:
   buttonName: Reload
   hidesOtherInputs: 0
   abilityContext: {fileID: 3769535869663102263}
+--- !u!114 &7366886583290664003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3103024714437739674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1146f130182c8b468babded8c5cb840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manaCost: 0
+  buttonName: Ability3
+  hidesOtherInputs: 1
+  aminaReservedPerSecond: 5
+  expectedAnimaReserved: 5
+  minAminaReserved: 0.1
+  shotPrefabName: spawner_scythe_arm
+  subfolderName: '!parent'
+  defaultSpawnBuffer: 0
+  minSpawnBuffer: 0
+  maxSpawnBuffer: 0
+  rotateShot: 1
+  previewPrefab: {fileID: 0}
 --- !u!1 &3107006109710722385
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +355,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1073061482865175048}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4034267826870480475
 MonoBehaviour:
@@ -407,6 +376,7 @@ MonoBehaviour:
   expectedAnimaReserved: 10
   minAminaReserved: 0.1
   shotPrefabName: barricade
+  subfolderName: '!parent'
   defaultSpawnBuffer: 1
   minSpawnBuffer: 0
   maxSpawnBuffer: 2
@@ -461,5 +431,6 @@ MonoBehaviour:
   hidesOtherInputs: 0
   fireDelay: 0.5
   shotPrefabName: shot
+  subfolderName: '!parent'
   spawnBuffer: 1.5
   rotateShot: 1
