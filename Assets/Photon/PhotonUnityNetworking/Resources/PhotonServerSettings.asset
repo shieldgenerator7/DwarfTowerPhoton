@@ -38,5 +38,7 @@ MonoBehaviour:
   - RPC_ChargeStats
   - RPC_SeeRecruiter
   - RPC_Blink
+  - RPC_StunTarget
+  - RPC_SelfDestruct
   DisableAutoOpenWizard: 1
   ShowSettings: 1

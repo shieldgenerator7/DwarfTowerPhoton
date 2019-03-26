@@ -113,11 +113,8 @@ public class ShotController : MonoBehaviour
             Stunnable stunnable = collision.gameObject.GetComponent<Stunnable>();
             if (stunnable && !stunnable.Stunned)
             {
-                stunnable.stun(stunDuration, knockbackDistance);
-                if (PV.IsMine)
-                {
-                    addHealth(-Health);
-                }
+                PhotonView targetView = collision.gameObject.GetComponentInParent<PhotonView>();
+                PV.RPC("RPC_StunTarget", RpcTarget.All, targetView.ViewID);
             }
         }
         if (!collision.isTrigger)
@@ -125,10 +122,7 @@ public class ShotController : MonoBehaviour
             CaravanController cc = collision.gameObject.GetComponent<CaravanController>();
             if (cc)
             {
-                if (PV.IsMine)
-                {
-                    addHealth(-Health);
-                }
+                Health = 0;
             }
         }
     }
@@ -136,5 +130,32 @@ public class ShotController : MonoBehaviour
     public void addHealth(float health)
     {
         this.Health += health;
+    }
+
+    [PunRPC]
+    protected void RPC_StunTarget(int targetID)
+    {
+        foreach (PhotonView targetView in FindObjectsOfType<PhotonView>())
+        {
+            if (targetView.ViewID == targetID)
+            {
+                if (targetView.IsMine)
+                {
+                    Stunnable stunnable = targetView.gameObject.GetComponentInChildren<Stunnable>();
+                    if (!stunnable.Stunned)
+                    {
+                        stunnable.stun(stunDuration, knockbackDistance);
+                        PV.RPC("RPC_SelfDestruct", RpcTarget.All);
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    [PunRPC]
+    protected void RPC_SelfDestruct()
+    {
+        Health = 0;
     }
 }
