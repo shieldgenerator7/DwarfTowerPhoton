@@ -11,13 +11,27 @@ public class Stunnable : MonoBehaviour
     private float stunDuration = 0;
 
     private Rigidbody2D rb2d;
-    public PhotonView PV;
+    protected PhotonView photonView;
+    public PhotonView PV
+    {
+        get
+        {
+            if (photonView == null)
+            {
+                photonView = GetComponent<PhotonView>();
+            }
+            if (photonView == null)
+            {
+                photonView = GetComponentInParent<PhotonView>();
+            }
+            return photonView;
+        }
+    }
     private BlinkEffect blinkEffect;
 
     private void Start()
     {
         rb2d = GetComponentInParent<Rigidbody2D>();
-        PV = GetComponentInParent<PhotonView>();
         blinkEffect = GetComponentInParent<BlinkEffect>();
     }
 

@@ -248,6 +248,8 @@ GameObject:
   - component: {fileID: 5947632648880918540}
   - component: {fileID: 5518924279983056713}
   - component: {fileID: 2980897293802834191}
+  - component: {fileID: 9093233151845911435}
+  - component: {fileID: 8823400307403786068}
   - component: {fileID: 7366886583290664003}
   m_Layer: 0
   m_Name: Weapon Menu
@@ -283,6 +285,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilities:
+  - {fileID: 9093233151845911435}
+  - {fileID: 8823400307403786068}
   - {fileID: 7366886583290664003}
   - {fileID: 2980897293802834191}
 --- !u!114 &2980897293802834191
@@ -301,6 +305,56 @@ MonoBehaviour:
   buttonName: Reload
   hidesOtherInputs: 0
   abilityContext: {fileID: 3769535869663102263}
+--- !u!114 &9093233151845911435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3103024714437739674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1146f130182c8b468babded8c5cb840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manaCost: 0
+  buttonName: Ability1
+  hidesOtherInputs: 1
+  aminaReservedPerSecond: 5
+  expectedAnimaReserved: 5
+  minAminaReserved: 0.1
+  shotPrefabName: sword
+  subfolderName: '!parent'
+  defaultSpawnBuffer: 0
+  minSpawnBuffer: 0
+  maxSpawnBuffer: 0
+  rotateShot: 1
+  previewPrefab: {fileID: 0}
+--- !u!114 &8823400307403786068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3103024714437739674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1146f130182c8b468babded8c5cb840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manaCost: 0
+  buttonName: Ability2
+  hidesOtherInputs: 1
+  aminaReservedPerSecond: 5
+  expectedAnimaReserved: 5
+  minAminaReserved: 0.1
+  shotPrefabName: spawner_daggers
+  subfolderName: '!parent'
+  defaultSpawnBuffer: 0
+  minSpawnBuffer: 0
+  maxSpawnBuffer: 0
+  rotateShot: 1
+  previewPrefab: {fileID: 0}
 --- !u!114 &7366886583290664003
 MonoBehaviour:
   m_ObjectHideFlags: 0
