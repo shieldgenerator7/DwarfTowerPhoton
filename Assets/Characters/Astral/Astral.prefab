@@ -153,6 +153,7 @@ MonoBehaviour:
   buttonName: Ability2
   hidesOtherInputs: 0
   abilityContext: {fileID: 5518924279983056713}
+  switchOnAbilities: []
 --- !u!114 &4410195784120660945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,7 +169,6 @@ MonoBehaviour:
   stunnableScripts:
   - {fileID: 307085991090335124}
   - {fileID: 4517987756410504376}
-  PV: {fileID: 0}
 --- !u!61 &9144531418077418824
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -305,6 +305,10 @@ MonoBehaviour:
   buttonName: Reload
   hidesOtherInputs: 0
   abilityContext: {fileID: 3769535869663102263}
+  switchOnAbilities:
+  - {fileID: 9093233151845911435}
+  - {fileID: 8823400307403786068}
+  - {fileID: 7366886583290664003}
 --- !u!114 &9093233151845911435
 MonoBehaviour:
   m_ObjectHideFlags: 0
