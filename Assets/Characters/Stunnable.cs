@@ -61,6 +61,10 @@ public class Stunnable : MonoBehaviour
         enableScripts(false);
 
         blinkEffect.Blinking = true;
+        if (PV.IsMine)
+        {
+            blinkEffect.setBlink(true);
+        }
     }
 
     private void enableScripts(bool enable)

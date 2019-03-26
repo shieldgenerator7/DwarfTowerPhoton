@@ -60,7 +60,7 @@ public class BlinkEffect : MonoBehaviour
         setBlink(blink);
     }
 
-    void setBlink(bool blink)
+    public void setBlink(bool blink)
     {
         if (blink)
         {
