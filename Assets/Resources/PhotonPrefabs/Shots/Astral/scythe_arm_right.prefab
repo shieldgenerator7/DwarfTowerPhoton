@@ -176,6 +176,7 @@ MonoBehaviour:
   wielder: {fileID: 0}
   dataBase: {fileID: 11400000, guid: 2e2bdc319235022488609b3b9b6f36a5, type: 2}
   dataFinal: {fileID: 11400000, guid: c569574c39d11944ca2330928e801467, type: 2}
+  swingSpeed: 3
 --- !u!114 &5431171971898091153
 MonoBehaviour:
   m_ObjectHideFlags: 0

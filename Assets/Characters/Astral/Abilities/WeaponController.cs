@@ -8,6 +8,7 @@ public class WeaponController : ChargedShotController
     public WeaponControllerData dataBase;
     public WeaponControllerData dataFinal;
     private WeaponControllerData dataCurrent;
+    public float swingSpeed = 1;
     private float swingPercent = -1;//how much has been swung
     public float SwingPercent
     {
@@ -59,11 +60,11 @@ public class WeaponController : ChargedShotController
             {
                 if (Input.GetButton("Ability1"))
                 {
-                    SwingPercent += Time.deltaTime;
+                    SwingPercent += swingSpeed * Time.deltaTime;
                 }
                 else
                 {
-                    SwingPercent -= Time.deltaTime;
+                    SwingPercent -= swingSpeed * Time.deltaTime;
                 }
                 Vector2 mouseDir = (Vector2)Utility.MouseWorldPos - PivotPoint;
                 Vector2 pointDir = mouseDir.Rotate(dataCurrent.positionAngle).normalized;
