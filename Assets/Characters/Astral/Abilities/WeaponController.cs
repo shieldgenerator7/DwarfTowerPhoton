@@ -5,7 +5,8 @@ using UnityEngine;
 public class WeaponController : ChargedShotController
 {
     public GameObject wielder;
-    public float angle = 0;//the angle between the facing direction and the weapon's hold direction
+    public float positionAngle = 0;//the angle between the facing direction and the weapon's hold direction
+    public float rotationAngle = 0;//the angle between the hold direction and the weapon's rotation
     public float holdBuffer = 1;
 
     public Vector2 PivotPoint
@@ -40,10 +41,10 @@ public class WeaponController : ChargedShotController
             if (wielder)
             {
                 Vector2 mouseDir = (Vector2)Utility.MouseWorldPos - PivotPoint;
-                Vector2 pointDir = Vector2Extension.Rotate(mouseDir, angle).normalized;
+                Vector2 pointDir = mouseDir.Rotate(positionAngle).normalized;
                 transform.position = PivotPoint + (pointDir * holdBuffer);
-                transform.up = pointDir
-                    * ((sr.flipY) ? -1 : 1);
+                Vector2 lookDir = (pointDir * ((sr.flipY) ? -1 : 1)).Rotate(rotationAngle).normalized;
+                transform.up = lookDir;
             }
         }
     }
