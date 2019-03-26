@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3859086766369871077}
   - component: {fileID: 3859086766369871067}
   - component: {fileID: 4283370477849259487}
+  - component: {fileID: 361451454471490998}
+  - component: {fileID: 5610240382557427576}
   - component: {fileID: 7644985127634344394}
   - component: {fileID: 8410021333655671393}
   - component: {fileID: 5431171971898091153}
@@ -103,6 +105,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 4283370477849259487}
+  - {fileID: 361451454471490998}
   viewIdField: 0
   InstantiationId: 2
   isRuntimeInstantiated: 0
@@ -121,6 +124,43 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!114 &361451454471490998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3859086766369871076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 0
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
+--- !u!50 &5610240382557427576
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3859086766369871076}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!61 &7644985127634344394
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -177,6 +217,7 @@ MonoBehaviour:
   dataBase: {fileID: 11400000, guid: 2e2bdc319235022488609b3b9b6f36a5, type: 2}
   dataFinal: {fileID: 11400000, guid: c569574c39d11944ca2330928e801467, type: 2}
   swingSpeed: 3
+  throwSpeed: 3
 --- !u!114 &5431171971898091153
 MonoBehaviour:
   m_ObjectHideFlags: 0

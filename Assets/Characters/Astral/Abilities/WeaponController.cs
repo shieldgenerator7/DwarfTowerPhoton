@@ -9,6 +9,8 @@ public class WeaponController : ChargedShotController
     public WeaponControllerData dataFinal;
     private WeaponControllerData dataCurrent;
     public float swingSpeed = 1;
+    public float throwSpeed = 3;
+
     private float swingPercent = -1;//how much has been swung
     public float SwingPercent
     {
@@ -42,11 +44,13 @@ public class WeaponController : ChargedShotController
     }
 
     private SpriteRenderer sr;
+    private Rigidbody2D rb2d;
 
     protected override void Start()
     {
         base.Start();
         sr = GetComponent<SpriteRenderer>();
+        rb2d = GetComponent<Rigidbody2D>();
         dataCurrent = new WeaponControllerData();
         SwingPercent = 0;
     }
@@ -58,6 +62,9 @@ public class WeaponController : ChargedShotController
         {
             if (wielder)
             {
+                //
+                // Swing
+                //
                 if (Input.GetButton("Ability1"))
                 {
                     SwingPercent += swingSpeed * Time.deltaTime;
@@ -72,6 +79,14 @@ public class WeaponController : ChargedShotController
                 Vector2 lookDir = pointDir * ((sr.flipY) ? -1 : 1);
                 lookDir = lookDir.Rotate(dataCurrent.rotationAngle).normalized;
                 transform.up = lookDir;
+                //
+                // Throw
+                //
+                if (Input.GetButtonDown("Ability2"))
+                {
+                    wielder = null;
+                    rb2d.velocity = pointDir * throwSpeed;
+                }
             }
         }
     }
@@ -85,10 +100,12 @@ public class WeaponController : ChargedShotController
             if (targetIsPlayer)
             {
                 wielder = collision.gameObject;
+                rb2d.velocity = Vector2.zero;
             }
         }
         else
         {
+            rb2d.velocity = Vector2.zero;
             processCollision(collision, true);
         }
     }
