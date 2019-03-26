@@ -199,25 +199,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7080c406b5a058c4fa261bb09b7f074c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 2
   initialDamage: 10
   damagePerSecond: 10
-  stunDuration: 5
-  knockbackDistance: 10
-  maxHealth: 25
+  stunDuration: 3
+  knockbackDistance: 3
+  maxHealth: 150
   health: 0
-  speedChargeMultiplier: 1
-  initialDamageChargeMultiplier: 1
-  damagePerSecondChargeMultiplier: 1
-  stunDurationChargeMultiplier: 1
-  knockbackDistanceChargeMultiplier: 1
-  maxHealthChargeMultiplier: 1
+  speedChargeMultiplier: 0
+  initialDamageChargeMultiplier: 0
+  damagePerSecondChargeMultiplier: 0
+  stunDurationChargeMultiplier: 0.5
+  knockbackDistanceChargeMultiplier: 0.5
+  maxHealthChargeMultiplier: 2
   previewSprite: {fileID: 0}
   wielder: {fileID: 0}
   dataBase: {fileID: 11400000, guid: 2e2bdc319235022488609b3b9b6f36a5, type: 2}
   dataFinal: {fileID: 11400000, guid: c569574c39d11944ca2330928e801467, type: 2}
   swingSpeed: 3
-  throwSpeed: 3
+  throwSpeed: 2
 --- !u!114 &5431171971898091153
 MonoBehaviour:
   m_ObjectHideFlags: 0

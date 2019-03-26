@@ -324,9 +324,9 @@ MonoBehaviour:
   manaCost: 0
   buttonName: Ability1
   hidesOtherInputs: 1
-  aminaReservedPerSecond: 5
-  expectedAnimaReserved: 5
-  minAminaReserved: 0.1
+  aminaReservedPerSecond: 10
+  expectedAnimaReserved: 10
+  minAminaReserved: 10
   shotPrefabName: sword
   subfolderName: '!parent'
   defaultSpawnBuffer: 0
@@ -349,8 +349,8 @@ MonoBehaviour:
   manaCost: 0
   buttonName: Ability2
   hidesOtherInputs: 1
-  aminaReservedPerSecond: 5
-  expectedAnimaReserved: 5
+  aminaReservedPerSecond: 2
+  expectedAnimaReserved: 2
   minAminaReserved: 0.1
   shotPrefabName: spawner_daggers
   subfolderName: '!parent'
@@ -376,7 +376,7 @@ MonoBehaviour:
   hidesOtherInputs: 1
   aminaReservedPerSecond: 5
   expectedAnimaReserved: 5
-  minAminaReserved: 0.1
+  minAminaReserved: 5
   shotPrefabName: spawner_scythe_arm
   subfolderName: '!parent'
   defaultSpawnBuffer: 0
@@ -474,10 +474,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83413c13fefadf64bab9596e5332f75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 5
+  manaCost: 1
   buttonName: Ability1
   hidesOtherInputs: 0
-  fireDelay: 2
+  fireDelay: 3
   shotPrefabName: shot
   subfolderName: '!parent'
   spawnBuffer: 1.5
