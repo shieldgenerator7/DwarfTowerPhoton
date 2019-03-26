@@ -174,8 +174,8 @@ MonoBehaviour:
   maxHealthChargeMultiplier: 1
   previewSprite: {fileID: 0}
   wielder: {fileID: 0}
-  angle: 90
-  holdBuffer: 0.5
+  dataBase: {fileID: 11400000, guid: a54cc1828eee1a348923f104b7c1488b, type: 2}
+  dataFinal: {fileID: 11400000, guid: 5f4b7b90287e76345b63232b7195e0e2, type: 2}
 --- !u!114 &7639241076731766270
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,9 +5,24 @@ using UnityEngine;
 public class WeaponController : ChargedShotController
 {
     public GameObject wielder;
-    public float positionAngle = 0;//the angle between the facing direction and the weapon's hold direction
-    public float rotationAngle = 0;//the angle between the hold direction and the weapon's rotation
-    public float holdBuffer = 1;
+    public WeaponControllerData dataBase;
+    public WeaponControllerData dataFinal;
+    private WeaponControllerData dataCurrent;
+    private float swingPercent = -1;//how much has been swung
+    public float SwingPercent
+    {
+        get { return swingPercent; }
+        set
+        {
+            float newValue = Mathf.Clamp(value, 0, 1);
+            if (swingPercent != newValue) {
+                swingPercent = newValue;
+                dataCurrent.positionAngle = Mathf.Lerp(dataBase.positionAngle, dataFinal.positionAngle, swingPercent);
+                dataCurrent.rotationAngle = Mathf.Lerp(dataBase.rotationAngle, dataFinal.rotationAngle, swingPercent);
+                dataCurrent.holdBuffer = Mathf.Lerp(dataBase.holdBuffer, dataFinal.holdBuffer, swingPercent);
+            }
+        }
+    }
 
     public Vector2 PivotPoint
     {
@@ -31,6 +46,8 @@ public class WeaponController : ChargedShotController
     {
         base.Start();
         sr = GetComponent<SpriteRenderer>();
+        dataCurrent = new WeaponControllerData();
+        SwingPercent = 0;
     }
 
     // Update is called once per frame
@@ -40,10 +57,19 @@ public class WeaponController : ChargedShotController
         {
             if (wielder)
             {
+                if (Input.GetButton("Ability1"))
+                {
+                    SwingPercent += Time.deltaTime;
+                }
+                else
+                {
+                    SwingPercent -= Time.deltaTime;
+                }
                 Vector2 mouseDir = (Vector2)Utility.MouseWorldPos - PivotPoint;
-                Vector2 pointDir = mouseDir.Rotate(positionAngle).normalized;
-                transform.position = PivotPoint + (pointDir * holdBuffer);
-                Vector2 lookDir = (pointDir * ((sr.flipY) ? -1 : 1)).Rotate(rotationAngle).normalized;
+                Vector2 pointDir = mouseDir.Rotate(dataCurrent.positionAngle).normalized;
+                transform.position = PivotPoint + (pointDir * dataCurrent.holdBuffer);
+                Vector2 lookDir = pointDir * ((sr.flipY) ? -1 : 1);
+                lookDir = lookDir.Rotate(dataCurrent.rotationAngle).normalized;
                 transform.up = lookDir;
             }
         }
