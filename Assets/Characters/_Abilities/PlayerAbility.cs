@@ -51,6 +51,7 @@ public abstract class PlayerAbility : MonoBehaviour
     //
 
     protected PlayerController playerController;
+    protected Rigidbody2D rb2d;
     protected PhotonView PV;
 
     // Start is called before the first frame update
@@ -60,6 +61,11 @@ public abstract class PlayerAbility : MonoBehaviour
         if (!playerController)
         {
             playerController = GetComponentInParent<PlayerController>();
+        }
+        rb2d = GetComponent<Rigidbody2D>();
+        if (!rb2d)
+        {
+            rb2d = GetComponentInParent<Rigidbody2D>();
         }
         PV = GetComponentInParent<PhotonView>();
     }
