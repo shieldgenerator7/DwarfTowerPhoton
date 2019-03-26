@@ -14,23 +14,31 @@ public class BlinkEffect : MonoBehaviour
         get { return lastBlinkTime > 0; }
         set
         {
+            bool blinking = value;
             if (PV.IsMine)
             {
-                bool prevValue = Blinking;
-                if (prevValue != value)
-                {
-                    PV.RPC("RPC_Blink", RpcTarget.AllViaServer, value);
-                }
+                setBlink(blinking);
+                PV.RPC("RPC_Blink", RpcTarget.AllViaServer, blinking);
             }
         }
     }
 
     List<SpriteRenderer> srs;
 
-    private PhotonView PV;
+    protected PhotonView photonView;
+    public PhotonView PV
+    {
+        get
+        {
+            if (photonView == null)
+            {
+                photonView = GetComponent<PhotonView>();
+            }
+            return photonView;
+        }
+    }
     private void Start()
     {
-        PV = GetComponent<PhotonView>();
         srs = new List<SpriteRenderer>(GetComponentsInChildren<SpriteRenderer>());
     }
 
@@ -48,6 +56,11 @@ public class BlinkEffect : MonoBehaviour
 
     [PunRPC]
     void RPC_Blink(bool blink)
+    {
+        setBlink(blink);
+    }
+
+    void setBlink(bool blink)
     {
         if (blink)
         {

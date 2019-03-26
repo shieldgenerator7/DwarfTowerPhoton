@@ -63,7 +63,18 @@ public class ShotController : MonoBehaviour
     //
 
     private Rigidbody2D rb2d;
-    protected PhotonView PV;
+    protected PhotonView photonView;
+    public PhotonView PV
+    {
+        get
+        {
+            if (photonView == null)
+            {
+                photonView = GetComponent<PhotonView>();
+            }
+            return photonView;
+        }
+    }
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -73,7 +84,6 @@ public class ShotController : MonoBehaviour
         {
             rb2d.velocity = transform.up * speed;
         }
-        PV = GetComponent<PhotonView>();
         health = maxHealth;
     }
 
@@ -114,7 +124,10 @@ public class ShotController : MonoBehaviour
             if (stunnable && !stunnable.Stunned)
             {
                 PhotonView targetView = collision.gameObject.GetComponentInParent<PhotonView>();
-                PV.RPC("RPC_StunTarget", RpcTarget.All, targetView.ViewID);
+                if (PV.IsMine)
+                {
+                    PV.RPC("RPC_StunTarget", RpcTarget.All, targetView.ViewID);
+                }
             }
         }
         if (!collision.isTrigger)
@@ -139,12 +152,12 @@ public class ShotController : MonoBehaviour
         {
             if (targetView.ViewID == targetID)
             {
-                if (targetView.IsMine)
+                Stunnable stunnable = targetView.gameObject.GetComponentInChildren<Stunnable>();
+                if (!stunnable.Stunned)
                 {
-                    Stunnable stunnable = targetView.gameObject.GetComponentInChildren<Stunnable>();
-                    if (!stunnable.Stunned)
+                    stunnable.stun(stunDuration, knockbackDistance);
+                    if (targetView.IsMine)
                     {
-                        stunnable.stun(stunDuration, knockbackDistance);
                         PV.RPC("RPC_SelfDestruct", RpcTarget.All);
                     }
                 }
