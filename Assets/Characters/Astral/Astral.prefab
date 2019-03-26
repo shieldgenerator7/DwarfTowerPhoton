@@ -37,7 +37,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6220889621231917683}
-  - {fileID: 8736292213951035431}
   - {fileID: 5947632648880918540}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -134,7 +133,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilities:
   - {fileID: 7329762624495837724}
-  - {fileID: 4034267826870480475}
   - {fileID: 5500888993561376432}
   - {fileID: 3369071877670158181}
 --- !u!114 &7329762624495837724
@@ -270,7 +268,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1073061482865175048}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5518924279983056713
 MonoBehaviour:
@@ -384,63 +382,6 @@ MonoBehaviour:
   maxSpawnBuffer: 0
   rotateShot: 1
   previewPrefab: {fileID: 0}
---- !u!1 &3107006109710722385
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8736292213951035431}
-  - component: {fileID: 4034267826870480475}
-  m_Layer: 0
-  m_Name: Barricade Launcher
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8736292213951035431
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3107006109710722385}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1073061482865175048}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4034267826870480475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3107006109710722385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1146f130182c8b468babded8c5cb840, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manaCost: 0
-  buttonName: Ability3
-  hidesOtherInputs: 1
-  aminaReservedPerSecond: 10
-  expectedAnimaReserved: 10
-  minAminaReserved: 0.1
-  shotPrefabName: barricade
-  subfolderName: '!parent'
-  defaultSpawnBuffer: 1
-  minSpawnBuffer: 0
-  maxSpawnBuffer: 2
-  rotateShot: 0
-  previewPrefab: {fileID: 4883769523225080588, guid: b262c7e4978b83d4da6bd142ea06f830,
-    type: 3}
 --- !u!1 &7577088886736187312
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,7 +393,7 @@ GameObject:
   - component: {fileID: 6220889621231917683}
   - component: {fileID: 5500888993561376432}
   m_Layer: 0
-  m_Name: Iron Shot
+  m_Name: Star Shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -487,7 +428,7 @@ MonoBehaviour:
   manaCost: 5
   buttonName: Ability1
   hidesOtherInputs: 0
-  fireDelay: 0.5
+  fireDelay: 2
   shotPrefabName: shot
   subfolderName: '!parent'
   spawnBuffer: 1.5
