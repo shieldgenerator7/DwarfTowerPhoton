@@ -22,7 +22,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
     public int playersInRoom;
     public int myNumberInRoom;
 
-    public int playerInGame;
+    public int playersInGame;
 
     //Delayed Start
     private bool readyToCount;
@@ -221,8 +221,8 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
     private void RPC_LoadedGameScene()//"RPC_" not necessary in front of method name, it's only for style
     {
         Debug.Log("RPC_LoadedGameScene()");
-        playerInGame++;
-        if (playerInGame == PhotonNetwork.PlayerList.Length)
+        playersInGame++;
+        if (playersInGame == PhotonNetwork.PlayerList.Length)
         {
             PV.RPC("RPC_CreatePlayer", RpcTarget.All);
         }
@@ -233,5 +233,12 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
     {
         Debug.Log("Create Player");
         PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PhotonNetworkPlayer"), transform.position, Quaternion.identity, 0);
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
+        Debug.Log(otherPlayer.NickName + " has left the game");
+        playersInGame--;
     }
 }
