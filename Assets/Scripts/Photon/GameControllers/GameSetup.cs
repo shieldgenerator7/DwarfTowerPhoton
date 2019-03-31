@@ -26,8 +26,8 @@ public class GameSetup : MonoBehaviour
 
     IEnumerator DisconnectAndLoad()
     {
-        PhotonNetwork.Disconnect();
-        while (PhotonNetwork.IsConnected)
+        PhotonNetwork.LeaveRoom();
+        while (PhotonNetwork.InRoom)
         {
             yield return null;
         }
