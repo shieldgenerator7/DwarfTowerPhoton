@@ -15,7 +15,7 @@ public class CaravanController : MonoBehaviour
     public Collider2D detectionColl;//the collider that detects which players are pushing
     private RaycastHit2D[] rch2ds = new RaycastHit2D[100];//used for detection
 
-    private Dictionary<TeamToken, float> teamCaptains = new Dictionary<TeamToken, float>();
+    private Dictionary<TeamTokenCaptain, float> teamCaptains = new Dictionary<TeamTokenCaptain, float>();
 
     private static CaravanController instance;
     public static CaravanController Caravan
@@ -31,12 +31,9 @@ public class CaravanController : MonoBehaviour
         instance = this;
         rb2d = GetComponent<Rigidbody2D>();
         PV = GetComponent<PhotonView>();
-        foreach (TeamToken tt in FindObjectsOfType<TeamToken>())
+        foreach (TeamTokenCaptain ttc in FindObjectsOfType<TeamTokenCaptain>())
         {
-            if (!teamCaptains.ContainsKey(tt.teamCaptain))
-            {
-                teamCaptains.Add(tt.teamCaptain, 0);
-            }
+            teamCaptains.Add(ttc, 0);
         }
         updateDirection();
     }
@@ -82,10 +79,10 @@ public class CaravanController : MonoBehaviour
     void updateDirection()
     {
         direction = Vector2.zero;
-        foreach (TeamToken tt in teamCaptains.Keys)
+        foreach (TeamTokenCaptain ttc in teamCaptains.Keys)
         {
-            direction += (Vector2)(transform.position - tt.transform.position).normalized
-                * teamCaptains[tt];
+            direction += (Vector2)(transform.position - ttc.transform.position).normalized
+                * teamCaptains[ttc];
         }
         float magnitude = direction.magnitude;
         magnitude = Mathf.Clamp(magnitude, 0, maxMoveSpeed);

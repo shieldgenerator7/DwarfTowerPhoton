@@ -9,7 +9,7 @@ using UnityEngine;
 /// </summary>
 public class TeamToken : MonoBehaviour
 {
-    public TeamToken teamCaptain;
+    public TeamTokenCaptain teamCaptain;
     public TeamToken owner;
 
     private PhotonView photonView;
@@ -29,7 +29,7 @@ public class TeamToken : MonoBehaviour
         }
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         if (PV.IsMine)
         {
@@ -201,28 +201,59 @@ public class TeamToken : MonoBehaviour
         return tt;
     }
 
-    public static TeamToken getTeamWithFewestPlayers()
+    public void assignTeam()
     {
-        //Get list of all team captains
-        Dictionary<TeamToken, int> teamCaptains = new Dictionary<TeamToken, int>();
+        PV.RPC("RPC_Server_AssignTeam", RpcTarget.MasterClient);
+    }
+
+    [PunRPC]
+    void RPC_Server_AssignTeam()
+    {
+        TeamTokenCaptain teamCaptain = getTeamWithFewestPlayers();
+        PV.RPC("RPC_AssignTeam", RpcTarget.AllBuffered, teamCaptain.PV.ViewID);
+    }
+
+    [PunRPC]
+    void RPC_AssignTeam(int captainID)
+    {
         foreach (TeamToken tt in FindObjectsOfType<TeamToken>())
         {
-            int increment = (tt.isPlayer()) ? 1 : 0;
-            if (!teamCaptains.ContainsKey(tt.teamCaptain))
+            if (tt.PV.ViewID == captainID)
             {
-                teamCaptains.Add(tt.teamCaptain, 0);
+                tt.recruit(this);
+                break;
             }
-            teamCaptains[tt.teamCaptain] += increment;
+        }
+    }
+
+    public static TeamTokenCaptain getTeamWithFewestPlayers()
+    {
+        //Get list of all team captains
+        Dictionary<TeamTokenCaptain, int> teamCaptains = new Dictionary<TeamTokenCaptain, int>();
+        foreach (TeamTokenCaptain ttc in FindObjectsOfType<TeamTokenCaptain>())
+        {
+            if (!teamCaptains.ContainsKey(ttc))
+            {
+                teamCaptains.Add(ttc, 0);
+            }
+        }
+        foreach (TeamToken tt in FindObjectsOfType<TeamToken>())
+        {
+            if (tt.teamCaptain != null)
+            {
+                int increment = (tt.isPlayer()) ? 1 : 0;
+                teamCaptains[tt.teamCaptain] += increment;
+            }
         }
         //Find the team with the lowest number of team members
         int minTeamMembers = int.MaxValue;
-        TeamToken minTeamCaptain = null;
-        foreach (TeamToken tc in teamCaptains.Keys)
+        TeamTokenCaptain minTeamCaptain = null;
+        foreach (TeamTokenCaptain ttc in teamCaptains.Keys)
         {
-            if ((int)teamCaptains[tc] < minTeamMembers)
+            if ((int)teamCaptains[ttc] < minTeamMembers)
             {
-                minTeamMembers = (int)teamCaptains[tc];
-                minTeamCaptain = tc;
+                minTeamMembers = (int)teamCaptains[ttc];
+                minTeamCaptain = ttc;
             }
         }
         return minTeamCaptain;

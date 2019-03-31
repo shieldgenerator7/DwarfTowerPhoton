@@ -16,21 +16,27 @@ public class PhotonPlayer : MonoBehaviour
         PV = GetComponent<PhotonView>();
         if (PV.IsMine)
         {
-            int spawnPickIndex = PhotonNetwork.CurrentRoom.PlayerCount - 1 % GameSetup.instance.spawnPoints.Length;
-            GameObject spawn = GameSetup.instance.spawnPoints[spawnPickIndex];
-            myAvatar = PhotonNetwork.Instantiate(
-                Path.Combine("PhotonPrefabs", "PlayerAvatar"),
-                spawn.transform.position,
-                spawn.transform.rotation,
-                0
-                );
-            myAvatar.GetComponent<TeamToken>().seeRecruiter(TeamToken.getTeamToken(spawn));
+            StartCoroutine(spawn());
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator spawn()
     {
-
+        GameObject spawn = GameSetup.instance.spawnPoint;
+        myAvatar = PhotonNetwork.Instantiate(
+            Path.Combine("PhotonPrefabs", "PlayerAvatar"),
+            spawn.transform.position,
+            spawn.transform.rotation,
+            0
+            );
+        TeamToken teamToken = TeamToken.getTeamToken(myAvatar);
+        teamToken.assignTeam();
+        while (teamToken.teamCaptain == null)
+        {
+            yield return null;
+        }
+        spawn = teamToken.teamCaptain.getNextSpawnPoint();
+        myAvatar.transform.position = spawn.transform.position;
+        yield return null;
     }
 }

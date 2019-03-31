@@ -9,7 +9,7 @@ public class GameSetup : MonoBehaviour
 
     public static GameSetup instance;
 
-    public GameObject[] spawnPoints;
+    public GameObject spawnPoint;
 
     private void OnEnable()
     {
