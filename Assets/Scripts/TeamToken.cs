@@ -216,11 +216,11 @@ public class TeamToken : MonoBehaviour
     [PunRPC]
     void RPC_AssignTeam(int captainID)
     {
-        foreach (TeamToken tt in FindObjectsOfType<TeamToken>())
+        foreach (TeamTokenCaptain ttc in FindObjectsOfType<TeamTokenCaptain>())
         {
-            if (tt.PV.ViewID == captainID)
+            if (ttc.PV.ViewID == captainID)
             {
-                tt.recruit(this);
+                ttc.recruit(this);
                 break;
             }
         }
