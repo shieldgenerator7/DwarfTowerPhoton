@@ -237,5 +237,4 @@ MonoBehaviour:
   teamCaptain: {fileID: 7351537156668849939}
   owner: {fileID: 7351537156668849939}
   spawnPoints:
-  - {fileID: 861237106}
-  - {fileID: 1852675302}
+  - {fileID: 1385570900420768267}
