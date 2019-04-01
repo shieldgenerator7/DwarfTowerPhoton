@@ -44,13 +44,11 @@ public class WeaponController : ChargedShotController
     }
 
     private SpriteRenderer sr;
-    private Rigidbody2D rb2d;
 
     protected override void Start()
     {
         base.Start();
         sr = GetComponent<SpriteRenderer>();
-        rb2d = GetComponent<Rigidbody2D>();
         dataCurrent = new WeaponControllerData();
         SwingPercent = 0;
     }

@@ -62,7 +62,7 @@ public class ShotController : MonoBehaviour
     // Components
     //
 
-    private Rigidbody2D rb2d;
+    protected Rigidbody2D rb2d;
     protected PhotonView photonView;
     public PhotonView PV
     {
