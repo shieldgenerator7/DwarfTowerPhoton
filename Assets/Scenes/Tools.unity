@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clientCount: 4
+  resetClients: 1
 --- !u!4 &583353027
 Transform:
   m_ObjectHideFlags: 0

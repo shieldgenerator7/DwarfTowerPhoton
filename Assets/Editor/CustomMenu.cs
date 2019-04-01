@@ -56,6 +56,9 @@ public class CustomMenu
             }
         }
 
+        //Kill running builds if any
+        killProcesses();
+
         // Build player.
         BuildPipeline.BuildPlayer(levels, buildName, buildTarget, BuildOptions.None);
 
@@ -64,17 +67,15 @@ public class CustomMenu
 
         if (buildTarget == BuildTarget.StandaloneWindows)
         {
-            killProcesses();
             runWindows();
         }
     }
 
     public static void killProcesses()
     {
-        foreach(Process proc in buildProcesses)
+        foreach (Process proc in buildProcesses)
         {
-            proc.CloseMainWindow();
-            proc.Close();
+            proc.Kill();
         }
         buildProcesses.Clear();
     }
@@ -87,6 +88,10 @@ public class CustomMenu
         if (gls)
         {
             windowCount = gls.clientCount;
+            if (gls.resetClients)
+            {
+                killProcesses();
+            }
         }
         string extension = "exe";
         string buildName = getBuildNamePath(extension);
