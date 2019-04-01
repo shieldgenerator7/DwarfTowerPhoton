@@ -32,12 +32,23 @@ public class PlayerController : MonoBehaviour
 
     private List<PlayerAbility> processingAbilities = new List<PlayerAbility>();//used for abilities that have lasting effects
 
-    private PhotonView PV;
+    private PhotonView photonView;
+    public PhotonView PV
+    {
+        get
+        {
+            if (photonView == null)
+            {
+                photonView = GetComponentInParent<PhotonView>();
+            }
+            return photonView;
+        }
+        private set { photonView = value; }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        PV = GetComponentInParent<PhotonView>();
         if (PV.IsMine)
         {
             Amina = maxAmina;
@@ -53,7 +64,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         //Auto-Reloading
-        if (Amina == 0  && ReservedAmina == 0 && !aminaReloader.Reloading)
+        if (Amina == 0 && ReservedAmina == 0 && !aminaReloader.Reloading)
         {
             aminaReloader.reload();
         }

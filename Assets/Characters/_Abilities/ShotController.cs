@@ -62,7 +62,19 @@ public class ShotController : MonoBehaviour
     // Components
     //
 
-    protected Rigidbody2D rb2d;
+    private new Rigidbody2D rigidbody2D;
+    protected Rigidbody2D rb2d
+    {
+        get
+        {
+            if (rigidbody2D == null)
+            {
+                rigidbody2D = GetComponent<Rigidbody2D>();
+            }
+            return rigidbody2D;
+        }
+        private set { rigidbody2D = value; }
+    }
     protected PhotonView photonView;
     public PhotonView PV
     {
@@ -79,7 +91,6 @@ public class ShotController : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        rb2d = GetComponent<Rigidbody2D>();
         if (rb2d)
         {
             rb2d.velocity = transform.up * speed;

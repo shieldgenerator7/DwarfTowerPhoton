@@ -43,5 +43,6 @@ MonoBehaviour:
   - RPC_AssignTeam
   - RPC_Server_AssignTeam
   - RPC_ShowResultScreen
+  - RPC_SwitchOwner
   DisableAutoOpenWizard: 1
   ShowSettings: 1

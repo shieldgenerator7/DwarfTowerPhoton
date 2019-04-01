@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponController : ChargedShotController
 {
-    public GameObject wielder;
+    public PlayerController wielder;
     public WeaponControllerData dataBase;
     public WeaponControllerData dataFinal;
     private WeaponControllerData dataCurrent;
@@ -18,7 +19,8 @@ public class WeaponController : ChargedShotController
         set
         {
             float newValue = Mathf.Clamp(value, 0, 1);
-            if (swingPercent != newValue) {
+            if (swingPercent != newValue)
+            {
                 swingPercent = newValue;
                 dataCurrent.positionAngle = Mathf.Lerp(dataBase.positionAngle, dataFinal.positionAngle, swingPercent);
                 dataCurrent.rotationAngle = Mathf.Lerp(dataBase.rotationAngle, dataFinal.rotationAngle, swingPercent);
@@ -56,9 +58,9 @@ public class WeaponController : ChargedShotController
     // Update is called once per frame
     void Update()
     {
-        if (PV.IsMine)
+        if (wielder)
         {
-            if (wielder)
+            if (wielder.PV.IsMine)
             {
                 //
                 // Swing
@@ -82,7 +84,7 @@ public class WeaponController : ChargedShotController
                 //
                 if (Input.GetButtonDown("Ability2"))
                 {
-                    wielder = null;
+                    switchOwner(null);
                     rb2d.velocity = pointDir * throwSpeed;
                 }
             }
@@ -101,6 +103,11 @@ public class WeaponController : ChargedShotController
                 {
                     wielder = collision.gameObject.GetComponent<PlayerController>();
                     rb2d.velocity = Vector2.zero;
+                    //Photon Take Over
+                    if (PV.IsMine)
+                    {
+                        switchOwner(wielder);
+                    }
                 }
             }
         }
@@ -108,6 +115,32 @@ public class WeaponController : ChargedShotController
         {
             rb2d.velocity = Vector2.zero;
             processCollision(collision, true);
+        }
+    }
+
+    void switchOwner(PlayerController pc)
+    {
+        int ownerID = -1;
+        if (pc) {
+            PV.TransferOwnership(pc.PV.Owner);
+            ownerID = pc.PV.ViewID;
+        }
+        PV.RPC("RPC_SwitchOwner", RpcTarget.AllBuffered, ownerID);
+    }
+
+    [PunRPC]
+    void RPC_SwitchOwner(int ownerID)
+    {
+        wielder = null;
+        if (ownerID >= 0)
+        {
+            foreach (PlayerController pc in FindObjectsOfType<PlayerController>())
+            {
+                if (pc.PV.ViewID == ownerID)
+                {
+                    wielder = pc;
+                }
+            }
         }
     }
 }
