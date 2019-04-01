@@ -79,7 +79,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        if (Mathf.Approximately( Time.time, Mathf.Floor(Time.time)))
+        if (Mathf.Approximately(Time.time, Mathf.Floor(Time.time)))
         {
             Debug.Log("Update: time: " + Time.time);
         }
@@ -198,7 +198,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
 
     void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("OnSceneFinishedLoading: scene: "+scene.name+", mode: "+mode);
+        Debug.Log("OnSceneFinishedLoading: scene: " + scene.name + ", mode: " + mode);
         currentScene = scene.buildIndex;
         if (currentScene == MultiplayerSetting.multiplayerSetting.menuScene)
         {

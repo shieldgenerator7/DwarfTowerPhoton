@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class CustomMenu
 {
+    private static List<Process> buildProcesses = new List<Process>();
+
     [MenuItem("SG7/Build/Build Windows %w")]
     public static void buildWindows()
     {
@@ -59,23 +61,44 @@ public class CustomMenu
 
         // Copy a file from the project folder to the build folder, alongside the built game.
         string resourcesPath = path + "/Assets/Resources";
-        
-        // Run the game (Process class from System.Diagnostics).
-        Process proc = new Process();
-        proc.StartInfo.FileName = buildName;
-        proc.Start();
+
+        if (buildTarget == BuildTarget.StandaloneWindows)
+        {
+            killProcesses();
+            runWindows();
+        }
+    }
+
+    public static void killProcesses()
+    {
+        foreach(Process proc in buildProcesses)
+        {
+            proc.CloseMainWindow();
+            proc.Close();
+        }
+        buildProcesses.Clear();
     }
 
     [MenuItem("SG7/Run/Run Windows %#w")]
     public static void runWindows()
     {//2018-08-10: copied from build()
+        int windowCount = 1;
+        GameLauncherSettings gls = GameObject.FindObjectOfType<GameLauncherSettings>();
+        if (gls)
+        {
+            windowCount = gls.clientCount;
+        }
         string extension = "exe";
         string buildName = getBuildNamePath(extension);
         UnityEngine.Debug.Log("Launching: " + buildName);
-        // Run the game (Process class from System.Diagnostics).
-        Process proc = new Process();
-        proc.StartInfo.FileName = buildName;
-        proc.Start();
+        for (int i = 0; i < windowCount; i++)
+        {
+            // Run the game (Process class from System.Diagnostics).
+            Process proc = new Process();
+            buildProcesses.Add(proc);
+            proc.StartInfo.FileName = buildName;
+            proc.Start();
+        }
     }
 
     [MenuItem("SG7/Run/Open Build Folder #w")]
