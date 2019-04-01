@@ -94,11 +94,14 @@ public class WeaponController : ChargedShotController
         bool onSameTeam = TeamToken.onSameTeam(gameObject, collision.gameObject);
         if (onSameTeam)
         {
-            bool targetIsPlayer = collision.gameObject.CompareTag("Player");
-            if (targetIsPlayer)
+            if (wielder == null)
             {
-                wielder = collision.gameObject;
-                rb2d.velocity = Vector2.zero;
+                bool targetIsPlayer = collision.gameObject.CompareTag("Player");
+                if (targetIsPlayer)
+                {
+                    wielder = collision.gameObject.GetComponent<PlayerController>();
+                    rb2d.velocity = Vector2.zero;
+                }
             }
         }
         else
