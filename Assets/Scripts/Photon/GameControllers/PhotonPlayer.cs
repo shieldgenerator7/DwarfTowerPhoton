@@ -36,7 +36,14 @@ public class PhotonPlayer : MonoBehaviour
             yield return null;
         }
         spawn = teamToken.teamCaptain.getNextSpawnPoint();
-        myAvatar.transform.position = spawn.transform.position;
+        Rigidbody2D rb2d = myAvatar.GetComponent<Rigidbody2D>();
+        rb2d.isKinematic = true;
+        while (myAvatar.transform.position != spawn.transform.position)
+        {
+            myAvatar.transform.position = spawn.transform.position;
+            yield return null;
+        }
+        rb2d.isKinematic = false;
         yield return null;
     }
 }
