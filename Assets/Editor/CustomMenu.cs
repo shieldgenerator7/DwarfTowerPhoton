@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class CustomMenu
 {
-    private static List<Process> buildProcesses = new List<Process>();
 
     [MenuItem("SG7/Build/Build Windows %w")]
     public static void buildWindows()
@@ -73,14 +72,18 @@ public class CustomMenu
 
     public static void killProcesses()
     {
-        foreach (Process proc in buildProcesses)
+        GameLauncherSettings gls = GameObject.FindObjectOfType<GameLauncherSettings>();
+        if (gls)
         {
-            if (!proc.HasExited)
+            foreach (Process proc in gls.buildProcesses)
             {
-                proc.Kill();
+                if (!proc.HasExited)
+                {
+                    proc.Kill();
+                }
             }
+            gls.buildProcesses.Clear();
         }
-        buildProcesses.Clear();
     }
 
     [MenuItem("SG7/Run/Run Windows %#w")]
@@ -103,7 +106,7 @@ public class CustomMenu
         {
             // Run the game (Process class from System.Diagnostics).
             Process proc = new Process();
-            buildProcesses.Add(proc);
+            gls.buildProcesses.Add(proc);
             proc.StartInfo.FileName = buildName;
             proc.Start();
         }

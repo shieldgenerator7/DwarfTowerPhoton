@@ -21,6 +21,7 @@ public class GameSetup : MonoBehaviour
 
     public void DisconnectPlayer()
     {
+        Destroy(FindObjectOfType<PhotonRoom>().gameObject);
         StartCoroutine(DisconnectAndLoad());
     }
 
@@ -31,6 +32,6 @@ public class GameSetup : MonoBehaviour
         {
             yield return null;
         }
-        SceneManager.LoadScene(MultiplayerSetting.multiplayerSetting.menuScene);
+        SceneManager.LoadScene(MultiplayerSetting.instance.menuScene);
     }
 }

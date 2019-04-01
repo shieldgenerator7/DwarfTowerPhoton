@@ -11,7 +11,7 @@ public class PlayerInfo : MonoBehaviour
 
     public GameObject[] allCharacters;
 
-    private void OnEnable()
+    private void Awake()
     {
         if (instance == null)
         {
@@ -21,8 +21,7 @@ public class PlayerInfo : MonoBehaviour
         {
             if (instance != this)
             {
-                Destroy(instance.gameObject);
-                instance = this;
+                Destroy(this.gameObject);
             }
         }
         DontDestroyOnLoad(this.gameObject);

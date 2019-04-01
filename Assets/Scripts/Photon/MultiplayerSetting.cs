@@ -5,7 +5,7 @@ using UnityEngine;
 public class MultiplayerSetting : MonoBehaviour
 {//2019-03-14: made from following this tutorial: https://www.youtube.com/watch?v=IsiWRD1Xh5g
 
-    public static MultiplayerSetting multiplayerSetting;
+    public static MultiplayerSetting instance;
 
     public bool delayStart;
     public int maxPlayers;
@@ -15,13 +15,13 @@ public class MultiplayerSetting : MonoBehaviour
 
     private void Awake()
     {
-        if (multiplayerSetting == null)
+        if (instance == null)
         {
-            multiplayerSetting = this;
+            instance = this;
         }
         else
         {
-            if (multiplayerSetting != this)
+            if (instance != this)
             {
                 Destroy(this.gameObject);
             }
