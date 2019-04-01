@@ -75,7 +75,10 @@ public class CustomMenu
     {
         foreach (Process proc in buildProcesses)
         {
-            proc.Kill();
+            if (!proc.HasExited)
+            {
+                proc.Kill();
+            }
         }
         buildProcesses.Clear();
     }
