@@ -11,7 +11,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
 {//2019-03-14: made by following this tutorial: https://www.youtube.com/watch?v=IsiWRD1Xh5g
 
     //Room Info
-    public static PhotonRoom photonRoom;
+    public static PhotonRoom instance;
     private PhotonView PV;
 
     public bool isGameLoaded;
@@ -34,16 +34,16 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        if (PhotonRoom.photonRoom == null)
+        if (instance == null)
         {
-            PhotonRoom.photonRoom = this;
+            instance = this;
         }
         else
         {
-            if (PhotonRoom.photonRoom != this)
+            if (instance != this)
             {
-                Destroy(PhotonRoom.photonRoom.gameObject);
-                PhotonRoom.photonRoom = this;
+                Destroy(instance.gameObject);
+                instance = this;
             }
         }
         DontDestroyOnLoad(this.gameObject);

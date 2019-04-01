@@ -42,5 +42,6 @@ MonoBehaviour:
   - RPC_SelfDestruct
   - RPC_AssignTeam
   - RPC_Server_AssignTeam
+  - RPC_ShowResultScreen
   DisableAutoOpenWizard: 1
   ShowSettings: 1

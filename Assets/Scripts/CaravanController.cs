@@ -101,5 +101,27 @@ public class CaravanController : MonoBehaviour
         {
             stunnable.stun(stunDuration, knockbackDistance);
         }
+        if (PhotonNetwork.IsMasterClient)
+        {
+            //Checking if the game should end (when the caravan hits a team flag)
+            if (collision.gameObject.CompareTag("TeamFlag"))
+            {
+                TeamTokenCaptain ttc = collision.gameObject.GetComponent<TeamTokenCaptain>();
+                if (teamCaptains.ContainsKey(ttc))
+                {
+                    teamCaptains.Remove(ttc);
+                }
+                if (teamCaptains.Count == 1)
+                {
+                    foreach (TeamTokenCaptain ttcWin in teamCaptains.Keys)
+                    {
+                        GameSetup.showResultsScreen(ttcWin);
+                        break;//only let one team win
+                    }
+                }
+                //Turn off the caravan for good
+                Destroy(this);
+            }
+        }
     }
 }

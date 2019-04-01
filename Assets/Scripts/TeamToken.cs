@@ -13,7 +13,7 @@ public class TeamToken : MonoBehaviour
     public TeamToken owner;
 
     private PhotonView photonView;
-    private PhotonView PV
+    public PhotonView PV
     {
         get
         {
