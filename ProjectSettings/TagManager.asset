@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - TeamFlag
+  - Bullet
   layers:
   - Default
   - TransparentFX
