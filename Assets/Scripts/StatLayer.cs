@@ -32,52 +32,22 @@ public struct StatLayer
             throw new ArgumentException("multiplier is less than 0! " + multiplier);
         }
         StatLayer layer = new StatLayer();
-        if (this.moveSpeed >= 0)
-        {
-            layer.moveSpeed = this.moveSpeed * multiplier;
-        }
-        if (this.maxHits >= 0)
-        {
-            layer.maxHits = this.maxHits * multiplier;
-        }
-        if (this.fireRate >= 0)
-        {
-            layer.fireRate = this.fireRate * multiplier;
-        }
-        if (this.damage >= 0)
-        {
-            layer.damage = this.damage * multiplier;
-        }
-        if (this.size >= 0)
-        {
-            layer.size = this.size * multiplier;
-        }
+        layer.moveSpeed = MultiplyStat(this.moveSpeed, multiplier);
+        layer.maxHits = MultiplyStat(this.maxHits, multiplier);
+        layer.fireRate = MultiplyStat(this.fireRate, multiplier);
+        layer.damage = MultiplyStat(this.damage, multiplier);
+        layer.size = MultiplyStat(this.size, multiplier);
         return layer;
     }
 
     public StatLayer Multiply(StatLayer multiplier)
     {
         StatLayer layer = new StatLayer();
-        if (this.moveSpeed >= 0 && multiplier.moveSpeed >= 0)
-        {
-            layer.moveSpeed = this.moveSpeed * multiplier.moveSpeed;
-        }
-        if (this.maxHits >= 0 && multiplier.maxHits >= 0)
-        {
-            layer.maxHits = this.maxHits * multiplier.maxHits;
-        }
-        if (this.fireRate >= 0 && multiplier.fireRate >= 0)
-        {
-            layer.fireRate = this.fireRate * multiplier.fireRate;
-        }
-        if (this.damage >= 0 && multiplier.damage >= 0)
-        {
-            layer.damage = this.damage * multiplier.damage;
-        }
-        if (this.size >= 0 && multiplier.size >= 0)
-        {
-            layer.size = this.size * multiplier.size;
-        }
+        layer.moveSpeed = MultiplyStat(this.moveSpeed, multiplier.moveSpeed);
+        layer.maxHits = MultiplyStat(this.maxHits, multiplier.maxHits);
+        layer.fireRate = MultiplyStat(this.fireRate, multiplier.fireRate);
+        layer.damage = MultiplyStat(this.damage, multiplier.damage);
+        layer.size = MultiplyStat(this.size, multiplier.size);
         return layer;
     }
 
@@ -91,26 +61,70 @@ public struct StatLayer
     public static StatLayer Lerp(StatLayer minLayer, StatLayer maxLayer, float percentage)
     {
         StatLayer layer = new StatLayer();
-        if (minLayer.moveSpeed >= 0 && maxLayer.moveSpeed >= 0)
-        {
-            layer.moveSpeed = Mathf.Lerp(minLayer.moveSpeed, maxLayer.moveSpeed, percentage);
-        }
-        if (minLayer.maxHits >= 0 && maxLayer.maxHits >= 0)
-        {
-            layer.maxHits = Mathf.Lerp(minLayer.maxHits, maxLayer.maxHits, percentage);
-        }
-        if (minLayer.fireRate >= 0 && maxLayer.fireRate >= 0)
-        {
-            layer.fireRate = Mathf.Lerp(minLayer.fireRate, maxLayer.fireRate, percentage);
-        }
-        if (minLayer.damage >= 0 && maxLayer.damage >= 0)
-        {
-            layer.damage = Mathf.Lerp(minLayer.damage, maxLayer.damage, percentage);
-        }
-        if (minLayer.size >= 0 && maxLayer.size >= 0)
-        {
-            layer.size = Mathf.Lerp(minLayer.size, maxLayer.size, percentage);
-        }
+        layer.moveSpeed = LerpStat(minLayer.moveSpeed, maxLayer.moveSpeed, percentage);
+        layer.maxHits = LerpStat(minLayer.maxHits, maxLayer.maxHits, percentage);
+        layer.fireRate = LerpStat(minLayer.fireRate, maxLayer.fireRate, percentage);
+        layer.damage = LerpStat(minLayer.damage, maxLayer.damage, percentage);
+        layer.size = LerpStat(minLayer.size, maxLayer.size, percentage);
         return layer;
     }
+
+    #region Individual Stat Methods
+    private static float MultiplyStat(float stat, float multiplier)
+    {
+        if (stat >= 0 && multiplier >= 0)
+        {
+            stat *= multiplier;
+        }
+        return stat;
+    }
+    private static float LerpStat(float min, float max, float percentage)
+    {
+        if (min >= 0 && max >= 0)
+        {
+            return Mathf.Lerp(min, max, percentage);
+        }
+        else if (min >= 0)
+        {
+            return min;
+        }
+        else if (max >= 0)
+        {
+            return max;
+        }
+        else
+        {
+            return STAT_INVALID;
+        }
+    }
+
+    /// <summary>
+    /// Returns the charged value of the given stat with the given multiplier and given percentage
+    /// Percentage is the percentage of extra amount kept
+    /// Examples:
+    /// 2, 1, 1 -> 2
+    /// 2, 2, 1 -> 4
+    /// 2, 0.5, 1 -> 1
+    /// 2, 1, 2 -> 2
+    /// 2, 2, 2 -> 6
+    /// 2, 0.5, 2 -> 0
+    /// 2, 1, 0.5 -> 2
+    /// 2, 2, 0.5 -> 3
+    /// 2, 0.5, 0.5 -> 1.5
+    /// </summary>
+    /// <param name="multiplier"></param>
+    /// <param name="stat"></param>
+    /// <param name="percentage">Percentage of extra amount kept</param>
+    private static float ChargeStat(float stat, float multiplier, float percentage)
+    {
+        if (stat == 0 && percentage > 0)
+        {
+            stat = 1;
+        }
+        float newStat = stat * multiplier;
+        float diff = (newStat - stat);
+        float keptDiff = diff * percentage;
+        return Mathf.Max(0, stat + keptDiff);
+    }
+    #endregion
 }
