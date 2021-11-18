@@ -6,13 +6,15 @@ using UnityEngine;
 [System.Serializable]
 public struct StatLayer
 {
+    public const float STAT_INVALID = -1;
+
     public float moveSpeed;
     public float maxHits;
     public float fireRate;
     public float damage;
     public float size;
 
-    public StatLayer(float defaultValue = -1)
+    public StatLayer(float defaultValue = STAT_INVALID)
     {
         //-1 is an invalid value
         //if a stat has an invalid value, it doesn't get processed
