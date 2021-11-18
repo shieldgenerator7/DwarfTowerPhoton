@@ -206,6 +206,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7080c406b5a058c4fa261bb09b7f074c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statBase:
+    moveSpeed: 3
+    maxHits: 50
+    fireRate: -1
+    damage: 100
+    size: 1
   speed: 3
   initialDamage: 100
   damagePerSecond: 100
@@ -213,6 +219,12 @@ MonoBehaviour:
   knockbackDistance: 5
   maxHealth: 50
   health: 0
+  multiplierLayer:
+    moveSpeed: -1
+    maxHits: 2
+    fireRate: -1
+    damage: 2
+    size: 1
   speedChargeMultiplier: 0
   initialDamageChargeMultiplier: 2
   damagePerSecondChargeMultiplier: 2

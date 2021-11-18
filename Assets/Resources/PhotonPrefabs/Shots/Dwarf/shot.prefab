@@ -139,6 +139,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95401923689b5e04ba705f1bf93961a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statBase:
+    moveSpeed: 3
+    maxHits: 1
+    fireRate: -1
+    damage: 10
+    size: 1
   speed: 3
   initialDamage: 10
   damagePerSecond: 10

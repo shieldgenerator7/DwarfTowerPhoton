@@ -14,17 +14,17 @@ public class ChargedShotController : ShotController
     // 1   = exact multiplier received
     // 2   = double multiplier received
     [SerializeField]
-    private float speedChargeMultiplier = 1;
+    public float speedChargeMultiplier = 1;
     [SerializeField]
-    private float initialDamageChargeMultiplier = 1;
+    public float initialDamageChargeMultiplier = 1;
     [SerializeField]
-    private float damagePerSecondChargeMultiplier = 1;
+    public float damagePerSecondChargeMultiplier = 1;
     [SerializeField]
-    private float stunDurationChargeMultiplier = 1;
+    public float stunDurationChargeMultiplier = 1;
     [SerializeField]
-    private float knockbackDistanceChargeMultiplier = 1;
+    public float knockbackDistanceChargeMultiplier = 1;
     [SerializeField]
-    private float maxHealthChargeMultiplier = 1;
+    public float maxHealthChargeMultiplier = 1;
 
     protected float multiplier = 0;
 
