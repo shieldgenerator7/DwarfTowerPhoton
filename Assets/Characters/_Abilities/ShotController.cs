@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ShotController : MonoBehaviour
 {
+    public StatLayer statBase = new StatLayer();
     //
     // Settings
     //

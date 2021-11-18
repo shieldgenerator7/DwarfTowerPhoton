@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ChargedShotController : ShotController
 {
+    public StatLayer multiplierLayer = new StatLayer();
     //
     // Multipliers
     // How much the multiplier passed into chargeStats() effects that stat
