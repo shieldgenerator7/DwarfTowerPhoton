@@ -5,33 +5,26 @@ using UnityEngine;
 
 public class ShotController : MonoBehaviour
 {
-    public StatLayer statBase = new StatLayer();
     //
     // Settings
     //
-    public float speed = 3;//how fast it travels (units/sec)
-    public float initialDamage = 10;//damage dealt upon initial contact
-    public float damagePerSecond = 10;//damage per second in seconds
-    public float stunDuration = 5;//how long hit players will be stunned for
-    public float knockbackDistance = 10;//how far (in total) hit players will be knocked back
-    public float maxHealth = 1;//how much health this shot has
+    [SerializeField]
+    protected StatLayer statBase = new StatLayer();
+    /// <summary>
+    /// Current stats
+    /// </summary>
+    public StatLayer stats
+    {
+        get => _stats;
+        protected set
+        {
+            _stats = value;
+        }
+    }
+    private StatLayer _stats;
 
-    public bool Stuns
-    {
-        get { return stunDuration > 0; }
-    }
-    public bool Knocksback
-    {
-        get { return knockbackDistance > 0; }
-    }
-    public bool HitsPlayer
-    {
-        get { return Stuns || Knocksback; }
-    }
-    public bool HitsObjects
-    {
-        get { return damagePerSecond > 0; }
-    }
+    public bool hitsPlayer = true;
+    public bool hitsObjects = true;
 
     //
     // Runtime Vars
@@ -94,9 +87,9 @@ public class ShotController : MonoBehaviour
     {
         if (rb2d)
         {
-            rb2d.velocity = transform.up * speed;
+            rb2d.velocity = transform.up * _stats.moveSpeed;
         }
-        health = maxHealth;
+        health = _stats.maxHits;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -108,29 +101,25 @@ public class ShotController : MonoBehaviour
         processCollision(collision, false);
     }
 
-    protected void processCollision(Collider2D collision, bool useInitialDamage = false)
+    protected void processCollision(Collider2D collision, bool useInitialDamage)
     {
         if (TeamToken.onSameTeam(gameObject, collision.gameObject))
         {
             //don't damage teammates
             return;
         }
-        if (HitsObjects)
+        if (hitsObjects)
         {
             ShotController sc = collision.gameObject.GetComponent<ShotController>();
             if (sc)
             {
                 if (useInitialDamage)
                 {
-                    sc.addHealth(-initialDamage);
-                }
-                else
-                {
-                    sc.addHealth(-damagePerSecond * Time.deltaTime);
+                    sc.addHealth(-_stats.damage);
                 }
             }
         }
-        if (HitsPlayer)
+        if (hitsPlayer)
         {
             Stunnable stunnable = collision.gameObject.GetComponent<Stunnable>();
             if (stunnable && !stunnable.Stunned)
@@ -167,7 +156,7 @@ public class ShotController : MonoBehaviour
                 Stunnable stunnable = targetView.gameObject.GetComponentInChildren<Stunnable>();
                 if (!stunnable.Stunned)
                 {
-                    stunnable.stun(stunDuration, knockbackDistance);
+                    stunnable.stun();
                     if (targetView.IsMine)
                     {
                         PV.RPC("RPC_SelfDestruct", RpcTarget.All);

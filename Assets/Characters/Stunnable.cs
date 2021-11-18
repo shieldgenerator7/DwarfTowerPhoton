@@ -64,7 +64,7 @@ public class Stunnable : MonoBehaviour
         }
     }
 
-    public void stun(float duration, float knockbackDistance)
+    public void stun(float duration = 2, float knockbackDistance = 5)
     {
         stunDuration = duration;
         float knockbackPerSecond = knockbackDistance / stunDuration;

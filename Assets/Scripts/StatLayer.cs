@@ -8,11 +8,11 @@ public struct StatLayer
 {
     public const float STAT_INVALID = -1;
 
-    public float moveSpeed;
-    public float maxHits;
-    public float fireRate;
-    public float damage;
-    public float size;
+    public float moveSpeed;//how fast it travels (units/sec)
+    public float maxHits;//how many hits before being stunned or destroyed
+    public float fireRate;//how many seconds between shots
+    public float damage;//damage dealt upon initial contact
+    public float size;//percentage of base size
 
     public StatLayer(float defaultValue = STAT_INVALID)
     {
@@ -66,6 +66,18 @@ public struct StatLayer
         layer.fireRate = LerpStat(minLayer.fireRate, maxLayer.fireRate, percentage);
         layer.damage = LerpStat(minLayer.damage, maxLayer.damage, percentage);
         layer.size = LerpStat(minLayer.size, maxLayer.size, percentage);
+        return layer;
+    }
+
+    //TODO: Potentially remove this method and refactor the thing that uses it
+    public StatLayer Charge(float multiplier, StatLayer percentage)
+    {
+        StatLayer layer = new StatLayer();
+        layer.moveSpeed = ChargeStat(this.moveSpeed, multiplier, percentage.moveSpeed);
+        layer.maxHits = ChargeStat(this.maxHits, multiplier, percentage.maxHits);
+        layer.fireRate = ChargeStat(this.fireRate, multiplier, percentage.fireRate);
+        layer.damage = ChargeStat(this.damage, multiplier, percentage.damage);
+        layer.size = ChargeStat(this.size, multiplier, percentage.size);
         return layer;
     }
 

@@ -94,7 +94,7 @@ public class CaravanController : MonoBehaviour
         ShotController sc = collision.gameObject.GetComponent<ShotController>();
         if (sc)
         {
-            sc.addHealth(-sc.maxHealth);
+            sc.addHealth(-sc.stats.maxHits);
         }
         Stunnable stunnable = collision.gameObject.GetComponentInChildren<Stunnable>();
         if (stunnable && !stunnable.Stunned)
