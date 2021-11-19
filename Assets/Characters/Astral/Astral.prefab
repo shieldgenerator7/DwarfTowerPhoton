@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4517987756410504376}
   - component: {fileID: 3769535869663102263}
   - component: {fileID: 7329762624495837724}
+  - component: {fileID: 1916908965083646283}
   - component: {fileID: 4410195784120660945}
   - component: {fileID: 9144531418077418824}
   - component: {fileID: 3158633092025413174}
@@ -159,6 +160,20 @@ MonoBehaviour:
   hidesOtherInputs: 0
   abilityContext: {fileID: 5518924279983056713}
   switchOnAbilities: []
+--- !u!114 &1916908965083646283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532201618779257096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab49dea0eb78a7a43aafe9024717e71c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 1
+  health: 1
 --- !u!114 &4410195784120660945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,6 +186,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f058152a2edad5a4c91a5fd6bd76ad4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 2
+  knockbackDistance: 5
   stunnableScripts:
   - {fileID: 307085991090335124}
   - {fileID: 4517987756410504376}

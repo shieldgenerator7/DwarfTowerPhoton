@@ -62,6 +62,11 @@ public class PlayerController : MonoBehaviour
         {
             Amina = maxAmina;
             FindObjectOfType<AminaMeterController>().FocusPlayerController = this;
+            //Hook up Stunnable with HealthPool
+            Stunnable stunnable = GetComponent<Stunnable>();
+            HealthPool healthPool = GetComponent<HealthPool>();
+            healthPool.onDied += () => { stunnable.stun(); };
+            stunnable.onStunEnded += () => { healthPool.Health = healthPool.MaxHealth; };
         }
         foreach (string input in new string[] { "Ability1", "Ability2", "Ability3", "Reload" })
         {

@@ -243,6 +243,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxMoveSpeed: 1
   maxAllowedDistance: 3
-  stunDuration: 1
-  knockbackDistance: 5
   detectionColl: {fileID: 6696323203719167965}

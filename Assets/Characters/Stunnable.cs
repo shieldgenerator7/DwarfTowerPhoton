@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Stunnable : MonoBehaviour
 {
+    public float duration = 2;
+    public float knockbackDistance = 5;
     //the scripts to be turned off while stunned
     public List<MonoBehaviour> stunnableScripts = new List<MonoBehaviour>();
 
@@ -45,9 +47,12 @@ public class Stunnable : MonoBehaviour
                 rb2d.velocity = Vector2.zero;
                 enableScripts(true);
                 blinkEffect.Blinking = false;
+                onStunEnded?.Invoke();
             }
         }
     }
+    public delegate void OnStunEnded();
+    public event OnStunEnded onStunEnded;
 
     public bool Stunned
     {
@@ -64,7 +69,7 @@ public class Stunnable : MonoBehaviour
         }
     }
 
-    public void stun(float duration = 2, float knockbackDistance = 5)
+    public void stun()
     {
         stunDuration = duration;
         float knockbackPerSecond = knockbackDistance / stunDuration;
