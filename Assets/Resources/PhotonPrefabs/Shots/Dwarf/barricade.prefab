@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7912892047191950911}
   - component: {fileID: 5510426356874053144}
   - component: {fileID: 1657828438935520144}
+  - component: {fileID: 7473864452702116121}
   - component: {fileID: 952854599176919057}
   m_Layer: 0
   m_Name: barricade
@@ -157,7 +158,6 @@ MonoBehaviour:
     size: 1
   hitsPlayer: 0
   hitsObjects: 1
-  health: 0
   multiplierLayer:
     moveSpeed: -1
     maxHits: 3
@@ -165,6 +165,20 @@ MonoBehaviour:
     damage: 1
     size: 1
   previewSprite: {fileID: 21300000, guid: 73cc7530856002240a7109884895d36f, type: 3}
+--- !u!114 &7473864452702116121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8455910277119496503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab49dea0eb78a7a43aafe9024717e71c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  health: 0
 --- !u!114 &952854599176919057
 MonoBehaviour:
   m_ObjectHideFlags: 0

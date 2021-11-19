@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5610240382557427576}
   - component: {fileID: 7644985127634344394}
   - component: {fileID: 8410021333655671393}
+  - component: {fileID: -7427840416990816882}
   - component: {fileID: 5431171971898091153}
   m_Layer: 0
   m_Name: scythe_arm_right
@@ -214,7 +215,6 @@ MonoBehaviour:
     size: 1
   hitsPlayer: 1
   hitsObjects: 1
-  health: 0
   multiplierLayer:
     moveSpeed: -1
     maxHits: 2
@@ -227,6 +227,20 @@ MonoBehaviour:
   dataFinal: {fileID: 11400000, guid: c569574c39d11944ca2330928e801467, type: 2}
   swingSpeed: 3
   throwSpeed: 2
+--- !u!114 &-7427840416990816882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3859086766369871076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab49dea0eb78a7a43aafe9024717e71c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  health: 0
 --- !u!114 &5431171971898091153
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2797045777417747817}
   - component: {fileID: 7626340897562748512}
   - component: {fileID: 6076103221566336280}
+  - component: {fileID: -1584471732268615055}
   - component: {fileID: 600149371874180314}
   m_Layer: 0
   m_Name: spawner_scythe_arm
@@ -95,7 +96,6 @@ MonoBehaviour:
     size: 1
   hitsPlayer: 1
   hitsObjects: 1
-  health: 0
   multiplierLayer:
     moveSpeed: 1
     maxHits: 1
@@ -103,6 +103,20 @@ MonoBehaviour:
     damage: 1
     size: 1
   previewSprite: {fileID: 0}
+--- !u!114 &-1584471732268615055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7626340897562748515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab49dea0eb78a7a43aafe9024717e71c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  health: 0
 --- !u!114 &600149371874180314
 MonoBehaviour:
   m_ObjectHideFlags: 0

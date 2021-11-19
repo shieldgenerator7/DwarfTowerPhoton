@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3417066565926880273}
   - component: {fileID: 5124396774317201690}
   - component: {fileID: 933569388299852495}
+  - component: {fileID: 1868033082892837353}
   - component: {fileID: 7639241076731766270}
   m_Layer: 0
   m_Name: dagger_left
@@ -214,7 +215,6 @@ MonoBehaviour:
     size: 1
   hitsPlayer: 1
   hitsObjects: 1
-  health: 0
   multiplierLayer:
     moveSpeed: -1
     maxHits: -1
@@ -227,6 +227,20 @@ MonoBehaviour:
   dataFinal: {fileID: 11400000, guid: 3b8a804221adcc84db4b14ff1a16a34f, type: 2}
   swingSpeed: 2
   throwSpeed: 7
+--- !u!114 &1868033082892837353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7945890412803988767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab49dea0eb78a7a43aafe9024717e71c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  health: 0
 --- !u!114 &7639241076731766270
 MonoBehaviour:
   m_ObjectHideFlags: 0

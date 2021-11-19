@@ -27,34 +27,11 @@ public class ShotController : MonoBehaviour
     public bool hitsObjects = true;
 
     //
-    // Runtime Vars
-    //
-
-    [SerializeField]
-    private float health;
-    protected float Health
-    {
-        get { return health; }
-        set
-        {
-            health = value;
-            if (health <= 0)
-            {
-                if (PV.IsMine)
-                {
-                    PhotonNetwork.Destroy(this.gameObject);
-                }
-                else
-                {
-                    GetComponent<Collider2D>().enabled = false;
-                }
-            }
-        }
-    }
-
-    //
     // Components
     //
+
+    protected HealthPool health{get; private set;} 
+
 
     private new Rigidbody2D rigidbody2D;
     protected Rigidbody2D rb2d
@@ -89,7 +66,20 @@ public class ShotController : MonoBehaviour
         {
             rb2d.velocity = transform.up * _stats.moveSpeed;
         }
-        health = _stats.maxHits;
+        //HealthPool
+        health = GetComponent<HealthPool>();
+        health.MaxHealth = _stats.maxHits;
+        health.onDied += () =>
+        {
+            if (PV.IsMine)
+            {
+                PhotonNetwork.Destroy(this.gameObject);
+            }
+            else
+            {
+                GetComponent<Collider2D>().enabled = false;
+            }
+        };
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -136,14 +126,14 @@ public class ShotController : MonoBehaviour
             CaravanController cc = collision.gameObject.GetComponent<CaravanController>();
             if (cc)
             {
-                Health = 0;
+                health.Health = 0;
             }
         }
     }
 
     public void addHealth(float health)
     {
-        this.Health += health;
+        this.health.Health += health;
     }
 
     [PunRPC]
@@ -170,6 +160,6 @@ public class ShotController : MonoBehaviour
     [PunRPC]
     protected void RPC_SelfDestruct()
     {
-        Health = 0;
+        health.Health = 0;
     }
 }
