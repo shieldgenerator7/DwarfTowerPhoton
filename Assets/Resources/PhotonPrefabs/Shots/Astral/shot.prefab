@@ -145,12 +145,8 @@ MonoBehaviour:
     fireRate: -1
     damage: 2
     size: 1
-  speed: 1
-  initialDamage: 2
-  damagePerSecond: 10
-  stunDuration: 1
-  knockbackDistance: 1
-  maxHealth: 1
+  hitsPlayer: 1
+  hitsObjects: 1
   health: 0
 --- !u!114 &571
 MonoBehaviour:

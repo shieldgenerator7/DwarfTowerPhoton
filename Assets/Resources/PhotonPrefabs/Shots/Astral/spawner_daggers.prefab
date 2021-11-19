@@ -93,12 +93,8 @@ MonoBehaviour:
     fireRate: -1
     damage: 10
     size: 1
-  speed: 3
-  initialDamage: 10
-  damagePerSecond: 10
-  stunDuration: 5
-  knockbackDistance: 10
-  maxHealth: 1
+  hitsPlayer: 1
+  hitsObjects: 1
   health: 0
   multiplierLayer:
     moveSpeed: 1
@@ -106,12 +102,6 @@ MonoBehaviour:
     fireRate: -1
     damage: 1
     size: 1
-  speedChargeMultiplier: 1
-  initialDamageChargeMultiplier: 1
-  damagePerSecondChargeMultiplier: 1
-  stunDurationChargeMultiplier: 1
-  knockbackDistanceChargeMultiplier: 1
-  maxHealthChargeMultiplier: 1
   previewSprite: {fileID: 0}
 --- !u!114 &600149371874180314
 MonoBehaviour:
