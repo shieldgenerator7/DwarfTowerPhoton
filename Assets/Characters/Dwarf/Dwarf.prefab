@@ -275,7 +275,7 @@ MonoBehaviour:
   expectedAnimaReserved: 10
   minAminaReserved: 5.1
   shotPrefabName: turret
-  subfolderName: '!parent'
+  subfolderName: 
   defaultSpawnBuffer: 1
   minSpawnBuffer: 0
   maxSpawnBuffer: 2
@@ -334,7 +334,7 @@ MonoBehaviour:
   expectedAnimaReserved: 10
   minAminaReserved: 0.1
   shotPrefabName: barricade
-  subfolderName: '!parent'
+  subfolderName: 
   defaultSpawnBuffer: 1
   minSpawnBuffer: 0
   maxSpawnBuffer: 2
@@ -390,6 +390,6 @@ MonoBehaviour:
   hidesOtherInputs: 0
   fireDelay: 0.5
   shotPrefabName: shot
-  subfolderName: '!parent'
+  subfolderName: 
   spawnBuffer: 1.5
   rotateShot: 1

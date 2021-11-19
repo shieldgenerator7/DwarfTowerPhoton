@@ -334,7 +334,7 @@ MonoBehaviour:
   expectedAnimaReserved: 10
   minAminaReserved: 10
   shotPrefabName: sword
-  subfolderName: '!parent'
+  subfolderName: 
   defaultSpawnBuffer: 0
   minSpawnBuffer: 0
   maxSpawnBuffer: 0
@@ -359,7 +359,7 @@ MonoBehaviour:
   expectedAnimaReserved: 2
   minAminaReserved: 0.1
   shotPrefabName: spawner_daggers
-  subfolderName: '!parent'
+  subfolderName: 
   defaultSpawnBuffer: 0
   minSpawnBuffer: 0
   maxSpawnBuffer: 0
@@ -384,7 +384,7 @@ MonoBehaviour:
   expectedAnimaReserved: 5
   minAminaReserved: 5
   shotPrefabName: spawner_scythe_arm
-  subfolderName: '!parent'
+  subfolderName: 
   defaultSpawnBuffer: 0
   minSpawnBuffer: 0
   maxSpawnBuffer: 0
@@ -487,6 +487,6 @@ MonoBehaviour:
   hidesOtherInputs: 0
   fireDelay: 3
   shotPrefabName: shot
-  subfolderName: '!parent'
+  subfolderName: 
   spawnBuffer: 1.5
   rotateShot: 1

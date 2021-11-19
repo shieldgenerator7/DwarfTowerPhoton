@@ -11,12 +11,10 @@ public class ChargedGunController : PlayerAbility
     public float minAminaReserved = 5.1f;
     public string shotPrefabName;
     /// <summary>
-    /// //the name of the subfolder of Resources/PhotonPrefabs/Shots that this is from
-    /// "!parent": get the subfolder name from the parent of this GameObject
-    /// "!this": get the subfolder name from this GameObject
-    /// null or "": defaults to parent
+    /// The name of the subfolder of Resources/PhotonPrefabs/Shots that this is from
+    /// null or "": defaults to parent gameObject's name
     /// </summary>
-    public string subfolderName = "!parent";
+    public string subfolderName;
     public float defaultSpawnBuffer = 1;//how far away from the player the shots spawn
     public float minSpawnBuffer = 0;
     public float maxSpawnBuffer = 2;
@@ -64,17 +62,12 @@ public class ChargedGunController : PlayerAbility
                 previewCollider = preview.GetComponent<Collider2D>();
                 previewDisplayer = preview.GetComponent<PreviewDisplayer>();
             }
-            if (subfolderName == null || subfolderName == "")
+            //Subfoldername
+            if (string.IsNullOrEmpty(subfolderName))
             {
-                subfolderName = "!parent";
-            }
-            if (subfolderName == "!parent")
-            {
-                subfolderName = transform.parent.gameObject.name.Replace("(Clone)","");
-            }
-            else if (subfolderName == "!this")
-            {
-                subfolderName = gameObject.name.Replace("(Clone)", "");
+                string name = transform.parent.gameObject.name;
+                name = name.Replace("(Clone)", "").Trim();
+                subfolderName = name;
             }
         }
     }
