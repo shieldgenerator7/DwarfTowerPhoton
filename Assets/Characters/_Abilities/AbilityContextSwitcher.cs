@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class AbilityContextSwitcher : PlayerAbility
 {
+    [Tooltip("The ability context to switch to when activated")]
     public AbilityContext abilityContext;
 
+    [Tooltip("The abilities that can activate this switcher")]
     public List<PlayerAbility> switchOnAbilities;
 
     protected override void Start()

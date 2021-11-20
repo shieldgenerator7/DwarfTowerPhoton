@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DashAbility : PlayerAbility
 {
+    [Tooltip("Distance to move the player in one frame")]
     public float dashDistance = 5;
 
     private bool zeroVelocity = false;

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AminaReloader : PlayerAbility
 {
+    [Tooltip("Seconds it takes to reload")]
     public float reloadDuration = 2;//time it takes to reload in seconds
     
     private float reloadStartTime = 0;

@@ -13,16 +13,19 @@ public abstract class PlayerAbility : MonoBehaviour
     /// How much mana it costs to use this ability, 
     /// either one-time or per second
     /// </summary>
+    [Tooltip("How much mana it costs to use this ability, either one-time or per second")]
     public float manaCost;
 
     /// <summary>
     /// The name of the button that activates this ability
     /// Options: Look in Edit->Project Settings->Input
     /// </summary>
+    [Tooltip("The name of the button that activates this ability,\nas listed in Edit->Project Settings->Input")]
     public string buttonName = "Ability1";
     /// <summary>
     /// Whether or not this ability prevents any further abilities from activating
     /// </summary>
+    [Tooltip("Should this ability prevent any other abilities from activating while active?")]
     public bool hidesOtherInputs = false;
 
     //

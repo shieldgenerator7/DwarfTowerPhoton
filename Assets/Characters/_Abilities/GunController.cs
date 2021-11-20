@@ -7,14 +7,19 @@ using UnityEngine;
 public class GunController : PlayerAbility
 {
     //Settings
+    [Tooltip("Seconds between shots")]
     public float fireDelay = 0.1f;//seconds between shots
+    [Tooltip("The name of the prefab to spawn from this character's folder under Resources/PhotonPrefabs/Shots")]
     public string shotPrefabName;
     /// <summary>
     /// The name of the subfolder of Resources/PhotonPrefabs/Shots that this is from
     /// null or "": defaults to parent gameObject's name
     /// </summary>
+    [Tooltip("The name of this character. Leave blank to default to parent GameObject's name")]
     public string subfolderName;
+    [Tooltip("How far away from the player the shots spawn")]
     public float spawnBuffer = 1;//how far away from the player the shots spawn
+    [Tooltip("Should the shot rotate to face the direction it's traveling?")]
     public bool rotateShot = true;//rotates shot to face the direction it's traveling
 
     //Runtime Vars

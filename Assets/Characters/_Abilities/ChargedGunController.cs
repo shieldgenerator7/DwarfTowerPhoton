@@ -6,19 +6,29 @@ using UnityEngine;
 
 public class ChargedGunController : PlayerAbility
 {
+    [Tooltip("How much amina is reserved per second of charge")]
     public float aminaReservedPerSecond = 5;//how much amina is reserved per second of charge
+    [Tooltip("The amount of anima reserved to get to \"normal\" shot values (NOT a maximum)")]
     public float expectedAnimaReserved = 10;
+    [Tooltip("The minimum amount of anima necessary to create the shot")]
     public float minAminaReserved = 5.1f;
+    [Tooltip("The name of the prefab to spawn from this character's folder under Resources/PhotonPrefabs/Shots")]
     public string shotPrefabName;
     /// <summary>
     /// The name of the subfolder of Resources/PhotonPrefabs/Shots that this is from
     /// null or "": defaults to parent gameObject's name
     /// </summary>
+    [Tooltip("The name of this character. Leave blank to default to parent GameObject's name")]
     public string subfolderName;
+    [Tooltip("How far away from the player the shots spawn when released with \"normal\" values")]
     public float defaultSpawnBuffer = 1;//how far away from the player the shots spawn
+    [Tooltip("Minimum of how far away from the player the shots spawn")]
     public float minSpawnBuffer = 0;
+    [Tooltip("Maximum of how far away from the player the shots spawn")]
     public float maxSpawnBuffer = 2;
+    [Tooltip("Should the shot rotate to face the direction it's traveling?")]
     public bool rotateShot = true;//rotates shot to face the direction it's traveling
+    [Tooltip("The display-only prefab to spawn while charging the shot")]
     public GameObject previewPrefab;
 
     public float SpawnBuffer
