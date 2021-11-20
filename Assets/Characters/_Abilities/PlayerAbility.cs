@@ -54,6 +54,7 @@ public abstract class PlayerAbility : MonoBehaviour
     //
 
     protected PlayerController playerController;
+    protected PlayerMovement playerMovement;
     protected Rigidbody2D rb2d;
     protected PhotonView PV;
 
@@ -64,6 +65,11 @@ public abstract class PlayerAbility : MonoBehaviour
         if (!playerController)
         {
             playerController = GetComponentInParent<PlayerController>();
+        }
+        playerMovement = GetComponent<PlayerMovement>();
+        if (!playerMovement)
+        {
+            playerMovement = GetComponentInParent<PlayerMovement>();
         }
         rb2d = GetComponent<Rigidbody2D>();
         if (!rb2d)

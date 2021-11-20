@@ -8,6 +8,12 @@ public class PlayerMovement : MonoBehaviour
 
     public float movementSpeed = 4;
 
+    /// <summary>
+    /// The direction the player is forced to choose
+    /// </summary>
+    public Vector2 ForceMoveDirection { get; private set; }
+    private bool forceMovementInput = false;
+
     private Vector2 prevVelocity;
 
     private PhotonView PV;
@@ -31,28 +37,36 @@ public class PlayerMovement : MonoBehaviour
 
     void BasicMovement()
     {
-        //Get inputs
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
         //Declare desired velocity
-        Vector2 desiredVelocity = rb2d.velocity;
-        //If there are movement inputs,
-        if (horizontal != 0 || vertical != 0)
+        Vector2 desiredVelocity;
+        if (forceMovementInput)
         {
-            //Set desired velocity
-            desiredVelocity =
-                ((Vector2.up * vertical) + (Vector2.right * horizontal)).normalized
-                * movementSpeed;
+            //Move in the force movement direction
+            desiredVelocity = ForceMoveDirection * movementSpeed;
         }
         else
         {
-            //Else set no velocity
-            desiredVelocity = Vector2.zero;
+            //Get inputs
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
+            //If there are movement inputs,
+            if (horizontal != 0 || vertical != 0)
+            {
+                //Set desired velocity
+                desiredVelocity =
+                    ((Vector2.up * vertical) + (Vector2.right * horizontal)).normalized
+                    * movementSpeed;
+            }
+            else
+            {
+                //Else set no velocity
+                desiredVelocity = Vector2.zero;
+            }
         }
         //If velocity hasn't changed since last frame,
         if (prevVelocity == rb2d.velocity)
         {
-            //Give exactly dsired velocity
+            //Give exactly desired velocity
             rb2d.velocity = desiredVelocity;
         }
         else
@@ -62,5 +76,16 @@ public class PlayerMovement : MonoBehaviour
         }
         //Record current velocity for next frame
         prevVelocity = rb2d.velocity;
+    }
+
+    public void forceMovement(bool force)
+    {
+        forceMovement(rb2d.velocity, force);
+    }
+
+    public void forceMovement(Vector2 direction, bool force = true)
+    {
+        ForceMoveDirection = direction.normalized;
+        forceMovementInput = force;
     }
 }

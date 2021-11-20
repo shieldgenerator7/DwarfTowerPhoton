@@ -151,6 +151,12 @@ public class PlayerController : MonoBehaviour
         return 0;
     }
 
+    public float requestAminaPerSecond(float amount, bool acceptPartialAmount = true)
+    {
+        amount = amount * Time.deltaTime;
+        return requestAmina(amount, acceptPartialAmount);
+    }
+
     public void reserveAmina(float amount)
     {
         ReservedAmina += requestAmina(amount);

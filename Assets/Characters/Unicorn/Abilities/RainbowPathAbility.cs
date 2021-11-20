@@ -4,28 +4,45 @@ using UnityEngine;
 
 public class RainbowPathAbility : PlayerAbility
 {
-    public float dashDistance = 5;
-
-    private bool zeroVelocity = false;
+    [Tooltip("The amount of speed players get when walking across the rainbow")]
+    public float speedMultiplier = 1.5f;
 
     public override void OnButtonDown()
     {
         base.OnButtonDown();
-        
-        if(playerController.requestAmina(manaCost) > 0){
-            Vector2 moveDir = (Utility.MouseWorldPos - transform.position).normalized;
-            //Give enough force for rb2d to move character entire distance in single frame
-            rb2d.velocity = moveDir * dashDistance / Time.deltaTime;
-            zeroVelocity = true;
+
+        if (playerController.requestAminaPerSecond(manaCost) > 0)
+        {
+            activate();
         }
     }
     public override void OnButtonHeld()
     {
         base.OnButtonHeld();
-        if (zeroVelocity)
+        if (playerController.requestAminaPerSecond(manaCost) > 0)
         {
-            zeroVelocity = false;
-            rb2d.velocity = Vector2.zero;
         }
+        else
+        {
+            deactivate();
+        }
+    }
+
+    public override void OnButtonUp()
+    {
+        base.OnButtonUp();
+        deactivate();
+    }
+
+    private void activate()
+    {
+        playerMovement.forceMovement(rb2d.velocity);
+        playerMovement.movementSpeed *= speedMultiplier;
+    }
+
+    private void deactivate()
+    {
+        playerMovement.forceMovement(false);
+        playerMovement.movementSpeed /= speedMultiplier;
     }
 }
