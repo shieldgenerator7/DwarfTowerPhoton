@@ -129,6 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedMultiplier: 1.5
   slowMultiplier: 0.75
+  duration: 10
 --- !u!114 &-845759806725884248
 MonoBehaviour:
   m_ObjectHideFlags: 0
