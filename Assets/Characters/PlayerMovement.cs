@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private bool forceMovementInput = false;
 
     private Vector2 prevVelocity;
+    public Vector2 LastMoveDirection { get; private set; }
 
     private PhotonView PV;
     private Rigidbody2D rb2d;
@@ -76,11 +77,15 @@ public class PlayerMovement : MonoBehaviour
         }
         //Record current velocity for next frame
         prevVelocity = rb2d.velocity;
+        if (rb2d.velocity != Vector2.zero)
+        {
+            LastMoveDirection = rb2d.velocity;
+        }
     }
 
     public void forceMovement(bool force)
     {
-        forceMovement(rb2d.velocity, force);
+        forceMovement(LastMoveDirection, force);
     }
 
     public void forceMovement(Vector2 direction, bool force = true)
