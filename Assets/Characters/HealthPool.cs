@@ -11,8 +11,19 @@ public class HealthPool : MonoBehaviour
         get => maxHealth;
         set
         {
-            maxHealth = Mathf.Clamp(value, 0, value);
-            Health = Mathf.Clamp(Health, 0, maxHealth);
+            //TODO: What does it mean for max health to be 0??
+            float newMaxHealth = Mathf.Clamp(value, 0, value);
+            float diff = newMaxHealth - maxHealth;
+            if (diff > 0)
+            {
+                //Increase health with max health increase
+                Health += diff;
+            }
+            else
+            {
+                //Make sure health doesn't end up above max health
+                Health += 0;
+            }
         }
     }
 
@@ -20,10 +31,10 @@ public class HealthPool : MonoBehaviour
     private float health;
     public float Health
     {
-        get { return health; }
+        get => health;
         set
         {
-            health = value;
+            health = Mathf.Clamp(value, 0, maxHealth);
             if (health <= 0)
             {
                 onDied?.Invoke();
