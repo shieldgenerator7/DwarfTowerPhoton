@@ -74,10 +74,10 @@ public class CarriedGunController : PlayerAbility
         if (carriedShot)
         {
             aminaConsumed += playerController.requestAminaPerSecond(manaCost);
-        }
-        if (Mathf.Approximately(rb2d.velocity.magnitude, 0))
-        {
-            releaseShot();
+            if (Mathf.Approximately(rb2d.velocity.magnitude, 0))
+            {
+                releaseShot();
+            }
         }
     }
 
@@ -90,8 +90,11 @@ public class CarriedGunController : PlayerAbility
 
     private void releaseShot()
     {
-        carriedShot.release();
-        carriedShot = null;
+        if (carriedShot)
+        {
+            carriedShot.release();
+            carriedShot = null;
+        }
     }
 
     /// <summary>
