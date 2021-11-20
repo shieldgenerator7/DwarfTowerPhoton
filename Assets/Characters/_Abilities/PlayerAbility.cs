@@ -53,10 +53,10 @@ public abstract class PlayerAbility : MonoBehaviour
     // Components
     //
 
-    protected PlayerController playerController;
-    protected PlayerMovement playerMovement;
-    protected Rigidbody2D rb2d;
-    protected PhotonView PV;
+    public PlayerController playerController { get; private set; }
+    public PlayerMovement playerMovement { get; private set; }
+    public Rigidbody2D rb2d { get; private set; }
+    public PhotonView PV { get; private set; }
 
     // Start is called before the first frame update
     protected virtual void Start()

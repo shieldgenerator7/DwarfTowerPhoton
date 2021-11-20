@@ -3,128 +3,88 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarriedShotController : ChargedShotController
+public class CarriedShotController : ShotController
 {
-    public PlayerController wielder;
+    [SerializeField]
+    [Tooltip("The max stats this shot can reach at full charge")]
+    private StatLayer statMax = new StatLayer();
+    [Tooltip("The initial position data")]
     public CarriedShotControllerData dataBase;
+    [Tooltip("The final position data")]
     public CarriedShotControllerData dataFinal;
     private CarriedShotControllerData dataCurrent;
-    public float swingSpeed = 1;
-    public float throwSpeed = 3;
 
-    private float swingPercent = -1;//how much has been swung
-    public float SwingPercent
+    private float carryPercent = -1;//how much has been swung
+    public float CarryPercent
     {
-        get { return swingPercent; }
+        get { return carryPercent; }
         set
         {
             float newValue = Mathf.Clamp(value, 0, 1);
-            if (swingPercent != newValue)
+            if (carryPercent != newValue)
             {
-                swingPercent = newValue;
-                dataCurrent.positionAngle = Mathf.Lerp(dataBase.positionAngle, dataFinal.positionAngle, swingPercent);
-                dataCurrent.rotationAngle = Mathf.Lerp(dataBase.rotationAngle, dataFinal.rotationAngle, swingPercent);
-                dataCurrent.holdBuffer = Mathf.Lerp(dataBase.holdBuffer, dataFinal.holdBuffer, swingPercent);
+                carryPercent = newValue;
+                dataCurrent.positionAngle = Mathf.Lerp(dataBase.positionAngle, dataFinal.positionAngle, carryPercent);
+                dataCurrent.rotationAngle = Mathf.Lerp(dataBase.rotationAngle, dataFinal.rotationAngle, carryPercent);
+                dataCurrent.holdBuffer = Mathf.Lerp(dataBase.holdBuffer, dataFinal.holdBuffer, carryPercent);
+                dataCurrent.size = Mathf.Lerp(dataBase.size, dataFinal.size, carryPercent);
+                stats = StatLayer.Lerp(statBase, statMax, carryPercent);
             }
         }
     }
 
     public Vector2 PivotPoint
-    {
-        get
-        {
-            if (wielder)
-            {
-                Vector2 wielderCenter = (Vector2)wielder.transform.position + (Vector2.up * 0.5f);
-                return wielderCenter;
-            }
-            else
-            {
-                return transform.position;
-            }
-        }
-    }
+        => (Vector2)carrier.transform.position + (Vector2.up * 0.5f);
 
+    private Vector3 origScale;
+
+    private CarriedGunController carrier;
     private SpriteRenderer sr;
-    private PlayerMovement playerMovement;
 
     protected override void Start()
     {
         base.Start();
         sr = GetComponent<SpriteRenderer>();
         dataCurrent = new CarriedShotControllerData();
-        SwingPercent = 0;
+        CarryPercent = 0;
+        origScale = transform.localScale;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (wielder)
+        if (carrier)
         {
-            if (wielder.PV.IsMine)
+            if (carrier.PV.IsMine)
             {
-                //
-                // Swing
-                //
-                if (Input.GetButton("Ability1"))
-                {
-                    SwingPercent += swingSpeed * Time.deltaTime;
-                }
-                else
-                {
-                    SwingPercent -= swingSpeed * Time.deltaTime;
-                }
-                Vector2 pointDir = playerMovement.LastMoveDirection.Rotate(dataCurrent.positionAngle).normalized;
+                //Swing percent
+                CarryPercent = carrier.CarryTime / carrier.maxTime;
+                //Position
+                Vector2 pointDir = carrier.playerMovement.LastMoveDirection.Rotate(dataCurrent.positionAngle).normalized;
                 transform.position = PivotPoint + (pointDir * dataCurrent.holdBuffer);
+                //Rotation
                 Vector2 lookDir = pointDir * ((sr.flipY) ? -1 : 1);
                 lookDir = lookDir.Rotate(dataCurrent.rotationAngle).normalized;
                 transform.up = lookDir;
-                //
-                // Throw
-                //
-                if (Input.GetButtonDown("Ability2"))
-                {
-                    switchOwner(null);
-                    rb2d.velocity = pointDir * throwSpeed;
-                }
+                //Scale
+                transform.localScale = origScale * dataCurrent.size;
             }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void release()
     {
-        bool onSameTeam = TeamToken.onSameTeam(gameObject, collision.gameObject);
-        if (onSameTeam)
-        {
-            if (wielder == null)
-            {
-                bool targetIsPlayer = collision.gameObject.CompareTag("Player");
-                if (targetIsPlayer)
-                {
-                    wielder = collision.gameObject.GetComponent<PlayerController>();
-                    rb2d.velocity = Vector2.zero;
-                    //Photon Take Over
-                    if (PV.IsMine)
-                    {
-                        switchOwner(wielder);
-                    }
-                }
-            }
-        }
-        else
-        {
-            rb2d.velocity = Vector2.zero;
-            processCollision(collision, true);
-        }
+        rb2d.velocity = carrier.rb2d.velocity;
+        switchOwner(null);
     }
 
-    void switchOwner(PlayerController pc)
+    public void switchOwner(CarriedGunController cgc)
     {
         int ownerID = -1;
-        if (pc)
+        if (cgc)
         {
-            PV.TransferOwnership(pc.PV.Owner);
-            ownerID = pc.PV.ViewID;
+            PV.TransferOwnership(cgc.PV.Owner);
+            ownerID = cgc.PV.ViewID;
         }
         PV.RPC("RPC_SwitchOwner", RpcTarget.AllBuffered, ownerID);
     }
@@ -132,15 +92,14 @@ public class CarriedShotController : ChargedShotController
     [PunRPC]
     void RPC_SwitchOwner(int ownerID)
     {
-        wielder = null;
+        carrier = null;
         if (ownerID >= 0)
         {
-            foreach (PlayerController pc in FindObjectsOfType<PlayerController>())
+            foreach (CarriedGunController cgc in FindObjectsOfType<CarriedGunController>())
             {
-                if (pc.PV.ViewID == ownerID)
+                if (cgc.PV.ViewID == ownerID)
                 {
-                    wielder = pc;
-                    playerMovement = wielder.GetComponent<PlayerMovement>();
+                    carrier = cgc;
                 }
             }
         }

@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public struct StatLayer
 {
-    public const float STAT_INVALID = -1;
+    public const float STAT_IGNORE = -1;
 
     public float moveSpeed;//how fast it travels (units/sec)
     public float maxHits;//how many hits before being stunned or destroyed
@@ -14,7 +14,7 @@ public struct StatLayer
     public float damage;//damage dealt upon initial contact
     public float size;//percentage of base size
 
-    public StatLayer(float defaultValue = STAT_INVALID)
+    public StatLayer(float defaultValue = STAT_IGNORE)
     {
         //-1 is an invalid value
         //if a stat has an invalid value, it doesn't get processed
@@ -106,7 +106,7 @@ public struct StatLayer
         }
         else
         {
-            return STAT_INVALID;
+            return STAT_IGNORE;
         }
     }
 

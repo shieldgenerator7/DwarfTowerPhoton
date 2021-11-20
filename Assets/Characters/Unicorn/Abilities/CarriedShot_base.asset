@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positionAngle: 0
   rotationAngle: 0
-  holdBuffer: 0.5
+  holdBuffer: 0.75
+  size: 0.1

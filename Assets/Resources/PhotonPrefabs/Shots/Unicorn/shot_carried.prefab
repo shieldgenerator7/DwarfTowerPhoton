@@ -141,25 +141,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statBase:
-    moveSpeed: 1
-    maxHits: 10
-    fireRate: 0
-    damage: 10
+    moveSpeed: -1
+    maxHits: 1
+    fireRate: -1
+    damage: 1
     size: 1
   hitsPlayer: 1
   hitsObjects: 1
-  multiplierLayer:
-    moveSpeed: 2
-    maxHits: 10
-    fireRate: 0
-    damage: 10
+  statMax:
+    moveSpeed: -1
+    maxHits: 100
+    fireRate: -1
+    damage: 100
     size: 2
-  previewSprite: {fileID: 0}
-  wielder: {fileID: 0}
   dataBase: {fileID: 11400000, guid: 956030f09354aff4881cc98aee9263a8, type: 2}
   dataFinal: {fileID: 11400000, guid: b25ff019cf9efdc4e82a306f95401458, type: 2}
-  swingSpeed: 5
-  throwSpeed: 3
 --- !u!114 &5520040029629572068
 MonoBehaviour:
   m_ObjectHideFlags: 0

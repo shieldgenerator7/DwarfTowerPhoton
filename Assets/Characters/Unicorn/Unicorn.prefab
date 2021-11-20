@@ -138,7 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilities:
   - {fileID: 3369071877670158181}
-  - {fileID: 7823614585768581381}
+  - {fileID: 6400624810076416732}
   - {fileID: 2613285986018779774}
 --- !u!114 &1916908965083646283
 MonoBehaviour:
@@ -299,7 +299,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6220889621231917683}
-  - component: {fileID: 7823614585768581381}
+  - component: {fileID: 6400624810076416732}
   m_Layer: 0
   m_Name: Carried Shot
   m_TagString: Untagged
@@ -322,7 +322,7 @@ Transform:
   m_Father: {fileID: 1073061482865175048}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7823614585768581381
+--- !u!114 &6400624810076416732
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -331,19 +331,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7577088886736187312}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1146f130182c8b468babded8c5cb840, type: 3}
+  m_Script: {fileID: 11500000, guid: f76bcf7659545f640bb9bd5d977a5398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 0
+  manaCost: 1
   buttonName: Ability1
   hidesOtherInputs: 0
-  aminaReservedPerSecond: 5
-  expectedAnimaReserved: 10
-  minAminaReserved: 5.1
+  maxTime: 5
   shotPrefabName: shot_carried
   subfolderName: 
-  defaultSpawnBuffer: 0.5
-  minSpawnBuffer: 0.5
-  maxSpawnBuffer: 2
+  spawnBuffer: 0.75
   rotateShot: 1
-  previewPrefab: {fileID: 0}
