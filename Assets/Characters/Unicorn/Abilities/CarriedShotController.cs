@@ -34,7 +34,7 @@ public class CarriedShotController : ShotController
     }
 
     public Vector2 PivotPoint
-        => (Vector2)carrier.transform.position + (Vector2.up * 0.5f);
+        => (Vector2)carrier.transform.position;// + (Vector2.up * 0.5f);
 
     private Vector3 origScale;
 
