@@ -12,13 +12,13 @@ GameObject:
   - component: {fileID: 521}
   - component: {fileID: 498}
   - component: {fileID: 505}
-  - component: {fileID: 566}
+  - component: {fileID: -995880849394706857}
   - component: {fileID: 5520040029629572068}
   - component: {fileID: 571}
   - component: {fileID: 8902093542985066328}
   - component: {fileID: 508065936224665636}
   m_Layer: 0
-  m_Name: shot
+  m_Name: shot_carried
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 66fc0cbc132755a49b6fc8bd017365c2, type: 3}
-  m_Color: {r: 0.16470589, g: 0.61960787, b: 1, a: 1}
+  m_Color: {r: 0.76100004, g: 0.89115965, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -128,7 +128,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &566
+--- !u!114 &-995880849394706857
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,17 +137,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 245}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95401923689b5e04ba705f1bf93961a0, type: 3}
+  m_Script: {fileID: 11500000, guid: cc6a150cf90c8804181392732cd0de3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   statBase:
-    moveSpeed: 1
-    maxHits: 1
-    fireRate: -1
-    damage: 2
-    size: 1
+    moveSpeed: 0
+    maxHits: 0
+    fireRate: 0
+    damage: 0
+    size: 0
   hitsPlayer: 1
   hitsObjects: 1
+  multiplierLayer:
+    moveSpeed: 0
+    maxHits: 0
+    fireRate: 0
+    damage: 0
+    size: 0
+  previewSprite: {fileID: 0}
+  wielder: {fileID: 0}
+  dataBase: {fileID: 0}
+  dataFinal: {fileID: 0}
+  swingSpeed: 1
+  throwSpeed: 3
 --- !u!114 &5520040029629572068
 MonoBehaviour:
   m_ObjectHideFlags: 0
