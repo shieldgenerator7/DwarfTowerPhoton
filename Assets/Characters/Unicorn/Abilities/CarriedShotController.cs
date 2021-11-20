@@ -6,9 +6,9 @@ using UnityEngine;
 public class CarriedShotController : ChargedShotController
 {
     public PlayerController wielder;
-    public WeaponControllerData dataBase;
-    public WeaponControllerData dataFinal;
-    private WeaponControllerData dataCurrent;
+    public CarriedShotControllerData dataBase;
+    public CarriedShotControllerData dataFinal;
+    private CarriedShotControllerData dataCurrent;
     public float swingSpeed = 1;
     public float throwSpeed = 3;
 
@@ -46,12 +46,13 @@ public class CarriedShotController : ChargedShotController
     }
 
     private SpriteRenderer sr;
+    private PlayerMovement playerMovement;
 
     protected override void Start()
     {
         base.Start();
         sr = GetComponent<SpriteRenderer>();
-        dataCurrent = new WeaponControllerData();
+        dataCurrent = new CarriedShotControllerData();
         SwingPercent = 0;
     }
 
@@ -73,8 +74,7 @@ public class CarriedShotController : ChargedShotController
                 {
                     SwingPercent -= swingSpeed * Time.deltaTime;
                 }
-                Vector2 mouseDir = (Vector2)Utility.MouseWorldPos - PivotPoint;
-                Vector2 pointDir = mouseDir.Rotate(dataCurrent.positionAngle).normalized;
+                Vector2 pointDir = playerMovement.LastMoveDirection.Rotate(dataCurrent.positionAngle).normalized;
                 transform.position = PivotPoint + (pointDir * dataCurrent.holdBuffer);
                 Vector2 lookDir = pointDir * ((sr.flipY) ? -1 : 1);
                 lookDir = lookDir.Rotate(dataCurrent.rotationAngle).normalized;
@@ -121,7 +121,8 @@ public class CarriedShotController : ChargedShotController
     void switchOwner(PlayerController pc)
     {
         int ownerID = -1;
-        if (pc) {
+        if (pc)
+        {
             PV.TransferOwnership(pc.PV.Owner);
             ownerID = pc.PV.ViewID;
         }
@@ -139,6 +140,7 @@ public class CarriedShotController : ChargedShotController
                 if (pc.PV.ViewID == ownerID)
                 {
                     wielder = pc;
+                    playerMovement = wielder.GetComponent<PlayerMovement>();
                 }
             }
         }
