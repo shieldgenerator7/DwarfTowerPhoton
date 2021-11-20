@@ -59,18 +59,20 @@ public class CarriedGunController : PlayerAbility
     public override void OnButtonDown()
     {
         base.OnButtonDown();
-        carryStartTime = Time.time;
-        aminaConsumed = playerController.requestAminaPerSecond(manaCost);
-        fireShot(
-            transform.position,
-            Utility.MouseWorldPos,
-            aminaConsumed
-            );
+
+        if (!carriedShot)
+        {
+            if (rb2d.velocity.magnitude > 0)
+            {
+                carryNewShot();
+            }
+        }
     }
 
     public override void OnButtonHeld()
     {
         base.OnButtonHeld();
+
         if (carriedShot)
         {
             aminaConsumed += playerController.requestAminaPerSecond(manaCost);
@@ -79,13 +81,32 @@ public class CarriedGunController : PlayerAbility
                 releaseShot();
             }
         }
+        else
+        {
+            if (rb2d.velocity.magnitude > 0)
+            {
+                carryNewShot();
+            }
+        }
     }
 
     public override void OnButtonUp()
     {
         base.OnButtonUp();
+
         releaseShot();
-        carryStartTime = -1;
+    }
+
+    private void carryNewShot()
+    {
+        carryStartTime = Time.time;
+        aminaConsumed = 0;
+        aminaConsumed += playerController.requestAminaPerSecond(manaCost);
+        carriedShot = fireShot(
+            transform.position,
+            Utility.MouseWorldPos
+            );
+        carriedShot.switchOwner(this);
     }
 
     private void releaseShot()
@@ -94,6 +115,7 @@ public class CarriedGunController : PlayerAbility
         {
             carriedShot.release();
             carriedShot = null;
+            carryStartTime = -1;
         }
     }
 
@@ -103,23 +125,23 @@ public class CarriedGunController : PlayerAbility
     /// </summary>
     /// <param name="playerPos"></param>
     /// <param name="targetPos"></param>
-    public void fireShot(Vector2 playerPos, Vector2 targetPos, float aminaObtained)
+    public CarriedShotController fireShot(Vector2 playerPos, Vector2 targetPos)
     {
         if (PV.IsMine)
         {
-            float aminaMultiplier = aminaObtained;
             Vector2 targetDir = (targetPos - playerPos).normalized;
             GameObject shot = PhotonNetwork.Instantiate(
                 Path.Combine("PhotonPrefabs", "Shots", subfolderName, shotPrefabName),
                 playerPos + (targetDir * spawnBuffer),
                 (rotateShot) ? Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, targetDir)) : Quaternion.Euler(0, 0, 0)
                 );
-            carriedShot = shot.GetComponent<CarriedShotController>();
-            carriedShot.switchOwner(this);
 
             //On Shot Fired Delegate
             onShotFired?.Invoke(shot, targetPos, targetDir);
+            //Return
+            return shot.GetComponent<CarriedShotController>();
         }
+        return null;
     }
 
     /// <summary>

@@ -74,7 +74,7 @@ public class CarriedShotController : ShotController
 
     public void release()
     {
-        rb2d.velocity = carrier.rb2d.velocity;
+        rb2d.velocity = carrier.playerMovement.LastMoveDirection;
         switchOwner(null);
     }
 
