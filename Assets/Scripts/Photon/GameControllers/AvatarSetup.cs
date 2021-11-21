@@ -16,7 +16,7 @@ public class AvatarSetup : MonoBehaviour
         PV = GetComponent<PhotonView>();
         if (PV.IsMine)
         {
-            PV.RPC("RPC_AddCharacter", RpcTarget.AllBuffered, PlayerInfo.instance.mySelectedCharacter);
+            PV.RPC("RPC_AddCharacter", RpcTarget.AllBuffered, PlayerInfo.instance.SelectedIndex);
             Camera.main.GetComponent<CameraController>().FocusObject = gameObject;
         }
     }

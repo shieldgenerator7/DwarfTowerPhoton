@@ -7,7 +7,19 @@ public class PlayerInfo : MonoBehaviour
 
     public static PlayerInfo instance;
 
-    public int mySelectedCharacter;
+    [SerializeField]
+    private int mySelectedCharacter;
+    public int SelectedIndex
+    {
+        get => mySelectedCharacter;
+        set
+        {
+            mySelectedCharacter = Mathf.Clamp(value, 0, allCharacters.Length - 1);
+            onSelectedIndexChanged?.Invoke(mySelectedCharacter);
+        }
+    }
+    public delegate void OnSelectedIndexChanged(int index);
+    public event OnSelectedIndexChanged onSelectedIndexChanged;
 
     public GameObject[] allCharacters;
 
