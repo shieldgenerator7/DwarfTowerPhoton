@@ -31,6 +31,8 @@ public class AvatarSetup : MonoBehaviour
             transform.rotation,
             transform
             );
+        myCharacter.GetComponent<Stunnable>().onStunned +=
+            (stunned) => GetComponent<BlinkEffect>().Blinking = stunned;
     }
 
     //Moved here because the AvatarSetup is on the same object as the PhotonView,

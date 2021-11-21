@@ -29,12 +29,10 @@ public class Stunnable : MonoBehaviour
             return photonView;
         }
     }
-    private BlinkEffect blinkEffect;
 
     private void Start()
     {
         rb2d = GetComponentInParent<Rigidbody2D>();
-        blinkEffect = GetComponentInParent<BlinkEffect>();
     }
 
     private void Update()
@@ -44,41 +42,32 @@ public class Stunnable : MonoBehaviour
             stunDuration -= Time.deltaTime;
             if (stunDuration <= 0)
             {
-                rb2d.velocity = Vector2.zero;
-                enableScripts(true);
-                blinkEffect.Blinking = false;
-                onStunEnded?.Invoke();
+                if (PV.IsMine)
+                {
+                    rb2d.velocity = Vector2.zero;
+                    enableScripts(true);
+                }
+                onStunned?.Invoke(false);
             }
         }
     }
-    public delegate void OnStunEnded();
-    public event OnStunEnded onStunEnded;
+    public delegate void OnStunned(bool stunned);
+    public event OnStunned onStunned;
 
-    public bool Stunned
-    {
-        get
-        {
-            if (PV.IsMine)
-            {
-                return stunDuration > 0;
-            }
-            else
-            {
-                return blinkEffect.Blinking;
-            }
-        }
-    }
+    public bool Stunned => stunDuration > 0;
 
     public void stun()
     {
         stunDuration = duration;
-        float knockbackPerSecond = knockbackDistance / stunDuration;
-        rb2d.velocity =
-            (transform.position - CaravanController.Caravan.transform.position).normalized
-            * knockbackPerSecond;
-        enableScripts(false);
-
-        blinkEffect.Blinking = true;
+        if (PV.IsMine)
+        {
+            float knockbackPerSecond = knockbackDistance / stunDuration;
+            rb2d.velocity =
+                (transform.position - CaravanController.Caravan.transform.position).normalized
+                * knockbackPerSecond;
+            enableScripts(false);
+        }
+        onStunned?.Invoke(true);
     }
 
     public void triggerStun()
@@ -88,7 +77,6 @@ public class Stunnable : MonoBehaviour
             if (PV.IsMine)
             {
                 PV.RPC("RPC_Stun", RpcTarget.All);
-                stun();
             }
         }
     }
