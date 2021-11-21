@@ -79,10 +79,6 @@ public class Stunnable : MonoBehaviour
         enableScripts(false);
 
         blinkEffect.Blinking = true;
-        if (PV.IsMine)
-        {
-            blinkEffect.setBlink(true);
-        }
     }
 
     public void triggerStun()
@@ -92,6 +88,7 @@ public class Stunnable : MonoBehaviour
             if (PV.IsMine)
             {
                 PV.RPC("RPC_Stun", RpcTarget.All);
+                stun();
             }
         }
     }
