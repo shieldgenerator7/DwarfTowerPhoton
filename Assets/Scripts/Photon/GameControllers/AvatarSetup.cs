@@ -32,4 +32,12 @@ public class AvatarSetup : MonoBehaviour
             transform
             );
     }
+
+    //Moved here because the AvatarSetup is on the same object as the PhotonView,
+    //but the Stunnable component is on a child of the object
+    [PunRPC]
+    void RPC_Stun()
+    {
+        GetComponentInChildren<Stunnable>().stun();
+    }
 }

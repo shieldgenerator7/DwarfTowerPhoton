@@ -18,7 +18,7 @@ public class BlinkEffect : MonoBehaviour
             if (PV.IsMine)
             {
                 setBlink(blinking);
-                PV.RPC("RPC_Blink", RpcTarget.Others, blinking);
+                PV.RPC("RPC_Blink", RpcTarget.All, blinking);
             }
         }
     }

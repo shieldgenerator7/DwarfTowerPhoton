@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
             //Hook up Stunnable with HealthPool
             Stunnable stunnable = GetComponent<Stunnable>();
             HealthPool healthPool = GetComponent<HealthPool>();
-            healthPool.onDied += () => { stunnable.stun(); };
+            healthPool.onDied += () => { stunnable.triggerStun(); };
             stunnable.onStunEnded += () => { healthPool.Health = healthPool.MaxHealth; };
         }
         foreach (string input in new string[] { "Ability1", "Ability2", "Ability3", "Reload" })

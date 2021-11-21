@@ -129,18 +129,6 @@ public class ShotController : MonoBehaviour
                 hp.Health += -_stats.damage;
             }
         }
-        //if (hitsPlayer)
-        //{
-        //    Stunnable stunnable = collision.gameObject.GetComponent<Stunnable>();
-        //    if (stunnable && !stunnable.Stunned)
-        //    {
-        //        PhotonView targetView = collision.gameObject.GetComponentInParent<PhotonView>();
-        //        if (PV.IsMine)
-        //        {
-        //            PV.RPC("RPC_StunTarget", RpcTarget.All, targetView.ViewID);
-        //        }
-        //    }
-        //}
         if (!collision.isTrigger)
         {
             CaravanController cc = collision.gameObject.GetComponent<CaravanController>();
@@ -155,27 +143,6 @@ public class ShotController : MonoBehaviour
     {
         this.health.Health += health;
     }
-
-    //[PunRPC]
-    //protected void RPC_StunTarget(int targetID)
-    //{
-    //    foreach (PhotonView targetView in FindObjectsOfType<PhotonView>())
-    //    {
-    //        if (targetView.ViewID == targetID)
-    //        {
-    //            Stunnable stunnable = targetView.gameObject.GetComponentInChildren<Stunnable>();
-    //            if (!stunnable.Stunned)
-    //            {
-    //                stunnable.stun();
-    //                if (targetView.IsMine)
-    //                {
-    //                    PV.RPC("RPC_SelfDestruct", RpcTarget.All);
-    //                }
-    //            }
-    //            break;
-    //        }
-    //    }
-    //}
 
     [PunRPC]
     protected void RPC_SelfDestruct()

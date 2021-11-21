@@ -73,7 +73,6 @@ public class Stunnable : MonoBehaviour
     {
         stunDuration = duration;
         float knockbackPerSecond = knockbackDistance / stunDuration;
-        TeamToken teamCaptain = TeamToken.getTeamToken(gameObject).teamCaptain;
         rb2d.velocity =
             (transform.position - CaravanController.Caravan.transform.position).normalized
             * knockbackPerSecond;
@@ -85,6 +84,24 @@ public class Stunnable : MonoBehaviour
             blinkEffect.setBlink(true);
         }
     }
+
+    public void triggerStun()
+    {
+        if (!Stunned)
+        {
+            if (PV.IsMine)
+            {
+                PV.RPC("RPC_Stun", RpcTarget.All);
+            }
+        }
+    }
+
+    //Moved to AvatarSetup because it's on the object with the PhotonView
+    //[PunRPC]
+    //void RPC_Stun()
+    //{
+    //    stun();
+    //}
 
     private void enableScripts(bool enable)
     {

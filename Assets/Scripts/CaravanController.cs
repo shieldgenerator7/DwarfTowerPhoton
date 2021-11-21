@@ -97,7 +97,7 @@ public class CaravanController : MonoBehaviour
         Stunnable stunnable = collision.gameObject.GetComponentInChildren<Stunnable>();
         if (stunnable && !stunnable.Stunned)
         {
-            stunnable.stun();
+            stunnable.triggerStun();
         }
         //Checking if the game should end (when the caravan hits a team flag)
         if (collision.gameObject.CompareTag("TeamFlag"))
