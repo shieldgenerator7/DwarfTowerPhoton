@@ -122,20 +122,19 @@ public class ShotController : MonoBehaviour
             return;
         }
         HealthPool hp = collision.gameObject.GetComponent<HealthPool>();
-        if (hp && damagableTypes.Contains(hp.entityType))
+        if (hp)
         {
-            if (useInitialDamage)
+            if (damagableTypes.Contains(hp.entityType))
             {
-                hp.Health += -_stats.damage;
+                if (useInitialDamage)
+                {
+                    hp.Health += -_stats.damage;
+                }
             }
         }
-        if (!collision.isTrigger)
+        else if (!collision.isTrigger)
         {
-            CaravanController cc = collision.gameObject.GetComponent<CaravanController>();
-            if (cc)
-            {
-                health.Health = 0;
-            }
+            health.Health = 0;
         }
     }
 
