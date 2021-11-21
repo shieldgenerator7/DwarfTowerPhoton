@@ -62,7 +62,7 @@ public class CarriedGunController : PlayerAbility
 
         if (!carriedShot)
         {
-            if (rb2d.velocity.magnitude > 0)
+            if (rb2d.isMoving())
             {
                 carryNewShot();
             }
@@ -76,14 +76,14 @@ public class CarriedGunController : PlayerAbility
         if (carriedShot)
         {
             aminaConsumed += playerController.requestAminaPerSecond(manaCost);
-            if (Mathf.Approximately(rb2d.velocity.magnitude, 0))
+            if (!rb2d.isMoving())
             {
                 releaseShot();
             }
         }
         else
         {
-            if (rb2d.velocity.magnitude > 0)
+            if (rb2d.isMoving())
             {
                 carryNewShot();
             }

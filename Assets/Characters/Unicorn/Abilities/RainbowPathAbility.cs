@@ -17,34 +17,45 @@ public class RainbowPathAbility : PlayerAbility
     [Tooltip("How far away from the player the path spawns")]
     public float spawnBuffer = 1;//how far away from the player the path spawns
 
+    private bool active = false;
+
     public override void OnButtonDown()
     {
         base.OnButtonDown();
 
-        if (playerController.requestAminaPerSecond(manaCost) > 0)
+        if (rb2d.isMoving())
         {
-            activate();
-            //Vector2 moveDir = (Utility.MouseWorldPos - transform.position).normalized;
-            ////Give enough force for rb2d to move character entire distance in single frame
-            //rb2d.velocity = moveDir * dashDistance / Time.deltaTime;
-            //zeroVelocity = true;
+            if (playerController.requestAminaPerSecond(manaCost) > 0)
+            {
+                activate();
+            }
         }
     }
     public override void OnButtonHeld()
     {
         base.OnButtonHeld();
-        if (playerController.requestAminaPerSecond(manaCost) > 0)
+        if (active)
         {
+            if (rb2d.isMoving()
+                && playerController.requestAminaPerSecond(manaCost) > 0
+                )
+            {
+            }
+            else
+            {
+                deactivate();
+            }
         }
         else
         {
-            deactivate();
+            if (rb2d.isMoving())
+            {
+                if (playerController.requestAminaPerSecond(manaCost) > 0)
+                {
+                    activate();
+                }
+            }
         }
-        //if (zeroVelocity)
-        //{
-        //    zeroVelocity = false;
-        //    rb2d.velocity = Vector2.zero;
-        //}
     }
 
     public override void OnButtonUp()
@@ -55,12 +66,14 @@ public class RainbowPathAbility : PlayerAbility
 
     private void activate()
     {
+        active = true;
         playerMovement.forceMovement(playerMovement.LastMoveDirection);
         playerMovement.movementSpeed *= speedMultiplier;
     }
 
     private void deactivate()
     {
+        active = false;
         playerMovement.forceMovement(false);
         playerMovement.movementSpeed /= speedMultiplier;
     }

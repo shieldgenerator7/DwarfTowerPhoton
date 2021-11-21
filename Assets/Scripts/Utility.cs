@@ -23,4 +23,10 @@ public static class Utility
         rb2d.isKinematic = false;
         yield return null;
     }
+
+    public static bool isMoving(this Rigidbody2D rb2d)
+    {
+        return rb2d.velocity.sqrMagnitude > 0.1f;
+        //return !Mathf.Approximately(rb2d.velocity.magnitude, 0);
+    }
 }
