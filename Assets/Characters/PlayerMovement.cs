@@ -58,6 +58,12 @@ public class PlayerMovement : MonoBehaviour
                     ((Vector2.up * vertical) + (Vector2.right * horizontal)).normalized
                     * movementSpeed;
             }
+            else if (Input.GetButton("MoveToCursor"))
+            {
+                desiredVelocity =
+                    ((Vector2)(Utility.MouseWorldPos - transform.position)).normalized
+                    * movementSpeed;
+            }
             else
             {
                 //Else set no velocity
