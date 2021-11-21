@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 4608137011960805165}
   - component: {fileID: 748800143414026977}
   - component: {fileID: 7351537156668849939}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flag
   m_TagString: TeamFlag
   m_Icon: {fileID: 0}

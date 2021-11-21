@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5805177630514372060}
   - component: {fileID: 6696323203719167965}
   - component: {fileID: 8316750907752029666}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: caravan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
