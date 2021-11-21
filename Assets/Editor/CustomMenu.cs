@@ -78,7 +78,7 @@ public class CustomMenu
     {
         build(BuildTarget.StandaloneOSX, "");
     }
-    public static void build(BuildTarget buildTarget, string extension)
+    public static void build(BuildTarget buildTarget, string extension, bool openDialog=true)
     {
         string defaultPath = getDefaultBuildPath();
         if (!System.IO.Directory.Exists(defaultPath))
@@ -87,8 +87,16 @@ public class CustomMenu
         }
         //2017-10-19 copied from https://docs.unity3d.com/Manual/BuildPlayerPipeline.html
         // Get filename.
-        string buildName = EditorUtility.SaveFilePanel("Choose Location of Built Game", defaultPath, PlayerSettings.productName, extension);
-
+        string buildName = getBuildNamePath(extension);
+        if (openDialog)
+        {
+            buildName = EditorUtility.SaveFilePanel(
+                "Choose Location of Built Game", 
+                defaultPath, 
+                PlayerSettings.productName,
+                extension
+                );
+        }
         // User hit the cancel button.
         if (buildName == "")
             return;
@@ -115,13 +123,24 @@ public class CustomMenu
 
         // Build player.
         BuildPipeline.BuildPlayer(levels, buildName, buildTarget, BuildOptions.None);
-
-        // Run the game (Process class from System.Diagnostics).
-        Process proc = new Process();
-        proc.StartInfo.FileName = buildName;
-        proc.Start();
     }
 
+    [MenuItem("SG7/Test/Test Windows %t")]
+    public static void testWindows()
+    {
+        runWindows();
+        //EditorApplication.EnterPlaymode();
+    }
+
+    [MenuItem("SG7/Test/Build and Test Windows %#t")]
+    public static void buildAndtestWindows()
+    {
+        killProcesses();
+        build(BuildTarget.StandaloneWindows, "exe", false);
+        testWindows();
+    }
+
+    [MenuItem("SG7/Test/Kill Processes &t")]
     public static void killProcesses()
     {
         GameLauncherSettings gls = GameObject.FindObjectOfType<GameLauncherSettings>();
@@ -153,13 +172,17 @@ public class CustomMenu
         }
         string extension = "exe";
         string buildName = getBuildNamePath(extension);
-        UnityEngine.Debug.Log("Launching: " + buildName);
+        Debug.Log("Launching: " + buildName);
         for (int i = 0; i < windowCount; i++)
         {
             // Run the game (Process class from System.Diagnostics).
             Process proc = new Process();
-            gls.buildProcesses.Add(proc);
+            if (gls)
+            {
+                gls.buildProcesses.Add(proc);
+            }
             proc.StartInfo.FileName = buildName;
+            proc.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
             proc.Start();
         }
     }
