@@ -27,6 +27,8 @@ public class MultiplayerSetting : MonoBehaviour
             }
         }
         DontDestroyOnLoad(this.gameObject);
+        //TEST CODE: Make the game windowed to make testing easier
+        Screen.fullScreen = false;
     }
 
 }
