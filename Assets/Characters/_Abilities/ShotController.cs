@@ -21,16 +21,22 @@ public class ShotController : MonoBehaviour
             _stats = value;
         }
     }
+    [SerializeField]
     private StatLayer _stats;
 
-    public bool hitsPlayer = true;
-    public bool hitsObjects = true;
+    [Tooltip("The EntityTypes that this shot can damage")]
+    private List<EntityType> damagableTypes;
+
+    //TODO: Remove these checkboxes when Unity fixes its editor list bug
+    public bool damagesShots = false;
+    public bool damagesObjects = false;
+    public bool damagesPlayers = false;
 
     //
     // Components
     //
 
-    protected HealthPool health{get; private set;} 
+    protected HealthPool health { get; private set; }
 
 
     private new Rigidbody2D rigidbody2D;
@@ -67,6 +73,21 @@ public class ShotController : MonoBehaviour
         {
             rb2d.velocity = transform.up * _stats.moveSpeed;
         }
+        //TODO: remove this damageable types section when Unity fixes their editor list bug
+        //Damagable Types
+        damagableTypes = new List<EntityType>();
+        if (damagesShots)
+        {
+            damagableTypes.Add(EntityType.SHOT);
+        }
+        if (damagesObjects)
+        {
+            damagableTypes.Add(EntityType.OBJECT);
+        }
+        if (damagesPlayers)
+        {
+            damagableTypes.Add(EntityType.PLAYER);
+        }
         //HealthPool
         health = GetComponent<HealthPool>();
         health.MaxHealth = _stats.maxHits;
@@ -100,15 +121,12 @@ public class ShotController : MonoBehaviour
             //don't damage teammates
             return;
         }
-        if (hitsObjects)
+        HealthPool hp = collision.gameObject.GetComponent<HealthPool>();
+        if (hp && damagableTypes.Contains(hp.entityType))
         {
-            ShotController sc = collision.gameObject.GetComponent<ShotController>();
-            if (sc)
+            if (useInitialDamage)
             {
-                if (useInitialDamage)
-                {
-                    sc.addHealth(-_stats.damage);
-                }
+                hp.Health += -_stats.damage;
             }
         }
         //if (hitsPlayer)

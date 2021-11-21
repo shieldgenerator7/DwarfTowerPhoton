@@ -5,6 +5,7 @@ using UnityEngine;
 public class HealthPool : MonoBehaviour
 {
     [SerializeField]
+    [Tooltip("The maximum amount of health this entity can have")]
     private float maxHealth;
     public float MaxHealth
     {
@@ -28,6 +29,7 @@ public class HealthPool : MonoBehaviour
     }
 
     [SerializeField]
+    [Tooltip("The current amount of health this entity has")]
     private float health;
     public float Health
     {
@@ -43,5 +45,8 @@ public class HealthPool : MonoBehaviour
     }
     public delegate void OnDied();
     public event OnDied onDied;
+
+    [Tooltip("The type of entity this health pool represents")]
+    public EntityType entityType;
 
 }

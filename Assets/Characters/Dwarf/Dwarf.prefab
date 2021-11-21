@@ -156,6 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   health: 1
+  entityType: 2
 --- !u!114 &4410195784120660945
 MonoBehaviour:
   m_ObjectHideFlags: 0
