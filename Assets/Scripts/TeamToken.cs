@@ -43,6 +43,11 @@ public class TeamToken : MonoBehaviour
             {
                 cgc.onShotFired += recruitShot;
             }
+            //Make sure all charged guns register their launched objects
+            foreach (CarriedGunController cgc in GetComponentsInChildren<CarriedGunController>())
+            {
+                cgc.onShotFired += recruitShot;
+            }
         }
         //If there's no owner,
         if (!owner)
