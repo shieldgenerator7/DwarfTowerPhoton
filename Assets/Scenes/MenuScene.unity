@@ -1431,7 +1431,7 @@ MonoBehaviour:
   currentScene: 0
   playersInRoom: 0
   myNumberInRoom: 0
-  playersInGame: 0
+  _playersInGame: 0
 --- !u!1 &1002606570
 GameObject:
   m_ObjectHideFlags: 0
@@ -1478,7 +1478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delayStart: 0
-  maxPlayers: 4
+  maxPlayers: 10
   menuScene: 0
   multiplayerScene: 1
 --- !u!114 &1002606577

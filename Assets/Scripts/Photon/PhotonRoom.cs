@@ -22,7 +22,17 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
     public int playersInRoom;
     public int myNumberInRoom;
 
-    public int playersInGame;
+    [SerializeField]
+    private int _playersInGame;
+    public int playersInGame
+    {
+        get => _playersInGame;
+        set
+        {
+            _playersInGame = value;
+            PhotonNetwork.CurrentRoom.IsOpen = _playersInGame < MultiplayerSetting.instance.maxPlayers;
+        }
+    }
 
     //Delayed Start
     private bool readyToCount;
@@ -135,7 +145,6 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
                 {
                     return;
                 }
-                PhotonNetwork.CurrentRoom.IsOpen = false;
             }
         }
         else
@@ -166,7 +175,6 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
                 {
                     return;
                 }
-                PhotonNetwork.CurrentRoom.IsOpen = false;
             }
         }
     }
@@ -178,10 +186,6 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.IsMasterClient)
         {
             return;
-        }
-        if (MultiplayerSetting.instance.delayStart)
-        {
-            PhotonNetwork.CurrentRoom.IsOpen = false;
         }
         PhotonNetwork.LoadLevel(MultiplayerSetting.instance.multiplayerScene);
     }
