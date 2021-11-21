@@ -18,6 +18,7 @@ public class DashAbility : PlayerAbility
             //Give enough force for rb2d to move character entire distance in single frame
             rb2d.velocity = moveDir * dashDistance / Time.deltaTime;
             zeroVelocity = true;
+            playerMovement.enabled = false;
         }
     }
     public override void OnButtonHeld()
@@ -27,6 +28,8 @@ public class DashAbility : PlayerAbility
         {
             zeroVelocity = false;
             rb2d.velocity = Vector2.zero;
+            playerMovement.enabled = true;
         }
+        
     }
 }
