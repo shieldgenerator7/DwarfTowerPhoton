@@ -8,6 +8,7 @@ public class RainbowPathController : MonoBehaviour
     public float speedMultiplier = 1.5f;
     public float slowMultiplier = 0.75f;
     public float duration = 10;
+    public float fadeSpeed = 1;
 
     private Vector2 _startPos;
     public Vector2 startPos
@@ -55,7 +56,16 @@ public class RainbowPathController : MonoBehaviour
         {
             if (Time.time - startTime >= duration)
             {
-                PhotonNetwork.Destroy(this.gameObject);
+                Vector2 dir = (endPos - startPos);
+                float step = fadeSpeed * Time.deltaTime;
+                if (dir.magnitude > step)
+                {
+                    startPos += dir.normalized * step;
+                }
+                else
+                {
+                    PhotonNetwork.Destroy(this.gameObject);
+                }
             }
         }
     }
