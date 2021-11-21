@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Diagnostics;
 using UnityEditor;
 using UnityEngine.SceneManagement;
+using Debug = UnityEngine.Debug;
 
 public class CustomMenu
 {
@@ -39,8 +40,8 @@ public class CustomMenu
             return;
 
         string path = buildName.Substring(0, buildName.LastIndexOf("/"));
-        UnityEngine.Debug.Log("BUILDNAME: " + buildName);
-        UnityEngine.Debug.Log("PATH: " + path);
+        Debug.Log("BUILDNAME: " + buildName);
+        Debug.Log("PATH: " + path);
 
         string[] levels = new string[EditorBuildSettings.scenes.Length];
         for (int i = 0; i < EditorBuildSettings.scenes.Length; i++)
@@ -61,13 +62,10 @@ public class CustomMenu
         // Build player.
         BuildPipeline.BuildPlayer(levels, buildName, buildTarget, BuildOptions.None);
 
-        // Copy a file from the project folder to the build folder, alongside the built game.
-        string resourcesPath = path + "/Assets/Resources";
-
-        if (buildTarget == BuildTarget.StandaloneWindows)
-        {
-            runWindows();
-        }
+        // Run the game (Process class from System.Diagnostics).
+        Process proc = new Process();
+        proc.StartInfo.FileName = buildName;
+        proc.Start();
     }
 
     public static void killProcesses()
