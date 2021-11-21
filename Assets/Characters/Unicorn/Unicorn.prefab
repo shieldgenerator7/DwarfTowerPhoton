@@ -287,7 +287,6 @@ MonoBehaviour:
   manaCost: 1
   buttonName: Ability3
   hidesOtherInputs: 0
-  speedMultiplier: 1
   rainbowPathPrefabName: rainbow_path
   subfolderName: 
 --- !u!1 &7577088886736187312

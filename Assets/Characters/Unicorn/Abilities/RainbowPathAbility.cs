@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class RainbowPathAbility : PlayerAbility
 {
-    [Tooltip("The amount of speed players get when walking across the rainbow")]
-    public float speedMultiplier = 1.5f;
     [Tooltip("The name of the prefab to spawn from this character's folder under Resources/PhotonPrefabs/Shots")]
     public string rainbowPathPrefabName;
     /// <summary>
@@ -87,7 +85,6 @@ public class RainbowPathAbility : PlayerAbility
     {
         active = true;
         playerMovement.forceMovement(playerMovement.LastMoveDirection);
-        playerMovement.movementSpeed *= speedMultiplier;
         //Make new rainbow path
         rainbowPath = pavePath();
         rainbowPath.startPos = PavePosition;
@@ -99,11 +96,7 @@ public class RainbowPathAbility : PlayerAbility
     {
         active = false;
         playerMovement.forceMovement(false);
-        playerMovement.movementSpeed /= speedMultiplier;
-        if (rainbowPath)
-        {
-            rainbowPath = null;
-        }
+        rainbowPath = null;
     }
 
 
