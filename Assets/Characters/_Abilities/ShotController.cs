@@ -62,6 +62,7 @@ public class ShotController : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        stats = statBase;
         if (rb2d)
         {
             rb2d.velocity = transform.up * _stats.moveSpeed;
