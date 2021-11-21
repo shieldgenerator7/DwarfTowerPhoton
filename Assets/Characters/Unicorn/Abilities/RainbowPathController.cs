@@ -18,6 +18,7 @@ public class RainbowPathController : MonoBehaviour
         {
             _startPos = value;
             reposition();
+            PV.RPC("RPC_Reposition", RpcTarget.Others, _startPos, _endPos);
         }
     }
     private Vector2 _endPos;
@@ -28,6 +29,7 @@ public class RainbowPathController : MonoBehaviour
         {
             _endPos = value;
             reposition();
+            PV.RPC("RPC_Reposition", RpcTarget.Others, _startPos, _endPos);
         }
     }
 
@@ -101,5 +103,13 @@ public class RainbowPathController : MonoBehaviour
                 pm.movementSpeed /= slowMultiplier;
             }
         }
+    }
+
+    [PunRPC]
+    void RPC_Reposition(Vector2 start, Vector2 end)
+    {
+        _startPos = start;
+        _endPos = end;
+        reposition();
     }
 }
