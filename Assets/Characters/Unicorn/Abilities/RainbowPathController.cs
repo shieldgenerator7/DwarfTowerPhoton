@@ -9,6 +9,27 @@ public class RainbowPathController : MonoBehaviour
     public float slowMultiplier = 0.75f;
     public float duration = 10;
 
+    private Vector2 _startPos;
+    public Vector2 startPos
+    {
+        get => _startPos;
+        set
+        {
+            _startPos = value;
+            reposition();
+        }
+    }
+    private Vector2 _endPos;
+    public Vector2 endPos
+    {
+        get => _endPos;
+        set
+        {
+            _endPos = value;
+            reposition();
+        }
+    }
+
     private float startTime;
     private PhotonView PV;
 
@@ -16,6 +37,16 @@ public class RainbowPathController : MonoBehaviour
     {
         startTime = Time.time;
         PV = GetComponent<PhotonView>();
+    }
+
+    private void reposition()
+    {
+        transform.position = startPos;
+        Vector2 dir = endPos - startPos;
+        transform.up = dir;
+        Vector3 scale = transform.localScale;
+        scale.y = dir.magnitude;
+        transform.localScale = scale;
     }
 
     private void Update()

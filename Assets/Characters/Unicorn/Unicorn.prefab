@@ -140,7 +140,6 @@ MonoBehaviour:
   - {fileID: 3369071877670158181}
   - {fileID: 6400624810076416732}
   - {fileID: 2613285986018779774}
-  - {fileID: 501671236562416919}
 --- !u!114 &1916908965083646283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,7 +250,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2840908922013369465}
   - component: {fileID: 2613285986018779774}
-  - component: {fileID: 501671236562416919}
   m_Layer: 0
   m_Name: Rainbow Path
   m_TagString: Untagged
@@ -286,33 +284,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb9da9c92c361704f9ddf46d83b0c6d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 0
-  buttonName: Ability3
-  hidesOtherInputs: 0
-  speedMultiplier: 1
-  pathPrefabName: 
-  subfolderName: 
-  spawnBuffer: 1
---- !u!114 &501671236562416919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3887385788853543116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83413c13fefadf64bab9596e5332f75f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   manaCost: 1
   buttonName: Ability3
   hidesOtherInputs: 0
-  fireDelay: 0.2
-  shotPrefabName: rainbow_path
+  speedMultiplier: 1
+  rainbowPathPrefabName: rainbow_path
   subfolderName: 
-  spawnBuffer: 0
-  rotateShot: 0
 --- !u!1 &7577088886736187312
 GameObject:
   m_ObjectHideFlags: 0

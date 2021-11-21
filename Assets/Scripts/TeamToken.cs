@@ -43,10 +43,15 @@ public class TeamToken : MonoBehaviour
             {
                 cgc.onShotFired += recruitShot;
             }
-            //Make sure all charged guns register their launched objects
+            //Make sure all carried guns register their launched objects
             foreach (CarriedGunController cgc in GetComponentsInChildren<CarriedGunController>())
             {
                 cgc.onShotFired += recruitShot;
+            }
+            //Make sure all rainbow paths register their launched objects
+            foreach (RainbowPathAbility rpa in GetComponentsInChildren<RainbowPathAbility>())
+            {
+                rpa.onPathPaved += recruitShot;
             }
         }
         //If there's no owner,
