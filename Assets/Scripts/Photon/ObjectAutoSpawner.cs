@@ -5,9 +5,9 @@ using System.IO;
 using UnityEngine;
 
 /// <summary>
-/// Spawns its objects then destroys itself
+/// Spawns its objects as soon as it can and then destroys itself
 /// </summary>
-public class ObjectSpawner : MonoBehaviour
+public class ObjectAutoSpawner : MonoBehaviour
 {
     public string folderName;
     public List<string> objectNames;

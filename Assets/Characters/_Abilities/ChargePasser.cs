@@ -7,11 +7,12 @@ public class ChargePasser : ChargedShotController
     // Start is called before the first frame update
     protected override void Start()
     {
-        GetComponent<ObjectSpawner>().onObjectSpawned += passCharge;
+        GetComponent<ObjectAutoSpawner>().onObjectSpawned += passCharge;
     }
 
     void passCharge(GameObject go)
     {
+        Debug.Log("passcharge on go: " + go.name + ", " + this.gameObject.name);
         go.GetComponent<ChargedShotController>().chargeStats(multiplier);
     }
 }
