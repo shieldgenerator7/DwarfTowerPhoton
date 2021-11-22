@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 9144531418077418824}
   - component: {fileID: 3158633092025413174}
   - component: {fileID: 3369071877670158181}
+  - component: {fileID: 6783306785579899987}
   m_Layer: 0
   m_Name: Astral
   m_TagString: Player
@@ -260,6 +261,28 @@ MonoBehaviour:
   buttonName: Reload
   hidesOtherInputs: 1
   reloadDuration: 2
+--- !u!114 &6783306785579899987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532201618779257096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 135c219b73c067049a173809b5bfe32f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderName: Shots/Astral
+  objectSpawnInfoList:
+  - {fileID: 11400000, guid: 33e0ce6d458d86f499ad7d7588d18140, type: 2}
+  - {fileID: 11400000, guid: db4ded2421da37745b310dbfcb93b55c, type: 2}
+  - {fileID: 11400000, guid: e40015e36d10ad34098e08d675c75455, type: 2}
+  - {fileID: 11400000, guid: 1edbffd4457e71149bbd0f76f09197a9, type: 2}
+  - {fileID: 11400000, guid: 5b7bedcee2a74aa4891671707ecb9791, type: 2}
+  - {fileID: 11400000, guid: 6d811b14238b1934cbab6985ed17ce8b, type: 2}
+  - {fileID: 11400000, guid: e4835ef41a70dd24bb2e0f1874aac2b0, type: 2}
+  - {fileID: 11400000, guid: 7186f5ffa6dbca24ebce8c2ebbc90ddf, type: 2}
 --- !u!1 &3103024714437739674
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,12 +374,7 @@ MonoBehaviour:
   aminaReservedPerSecond: 10
   expectedAnimaReserved: 10
   minAminaReserved: 10
-  shotPrefabName: sword
-  subfolderName: 
-  defaultSpawnBuffer: 0
-  minSpawnBuffer: 0
-  maxSpawnBuffer: 0
-  rotateShot: 1
+  chargedShotIndex: 1
   previewPrefab: {fileID: 0}
 --- !u!114 &8823400307403786068
 MonoBehaviour:
@@ -376,12 +394,7 @@ MonoBehaviour:
   aminaReservedPerSecond: 2
   expectedAnimaReserved: 2
   minAminaReserved: 0.1
-  shotPrefabName: spawner_daggers
-  subfolderName: 
-  defaultSpawnBuffer: 0
-  minSpawnBuffer: 0
-  maxSpawnBuffer: 0
-  rotateShot: 1
+  chargedShotIndex: 2
   previewPrefab: {fileID: 0}
 --- !u!114 &7366886583290664003
 MonoBehaviour:
@@ -401,12 +414,7 @@ MonoBehaviour:
   aminaReservedPerSecond: 5
   expectedAnimaReserved: 5
   minAminaReserved: 5
-  shotPrefabName: spawner_scythe_arm
-  subfolderName: 
-  defaultSpawnBuffer: 0
-  minSpawnBuffer: 0
-  maxSpawnBuffer: 0
-  rotateShot: 1
+  chargedShotIndex: 5
   previewPrefab: {fileID: 0}
 --- !u!1 &3887385788853543116
 GameObject:
@@ -504,7 +512,4 @@ MonoBehaviour:
   buttonName: Ability1
   hidesOtherInputs: 0
   fireDelay: 3
-  shotPrefabName: shot
-  subfolderName: 
-  spawnBuffer: 1.5
-  rotateShot: 1
+  shotIndex: 0

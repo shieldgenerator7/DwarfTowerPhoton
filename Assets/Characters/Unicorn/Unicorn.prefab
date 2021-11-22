@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 9144531418077418824}
   - component: {fileID: 3158633092025413174}
   - component: {fileID: 3369071877670158181}
+  - component: {fileID: 6160328844216468952}
   m_Layer: 0
   m_Name: Unicorn
   m_TagString: Player
@@ -240,6 +241,22 @@ MonoBehaviour:
   buttonName: Reload
   hidesOtherInputs: 1
   reloadDuration: 2
+--- !u!114 &6160328844216468952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532201618779257096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 135c219b73c067049a173809b5bfe32f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderName: 
+  objectSpawnInfoList:
+  - {fileID: 11400000, guid: fa6cd0043f5b69347a4279e48dbf06e2, type: 2}
+  - {fileID: 11400000, guid: 8822e348e2f4deb44b5dc8900560a165, type: 2}
 --- !u!1 &3887385788853543116
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,8 +304,7 @@ MonoBehaviour:
   manaCost: 1
   buttonName: Ability3
   hidesOtherInputs: 0
-  rainbowPathPrefabName: rainbow_path
-  subfolderName: 
+  rainbowPathIndex: 1
 --- !u!1 &7577088886736187312
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,7 +353,4 @@ MonoBehaviour:
   buttonName: Ability1
   hidesOtherInputs: 0
   maxTime: 5
-  shotPrefabName: shot_carried
-  subfolderName: 
-  spawnBuffer: 0.75
-  rotateShot: 1
+  carriedShotIndex: 0

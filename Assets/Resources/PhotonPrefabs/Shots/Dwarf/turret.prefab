@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8423462684164734678}
   - component: {fileID: 7548018324808108502}
   - component: {fileID: 3748292705606818108}
+  - component: {fileID: 4828285463036561203}
   m_Layer: 0
   m_Name: turret
   m_TagString: Untagged
@@ -192,6 +193,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamCaptain: {fileID: 0}
   owner: {fileID: 0}
+--- !u!114 &4828285463036561203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 135c219b73c067049a173809b5bfe32f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderName: Shots/Dwarf
+  objectSpawnInfoList:
+  - {fileID: 11400000, guid: 08a9426390ca6b04fa30b8300e014ada, type: 2}
 --- !u!1 &247
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +256,4 @@ MonoBehaviour:
   buttonName: ability1
   hidesOtherInputs: 0
   fireDelay: 0.1
-  shotPrefabName: shot
-  subfolderName: Dwarf
-  spawnBuffer: 1
-  rotateShot: 1
+  shotIndex: 0

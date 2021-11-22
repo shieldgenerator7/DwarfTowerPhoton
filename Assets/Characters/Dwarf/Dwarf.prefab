@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 9144531418077418824}
   - component: {fileID: 3158633092025413174}
   - component: {fileID: 3369071877670158181}
+  - component: {fileID: 1242758000075440754}
   m_Layer: 0
   m_Name: Dwarf
   m_TagString: Player
@@ -242,6 +243,23 @@ MonoBehaviour:
   buttonName: Reload
   hidesOtherInputs: 1
   reloadDuration: 2
+--- !u!114 &1242758000075440754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532201618779257096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 135c219b73c067049a173809b5bfe32f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderName: 
+  objectSpawnInfoList:
+  - {fileID: 11400000, guid: 08a9426390ca6b04fa30b8300e014ada, type: 2}
+  - {fileID: 11400000, guid: d682e5faad624fa4482ee30a419b27a4, type: 2}
+  - {fileID: 11400000, guid: 4a1d62476983408419a5ad453f1e2a63, type: 2}
 --- !u!1 &2299017120802892305
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,12 +310,7 @@ MonoBehaviour:
   aminaReservedPerSecond: 5
   expectedAnimaReserved: 10
   minAminaReserved: 5.1
-  shotPrefabName: turret
-  subfolderName: 
-  defaultSpawnBuffer: 1
-  minSpawnBuffer: 0
-  maxSpawnBuffer: 2
-  rotateShot: 0
+  chargedShotIndex: 1
   previewPrefab: {fileID: 3363737750353282456, guid: c61aa5d8c6dad3f43806362e06c103e5,
     type: 3}
   turretFireTrigger: {fileID: 5500888993561376432}
@@ -351,12 +364,7 @@ MonoBehaviour:
   aminaReservedPerSecond: 10
   expectedAnimaReserved: 10
   minAminaReserved: 0.1
-  shotPrefabName: barricade
-  subfolderName: 
-  defaultSpawnBuffer: 1
-  minSpawnBuffer: 0
-  maxSpawnBuffer: 2
-  rotateShot: 0
+  chargedShotIndex: 2
   previewPrefab: {fileID: 4883769523225080588, guid: b262c7e4978b83d4da6bd142ea06f830,
     type: 3}
 --- !u!1 &7577088886736187312
@@ -407,7 +415,4 @@ MonoBehaviour:
   buttonName: Ability1
   hidesOtherInputs: 0
   fireDelay: 0.5
-  shotPrefabName: shot
-  subfolderName: 
-  spawnBuffer: 1.5
-  rotateShot: 1
+  shotIndex: 0
