@@ -63,13 +63,13 @@ public class RainbowPathAbility : PlayerAbility
     private void activate()
     {
         active = true;
-        Vector2 dir = playerMovement.LastMoveDirection;
-        playerMovement.forceMovement(dir);
+        Vector2 velocity = playerMovement.LastMoveDirection;
+        playerMovement.forceMovement(velocity);
         //Make new rainbow path
         rainbowPath = objectSpawner.spawnObject<RainbowPathController>(
             rainbowPathIndex,
             transform.position,
-            dir
+            velocity.normalized
             );
         rainbowPath.startPos = PavePosition;
         rainbowPath.endPos = PavePosition;

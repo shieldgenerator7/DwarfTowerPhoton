@@ -75,7 +75,7 @@ public class ChargedGunController : PlayerAbility
         {
             if (playerController.ReservedAmina >= minAminaReserved)
             {
-                Vector2 dir = (Utility.MouseWorldPos - transform.position).normalized;
+                Vector2 dir = ((Vector2)(Utility.MouseWorldPos - transform.position)).normalized;
                 ChargedShotController chargedShot = objectSpawner.spawnObject<ChargedShotController>(
                     chargedShotIndex,
                     transform.position,

@@ -29,7 +29,7 @@ public class GunController : PlayerAbility
             if (manaCost <= 0 || playerController.hasAmina(manaCost))
             {
                 lastFireTime = lastFireTime + fireDelay;
-                Vector2 dir = (Utility.MouseWorldPos - transform.position).normalized;
+                Vector2 dir = ((Vector2)(Utility.MouseWorldPos - transform.position)).normalized;
                 CarriedShotController carriedShot = objectSpawner.spawnObject<CarriedShotController>(
                     shotIndex,
                     transform.position,

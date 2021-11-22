@@ -21,6 +21,10 @@ public class ObjectSpawner : MonoBehaviour
     {
         teamToken = TeamToken.getTeamToken(gameObject);
         PV = GetComponent<PhotonView>();
+        if (!PV)
+        {
+            PV = GetComponentInParent<PhotonView>();
+        }
         if (PV.IsMine)
         {
             //Subfoldername
@@ -43,7 +47,7 @@ public class ObjectSpawner : MonoBehaviour
         if (PV.IsMine)
         {
             //Make sure dir is a unit vector
-            if (dir.sqrMagnitude != 1)
+            if (!Mathf.Approximately(dir.sqrMagnitude, 1))
             {
                 throw new System.ArgumentException(
                     "dir needs to be a unit vector! dir: " + dir + "," +

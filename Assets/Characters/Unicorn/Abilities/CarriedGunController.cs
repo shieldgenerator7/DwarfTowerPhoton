@@ -77,10 +77,11 @@ public class CarriedGunController : PlayerAbility
         carryStartTime = Time.time;
         aminaConsumed = 0;
         aminaConsumed += playerController.requestAminaPerSecond(manaCost);
+        Vector2 dir = ((Vector2)(Utility.MouseWorldPos - transform.position)).normalized;
         carriedShot = objectSpawner.spawnObject<CarriedShotController>(
             carriedShotIndex,
             transform.position,
-            (Utility.MouseWorldPos - transform.position).normalized
+            dir
             );
         carriedShot.switchOwner(this);
     }
