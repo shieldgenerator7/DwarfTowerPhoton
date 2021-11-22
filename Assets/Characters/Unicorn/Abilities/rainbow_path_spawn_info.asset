@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ea2da8821bc0354396985b4972da9a3, type: 3}
   m_Name: rainbow_path_spawn_info
   m_EditorClassIdentifier: 
-  objectName: 
-  spawnBuffer: 1
+  objectName: rainbow_path
+  spawnBuffer: 0
   rotateShot: 1
   inheritTeamToken: 1

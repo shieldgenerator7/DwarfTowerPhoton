@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ea2da8821bc0354396985b4972da9a3, type: 3}
   m_Name: carried_shot_spawn_info
   m_EditorClassIdentifier: 
-  objectName: 
-  spawnBuffer: 1
+  objectName: shot_carried
+  spawnBuffer: 0.75
   rotateShot: 1
   inheritTeamToken: 1
