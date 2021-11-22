@@ -26,18 +26,18 @@ public class GunController : PlayerAbility
         //base.OnButtonHeld();
         if (Time.time > lastFireTime + fireDelay)
         {
-            if (manaCost <= 0 || playerController.hasAmina(manaCost))
+            if (manaCost <= 0 || playerController.requestAmina(manaCost) > 0)
             {
                 lastFireTime = lastFireTime + fireDelay;
                 Vector2 dir = ((Vector2)(Utility.MouseWorldPos - transform.position)).normalized;
-                CarriedShotController carriedShot = objectSpawner.spawnObject<CarriedShotController>(
+                ShotController shot = objectSpawner.spawnObject<ShotController>(
                     shotIndex,
                     transform.position,
                     dir
                     );
                 onShotFired?.Invoke(
-                    carriedShot.gameObject,
-                    carriedShot.transform.position,
+                    shot.gameObject,
+                    shot.transform.position,
                     dir
                     );
             }

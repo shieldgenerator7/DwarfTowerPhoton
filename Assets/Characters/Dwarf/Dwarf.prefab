@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 135c219b73c067049a173809b5bfe32f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  folderName: 
+  folderName: Shots/Dwarf
   objectSpawnInfoList:
   - {fileID: 11400000, guid: 08a9426390ca6b04fa30b8300e014ada, type: 2}
   - {fileID: 11400000, guid: d682e5faad624fa4482ee30a419b27a4, type: 2}
