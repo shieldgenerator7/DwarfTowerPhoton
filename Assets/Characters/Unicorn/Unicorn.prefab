@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 135c219b73c067049a173809b5bfe32f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  folderName: 
+  folderName: Shots/Unicorn
   objectSpawnInfoList:
   - {fileID: 11400000, guid: fa6cd0043f5b69347a4279e48dbf06e2, type: 2}
   - {fileID: 11400000, guid: 8822e348e2f4deb44b5dc8900560a165, type: 2}

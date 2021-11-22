@@ -36,7 +36,7 @@ public class RainbowPathController : MonoBehaviour
     private float startTime;
     private PhotonView PV;
 
-    private void Start()
+    public void Start()
     {
         startTime = Time.time;
         PV = GetComponent<PhotonView>();
