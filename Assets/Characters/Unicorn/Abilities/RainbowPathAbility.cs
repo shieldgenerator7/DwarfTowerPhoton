@@ -6,34 +6,13 @@ using UnityEngine;
 
 public class RainbowPathAbility : PlayerAbility
 {
-    [Tooltip("The name of the prefab to spawn from this character's folder under Resources/PhotonPrefabs/Shots")]
-    public string rainbowPathPrefabName;
-    /// <summary>
-    /// The name of the subfolder of Resources/PhotonPrefabs/Shots that this is from
-    /// null or "": defaults to parent gameObject's name
-    /// </summary>
-    [Tooltip("The name of this character. Leave blank to default to parent GameObject's name")]
-    public string subfolderName;
+    [Tooltip("The index of the rainbow path in the object spawner")]
+    public int rainbowPathIndex;
 
     private Vector2 PavePosition => (Vector2)transform.position + (Vector2.up * 0.5f);
 
     private bool active = false;
     private RainbowPathController rainbowPath;
-
-    protected override void Start()
-    {
-        base.Start();
-        if (PV.IsMine)
-        {
-            //Subfoldername
-            if (string.IsNullOrEmpty(subfolderName))
-            {
-                string name = transform.parent.gameObject.name;
-                name = name.Replace("(Clone)", "").Trim();
-                subfolderName = name;
-            }
-        }
-    }
 
     public override void OnButtonDown()
     {
@@ -84,9 +63,14 @@ public class RainbowPathAbility : PlayerAbility
     private void activate()
     {
         active = true;
-        playerMovement.forceMovement(playerMovement.LastMoveDirection);
+        Vector2 dir = playerMovement.LastMoveDirection;
+        playerMovement.forceMovement(dir);
         //Make new rainbow path
-        rainbowPath = pavePath();
+        rainbowPath = objectSpawner.spawnObject<RainbowPathController>(
+            rainbowPathIndex,
+            transform.position,
+            dir
+            );
         rainbowPath.startPos = PavePosition;
         rainbowPath.endPos = PavePosition;
         rainbowPath.startPos = PavePosition;
@@ -98,35 +82,4 @@ public class RainbowPathAbility : PlayerAbility
         playerMovement.forceMovement(false);
         rainbowPath = null;
     }
-
-
-    /// <summary>
-    /// Paves a path
-    /// </summary>
-    /// <param name="playerPos"></param>
-    /// <param name="targetPos"></param>
-    public RainbowPathController pavePath()
-    {
-        if (PV.IsMine)
-        {
-            Vector2 playerPos = transform.position;
-            GameObject path = PhotonNetwork.Instantiate(
-                Path.Combine("PhotonPrefabs", "Shots", subfolderName, rainbowPathPrefabName),
-                playerPos,
-                Quaternion.identity
-                );
-
-            //OnPathPaved Delegate
-            onPathPaved?.Invoke(path, playerPos, playerPos);
-            //Return
-            return path.GetComponent<RainbowPathController>();
-        }
-        return null;
-    }
-    /// <summary>
-    /// Reacts to a path being paved
-    /// </summary>
-    /// <param name="targetPos">The position targetted by this shot</param>
-    public delegate void OnPathPaved(GameObject path, Vector2 targetPos, Vector2 targetDir);
-    public OnPathPaved onPathPaved;
 }

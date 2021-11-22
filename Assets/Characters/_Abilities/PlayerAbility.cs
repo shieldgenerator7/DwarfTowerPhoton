@@ -55,6 +55,7 @@ public abstract class PlayerAbility : MonoBehaviour
 
     public PlayerController playerController { get; private set; }
     public PlayerMovement playerMovement { get; private set; }
+    public ObjectSpawner objectSpawner { get; private set; }
     public Rigidbody2D rb2d { get; private set; }
     public PhotonView PV { get; private set; }
 
@@ -70,6 +71,11 @@ public abstract class PlayerAbility : MonoBehaviour
         if (!playerMovement)
         {
             playerMovement = GetComponentInParent<PlayerMovement>();
+        }
+        objectSpawner = GetComponent<ObjectSpawner>();
+        if (!objectSpawner)
+        {
+            objectSpawner = GetComponentInParent<ObjectSpawner>();
         }
         rb2d = GetComponent<Rigidbody2D>();
         if (!rb2d)

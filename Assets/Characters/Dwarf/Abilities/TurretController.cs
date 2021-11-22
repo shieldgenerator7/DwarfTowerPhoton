@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TurretController : GunController
 {
-
     private ShotController sc;
     private GunController turretFireTrigger;//the gun controller that causes the turrets to fire
     public GunController Trigger
@@ -35,7 +34,11 @@ public class TurretController : GunController
 
     private void fireInDirection(GameObject shot, Vector2 targetPos, Vector2 targetDir)
     {
-        fireShot(transform.position, (Vector2)transform.position + targetDir);
+        objectSpawner.spawnObject(
+            shotIndex,
+            transform.position, 
+            targetDir
+            );
     }
 
     private void OnDestroy()

@@ -12,44 +12,10 @@ public class ChargedGunController : PlayerAbility
     public float expectedAnimaReserved = 10;
     [Tooltip("The minimum amount of anima necessary to create the shot")]
     public float minAminaReserved = 5.1f;
-    [Tooltip("The name of the prefab to spawn from this character's folder under Resources/PhotonPrefabs/Shots")]
-    public string shotPrefabName;
-    /// <summary>
-    /// The name of the subfolder of Resources/PhotonPrefabs/Shots that this is from
-    /// null or "": defaults to parent gameObject's name
-    /// </summary>
-    [Tooltip("The name of this character. Leave blank to default to parent GameObject's name")]
-    public string subfolderName;
-    [Tooltip("How far away from the player the shots spawn when released with \"normal\" values")]
-    public float defaultSpawnBuffer = 1;//how far away from the player the shots spawn
-    [Tooltip("Minimum of how far away from the player the shots spawn")]
-    public float minSpawnBuffer = 0;
-    [Tooltip("Maximum of how far away from the player the shots spawn")]
-    public float maxSpawnBuffer = 2;
-    [Tooltip("Should the shot rotate to face the direction it's traveling?")]
-    public bool rotateShot = true;//rotates shot to face the direction it's traveling
+    [Tooltip("The index of the charged shot in the object spawner")]
+    public int chargedShotIndex;
     [Tooltip("The display-only prefab to spawn while charging the shot")]
     public GameObject previewPrefab;
-
-    public float SpawnBuffer
-    {
-        get
-        {
-            if (preview)
-            {
-                Vector2 playerPos = transform.position;
-                Vector2 targetPos = Utility.MouseWorldPos;
-                Vector2 targetDir = (targetPos - playerPos);
-                float magnitude = targetDir.magnitude;
-                magnitude = Mathf.Clamp(magnitude, minSpawnBuffer, maxSpawnBuffer);
-                return magnitude;
-            }
-            else
-            {
-                return defaultSpawnBuffer;
-            }
-        }
-    }
 
     private GameObject preview;
     private Collider2D previewCollider;
@@ -71,13 +37,6 @@ public class ChargedGunController : PlayerAbility
                 previewSprite = previewSpriteRenderer.sprite;
                 previewCollider = preview.GetComponent<Collider2D>();
                 previewDisplayer = preview.GetComponent<PreviewDisplayer>();
-            }
-            //Subfoldername
-            if (string.IsNullOrEmpty(subfolderName))
-            {
-                string name = transform.parent.gameObject.name;
-                name = name.Replace("(Clone)", "").Trim();
-                subfolderName = name;
             }
         }
     }
@@ -116,11 +75,19 @@ public class ChargedGunController : PlayerAbility
         {
             if (playerController.ReservedAmina >= minAminaReserved)
             {
-                float aminaObtained = playerController.collectReservedAmina();
-                fireShot(
+                Vector2 dir = (Utility.MouseWorldPos - transform.position).normalized;
+                ChargedShotController chargedShot = objectSpawner.spawnObject<ChargedShotController>(
+                    chargedShotIndex,
                     transform.position,
-                    Utility.MouseWorldPos,
-                    aminaObtained
+                    dir
+                    );
+                float aminaObtained = playerController.collectReservedAmina();
+                float aminaMultiplier = aminaObtained / expectedAnimaReserved;
+                chargedShot.chargeStats(aminaMultiplier);
+                onShotFired?.Invoke(
+                    chargedShot.gameObject,
+                    chargedShot.transform.position,
+                    dir
                     );
             }
             else
@@ -150,39 +117,12 @@ public class ChargedGunController : PlayerAbility
     }
 
     /// <summary>
-    /// Fires a shot
-    /// 2019-03-20: copied from GunController.fireShot()
-    /// </summary>
-    /// <param name="playerPos"></param>
-    /// <param name="targetPos"></param>
-    public void fireShot(Vector2 playerPos, Vector2 targetPos, float aminaObtained)
-    {
-        if (PV.IsMine)
-        {
-            float aminaMultiplier = aminaObtained / expectedAnimaReserved;
-            Vector2 targetDir = (targetPos - playerPos).normalized;
-            GameObject shot = PhotonNetwork.Instantiate(
-                Path.Combine("PhotonPrefabs", "Shots", subfolderName, shotPrefabName),
-                playerPos + (targetDir * SpawnBuffer),
-                (rotateShot) ? Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, targetDir)) : Quaternion.Euler(0, 0, 0)
-                );
-            shot.GetComponent<ChargedShotController>().chargeStats(aminaMultiplier);
-
-            //On Shot Fired Delegate
-            if (onShotFired != null)
-            {
-                onShotFired(shot, targetPos, targetDir);
-            }
-        }
-    }
-
-    /// <summary>
     /// Reacts to a shot being fired from this gun controller
     /// </summary>
     /// <param name="targetPos">The position targetted by this shot</param>
     /// <param name="targetDir">The direction from the player to the target pos, normalized</param>
     public delegate void OnShotFired(GameObject shot, Vector2 targetPos, Vector2 targetDir);
-    public OnShotFired onShotFired;
+    public event OnShotFired onShotFired;
 
     /// <summary>
     /// Returns the preview state of the updated preview location
@@ -193,7 +133,8 @@ public class ChargedGunController : PlayerAbility
         Vector2 playerPos = transform.position;
         Vector2 targetPos = Utility.MouseWorldPos;
         Vector2 targetDir = (targetPos - playerPos).normalized;
-        Vector2 pos = playerPos + (targetDir * SpawnBuffer);
+        Vector2 pos = playerPos +
+            (targetDir * objectSpawner.objectSpawnInfoList[chargedShotIndex].spawnBuffer);
         return getPreviewState(pos);
     }
 
@@ -244,7 +185,9 @@ public class ChargedGunController : PlayerAbility
             if (TeamToken.ownedBySamePlayer(gameObject, conflictingObject))
             {
                 //if they're the same type,
-                if (conflictingObject.name.Contains(shotPrefabName))
+                if (conflictingObject.name.Contains(
+                    objectSpawner.objectSpawnInfoList[chargedShotIndex].objectName
+                    ))
                 {
                     //upgrade the one there
                     targetObject = conflictingObject;

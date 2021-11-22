@@ -33,27 +33,45 @@ public class ObjectSpawner : MonoBehaviour
         }
     }
 
+    public T spawnObject<T>(int index, Vector2 pos, Vector2 dir)
+    {
+        return spawnObject(index, pos, dir).GetComponent<T>();
+    }
+
     public GameObject spawnObject(int index, Vector2 pos, Vector2 dir)
     {
         if (PV.IsMine)
         {
+            //Make sure dir is a unit vector
+            if (dir.sqrMagnitude != 1)
+            {
+                throw new System.ArgumentException(
+                    "dir needs to be a unit vector! dir: " + dir + "," +
+                    "sqrMagnitude: " + dir.sqrMagnitude
+                    );
+            }
+            //Initialize arguments
             ObjectSpawnInfo osi = objectSpawnInfoList[index];
             string pathName = Path.Combine("PhotonPrefabs", folderName, osi.objectName);
             Vector2 position = pos + (dir * osi.spawnBuffer);
             Quaternion rotation = (osi.rotateShot)
                 ? Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, dir))
                 : Quaternion.Euler(0, 0, 0);
+            //Instantiate
             GameObject go = PhotonNetwork.Instantiate(pathName, position, rotation);
+            //Team Token
             if (osi.inheritTeamToken)
             {
                 TeamToken.seeRecruiter(go, teamToken.owner, true);
             }
-            onObjectSpawned?.Invoke(go);
+            //Delegate
+            onObjectSpawned?.Invoke(go, position, dir);
+            //Return
             return go;
         }
         return null;
     }
-    public delegate void OnObjectSpawned(GameObject go);
+    public delegate void OnObjectSpawned(GameObject go, Vector2 pos, Vector2 dir);
     public event OnObjectSpawned onObjectSpawned;
 
 }
