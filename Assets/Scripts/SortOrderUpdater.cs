@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
+[RequireComponent(typeof(SpriteRenderer))]
 public class SortOrderUpdater : MonoBehaviour
 {
     [Tooltip("Should this update the sorting order every frame? If false, only sets it on start")]

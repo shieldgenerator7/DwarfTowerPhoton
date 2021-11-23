@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 571}
   - component: {fileID: 8902093542985066328}
   - component: {fileID: 508065936224665636}
+  - component: {fileID: 5017439048823165453}
   m_Layer: 0
   m_Name: shot_carried
   m_TagString: Untagged
@@ -231,3 +232,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamCaptain: {fileID: 0}
   owner: {fileID: 0}
+--- !u!114 &5017439048823165453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee9253eaee8cde4081db31a9f23311f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateEveryFrame: 1

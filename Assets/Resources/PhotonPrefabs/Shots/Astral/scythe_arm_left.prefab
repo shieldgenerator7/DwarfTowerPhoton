@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 933569388299852495}
   - component: {fileID: -7881619707582004922}
   - component: {fileID: 7639241076731766270}
+  - component: {fileID: -6374313900167222068}
   m_Layer: 0
   m_Name: scythe_arm_left
   m_TagString: Untagged
@@ -263,3 +264,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamCaptain: {fileID: 0}
   owner: {fileID: 0}
+--- !u!114 &-6374313900167222068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7945890412803988767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee9253eaee8cde4081db31a9f23311f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateEveryFrame: 1

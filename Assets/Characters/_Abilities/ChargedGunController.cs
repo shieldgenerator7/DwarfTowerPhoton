@@ -153,8 +153,15 @@ public class ChargedGunController : PlayerAbility
             GameObject rchGO = rch2d.collider.gameObject;
             Rigidbody2D rchRB2D = rchGO.GetComponent<Rigidbody2D>();
             ShotController rchSC = rchGO.GetComponent<ShotController>();
+            Collider2D coll2d = rchGO.GetComponent<Collider2D>();
             //If the conflicting object is a regular moving shot,
             if (rchRB2D && rchSC)
+            {
+                //You can build here anyway
+                continue;
+            }
+            //If the conflicting object is not solid,
+            else if (coll2d.isTrigger)
             {
                 //You can build here anyway
                 continue;

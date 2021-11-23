@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7548018324808108502}
   - component: {fileID: 3748292705606818108}
   - component: {fileID: 4828285463036561203}
+  - component: {fileID: 8192478844641325724}
   m_Layer: 0
   m_Name: turret
   m_TagString: Untagged
@@ -208,6 +209,19 @@ MonoBehaviour:
   folderName: Shots/Dwarf
   objectSpawnInfoList:
   - {fileID: 11400000, guid: 08a9426390ca6b04fa30b8300e014ada, type: 2}
+--- !u!114 &8192478844641325724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee9253eaee8cde4081db31a9f23311f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateEveryFrame: 0
 --- !u!1 &247
 GameObject:
   m_ObjectHideFlags: 0
