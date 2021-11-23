@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2737338846548359576}
   - component: {fileID: 4790808990912515112}
+  - component: {fileID: 4805225643363986381}
   m_Layer: 0
   m_Name: grass_tall_2
   m_TagString: Untagged
@@ -84,6 +85,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &4805225643363986381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885424223054878986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee9253eaee8cde4081db31a9f23311f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateEveryFrame: 0
 --- !u!1 &2341819168554504977
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6893410121668913889}
   - component: {fileID: 5154465657336883215}
+  - component: {fileID: 3328546914488140799}
   m_Layer: 0
   m_Name: grass_tall_1
   m_TagString: Untagged
@@ -168,6 +183,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &3328546914488140799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2341819168554504977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee9253eaee8cde4081db31a9f23311f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateEveryFrame: 0
 --- !u!1 &6513834005769779809
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,6 +206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4593750866936276501}
   - component: {fileID: 6214090299942079968}
+  - component: {fileID: 3281208433357477668}
   m_Layer: 0
   m_Name: grass_tall_3
   m_TagString: Untagged
@@ -252,6 +281,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &3281208433357477668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6513834005769779809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee9253eaee8cde4081db31a9f23311f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateEveryFrame: 0
 --- !u!1 &7269731009769640609
 GameObject:
   m_ObjectHideFlags: 0
