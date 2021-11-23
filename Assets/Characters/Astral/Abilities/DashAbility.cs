@@ -27,6 +27,7 @@ public class DashAbility : PlayerAbility
         dashStartTime = Time.time;
         playerMovement.enabled = false;
         playerController.processAbility(this);
+        onDash?.Invoke(true);
     }
     void deactivate()
     {
@@ -36,8 +37,11 @@ public class DashAbility : PlayerAbility
             rb2d.velocity = Vector2.zero;
             playerMovement.enabled = true;
             playerController.processAbility(this, false);
+            onDash?.Invoke(false);
         }
     }
+    public delegate void OnDash(bool dashing);
+    public event OnDash onDash;
 
     public override void OnContinuedProcessing()
     {
