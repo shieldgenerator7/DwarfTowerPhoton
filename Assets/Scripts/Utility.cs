@@ -32,6 +32,6 @@ public static class Utility
 
     public static void updateSortingOrder(this SpriteRenderer sr)
     {
-        sr.sortingOrder = -(int)(sr.transform.position.y * 10);
+        sr.sortingOrder = -(int)(sr.transform.position.y * 100);
     }
 }
