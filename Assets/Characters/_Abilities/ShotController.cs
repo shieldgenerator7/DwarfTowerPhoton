@@ -138,11 +138,6 @@ public class ShotController : MonoBehaviour
         }
     }
 
-    public void addHealth(float health)
-    {
-        this.health.Health += health;
-    }
-
     [PunRPC]
     protected void RPC_SelfDestruct()
     {

@@ -89,15 +89,10 @@ public class CaravanController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        ShotController sc = collision.gameObject.GetComponent<ShotController>();
-        if (sc)
+        HealthPool hp = collision.gameObject.GetComponent<HealthPool>();
+        if (hp)
         {
-            sc.addHealth(-sc.stats.maxHits);
-        }
-        Stunnable stunnable = collision.gameObject.GetComponentInChildren<Stunnable>();
-        if (stunnable && !stunnable.Stunned)
-        {
-            stunnable.triggerStun();
+            hp.Health -= hp.MaxHealth;
         }
         //Checking if the game should end (when the caravan hits a team flag)
         if (collision.gameObject.CompareTag("TeamFlag"))
