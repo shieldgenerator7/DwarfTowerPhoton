@@ -5,6 +5,7 @@ using System.Diagnostics;
 using UnityEditor;
 using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
+using UnityEditor.SceneManagement;
 
 public class CustomMenu
 {
@@ -78,7 +79,7 @@ public class CustomMenu
     {
         build(BuildTarget.StandaloneOSX, "");
     }
-    public static void build(BuildTarget buildTarget, string extension, bool openDialog=true)
+    public static void build(BuildTarget buildTarget, string extension, bool openDialog = true)
     {
         string defaultPath = getDefaultBuildPath();
         if (!System.IO.Directory.Exists(defaultPath))
@@ -91,8 +92,8 @@ public class CustomMenu
         if (openDialog)
         {
             buildName = EditorUtility.SaveFilePanel(
-                "Choose Location of Built Game", 
-                defaultPath, 
+                "Choose Location of Built Game",
+                defaultPath,
                 PlayerSettings.productName,
                 extension
                 );
@@ -209,6 +210,29 @@ public class CustomMenu
         }
         string buildName = defaultPath + "/" + PlayerSettings.productName + "." + extension;
         return buildName;
+    }
+
+    [MenuItem("SG7/Session/Begin Session")]
+    public static void beginSession()
+    {
+        Debug.Log("=== Beginning session ===");
+        string oldVersion = PlayerSettings.bundleVersion;
+        string[] split = oldVersion.Split('.');
+        string newVersion = split[0] + "." + (int.Parse(split[1]) + 1);
+        PlayerSettings.bundleVersion = newVersion;
+        //Save and Log
+        EditorSceneManager.SaveOpenScenes();
+        Debug.LogWarning("Updated build version number from " + oldVersion + " to " + newVersion);
+    }
+
+    [MenuItem("SG7/Session/Finish Session")]
+    public static void finishSession()
+    {
+        Debug.Log("=== Finishing session ===");
+        EditorSceneManager.SaveOpenScenes();
+        buildWindows();
+        //Open folders
+        openBuildFolder();
     }
 
     [MenuItem("SG7/Upgrade/Force save all assets")]
