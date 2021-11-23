@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TreeForestPopulator : MonoBehaviour
@@ -11,26 +12,51 @@ public class TreeForestPopulator : MonoBehaviour
 
     public PlayArea playArea;
 
+    public List<Transform> avoidPosList;
+    [Range(1, 10)]
+    public float avoidRadius = 5;
+
     private ObjectSpawner objectSpawner;
+
+    private Vector2 min;
+    private Vector2 max;
+
     // Start is called before the first frame update
     void Start()
     {
+        //Object Spawner
         objectSpawner = GetComponent<ObjectSpawner>();
+        //Area
+        min = new Vector2(-playArea.width / 2 + 1, -playArea.height / 2 + 1);
+        max = new Vector2(playArea.width / 2 - 1, playArea.height / 2 - 1);
+        //Populate
         populate();
     }
 
     void populate()
     {
-        Vector2 min = new Vector2(-playArea.width / 2, -playArea.height / 2);
-        Vector2 max = new Vector2(playArea.width / 2, playArea.height / 2);
         for (int i = 0; i < treeCount; i++)
         {
-            Vector2 pos = new Vector2(
-                Random.Range(min.x, max.x),
-                Random.Range(min.y, max.y)
+            GameObject tree = objectSpawner.spawnObject(
+                treeIndex,
+                getRandomPosition(),
+                Vector2.up
                 );
-            GameObject tree = objectSpawner.spawnObject(treeIndex, pos, Vector2.up);
             tree.transform.parent = folder;
         }
+    }
+
+    Vector2 getRandomPosition()
+    {
+        Vector2 pos = Vector2.zero;
+        do
+        {
+            pos.x = Random.Range(min.x, max.x);
+            pos.y = Random.Range(min.y, max.y);
+        }
+        while (avoidPosList.Any(
+            t => Vector2.Distance(t.position, pos) <= avoidRadius
+            ));
+        return pos;
     }
 }
