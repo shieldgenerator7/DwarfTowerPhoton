@@ -1,4 +1,4 @@
-#if UNITY_EDITOR
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +11,8 @@ public class PlayArea : MonoBehaviour
     [Range(10, 100)]
     [Tooltip("The height of the play area")]
     public float height;
+
+#if UNITY_EDITOR
 
     public SpriteRenderer grass;
     public SpriteRenderer left;
@@ -39,5 +41,5 @@ public class PlayArea : MonoBehaviour
         top.transform.position = new Vector2(0, height / 2);
         bottom.transform.position = new Vector2(0, -height / 2);
     }
-}
 #endif
+}
