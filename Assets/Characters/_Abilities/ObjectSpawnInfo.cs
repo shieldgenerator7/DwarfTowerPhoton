@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "_spawn_info", menuName = "Characters/_All/ObjectSpawnInfo", order = 0)]
+[CreateAssetMenu(fileName = "_spawn_info", menuName = "ObjectSpawnInfo", order = 0)]
 public class ObjectSpawnInfo : ScriptableObject
 {
     [Tooltip("The name of the prefab to spawn from the folder")]

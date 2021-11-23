@@ -30,9 +30,7 @@ public class ObjectSpawner : MonoBehaviour
             //Subfoldername
             if (string.IsNullOrEmpty(folderName))
             {
-                string name = transform.parent.gameObject.name;
-                name = name.Replace("(Clone)", "").Trim();
-                folderName = "Shots/" + name;
+                throw new UnityException("folderName is null! foldername: " + folderName + ", gameObject: " + gameObject.name);
             }
         }
     }
