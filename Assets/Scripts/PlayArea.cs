@@ -5,15 +5,18 @@ using UnityEngine;
 
 public class PlayArea : MonoBehaviour
 {
+    [Range(10,100)]
+    [Tooltip("The width of the play area")]
+    public float width;
+    [Range(10, 100)]
+    [Tooltip("The height of the play area")]
+    public float height;
 
     public SpriteRenderer grass;
     public SpriteRenderer left;
     public SpriteRenderer right;
     public SpriteRenderer top;
     public SpriteRenderer bottom;
-
-    public float width;
-    public float height;
 
     public void adjustPlayArea()
     {
