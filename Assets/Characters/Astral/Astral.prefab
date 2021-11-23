@@ -464,6 +464,7 @@ MonoBehaviour:
   buttonName: Ability3
   hidesOtherInputs: 1
   dashDistance: 5
+  dashDuration: 0.1
 --- !u!1 &7577088886736187312
 GameObject:
   m_ObjectHideFlags: 0

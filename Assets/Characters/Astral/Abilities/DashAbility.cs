@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class DashAbility : PlayerAbility
 {
-    [Tooltip("Distance to move the player in one frame")]
+    [Tooltip("Distance to move the player during dash")]
     public float dashDistance = 5;
+    [Tooltip("Seconds it takes to complete the dash")]
+    public float dashDuration = 0.1f;
 
-    private bool zeroVelocity = false;
+    private float dashStartTime = -1;
 
     public override void OnButtonDown()
     {
@@ -17,28 +19,32 @@ public class DashAbility : PlayerAbility
             activate();
         }
     }
-    public override void OnButtonHeld()
-    {
-        base.OnButtonHeld();
-
-        deactivate();     
-    }
 
     void activate()
     {
         Vector2 moveDir = (Utility.MouseWorldPos - transform.position).normalized;
         //Give enough force for rb2d to move character entire distance in single frame
-        rb2d.velocity = moveDir * dashDistance / Time.deltaTime;
-        zeroVelocity = true;
+        rb2d.velocity = moveDir * dashDistance / dashDuration;
+        dashStartTime = Time.time;
         playerMovement.enabled = false;
+        playerController.processAbility(this);
     }
     void deactivate()
     {
-        if (zeroVelocity)
+        if (dashStartTime >= 0)
         {
-            zeroVelocity = false;
+            dashStartTime = -1;
             rb2d.velocity = Vector2.zero;
             playerMovement.enabled = true;
+            playerController.processAbility(this, false);
+        }
+    }
+
+    public override void OnContinuedProcessing()
+    {
+        if (Time.time >= dashStartTime + dashDuration)
+        {
+            deactivate();
         }
     }
 }
