@@ -218,7 +218,10 @@ public class CustomMenu
         Debug.Log("=== Beginning session ===");
         string oldVersion = PlayerSettings.bundleVersion;
         string[] split = oldVersion.Split('.');
-        string newVersion = split[0] + "." + (int.Parse(split[1]) + 1);
+        int versionNumber = int.Parse(split[1]) + 1;
+        string newVersion = split[0] + "."
+            + ((versionNumber < 100) ? "0" : "")
+            + versionNumber;
         PlayerSettings.bundleVersion = newVersion;
         //Save and Log
         EditorSceneManager.SaveOpenScenes();
