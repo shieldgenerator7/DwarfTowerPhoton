@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -43,8 +44,7 @@ public class TreeLinePopulator : MonoBehaviour
     void populateTree(Vector2 pos, float buffer)
     {
         GameObject tree = Instantiate(treePrefab, transform);
-        tree.transform.position = pos + (Vector2.up * buffer);
-        tree.GetComponent<SpriteRenderer>().updateSortingOrder();
+        setTreePosition(tree, pos + (Vector2.up * buffer));
         trees.Add(tree);
         tree.transform.parent = folder;
     }
@@ -63,9 +63,15 @@ public class TreeLinePopulator : MonoBehaviour
     {
         Vector2 dir1 = ((Vector2)marker.position - center);
         Vector2 pos1 = center + (dir1 * percentages[percentages.Count - 1]);
-        tree.transform.position = pos1 + (Vector2.up * buffer);
-        tree.GetComponent<SpriteRenderer>().updateSortingOrder();
+        setTreePosition(tree, pos1 + (Vector2.up * buffer));
         EditorUtility.SetDirty(tree);
+    }
+
+    void setTreePosition(GameObject tree, Vector2 pos)
+    {
+        tree.transform.position = pos;
+        tree.GetComponentsInChildren<SpriteRenderer>().ToList()
+            .ForEach(sr => sr.updateSortingOrder());
     }
 }
 #endif
