@@ -29,4 +29,9 @@ public static class Utility
         return rb2d.velocity.sqrMagnitude > 0.1f;
         //return !Mathf.Approximately(rb2d.velocity.magnitude, 0);
     }
+
+    public static void updateSortingOrder(this SpriteRenderer sr)
+    {
+        sr.sortingOrder = -(int)(sr.transform.position.y * 10);
+    }
 }

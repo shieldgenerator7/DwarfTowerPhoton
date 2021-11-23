@@ -43,6 +43,7 @@ public class TreeForestPopulator : MonoBehaviour
                 Vector2.up
                 );
             tree.transform.parent = folder;
+            tree.GetComponent<SpriteRenderer>().updateSortingOrder();
         }
     }
 

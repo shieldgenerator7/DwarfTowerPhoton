@@ -21,16 +21,11 @@ public class TreeLinePopulator : MonoBehaviour
     public float newPercent = 0;
 
     private Vector2 center;
-    //private ObjectSpawner objectSpawner;
 
     public void populate()
     {
         trees.ForEach(tree => DestroyImmediate(tree));
         trees.Clear();
-        //if (!objectSpawner)
-        //{
-        //    objectSpawner = GetComponent<ObjectSpawner>();
-        //}
         center = (marker1.position + marker2.position) / 2;
         Vector2 dir1 = ((Vector2)marker1.position - center);
         Vector2 dir2 = ((Vector2)marker2.position - center);
@@ -49,9 +44,9 @@ public class TreeLinePopulator : MonoBehaviour
     {
         GameObject tree = Instantiate(treePrefab, transform);
         tree.transform.position = pos + (Vector2.up * buffer);
+        tree.GetComponent<SpriteRenderer>().updateSortingOrder();
         trees.Add(tree);
         tree.transform.parent = folder;
-        //objectSpawner.spawnObject(0, pos, Vector2.up);
     }
 
     public void adjustLastTrees()
@@ -69,6 +64,7 @@ public class TreeLinePopulator : MonoBehaviour
         Vector2 dir1 = ((Vector2)marker.position - center);
         Vector2 pos1 = center + (dir1 * percentages[percentages.Count - 1]);
         tree.transform.position = pos1 + (Vector2.up * buffer);
+        tree.GetComponent<SpriteRenderer>().updateSortingOrder();
         EditorUtility.SetDirty(tree);
     }
 }
