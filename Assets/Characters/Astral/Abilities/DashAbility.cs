@@ -22,8 +22,7 @@ public class DashAbility : PlayerAbility
 
     void activate()
     {
-        Vector2 moveDir = (Utility.MouseWorldPos - transform.position).normalized;
-        //Give enough force for rb2d to move character entire distance in single frame
+        Vector2 moveDir = playerMovement.LastMoveDirection.normalized;
         rb2d.velocity = moveDir * dashDistance / dashDuration;
         dashStartTime = Time.time;
         playerMovement.enabled = false;
