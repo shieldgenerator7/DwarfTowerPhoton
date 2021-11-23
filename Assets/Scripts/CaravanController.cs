@@ -90,6 +90,10 @@ public class CaravanController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         HealthPool hp = collision.gameObject.GetComponent<HealthPool>();
+        if (!hp)
+        {
+            hp = collision.gameObject.GetComponentInChildren<HealthPool>();
+        }
         if (hp)
         {
             hp.Health -= hp.MaxHealth;
