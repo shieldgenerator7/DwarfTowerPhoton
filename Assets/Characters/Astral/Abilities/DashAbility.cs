@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,14 @@ public class DashAbility : PlayerAbility
     public float dashDuration = 0.1f;
 
     private float dashStartTime = -1;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        DashAbilityNetwork dan = PV.gameObject.AddComponent<DashAbilityNetwork>();
+        dan.dashAbility = this;
+    }
 
     public override void OnButtonDown()
     {
@@ -28,6 +37,7 @@ public class DashAbility : PlayerAbility
         playerMovement.enabled = false;
         playerController.processAbility(this);
         onDash?.Invoke(true);
+        PV.RPC("RPC_OnDash", RpcTarget.Others, true);
     }
     void deactivate()
     {
@@ -38,10 +48,16 @@ public class DashAbility : PlayerAbility
             playerMovement.enabled = true;
             playerController.processAbility(this, false);
             onDash?.Invoke(false);
+            PV.RPC("RPC_OnDash", RpcTarget.Others, false);
         }
     }
     public delegate void OnDash(bool dashing);
     public event OnDash onDash;
+
+    public void callOnDashDelegate(bool dashing)
+    {
+        onDash?.Invoke(dashing);
+    }
 
     public override void OnContinuedProcessing()
     {
