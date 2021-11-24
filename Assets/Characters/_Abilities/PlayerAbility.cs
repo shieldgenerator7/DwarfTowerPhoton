@@ -27,6 +27,10 @@ public abstract class PlayerAbility : MonoBehaviour
     /// </summary>
     [Tooltip("Should this ability prevent any other abilities from activating while active?")]
     public bool hidesOtherInputs = false;
+    [Tooltip("The unique id per character for this ability, " +
+        "as opposed to the other abilities this character has. " +
+        "MUST BE UNIQUE per character")]
+    public int abilityID;
 
     //
     // Runtime Variables
@@ -59,6 +63,7 @@ public abstract class PlayerAbility : MonoBehaviour
     public Rigidbody2D rb2d { get; private set; }
     public PhotonView PV { get; private set; }
     protected AminaPool aminaPool { get; private set; }
+    protected StatKeeper statKeeper { get; private set; }
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -69,6 +74,9 @@ public abstract class PlayerAbility : MonoBehaviour
         rb2d = gameObject.FindComponent<Rigidbody2D>();
         PV = gameObject.FindComponent<PhotonView>();
         aminaPool = gameObject.FindComponent<AminaPool>();
+        statKeeper = gameObject.FindComponent<StatKeeper>();
+        //Modify Ability ID
+        abilityID = PV.ViewID * 10 + abilityID;//multiplying by 10 means a possible 10 unique ability IDs per character
     }
 
     //

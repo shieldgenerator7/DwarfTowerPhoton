@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {//2019-03-15: made by following this tutorial: https://www.youtube.com/watch?v=JjfPaY57dDM
 
-    public float movementSpeed = 4;
+    private float movementSpeed = 4;
 
     /// <summary>
     /// The direction the player is forced to choose
@@ -25,6 +25,10 @@ public class PlayerMovement : MonoBehaviour
     {
         PV = GetComponentInParent<PhotonView>();
         rb2d = GetComponentInParent<Rigidbody2D>();
+        GetComponent<StatKeeper>().selfStats.onStatChanged += (stats) =>
+        {
+            movementSpeed = stats.moveSpeed;
+        };
     }
 
     // Update is called once per frame

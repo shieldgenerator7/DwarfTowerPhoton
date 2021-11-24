@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
     protected AminaPool aminaPool;
     protected PlayerMovement playerMovement;
+    protected StatKeeper statKeeper;
 
     // Start is called before the first frame update
     void Start()
@@ -58,6 +59,13 @@ public class PlayerController : MonoBehaviour
                     healthPool.Health = healthPool.MaxHealth;
                 }
             };
+            //StatKeeper
+            statKeeper = gameObject.FindComponent<StatKeeper>();
+            statKeeper.selfStats.onStatChanged += (stats) =>
+            {
+                healthPool.MaxHealth = stats.maxHits;
+            };
+            statKeeper.triggerEvents();
             //Amina
             aminaPool = gameObject.FindComponent<AminaPool>();
             FindObjectOfType<AminaMeterController>().FocusAminaPool = aminaPool;
