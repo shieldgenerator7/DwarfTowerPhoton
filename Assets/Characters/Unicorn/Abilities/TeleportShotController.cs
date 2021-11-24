@@ -12,7 +12,7 @@ public class TeleportShotController : ShotController
         {
             //It doesn't matter what it is, teleport it
             Vector2 teleportPos = Utility.MouseWorldPos;
-            hp.transform.position = teleportPos;
+            Utility.teleportObject(hp.gameObject, teleportPos);
             //and then destroy this shot
             health.Health = 0;
         }

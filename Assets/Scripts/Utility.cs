@@ -11,17 +11,12 @@ public static class Utility
         get { return Camera.main.ScreenToWorldPoint(Input.mousePosition); }
     }
 
-    public static IEnumerator teleportObject(GameObject go, Vector3 newPosition)
+    public static void teleportObject(GameObject go, Vector2 newPosition)
     {
-        Rigidbody2D rb2d = go.GetComponent<Rigidbody2D>();
+        Rigidbody2D rb2d = go.FindComponent<Rigidbody2D>();
         rb2d.isKinematic = true;
-        while (go.transform.position != newPosition)
-        {
-            go.transform.position = newPosition;
-            yield return null;
-        }
+        rb2d.transform.position = newPosition;
         rb2d.isKinematic = false;
-        yield return null;
     }
 
     public static T FindComponent<T>(this GameObject go, bool searchParent = true, bool searchChildren = true) where T : Component
