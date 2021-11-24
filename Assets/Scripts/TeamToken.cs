@@ -19,11 +19,7 @@ public class TeamToken : MonoBehaviour
         {
             if (!photonView)
             {
-                photonView = GetComponent<PhotonView>();
-                if (!photonView)
-                {
-                    photonView = GetComponentInParent<PhotonView>();
-                }
+                photonView = gameObject.FindComponent<PhotonView>();
             }
             return photonView;
         }
@@ -142,17 +138,9 @@ public class TeamToken : MonoBehaviour
     {//2019-03-20: copied from onSameTeam()
 
         //Get go1's team token
-        TeamToken tt1 = go1.GetComponent<TeamToken>();
-        if (!tt1)
-        {
-            tt1 = go1.GetComponentInParent<TeamToken>();
-        }
+        TeamToken tt1 = go1.FindComponent<TeamToken>();
         //Get go2's team token
-        TeamToken tt2 = go2.GetComponent<TeamToken>();
-        if (!tt2)
-        {
-            tt2 = go2.GetComponentInParent<TeamToken>();
-        }
+        TeamToken tt2 = go2.FindComponent<TeamToken>();
         //If both have a team token
         if (tt1 && tt2)
         {
@@ -176,11 +164,7 @@ public class TeamToken : MonoBehaviour
 
     public static TeamToken getTeamToken(GameObject go, bool addIfNone = false)
     {
-        TeamToken tt = go.GetComponent<TeamToken>();
-        if (!tt)
-        {
-            tt = go.GetComponentInParent<TeamToken>();
-        }
+        TeamToken tt = go.FindComponent<TeamToken>();
         if (!tt && addIfNone)
         {
             tt = go.AddComponent<TeamToken>();

@@ -24,6 +24,20 @@ public static class Utility
         yield return null;
     }
 
+    public static T FindComponent<T>(this GameObject go, bool searchParent = true, bool searchChildren = true)
+    {
+        T comp = go.GetComponent<T>();
+        if (comp == null && searchParent)
+        {
+            comp = go.GetComponentInParent<T>();
+        }
+        if (comp == null && searchChildren)
+        {
+            comp = go.GetComponentInChildren<T>();
+        }
+        return comp;
+    }
+
     public static bool isMoving(this Rigidbody2D rb2d)
     {
         return rb2d.velocity.sqrMagnitude > 0.1f;

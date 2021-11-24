@@ -20,11 +20,7 @@ public class ObjectSpawner : MonoBehaviour
     private void Start()
     {
         teamToken = TeamToken.getTeamToken(gameObject);
-        PV = GetComponent<PhotonView>();
-        if (!PV)
-        {
-            PV = GetComponentInParent<PhotonView>();
-        }
+        PV = gameObject.FindComponent<PhotonView>();
         if (PV.IsMine)
         {
             //Subfoldername

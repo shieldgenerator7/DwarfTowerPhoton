@@ -62,27 +62,11 @@ public abstract class PlayerAbility : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        playerController = GetComponent<PlayerController>();
-        if (!playerController)
-        {
-            playerController = GetComponentInParent<PlayerController>();
-        }
-        playerMovement = GetComponent<PlayerMovement>();
-        if (!playerMovement)
-        {
-            playerMovement = GetComponentInParent<PlayerMovement>();
-        }
-        objectSpawner = GetComponent<ObjectSpawner>();
-        if (!objectSpawner)
-        {
-            objectSpawner = GetComponentInParent<ObjectSpawner>();
-        }
-        rb2d = GetComponent<Rigidbody2D>();
-        if (!rb2d)
-        {
-            rb2d = GetComponentInParent<Rigidbody2D>();
-        }
-        PV = GetComponentInParent<PhotonView>();
+        playerController = gameObject.FindComponent<PlayerController>();
+        playerMovement = gameObject.FindComponent<PlayerMovement>();
+        objectSpawner = gameObject.FindComponent<ObjectSpawner>();
+        rb2d = gameObject.FindComponent<Rigidbody2D>();
+        PV = gameObject.FindComponent<PhotonView>();
     }
 
     //
