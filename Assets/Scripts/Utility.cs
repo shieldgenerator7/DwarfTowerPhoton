@@ -24,16 +24,19 @@ public static class Utility
         yield return null;
     }
 
-    public static T FindComponent<T>(this GameObject go, bool searchParent = true, bool searchChildren = true)
+    public static T FindComponent<T>(this GameObject go, bool searchParent = true, bool searchChildren = true) where T : Component
     {
         T comp = go.GetComponent<T>();
-        if (comp == null && searchParent)
+        bool found = comp && comp.gameObject.name != "null";
+        if (!found && searchParent)
         {
             comp = go.GetComponentInParent<T>();
+            found = comp && comp.gameObject.name != "null";
         }
-        if (comp == null && searchChildren)
+        if (!found && searchChildren)
         {
             comp = go.GetComponentInChildren<T>();
+            found = comp && comp.gameObject.name != "null";
         }
         return comp;
     }
