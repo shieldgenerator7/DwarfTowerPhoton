@@ -36,10 +36,27 @@ public class UnicornController : PlayerController
                 Vector2 forceDir = playerMovement.ForceMoveDirection;
                 Vector2 normal = collision.contacts[0].normal;
                 Vector2 newforceDir = Vector2.Reflect(forceDir, normal);
-                rainbowPathAbility.deactivate();
-                rainbowPathAbility.activate();
-                playerMovement.forceMovement(newforceDir);
+                redirectPath(transform.position, newforceDir);
             }
+        }
+    }
+
+    public void redirectPath(Vector2 newPos)
+    {
+        redirectPath(newPos, playerMovement.ForceMoveDirection);
+    }
+
+    public void redirectPath(Vector2 newPos, Vector2 newDir)
+    {
+        if (rainbowPathAbility.active)
+        {
+            rainbowPathAbility.deactivate();
+            if (newPos != (Vector2)transform.position)
+            {
+                Utility.teleportObject(gameObject, newPos);
+            }
+            rainbowPathAbility.activate();
+            playerMovement.forceMovement(newDir);
         }
     }
 }

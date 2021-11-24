@@ -12,6 +12,13 @@ public class TeleportShotController : ShotController
         {
             //It doesn't matter what it is, teleport it
             Vector2 teleportPos = Utility.MouseWorldPos;
+            //Check if it's a Unicorn using Rainbow Path
+            UnicornController unicorn = collision.gameObject.FindComponent<UnicornController>();
+            if (unicorn)
+            {
+                unicorn.redirectPath(teleportPos);
+            }
+            //Teleport like usual
             Utility.teleportObject(hp.gameObject, teleportPos);
             //and then destroy this shot
             health.Health = 0;
