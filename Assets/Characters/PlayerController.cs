@@ -5,22 +5,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float maxAmina = 100;
-    [SerializeField]
-    private float amina;//basically mana
-    public float Amina
-    {
-        get { return amina; }
-        set { amina = Mathf.Clamp(value, 0, maxAmina); }
-    }
-    [SerializeField]
-    private float reservedAmina;//amina reserved for a specific ability that requires charge time
-    public float ReservedAmina
-    {
-        get { return reservedAmina; }
-        private set { reservedAmina = Mathf.Clamp(value, 0, maxAmina); }
-    }
-
     public AminaReloader aminaReloader;//ability called by default when the player runs out of amina
     [SerializeField]
     private AbilityContext abilityContext;
@@ -55,16 +39,16 @@ public class PlayerController : MonoBehaviour
         private set { photonView = value; }
     }
 
+    protected AminaPool aminaPool;
+
     // Start is called before the first frame update
     void Start()
     {
         if (PV.IsMine)
         {
-            Amina = maxAmina;
-            FindObjectOfType<AminaMeterController>().FocusPlayerController = this;
             //Hook up Stunnable with HealthPool
-            Stunnable stunnable = GetComponent<Stunnable>();
-            HealthPool healthPool = GetComponent<HealthPool>();
+            Stunnable stunnable = gameObject.FindComponent<Stunnable>();
+            HealthPool healthPool = gameObject.FindComponent<HealthPool>();
             healthPool.onDied += () => { stunnable.triggerStun(); };
             stunnable.onStunned += (stunned) =>
             {
@@ -73,6 +57,20 @@ public class PlayerController : MonoBehaviour
                     healthPool.Health = healthPool.MaxHealth;
                 }
             };
+            //Amina
+            aminaPool = gameObject.FindComponent<AminaPool>();
+            FindObjectOfType<AminaMeterController>().FocusAminaPool = aminaPool;
+            //Auto-Reloading
+            if (aminaReloader)
+            {
+                aminaPool.onAminaEmpty += (amina) =>
+                {
+                    if (amina == 0 && aminaPool.ReservedAmina == 0 && !aminaReloader.Reloading)
+                    {
+                        aminaReloader.reload();
+                    }
+                };
+            }
         }
         foreach (string input in new string[] { "Ability1", "Ability2", "Ability3", "Reload" })
         {
@@ -86,11 +84,6 @@ public class PlayerController : MonoBehaviour
         if (!PV.IsMine)
         {
             return;
-        }
-        //Auto-Reloading
-        if (aminaReloader && Amina == 0 && ReservedAmina == 0 && !aminaReloader.Reloading)
-        {
-            aminaReloader.reload();
         }
         //Processing Abilities
         bool processingHidesInputs = false;
@@ -133,58 +126,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-    }
-
-    public bool hasAmina(float amount, bool acceptPartialAmount = true)
-    {
-        return Amina >= amount
-            || (acceptPartialAmount && Amina > 0);
-    }
-
-    public float requestAmina(float amount, bool acceptPartialAmount = true)
-    {
-        if (Amina - amount >= 0)
-        {
-            Amina -= amount;
-            return amount;
-        }
-        else if (acceptPartialAmount)
-        {
-            amount = Amina;
-            Amina = 0;
-            return amount;
-        }
-        return 0;
-    }
-
-    public float requestAminaPerSecond(float amount, bool acceptPartialAmount = true)
-    {
-        amount = amount * Time.deltaTime;
-        return requestAmina(amount, acceptPartialAmount);
-    }
-
-    public void reserveAmina(float amount)
-    {
-        ReservedAmina += requestAmina(amount);
-    }
-
-    public float collectReservedAmina()
-    {
-        float reserves = ReservedAmina;
-        ReservedAmina = 0;
-        return reserves;
-    }
-
-    public void cancelReservedAmina()
-    {
-        rechargeAmina(ReservedAmina);
-        ReservedAmina = 0;
-    }
-
-    public void rechargeAmina(float amount)
-    {
-        Amina += amount;
-    }
+    }    
 
     public void processAbility(PlayerAbility ability, bool process = true)
     {

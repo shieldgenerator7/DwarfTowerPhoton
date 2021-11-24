@@ -58,6 +58,7 @@ public abstract class PlayerAbility : MonoBehaviour
     public ObjectSpawner objectSpawner { get; private set; }
     public Rigidbody2D rb2d { get; private set; }
     public PhotonView PV { get; private set; }
+    protected AminaPool aminaPool { get; private set; }
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -67,6 +68,7 @@ public abstract class PlayerAbility : MonoBehaviour
         objectSpawner = gameObject.FindComponent<ObjectSpawner>();
         rb2d = gameObject.FindComponent<Rigidbody2D>();
         PV = gameObject.FindComponent<PhotonView>();
+        aminaPool = gameObject.FindComponent<AminaPool>();
     }
 
     //

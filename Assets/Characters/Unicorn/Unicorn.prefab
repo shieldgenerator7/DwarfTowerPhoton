@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8891596049456344743}
   - component: {fileID: 3769535869663102263}
   - component: {fileID: 1916908965083646283}
+  - component: {fileID: 5130418414652994702}
   - component: {fileID: 4410195784120660945}
   - component: {fileID: 9144531418077418824}
   - component: {fileID: 3158633092025413174}
@@ -120,9 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3a1368f6ffef0047b3bc902d56f2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmina: 100
-  amina: 0
-  reservedAmina: 0
   aminaReloader: {fileID: 0}
   abilityContext: {fileID: 3769535869663102263}
   aminaDecayRate: 5
@@ -157,6 +155,21 @@ MonoBehaviour:
   maxHealth: 1
   health: 1
   entityType: 2
+--- !u!114 &5130418414652994702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532201618779257096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 844eafc96aa6a7b408d52a318410ec69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAmina: 100
+  amina: 0
+  reservedAmina: 0
 --- !u!114 &4410195784120660945
 MonoBehaviour:
   m_ObjectHideFlags: 0

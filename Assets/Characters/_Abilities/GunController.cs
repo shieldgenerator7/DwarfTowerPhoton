@@ -26,7 +26,7 @@ public class GunController : PlayerAbility
         //base.OnButtonHeld();
         if (Time.time > lastFireTime + fireDelay)
         {
-            if (manaCost <= 0 || playerController.requestAmina(manaCost) > 0)
+            if (manaCost <= 0 || aminaPool.requestAmina(manaCost) > 0)
             {
                 lastFireTime = lastFireTime + fireDelay;
                 Vector2 dir = ((Vector2)(Utility.MouseWorldPos - transform.position)).normalized;

@@ -8,26 +8,36 @@ public class AminaMeterController : MonoBehaviour
     //public float maxAnimaPerRing = 100;
 
     [SerializeField]
-    private PlayerController focusPC;
-    public PlayerController FocusPlayerController
+    private AminaPool focusAminaPool;
+    public AminaPool FocusAminaPool
     {
-        get { return focusPC; }
-        set { focusPC = value; }
+        get { return focusAminaPool; }
+        set { focusAminaPool = value; }
     }
 
     public Image aminaMeter;
     public Image aminaReserveMeter;
-    
-    private void Update()
+
+    private void Start()
     {
-        if (focusPC)
+        if (focusAminaPool)
         {
-            updateMeter(focusPC.Amina, focusPC.maxAmina, focusPC.ReservedAmina);
+            focusAminaPool.onAminaChanged += onAminaChanged;
+            onAminaChanged(focusAminaPool.Amina);
         }
         else
         {
             updateMeter(0, 1, 0);
         }
+    }
+
+    void onAminaChanged(float amina)
+    {
+        updateMeter(amina, focusAminaPool.maxAmina, focusAminaPool.ReservedAmina);
+    }
+
+    private void Update()
+    {
         transform.position = Input.mousePosition;
     }
 

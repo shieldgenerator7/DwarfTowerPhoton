@@ -34,7 +34,7 @@ public class CarriedGunController : PlayerAbility
         {
             if (rb2d.isMoving())
             {
-                if (playerController.requestAminaPerSecond(manaCost) > 0)
+                if (aminaPool.requestAminaPerSecond(manaCost) > 0)
                 {
                     carryNewShot();
                 }
@@ -48,7 +48,7 @@ public class CarriedGunController : PlayerAbility
 
         if (carriedShot)
         {
-            if (playerController.requestAminaPerSecond(manaCost) > 0)
+            if (aminaPool.requestAminaPerSecond(manaCost) > 0)
             {
             }
             else
@@ -64,7 +64,7 @@ public class CarriedGunController : PlayerAbility
         {
             if (rb2d.isMoving())
             {
-                if (playerController.requestAminaPerSecond(manaCost) > 0)
+                if (aminaPool.requestAminaPerSecond(manaCost) > 0)
                 {
                     carryNewShot();
                 }

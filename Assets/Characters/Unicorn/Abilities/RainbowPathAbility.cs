@@ -33,7 +33,7 @@ public class RainbowPathAbility : PlayerAbility
             if (rb2d.isMoving())
             {
                 rainbowPath.endPos = PavePosition;
-                playerController.Amina += aminaRegenRate * Time.deltaTime;
+                aminaPool.rechargeAmina(aminaRegenRate * Time.deltaTime);
             }
             else
             {

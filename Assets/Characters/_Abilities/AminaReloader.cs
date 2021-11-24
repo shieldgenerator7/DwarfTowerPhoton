@@ -6,7 +6,7 @@ public class AminaReloader : PlayerAbility
 {
     [Tooltip("Seconds it takes to reload")]
     public float reloadDuration = 2;//time it takes to reload in seconds
-    
+
     private float reloadStartTime = 0;
 
     public bool Reloading
@@ -20,6 +20,12 @@ public class AminaReloader : PlayerAbility
         playerController.processAbility(this);
     }
 
+    protected override void Start()
+    {
+        base.Start();
+        aminaPool.onAminaFull += onAminaFull;
+    }
+
     public override void OnButtonDown()
     {
         base.OnButtonDown();
@@ -28,13 +34,12 @@ public class AminaReloader : PlayerAbility
 
     public override void OnContinuedProcessing()
     {
-        playerController.rechargeAmina(Time.deltaTime * playerController.maxAmina / reloadDuration);
-        if (Time.time > reloadStartTime + reloadDuration
-            || playerController.Amina == playerController.maxAmina)
-        {
-            reloadStartTime = 0;
-            playerController.Amina = playerController.maxAmina;
-            playerController.processAbility(this, false);
-        }
+        aminaPool.rechargeAmina(Time.deltaTime * aminaPool.maxAmina / reloadDuration);
+    }
+
+    void onAminaFull(float amina)
+    {
+        reloadStartTime = 0;
+        playerController.processAbility(this, false);
     }
 }

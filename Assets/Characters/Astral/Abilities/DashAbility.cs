@@ -24,7 +24,7 @@ public class DashAbility : PlayerAbility
     {
         base.OnButtonDown();
         
-        if(playerController.requestAmina(manaCost) > 0){
+        if(aminaPool.requestAmina(manaCost) > 0){
             activate();
         }
     }

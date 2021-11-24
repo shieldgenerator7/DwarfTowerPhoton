@@ -19,7 +19,7 @@ public class UnicornController : PlayerController
         else
         {
             //Amina decay
-            Amina -= aminaDecayRate * Time.deltaTime;
+            aminaPool.drainAmina(aminaDecayRate * Time.deltaTime);
         }
     }
 }

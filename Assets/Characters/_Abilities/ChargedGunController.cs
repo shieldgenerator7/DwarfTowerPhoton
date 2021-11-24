@@ -54,7 +54,7 @@ public class ChargedGunController : PlayerAbility
     public override void OnButtonHeld()
     {
         base.OnButtonHeld();
-        playerController.reserveAmina(aminaReservedPerSecond * Time.deltaTime);
+        aminaPool.reserveAmina(aminaReservedPerSecond * Time.deltaTime);
         //Check to see if the preview collides with anything
         if (preview)
         {
@@ -73,7 +73,7 @@ public class ChargedGunController : PlayerAbility
         }
         if (buildAction == PreviewDisplayer.PreviewState.BUILD)
         {
-            if (playerController.ReservedAmina >= minAminaReserved)
+            if (aminaPool.ReservedAmina >= minAminaReserved)
             {
                 Vector2 dir = ((Vector2)(Utility.MouseWorldPos - transform.position)).normalized;
                 ChargedShotController chargedShot = objectSpawner.spawnObject<ChargedShotController>(
@@ -81,7 +81,7 @@ public class ChargedGunController : PlayerAbility
                     transform.position,
                     dir
                     );
-                float aminaObtained = playerController.collectReservedAmina();
+                float aminaObtained = aminaPool.collectReservedAmina();
                 float aminaMultiplier = aminaObtained / expectedAnimaReserved;
                 chargedShot.chargeStats(aminaMultiplier);
                 onShotFired?.Invoke(
@@ -92,23 +92,23 @@ public class ChargedGunController : PlayerAbility
             }
             else
             {
-                playerController.cancelReservedAmina();
+                aminaPool.cancelReservedAmina();
             }
         }
         else if (buildAction == PreviewDisplayer.PreviewState.UPGRADE)
         {
-            float aminaObtained = playerController.collectReservedAmina();
+            float aminaObtained = aminaPool.collectReservedAmina();
             float aminaMultiplier = aminaObtained / expectedAnimaReserved;
             targetObject.GetComponent<ChargedShotController>().upgradeStats(aminaMultiplier);
         }
         else if (buildAction == PreviewDisplayer.PreviewState.DESTROY)
         {
             PhotonNetwork.Destroy(targetObject);
-            playerController.cancelReservedAmina();
+            aminaPool.cancelReservedAmina();
         }
         else if (buildAction == PreviewDisplayer.PreviewState.NONE)
         {
-            playerController.cancelReservedAmina();
+            aminaPool.cancelReservedAmina();
         }
         if (preview)
         {
@@ -218,7 +218,7 @@ public class ChargedGunController : PlayerAbility
         {
             targetObject = null;
         }
-        if (playerController.ReservedAmina < minAminaReserved)
+        if (aminaPool.ReservedAmina < minAminaReserved)
         {
             return PreviewDisplayer.PreviewState.NONE;
         }
