@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 307085991090335124}
   - component: {fileID: 8891596049456344743}
   - component: {fileID: 3769535869663102263}
+  - component: {fileID: 4380998440617942234}
   - component: {fileID: 1916908965083646283}
   - component: {fileID: 5130418414652994702}
   - component: {fileID: 4410195784120660945}
@@ -108,7 +109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013f7295e52709646ab9a665825342c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
 --- !u!114 &8891596049456344743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,6 +140,57 @@ MonoBehaviour:
   abilities:
   - {fileID: 6400624810076416732}
   - {fileID: 2613285986018779774}
+--- !u!114 &4380998440617942234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532201618779257096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f96f42a2284699644a5ecf1072c16723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selfStats:
+    statBase:
+      moveSpeed: 5
+      maxHits: 1
+      fireRate: -1
+      damage: -1
+      size: -1
+    statCurrent:
+      moveSpeed: -1
+      maxHits: -1
+      fireRate: -1
+      damage: -1
+      size: -1
+  shotStats:
+    statBase:
+      moveSpeed: -1
+      maxHits: -1
+      fireRate: -1
+      damage: -1
+      size: -1
+    statCurrent:
+      moveSpeed: -1
+      maxHits: -1
+      fireRate: -1
+      damage: -1
+      size: -1
+  constructStats:
+    statBase:
+      moveSpeed: -1
+      maxHits: -1
+      fireRate: -1
+      damage: -1
+      size: -1
+    statCurrent:
+      moveSpeed: -1
+      maxHits: -1
+      fireRate: -1
+      damage: -1
+      size: -1
 --- !u!114 &1916908965083646283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,6 +366,7 @@ MonoBehaviour:
   manaCost: 1
   buttonName: Ability3
   hidesOtherInputs: 0
+  abilityID: 1
   rainbowPathIndex: 1
   aminaRegenRate: 10
 --- !u!1 &7577088886736187312
@@ -364,5 +416,6 @@ MonoBehaviour:
   manaCost: 5
   buttonName: Ability1
   hidesOtherInputs: 0
+  abilityID: 0
   maxTime: 5
   carriedShotIndex: 0

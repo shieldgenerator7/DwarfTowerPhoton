@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4517987756410504376}
   - component: {fileID: 3769535869663102263}
   - component: {fileID: 7329762624495837724}
+  - component: {fileID: 286021266380114589}
   - component: {fileID: 1916908965083646283}
   - component: {fileID: -4405406897248786733}
   - component: {fileID: 4410195784120660945}
@@ -112,7 +113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013f7295e52709646ab9a665825342c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 4
 --- !u!114 &4517987756410504376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,8 +159,60 @@ MonoBehaviour:
   manaCost: 0
   buttonName: Ability2
   hidesOtherInputs: 0
+  abilityID: 0
   abilityContext: {fileID: 5518924279983056713}
   switchOnAbilities: []
+--- !u!114 &286021266380114589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532201618779257096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f96f42a2284699644a5ecf1072c16723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selfStats:
+    statBase:
+      moveSpeed: 4
+      maxHits: 1
+      fireRate: -1
+      damage: -1
+      size: -1
+    statCurrent:
+      moveSpeed: -1
+      maxHits: -1
+      fireRate: -1
+      damage: -1
+      size: -1
+  shotStats:
+    statBase:
+      moveSpeed: -1
+      maxHits: -1
+      fireRate: -1
+      damage: -1
+      size: -1
+    statCurrent:
+      moveSpeed: -1
+      maxHits: -1
+      fireRate: -1
+      damage: -1
+      size: -1
+  constructStats:
+    statBase:
+      moveSpeed: -1
+      maxHits: -1
+      fireRate: -1
+      damage: -1
+      size: -1
+    statCurrent:
+      moveSpeed: -1
+      maxHits: -1
+      fireRate: -1
+      damage: -1
+      size: -1
 --- !u!114 &1916908965083646283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,6 +327,7 @@ MonoBehaviour:
   manaCost: 0
   buttonName: Reload
   hidesOtherInputs: 1
+  abilityID: 0
   reloadDuration: 2
 --- !u!114 &6783306785579899987
 MonoBehaviour:
@@ -379,6 +432,7 @@ MonoBehaviour:
   manaCost: 0
   buttonName: Reload
   hidesOtherInputs: 0
+  abilityID: 0
   abilityContext: {fileID: 3769535869663102263}
   switchOnAbilities:
   - {fileID: 9093233151845911435}
@@ -399,6 +453,7 @@ MonoBehaviour:
   manaCost: 0
   buttonName: Ability1
   hidesOtherInputs: 1
+  abilityID: 0
   aminaReservedPerSecond: 10
   expectedAnimaReserved: 10
   minAminaReserved: 10
@@ -419,6 +474,7 @@ MonoBehaviour:
   manaCost: 0
   buttonName: Ability2
   hidesOtherInputs: 1
+  abilityID: 0
   aminaReservedPerSecond: 2
   expectedAnimaReserved: 2
   minAminaReserved: 0.1
@@ -439,6 +495,7 @@ MonoBehaviour:
   manaCost: 0
   buttonName: Ability3
   hidesOtherInputs: 1
+  abilityID: 0
   aminaReservedPerSecond: 5
   expectedAnimaReserved: 5
   minAminaReserved: 5
@@ -491,6 +548,7 @@ MonoBehaviour:
   manaCost: 5
   buttonName: Ability3
   hidesOtherInputs: 1
+  abilityID: 0
   dashDistance: 5
   dashDuration: 0.1
 --- !u!1 &7577088886736187312
@@ -540,6 +598,7 @@ MonoBehaviour:
   manaCost: 1
   buttonName: Ability1
   hidesOtherInputs: 0
+  abilityID: 0
   fireDelay: 3
   shotIndex: 0
 --- !u!1 &7921837136880890589
