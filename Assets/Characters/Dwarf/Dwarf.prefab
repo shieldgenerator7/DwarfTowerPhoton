@@ -307,7 +307,7 @@ MonoBehaviour:
   manaCost: 0
   buttonName: Reload
   hidesOtherInputs: 1
-  abilityID: 0
+  abilityID: 1
   reloadDuration: 2
 --- !u!114 &1242758000075440754
 MonoBehaviour:
@@ -386,7 +386,7 @@ MonoBehaviour:
   manaCost: 0
   buttonName: Ability2
   hidesOtherInputs: 1
-  abilityID: 0
+  abilityID: 3
   aminaReservedPerSecond: 5
   expectedAnimaReserved: 10
   minAminaReserved: 5.1
@@ -441,7 +441,7 @@ MonoBehaviour:
   manaCost: 0
   buttonName: Ability3
   hidesOtherInputs: 1
-  abilityID: 0
+  abilityID: 4
   aminaReservedPerSecond: 10
   expectedAnimaReserved: 10
   minAminaReserved: 0.1
@@ -495,6 +495,6 @@ MonoBehaviour:
   manaCost: 5
   buttonName: Ability1
   hidesOtherInputs: 0
-  abilityID: 0
+  abilityID: 2
   fireDelay: 0.5
   shotIndex: 0

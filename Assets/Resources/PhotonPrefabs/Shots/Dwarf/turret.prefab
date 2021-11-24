@@ -269,5 +269,6 @@ MonoBehaviour:
   manaCost: 0
   buttonName: ability1
   hidesOtherInputs: 0
+  abilityID: 0
   fireDelay: 0.1
   shotIndex: 0
