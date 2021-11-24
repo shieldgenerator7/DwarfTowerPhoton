@@ -41,6 +41,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6220889621231917683}
+  - {fileID: 9209149776473939325}
   - {fileID: 2840908922013369465}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -139,6 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilities:
   - {fileID: 6400624810076416732}
+  - {fileID: 448938204000306885}
   - {fileID: 2613285986018779774}
 --- !u!114 &4380998440617942234
 MonoBehaviour:
@@ -305,6 +307,7 @@ MonoBehaviour:
   folderName: Shots/Unicorn
   objectSpawnInfoList:
   - {fileID: 11400000, guid: fa6cd0043f5b69347a4279e48dbf06e2, type: 2}
+  - {fileID: 11400000, guid: 1904a0c2e83eee14390f7d75a111cb6b, type: 2}
   - {fileID: 11400000, guid: 8822e348e2f4deb44b5dc8900560a165, type: 2}
 --- !u!114 &1567083782174426373
 MonoBehaviour:
@@ -349,7 +352,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1073061482865175048}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2613285986018779774
 MonoBehaviour:
@@ -363,12 +366,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb9da9c92c361704f9ddf46d83b0c6d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 1
+  manaCost: 0
   buttonName: Ability3
   hidesOtherInputs: 0
-  abilityID: 1
-  rainbowPathIndex: 1
+  abilityID: 2
+  rainbowPathIndex: 2
   aminaRegenRate: 10
+--- !u!1 &4027114820006220005
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9209149776473939325}
+  - component: {fileID: 448938204000306885}
+  m_Layer: 0
+  m_Name: Teleport Shot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9209149776473939325
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4027114820006220005}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1073061482865175048}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &448938204000306885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4027114820006220005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83413c13fefadf64bab9596e5332f75f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manaCost: 0
+  buttonName: Ability2
+  hidesOtherInputs: 0
+  abilityID: 1
+  fireDelay: 1
+  shotIndex: 1
 --- !u!1 &7577088886736187312
 GameObject:
   m_ObjectHideFlags: 0

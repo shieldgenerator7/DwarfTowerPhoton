@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6261132995686225492}
   - component: {fileID: 6261132995686225327}
   - component: {fileID: 6261132995686225316}
-  - component: {fileID: 6261132995686225515}
+  - component: {fileID: 736873732641346183}
   - component: {fileID: 2497037802111640309}
   - component: {fileID: 6261132995686225510}
   - component: {fileID: 3273718494003639045}
@@ -129,7 +129,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &6261132995686225515
+--- !u!114 &736873732641346183
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,14 +138,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6261132995686225064}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95401923689b5e04ba705f1bf93961a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 3959f9f34b2d2f54c99449f0749dd8c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   statBase:
     moveSpeed: 3
     maxHits: 1
     fireRate: -1
-    damage: 10
+    damage: 0
     size: 1
   _stats:
     moveSpeed: 0
@@ -154,8 +154,8 @@ MonoBehaviour:
     damage: 0
     size: 0
   damagesShots: 0
-  damagesObjects: 1
-  damagesPlayers: 1
+  damagesObjects: 0
+  damagesPlayers: 0
 --- !u!114 &2497037802111640309
 MonoBehaviour:
   m_ObjectHideFlags: 0

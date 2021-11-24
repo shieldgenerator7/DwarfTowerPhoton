@@ -114,7 +114,7 @@ public class ShotController : MonoBehaviour
         processCollision(collision, false);
     }
 
-    protected void processCollision(Collider2D collision, bool useInitialDamage)
+    protected virtual void processCollision(Collider2D collision, bool useInitialDamage)
     {
         if (TeamToken.onSameTeam(gameObject, collision.gameObject))
         {
