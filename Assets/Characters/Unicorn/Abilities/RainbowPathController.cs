@@ -5,10 +5,15 @@ using UnityEngine;
 
 public class RainbowPathController : MonoBehaviour
 {
-    public float speedMultiplier = 1.5f;
-    public float slowMultiplier = 0.75f;
+    public StatLayer teamMultiplier;
+    public StatLayer enemyMultiplier;
     public float duration = 10;
     public float fadeSpeed = 1;
+
+    /// <summary>
+    /// The ability id to use when granting speed boosts
+    /// </summary>
+    public int abilityID { get; set; }
 
     private Vector2 _startPos;
     public Vector2 startPos
@@ -79,33 +84,36 @@ public class RainbowPathController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerMovement pm = collision.gameObject.GetComponent<PlayerMovement>();
-        if (pm)
-        {
-            bool onSameTeam = TeamToken.onSameTeam(gameObject, collision.gameObject);
-            if (onSameTeam)
-            {
-                pm.movementSpeed *= speedMultiplier;
-            }
-            else
-            {
-                pm.movementSpeed *= slowMultiplier;
-            }
-        }
+        checkAddLayer(collision.gameObject);
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        checkAddLayer(collision.gameObject);
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        PlayerMovement pm = collision.gameObject.GetComponent<PlayerMovement>();
-        if (pm)
+        checkAddLayer(collision.gameObject, false);
+    }
+    private void checkAddLayer(GameObject go, bool add = true)
+    {
+        StatKeeper sk = go.GetComponent<StatKeeper>();
+        if (sk)
         {
-            bool onSameTeam = TeamToken.onSameTeam(gameObject, collision.gameObject);
-            if (onSameTeam)
+            if (add)
             {
-                pm.movementSpeed /= speedMultiplier;
+                bool onSameTeam = TeamToken.onSameTeam(gameObject, go);
+                if (onSameTeam)
+                {
+                    sk.selfStats.addLayer(abilityID, teamMultiplier);
+                }
+                else
+                {
+                    sk.selfStats.addLayer(abilityID, enemyMultiplier);
+                }
             }
             else
             {
-                pm.movementSpeed /= slowMultiplier;
+                sk.selfStats.removeLayer(abilityID);
             }
         }
     }

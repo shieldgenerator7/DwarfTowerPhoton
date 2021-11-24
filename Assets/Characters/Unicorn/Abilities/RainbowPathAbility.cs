@@ -67,6 +67,7 @@ public class RainbowPathAbility : PlayerAbility
             transform.position,
             velocity.normalized
             );
+        rainbowPath.abilityID = this.abilityID;
         rainbowPath.Start();
         rainbowPath.startPos = PavePosition;
         rainbowPath.endPos = PavePosition;

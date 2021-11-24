@@ -127,8 +127,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f36790a4d656744ea859862085f24a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 1.5
-  slowMultiplier: 0.75
+  teamMultiplier:
+    moveSpeed: 1.5
+    maxHits: -1
+    fireRate: -1
+    damage: -1
+    size: -1
+  enemyMultiplier:
+    moveSpeed: 0.75
+    maxHits: -1
+    fireRate: -1
+    damage: -1
+    size: -1
   duration: 10
   fadeSpeed: 2
 --- !u!114 &-845759806725884248
