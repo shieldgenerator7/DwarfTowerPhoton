@@ -22,4 +22,17 @@ public class UnicornController : PlayerController
             aminaPool.drainAmina(aminaDecayRate * Time.deltaTime);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (rainbowPathAbility.active)
+        {
+            Vector2 forceDir = playerMovement.ForceMoveDirection;
+            Vector2 normal = collision.contacts[0].normal;
+            forceDir = Vector2.Reflect(forceDir, normal);
+            playerMovement.forceMovement(forceDir);
+            rainbowPathAbility.deactivate();
+            rainbowPathAbility.activate();
+        }
+    }
 }

@@ -56,7 +56,7 @@ public class RainbowPathAbility : PlayerAbility
         deactivate();
     }
 
-    private void activate()
+    public void activate()
     {
         active = true;
         Vector2 velocity = playerMovement.LastMoveDirection;
@@ -73,7 +73,7 @@ public class RainbowPathAbility : PlayerAbility
         rainbowPath.startPos = PavePosition;
     }
 
-    private void deactivate()
+    public void deactivate()
     {
         active = false;
         playerMovement.forceMovement(false);

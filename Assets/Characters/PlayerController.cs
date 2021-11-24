@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     }
 
     protected AminaPool aminaPool;
+    protected PlayerMovement playerMovement;
 
     // Start is called before the first frame update
     void Start()
@@ -71,6 +72,8 @@ public class PlayerController : MonoBehaviour
                     }
                 };
             }
+            //PlayerMovement
+            playerMovement = gameObject.FindComponent<PlayerMovement>();
         }
         foreach (string input in new string[] { "Ability1", "Ability2", "Ability3", "Reload" })
         {

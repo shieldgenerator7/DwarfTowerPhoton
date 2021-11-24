@@ -98,5 +98,6 @@ public class PlayerMovement : MonoBehaviour
     {
         ForceMoveDirection = direction.normalized;
         forceMovementInput = force;
+        LastMoveDirection = direction;
     }
 }
