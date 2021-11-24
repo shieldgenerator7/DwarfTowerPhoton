@@ -2175,7 +2175,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5a504ef69c004b4685fc51afd83cc51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  focusPC: {fileID: 0}
+  aminaDrainAminDelay: 0.5
+  aminaDrainAnimRate: 20
+  focusAminaPool: {fileID: 0}
   aminaMeter: {fileID: 1888970594}
   aminaReserveMeter: {fileID: 1001025896}
 --- !u!1 &1001025893

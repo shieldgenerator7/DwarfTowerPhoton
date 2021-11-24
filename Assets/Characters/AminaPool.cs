@@ -94,8 +94,9 @@ public class AminaPool : MonoBehaviour
 
     public void cancelReservedAmina()
     {
-        rechargeAmina(ReservedAmina);
+        float reservedAmina = ReservedAmina;
         ReservedAmina = 0;
+        rechargeAmina(reservedAmina);
     }
 
     public void rechargeAmina(float amount)
