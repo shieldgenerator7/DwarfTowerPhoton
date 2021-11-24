@@ -159,7 +159,7 @@ MonoBehaviour:
   manaCost: 0
   buttonName: Ability2
   hidesOtherInputs: 0
-  abilityID: 0
+  abilityID: 2
   abilityContext: {fileID: 5518924279983056713}
   switchOnAbilities: []
 --- !u!114 &286021266380114589
@@ -327,7 +327,7 @@ MonoBehaviour:
   manaCost: 0
   buttonName: Reload
   hidesOtherInputs: 1
-  abilityID: 0
+  abilityID: 3
   reloadDuration: 2
 --- !u!114 &6783306785579899987
 MonoBehaviour:
@@ -432,7 +432,7 @@ MonoBehaviour:
   manaCost: 0
   buttonName: Reload
   hidesOtherInputs: 0
-  abilityID: 0
+  abilityID: 5
   abilityContext: {fileID: 3769535869663102263}
   switchOnAbilities:
   - {fileID: 9093233151845911435}
@@ -453,7 +453,7 @@ MonoBehaviour:
   manaCost: 0
   buttonName: Ability1
   hidesOtherInputs: 1
-  abilityID: 0
+  abilityID: 6
   aminaReservedPerSecond: 10
   expectedAnimaReserved: 10
   minAminaReserved: 10
@@ -474,7 +474,7 @@ MonoBehaviour:
   manaCost: 0
   buttonName: Ability2
   hidesOtherInputs: 1
-  abilityID: 0
+  abilityID: 7
   aminaReservedPerSecond: 2
   expectedAnimaReserved: 2
   minAminaReserved: 0.1
@@ -495,7 +495,7 @@ MonoBehaviour:
   manaCost: 0
   buttonName: Ability3
   hidesOtherInputs: 1
-  abilityID: 0
+  abilityID: 8
   aminaReservedPerSecond: 5
   expectedAnimaReserved: 5
   minAminaReserved: 5
@@ -548,7 +548,7 @@ MonoBehaviour:
   manaCost: 5
   buttonName: Ability3
   hidesOtherInputs: 1
-  abilityID: 0
+  abilityID: 9
   dashDistance: 5
   dashDuration: 0.1
 --- !u!1 &7577088886736187312
@@ -598,7 +598,7 @@ MonoBehaviour:
   manaCost: 1
   buttonName: Ability1
   hidesOtherInputs: 0
-  abilityID: 0
+  abilityID: 4
   fireDelay: 3
   shotIndex: 0
 --- !u!1 &7921837136880890589
