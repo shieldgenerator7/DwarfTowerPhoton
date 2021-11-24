@@ -8,6 +8,8 @@ public class RainbowPathAbility : PlayerAbility
 {
     [Tooltip("The index of the rainbow path in the object spawner")]
     public int rainbowPathIndex;
+    [Tooltip("How much amina to regen each second while active")]
+    public float aminaRegenRate = 10;
 
     private Vector2 PavePosition => (Vector2)transform.position + (Vector2.up * 0.5f);
 
@@ -20,10 +22,7 @@ public class RainbowPathAbility : PlayerAbility
 
         if (rb2d.isMoving())
         {
-            if (playerController.requestAminaPerSecond(manaCost) > 0)
-            {
-                activate();
-            }
+            activate();
         }
     }
     public override void OnButtonHeld()
@@ -31,11 +30,10 @@ public class RainbowPathAbility : PlayerAbility
         base.OnButtonHeld();
         if (active)
         {
-            if (rb2d.isMoving()
-                && playerController.requestAminaPerSecond(manaCost) > 0
-                )
+            if (rb2d.isMoving())
             {
                 rainbowPath.endPos = PavePosition;
+                playerController.Amina += aminaRegenRate * Time.deltaTime;
             }
             else
             {
@@ -46,10 +44,7 @@ public class RainbowPathAbility : PlayerAbility
         {
             if (rb2d.isMoving())
             {
-                if (playerController.requestAminaPerSecond(manaCost) > 0)
-                {
-                    activate();
-                }
+                activate();
             }
         }
     }

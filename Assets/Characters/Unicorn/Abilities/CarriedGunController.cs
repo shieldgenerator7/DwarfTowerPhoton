@@ -11,11 +11,6 @@ public class CarriedGunController : PlayerAbility
     [Tooltip("The index of carried shot in the object spawner")]
     public int carriedShotIndex;
 
-    /// <summary>
-    /// How much amina has been consumed since the carried shot was started
-    /// </summary>
-    public float aminaConsumed { get; private set; }
-
     public float CarryTime
     {
         get
@@ -39,7 +34,10 @@ public class CarriedGunController : PlayerAbility
         {
             if (rb2d.isMoving())
             {
-                carryNewShot();
+                if (playerController.requestAminaPerSecond(manaCost) > 0)
+                {
+                    carryNewShot();
+                }
             }
         }
     }
@@ -50,7 +48,13 @@ public class CarriedGunController : PlayerAbility
 
         if (carriedShot)
         {
-            aminaConsumed += playerController.requestAminaPerSecond(manaCost);
+            if (playerController.requestAminaPerSecond(manaCost) > 0)
+            {
+            }
+            else
+            {
+                releaseShot();
+            }
             if (!rb2d.isMoving())
             {
                 releaseShot();
@@ -60,7 +64,10 @@ public class CarriedGunController : PlayerAbility
         {
             if (rb2d.isMoving())
             {
-                carryNewShot();
+                if (playerController.requestAminaPerSecond(manaCost) > 0)
+                {
+                    carryNewShot();
+                }
             }
         }
     }
@@ -75,8 +82,6 @@ public class CarriedGunController : PlayerAbility
     private void carryNewShot()
     {
         carryStartTime = Time.time;
-        aminaConsumed = 0;
-        aminaConsumed += playerController.requestAminaPerSecond(manaCost);
         Vector2 dir = ((Vector2)(Utility.MouseWorldPos - transform.position)).normalized;
         carriedShot = objectSpawner.spawnObject<CarriedShotController>(
             carriedShotIndex,

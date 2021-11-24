@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 4410195784120660945}
   - component: {fileID: 9144531418077418824}
   - component: {fileID: 3158633092025413174}
-  - component: {fileID: 3369071877670158181}
   - component: {fileID: 6160328844216468952}
   - component: {fileID: 1567083782174426373}
   m_Layer: 0
@@ -124,7 +123,7 @@ MonoBehaviour:
   maxAmina: 100
   amina: 0
   reservedAmina: 0
-  aminaReloader: {fileID: 3369071877670158181}
+  aminaReloader: {fileID: 0}
   abilityContext: {fileID: 3769535869663102263}
 --- !u!114 &3769535869663102263
 MonoBehaviour:
@@ -139,7 +138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilities:
-  - {fileID: 3369071877670158181}
   - {fileID: 6400624810076416732}
   - {fileID: 2613285986018779774}
 --- !u!114 &1916908965083646283
@@ -226,22 +224,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.37, y: 0.75}
   m_EdgeRadius: 0
---- !u!114 &3369071877670158181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532201618779257096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00b3994f5d6328d4ea5a2534d14ad54b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manaCost: 0
-  buttonName: Reload
-  hidesOtherInputs: 1
-  reloadDuration: 2
 --- !u!114 &6160328844216468952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,6 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ee9253eaee8cde4081db31a9f23311f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updateEveryFrame: 1
 --- !u!1 &3887385788853543116
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,6 +301,7 @@ MonoBehaviour:
   buttonName: Ability3
   hidesOtherInputs: 0
   rainbowPathIndex: 1
+  aminaRegenRate: 10
 --- !u!1 &7577088886736187312
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f76bcf7659545f640bb9bd5d977a5398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 1
+  manaCost: 5
   buttonName: Ability1
   hidesOtherInputs: 0
   maxTime: 5
