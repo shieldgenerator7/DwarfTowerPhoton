@@ -13,7 +13,7 @@ public class RainbowPathAbility : PlayerAbility
 
     private Vector2 PavePosition => (Vector2)transform.position + (Vector2.up * 0.5f);
 
-    private bool active = false;
+    public bool active { get; private set; } = false;
     private RainbowPathController rainbowPath;
 
     public override void OnButtonDown()
