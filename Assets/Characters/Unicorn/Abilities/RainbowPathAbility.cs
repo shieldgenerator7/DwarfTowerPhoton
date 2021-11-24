@@ -15,6 +15,7 @@ public class RainbowPathAbility : PlayerAbility
 
     public bool active { get; private set; } = false;
     private RainbowPathController rainbowPath;
+    private RainbowPathController prevRainbowPath;
 
     public override void OnButtonDown()
     {
@@ -76,6 +77,19 @@ public class RainbowPathAbility : PlayerAbility
     {
         active = false;
         playerMovement.forceMovement(false);
+        rainbowPath.finish(prevRainbowPath);
+        prevRainbowPath = rainbowPath;
         rainbowPath = null;
+        prevRainbowPath.onDestroy += (rpc) =>
+        {
+            if (rpc == prevRainbowPath)
+            {
+                prevRainbowPath = null;
+            }
+            if (rpc == rainbowPath)
+            {
+                throw new UnityException("I didn't expect this to happen.");
+            }
+        };
     }
 }

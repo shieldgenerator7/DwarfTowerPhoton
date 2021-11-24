@@ -33,12 +33,12 @@ public class RainbowPathController : MonoBehaviour
         }
     }
 
-    private float startTime;
+    private float startTime = -1;
+    private bool prevDestroyed = false;
     private PhotonView PV;
 
     public void Start()
     {
-        startTime = Time.time;
         PV = GetComponent<PhotonView>();
     }
 
@@ -56,7 +56,9 @@ public class RainbowPathController : MonoBehaviour
     {
         if (PV.IsMine)
         {
-            if (Time.time - startTime >= duration)
+            if (prevDestroyed && startTime != -1
+                && Time.time >= startTime + duration
+                )
             {
                 Vector2 dir = (endPos - startPos);
                 float step = fadeSpeed * Time.deltaTime;
@@ -66,11 +68,14 @@ public class RainbowPathController : MonoBehaviour
                 }
                 else
                 {
+                    onDestroy?.Invoke(this);
                     PhotonNetwork.Destroy(this.gameObject);
                 }
             }
         }
     }
+    public delegate void OnDestroy(RainbowPathController rpc);
+    public event OnDestroy onDestroy;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -102,6 +107,21 @@ public class RainbowPathController : MonoBehaviour
             {
                 pm.movementSpeed /= slowMultiplier;
             }
+        }
+    }
+
+    public void finish(RainbowPathController previous)
+    {
+        //Start the timer for fading
+        startTime = Time.time;
+        //Register previous delegate
+        if (previous)
+        {
+            previous.onDestroy += (rpc) => { prevDestroyed = true; };
+        }
+        else
+        {
+            prevDestroyed = true;
         }
     }
 
