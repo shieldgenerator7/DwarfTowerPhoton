@@ -14,14 +14,23 @@ public class PlayerInfo : MonoBehaviour
         get => mySelectedCharacter;
         set
         {
-            mySelectedCharacter = Mathf.Clamp(value, 0, allCharacters.Length - 1);
+            mySelectedCharacter = Mathf.Clamp(value, 0, allCharacters.Count - 1);
             onSelectedIndexChanged?.Invoke(mySelectedCharacter);
         }
     }
     public delegate void OnSelectedIndexChanged(int index);
     public event OnSelectedIndexChanged onSelectedIndexChanged;
 
-    public CharacterInfo[] allCharacters;
+    public CharacterInfo SelectedCharacter
+    {
+        get => allCharacters[mySelectedCharacter];
+        set
+        {
+            SelectedIndex = allCharacters.IndexOf(value);
+        }
+    }
+
+    public List<CharacterInfo> allCharacters;
 
     private void Awake()
     {
