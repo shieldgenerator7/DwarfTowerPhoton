@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: shot_teleport_spawn_info
   m_EditorClassIdentifier: 
   objectName: shot_teleport
-  spawnBuffer: 0.75
-  rotateShot: 0
+  spawnBuffer: 1.5
+  rotateShot: 1
   inheritTeamToken: 1
