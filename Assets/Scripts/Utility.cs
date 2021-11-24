@@ -14,9 +14,16 @@ public static class Utility
     public static void teleportObject(GameObject go, Vector2 newPosition)
     {
         Rigidbody2D rb2d = go.FindComponent<Rigidbody2D>();
-        rb2d.isKinematic = true;
-        rb2d.transform.position = newPosition;
-        rb2d.isKinematic = false;
+        if (rb2d)
+        {
+            rb2d.isKinematic = true;
+            rb2d.transform.position = newPosition;
+            rb2d.isKinematic = false;
+        }
+        else
+        {
+            go.transform.position = newPosition;
+        }
     }
 
     public static T FindComponent<T>(this GameObject go, bool searchParent = true, bool searchChildren = true) where T : Component
