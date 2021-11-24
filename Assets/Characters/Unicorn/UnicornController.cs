@@ -9,6 +9,8 @@ public class UnicornController : PlayerController
 
     public RainbowPathAbility rainbowPathAbility;
 
+    private GameObject lastBounceObject;
+
     // Update is called once per frame
     protected override void Update()
     {
@@ -21,18 +23,23 @@ public class UnicornController : PlayerController
             //Amina decay
             aminaPool.drainAmina(aminaDecayRate * Time.deltaTime);
         }
+        lastBounceObject = null;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (rainbowPathAbility.active)
         {
-            Vector2 forceDir = playerMovement.ForceMoveDirection;
-            Vector2 normal = collision.contacts[0].normal;
-            forceDir = Vector2.Reflect(forceDir, normal);
-            playerMovement.forceMovement(forceDir);
-            rainbowPathAbility.deactivate();
-            rainbowPathAbility.activate();
+            if (collision.gameObject != lastBounceObject)
+            {
+                lastBounceObject = collision.gameObject;
+                Vector2 forceDir = playerMovement.ForceMoveDirection;
+                Vector2 normal = collision.contacts[0].normal;
+                Vector2 newforceDir = Vector2.Reflect(forceDir, normal);
+                rainbowPathAbility.deactivate();
+                rainbowPathAbility.activate();
+                playerMovement.forceMovement(newforceDir);
+            }
         }
     }
 }

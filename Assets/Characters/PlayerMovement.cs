@@ -95,13 +95,19 @@ public class PlayerMovement : MonoBehaviour
 
     public void forceMovement(bool force)
     {
-        forceMovement(LastMoveDirection, force);
+        forceMovement(
+            (force) ? LastMoveDirection : Vector2.zero,
+            force
+            );
     }
 
     public void forceMovement(Vector2 direction, bool force = true)
     {
         ForceMoveDirection = direction.normalized;
         forceMovementInput = force;
-        LastMoveDirection = direction;
+        if (direction.magnitude > 0)
+        {
+            LastMoveDirection = direction;
+        }
     }
 }
