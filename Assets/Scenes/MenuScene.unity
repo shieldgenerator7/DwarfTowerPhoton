@@ -1221,10 +1221,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInfo: {fileID: 1002606577}
   characterImage: {fileID: 21162455}
-  characterImageList:
-  - {fileID: 1202223099}
-  - {fileID: 538109933}
-  - {fileID: 746199068}
 --- !u!1 &746199065
 GameObject:
   m_ObjectHideFlags: 0
@@ -1495,9 +1491,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mySelectedCharacter: 0
   allCharacters:
-  - {fileID: 532201618779257096, guid: 601bc1c138cf37d4e924aeee6aa70020, type: 3}
-  - {fileID: 532201618779257096, guid: 69f122fe10f37864bb52a35fc112ba76, type: 3}
-  - {fileID: 532201618779257096, guid: 95c79e13db999da4a83e76b9e2b273aa, type: 3}
+  - {fileID: 11400000, guid: 7fea9959ab8a51645a83774371fe55f9, type: 2}
+  - {fileID: 11400000, guid: ba874eaf7ebd1c442b578cafc6e0b469, type: 2}
+  - {fileID: 11400000, guid: 2a669681d75b3a448bd48183355d7958, type: 2}
 --- !u!1 &1202223096
 GameObject:
   m_ObjectHideFlags: 0

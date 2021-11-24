@@ -26,7 +26,7 @@ public class AvatarSetup : MonoBehaviour
     {
         characterValue = characterIndex;
         myCharacter = Instantiate(
-            PlayerInfo.instance.allCharacters[characterIndex],
+            PlayerInfo.instance.allCharacters[characterIndex].prefab,
             transform.position,
             transform.rotation,
             transform

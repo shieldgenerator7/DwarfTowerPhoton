@@ -21,7 +21,7 @@ public class PlayerInfo : MonoBehaviour
     public delegate void OnSelectedIndexChanged(int index);
     public event OnSelectedIndexChanged onSelectedIndexChanged;
 
-    public GameObject[] allCharacters;
+    public CharacterInfo[] allCharacters;
 
     private void Awake()
     {

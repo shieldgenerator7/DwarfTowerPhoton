@@ -7,7 +7,6 @@ public class MenuDisplay : MonoBehaviour
 {
     public PlayerInfo playerInfo;
     public Image characterImage;
-    public List<Image> characterImageList;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +18,8 @@ public class MenuDisplay : MonoBehaviour
 
     void updateCharacterImage(int index)
     {
-        characterImage.sprite = characterImageList[index].sprite;
-        characterImage.color = characterImageList[index].color;
+        CharacterInfo charInfo = playerInfo.allCharacters[index];
+        characterImage.sprite = charInfo.sprite;
+        characterImage.color = charInfo.defaultColor;
     }
 }
