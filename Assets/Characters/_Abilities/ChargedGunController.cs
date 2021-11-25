@@ -126,7 +126,7 @@ public class ChargedGunController : PlayerAbility
     /// <returns></returns>
     private PreviewDisplayer.PreviewState getPreviewState()
     {
-        Vector2 playerPos = transform.position;
+        Vector2 playerPos = (Vector2)transform.position + (Vector2.up * 0.5f);
         Vector2 targetPos = Utility.MouseWorldPos;
         Vector2 targetDir = (targetPos - playerPos).normalized;
         Vector2 pos = playerPos +

@@ -10,6 +10,7 @@ public class PreviewDisplayer : MonoBehaviour
     public Color destroyColor = Color.red;//shows that another object will be destroyed
     public Color upgradeColor = Color.green;//shows that another object will be upgraded
 
+    public bool faceMousePointer = false;
     public enum PreviewState
     {
         BUILD,
@@ -18,18 +19,32 @@ public class PreviewDisplayer : MonoBehaviour
         UPGRADE
     }
 
-    private List<SpriteRenderer> srs;
+    private List<SpriteRenderer> srs = new List<SpriteRenderer>();
     private List<Sprite> sprites;
 
     private void Start()
     {
-        //SpriteRenderers
-        srs = new List<SpriteRenderer>();
+        //SpriteRenderers        
         srs.Add(GetComponent<SpriteRenderer>());
         srs.AddRange(GetComponentsInChildren<SpriteRenderer>());
         srs.RemoveAll(sr => sr == null);
         //Sprites
         sprites = srs.ConvertAll(sr => sr.sprite);
+        //Face Mouse Pointer
+        if (!faceMousePointer)
+        {
+            enabled = false;
+        }
+    }
+
+    private void Update()
+    {
+        if (faceMousePointer)
+        {
+            //Face mouse pointer
+            Vector2 dir = ((Vector2)(Utility.MouseWorldPos - transform.position)).normalized;
+            transform.up = dir;
+        }
     }
 
     public void updatePreviewSprite(Sprite sprite = null)
@@ -49,10 +64,6 @@ public class PreviewDisplayer : MonoBehaviour
 
     public void updatePreviewColor(PreviewState state)
     {
-        if (srs == null || srs.Count == 0)
-        {
-            Start();
-        }
         Color color = Color.white;
         switch (state)
         {
