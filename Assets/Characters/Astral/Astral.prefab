@@ -597,6 +597,7 @@ MonoBehaviour:
   ability1Sprite: {fileID: 21300000, guid: 20804467fca618448a710723d8339b32, type: 3}
   ability2Sprite: {fileID: 21300000, guid: 4e24d60eff2f59e4f93408af74889f3b, type: 3}
   ability3Sprite: {fileID: 21300000, guid: 1b7373f4b056b2840a9b8375ea8b18e1, type: 3}
+  reloadText: EXIT MENU
 --- !u!1 &7577088886736187312
 GameObject:
   m_ObjectHideFlags: 0

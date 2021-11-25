@@ -7,6 +7,8 @@ public class AbilityContextMenuDisplay : MonoBehaviour
 {
     public List<Image> separators;
     public List<Image> abilityIcons;
+    public string reloadTextLabel = "R: ";
+    public Text reloadText;
 
     private AbilityContextDisplay acd;
 
@@ -36,12 +38,14 @@ public class AbilityContextMenuDisplay : MonoBehaviour
         {
             separators.ForEach(img => img.enabled = show);
             abilityIcons.ForEach(img => img.enabled = show);
+            reloadText.enabled = show;
             if (show)
             {
                 abilityIcons[0].sprite = acd.ability1Sprite;
                 abilityIcons[1].sprite = acd.ability2Sprite;
                 abilityIcons[2].sprite = acd.ability3Sprite;
                 abilityIcons.ForEach(img => img.color = acd.playerColor);
+                reloadText.text = reloadTextLabel + acd.reloadText;
             }
             else
             {

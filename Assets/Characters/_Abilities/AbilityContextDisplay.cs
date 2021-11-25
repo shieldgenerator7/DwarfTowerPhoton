@@ -9,6 +9,7 @@ public class AbilityContextDisplay : MonoBehaviour
     public Sprite ability1Sprite;
     public Sprite ability2Sprite;
     public Sprite ability3Sprite;
+    public string reloadText = "RELOAD";
 
     public Color playerColor { get; private set; } = Color.white;
 
