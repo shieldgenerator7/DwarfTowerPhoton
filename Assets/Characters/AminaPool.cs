@@ -89,6 +89,9 @@ public class AminaPool : MonoBehaviour
     {
         float reserves = ReservedAmina;
         ReservedAmina = 0;
+        //Call Amina delegates again
+        Amina = Amina;
+        //Return reserves
         return reserves;
     }
 
