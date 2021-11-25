@@ -14,6 +14,15 @@ EditorUserSettings:
     RecentlyUsedSceneGuid-2:
       value: 5453565e5d545b025a5c5a7415750844414f41727b2c22627c2d4b66e7b96361
       flags: 0
+    RecentlyUsedScenePath-0:
+      value: 22424703114646680e0b0227036c6b1f191b0b6439262f2434
+      flags: 0
+    RecentlyUsedScenePath-1:
+      value: 22424703114646680e0b0227036c72051a03113a20293f353f67083debf42d
+      flags: 0
+    RecentlyUsedScenePath-2:
+      value: 22424703114646680e0b0227036c721518022b292926237e38271427fb
+      flags: 0
     UnityRemoteCompression:
       value: 337f73
       flags: 0
@@ -25,13 +34,9 @@ EditorUserSettings:
   m_VCDebugCmd: 0
   m_VCDebugOut: 0
   m_SemanticMergeMode: 2
-  m_DesiredImportWorkerCount: 1
-  m_StandbyImportWorkerCount: 1
-  m_IdleImportWorkerShutdownDelay: 60000
   m_VCShowFailedCheckout: 1
   m_VCOverwriteFailedCheckoutAssets: 1
   m_VCProjectOverlayIcons: 1
   m_VCHierarchyOverlayIcons: 1
   m_VCOtherOverlayIcons: 1
   m_VCAllowAsyncUpdate: 1
-  m_ArtifactGarbageCollection: 1
