@@ -71,10 +71,11 @@ public class ChargedGunController : PlayerAbility
         {
             if (aminaPool.ReservedAmina >= minAminaReserved)
             {
-                Vector2 dir = ((Vector2)(Utility.MouseWorldPos - transform.position)).normalized;
+                Vector2 spawnPos = playerController.SpawnCenter;
+                Vector2 dir = ((Vector2)Utility.MouseWorldPos - spawnPos).normalized;
                 ChargedShotController chargedShot = objectSpawner.spawnObject<ChargedShotController>(
                     chargedShotIndex,
-                    transform.position,
+                    spawnPos,
                     dir
                     );
                 float aminaObtained = aminaPool.collectReservedAmina();
@@ -126,7 +127,7 @@ public class ChargedGunController : PlayerAbility
     /// <returns></returns>
     private PreviewDisplayer.PreviewState getPreviewState()
     {
-        Vector2 playerPos = (Vector2)transform.position + (Vector2.up * 0.5f);
+        Vector2 playerPos = playerController.SpawnCenter;
         Vector2 targetPos = Utility.MouseWorldPos;
         Vector2 targetDir = (targetPos - playerPos).normalized;
         Vector2 pos = playerPos +

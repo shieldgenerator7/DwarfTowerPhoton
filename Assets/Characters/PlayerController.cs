@@ -45,6 +45,8 @@ public class PlayerController : MonoBehaviour
         private set { photonView = value; }
     }
 
+    public Vector2 SpawnCenter => (Vector2)transform.position + (Vector2.up * 0.5f);
+
     protected AminaPool aminaPool;
     protected PlayerMovement playerMovement;
     protected StatKeeper statKeeper;

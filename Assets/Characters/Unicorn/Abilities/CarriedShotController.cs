@@ -33,8 +33,7 @@ public class CarriedShotController : ShotController
         }
     }
 
-    public Vector2 PivotPoint
-        => (Vector2)carrier.transform.position;// + (Vector2.up * 0.5f);
+    public Vector2 PivotPoint => carrier.playerController.SpawnCenter;
 
     private Vector3 origScale;
 

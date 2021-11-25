@@ -11,8 +11,6 @@ public class RainbowPathAbility : PlayerAbility
     [Tooltip("How much amina to regen each second while active")]
     public float aminaRegenRate = 10;
 
-    private Vector2 PavePosition => (Vector2)transform.position + (Vector2.up * 0.5f);
-
     public bool active { get; private set; } = false;
     private RainbowPathController rainbowPath;
     private RainbowPathController prevRainbowPath;
@@ -33,7 +31,7 @@ public class RainbowPathAbility : PlayerAbility
         {
             if (rb2d.isMoving())
             {
-                rainbowPath.endPos = PavePosition;
+                rainbowPath.endPos = playerController.SpawnCenter;
                 aminaPool.rechargeAmina(aminaRegenRate * Time.deltaTime);
             }
             else
@@ -61,17 +59,18 @@ public class RainbowPathAbility : PlayerAbility
         active = true;
         Vector2 velocity = playerMovement.LastMoveDirection;
         playerMovement.forceMovement(velocity);
+        Vector2 spawnPos = playerController.SpawnCenter;
         //Make new rainbow path
         rainbowPath = objectSpawner.spawnObject<RainbowPathController>(
             rainbowPathIndex,
-            transform.position,
+            spawnPos,
             velocity.normalized
             );
         rainbowPath.abilityID = this.abilityID;
         rainbowPath.Start();
-        rainbowPath.startPos = PavePosition;
-        rainbowPath.endPos = PavePosition;
-        rainbowPath.startPos = PavePosition;
+        rainbowPath.startPos = spawnPos;
+        rainbowPath.endPos = spawnPos;
+        rainbowPath.startPos = spawnPos;
     }
 
     public void deactivate()

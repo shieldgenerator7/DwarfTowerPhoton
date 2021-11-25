@@ -82,10 +82,11 @@ public class CarriedGunController : PlayerAbility
     private void carryNewShot()
     {
         carryStartTime = Time.time;
-        Vector2 dir = ((Vector2)(Utility.MouseWorldPos - transform.position)).normalized;
+        Vector2 spawnPos = playerController.SpawnCenter;
+        Vector2 dir = ((Vector2)Utility.MouseWorldPos - spawnPos).normalized;
         carriedShot = objectSpawner.spawnObject<CarriedShotController>(
             carriedShotIndex,
-            transform.position,
+            spawnPos,
             dir
             );
         carriedShot.switchOwner(this);

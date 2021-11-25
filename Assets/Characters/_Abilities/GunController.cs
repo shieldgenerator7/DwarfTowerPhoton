@@ -28,11 +28,12 @@ public class GunController : PlayerAbility
         {
             if (manaCost <= 0 || aminaPool.requestAmina(manaCost) > 0)
             {
+                Vector2 spawnPos = playerController.SpawnCenter;
                 lastFireTime = lastFireTime + fireDelay;
-                Vector2 dir = ((Vector2)(Utility.MouseWorldPos - transform.position)).normalized;
+                Vector2 dir = ((Vector2)Utility.MouseWorldPos - spawnPos).normalized;
                 ShotController shot = objectSpawner.spawnObject<ShotController>(
                     shotIndex,
-                    transform.position,
+                    spawnPos,
                     dir
                     );
                 onShotFired?.Invoke(
