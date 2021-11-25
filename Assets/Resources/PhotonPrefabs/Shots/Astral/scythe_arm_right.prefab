@@ -210,7 +210,7 @@ MonoBehaviour:
     moveSpeed: 2
     maxHits: 150
     fireRate: -1
-    damage: 10
+    damage: 1
     size: 1
   _stats:
     moveSpeed: 0
@@ -231,7 +231,7 @@ MonoBehaviour:
   wielder: {fileID: 0}
   dataBase: {fileID: 11400000, guid: 2e2bdc319235022488609b3b9b6f36a5, type: 2}
   dataFinal: {fileID: 11400000, guid: c569574c39d11944ca2330928e801467, type: 2}
-  swingSpeed: 3
+  swingSpeed: 6
   throwSpeed: 2
 --- !u!114 &-7427840416990816882
 MonoBehaviour:

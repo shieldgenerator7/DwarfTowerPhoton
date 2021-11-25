@@ -208,7 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statBase:
     moveSpeed: 7
-    maxHits: 25
+    maxHits: 1
     fireRate: -1
     damage: 10
     size: 1
@@ -225,13 +225,13 @@ MonoBehaviour:
     moveSpeed: -1
     maxHits: -1
     fireRate: -1
-    damage: -1
+    damage: 10
     size: 1
   previewSprite: {fileID: 0}
   wielder: {fileID: 0}
   dataBase: {fileID: 11400000, guid: a5b42e1790c761145ad60f549e4f668e, type: 2}
   dataFinal: {fileID: 11400000, guid: 1e0a23efac1ca904b9b42e8e2f78f7c0, type: 2}
-  swingSpeed: 2
+  swingSpeed: 3
   throwSpeed: 7
 --- !u!114 &-2353774961869244603
 MonoBehaviour:
