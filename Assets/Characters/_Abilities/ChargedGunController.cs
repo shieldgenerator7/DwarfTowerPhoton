@@ -20,8 +20,6 @@ public class ChargedGunController : PlayerAbility
     private GameObject preview;
     private Collider2D previewCollider;
     private PreviewDisplayer previewDisplayer;
-    private SpriteRenderer previewSpriteRenderer;
-    private Sprite previewSprite;
     private GameObject targetObject;//if not building something new, this is the object to act on
 
     protected override void Start()
@@ -33,8 +31,6 @@ public class ChargedGunController : PlayerAbility
             {
                 preview = Instantiate(previewPrefab);
                 preview.SetActive(false);
-                previewSpriteRenderer = preview.GetComponent<SpriteRenderer>();
-                previewSprite = previewSpriteRenderer.sprite;
                 previewCollider = preview.GetComponent<Collider2D>();
                 previewDisplayer = preview.GetComponent<PreviewDisplayer>();
             }
@@ -59,7 +55,7 @@ public class ChargedGunController : PlayerAbility
         if (preview)
         {
             PreviewDisplayer.PreviewState state = getPreviewState();
-            previewDisplayer.updatePreview(state);
+            previewDisplayer.updatePreviewColor(state);
         }
     }
 
@@ -141,48 +137,51 @@ public class ChargedGunController : PlayerAbility
     private PreviewDisplayer.PreviewState getPreviewState(Vector2 position)
     {
         preview.transform.position = position;
-        previewSpriteRenderer.sprite = previewSprite;
+        previewDisplayer.updatePreviewSprite();
         GameObject conflictingObject = null;
         bool coHasRB2D = false;
         bool coHasSC = false;
-        RaycastHit2D[] rch2ds = new RaycastHit2D[10];
-        int count = previewCollider.Cast(Vector2.zero, rch2ds, 0, false);
-        for (int i = 0; i < count; i++)
+        if (previewCollider)
         {
-            RaycastHit2D rch2d = rch2ds[i];
-            GameObject rchGO = rch2d.collider.gameObject;
-            Rigidbody2D rchRB2D = rchGO.GetComponent<Rigidbody2D>();
-            ShotController rchSC = rchGO.GetComponent<ShotController>();
-            Collider2D coll2d = rchGO.GetComponent<Collider2D>();
-            //If the conflicting object is a regular moving shot,
-            if (rchRB2D && rchSC)
+            RaycastHit2D[] rch2ds = new RaycastHit2D[10];
+            int count = previewCollider.Cast(Vector2.zero, rch2ds, 0, false);
+            for (int i = 0; i < count; i++)
             {
-                //You can build here anyway
-                continue;
-            }
-            //If the conflicting object is not solid,
-            else if (coll2d.isTrigger)
-            {
-                //You can build here anyway
-                continue;
-            }
-            //If the conflicting object is non-moving or is not a shot,
-            else
-            {
-                //Double-check to make sure the sprites overlap
-                SpriteRenderer coSR = rchGO.GetComponent<SpriteRenderer>();
-                bool overlap = coSR.bounds.Intersects(previewSpriteRenderer.bounds);
-                if (overlap)
+                RaycastHit2D rch2d = rch2ds[i];
+                GameObject rchGO = rch2d.collider.gameObject;
+                Rigidbody2D rchRB2D = rchGO.GetComponent<Rigidbody2D>();
+                ShotController rchSC = rchGO.GetComponent<ShotController>();
+                Collider2D coll2d = rchGO.GetComponent<Collider2D>();
+                //If the conflicting object is a regular moving shot,
+                if (rchRB2D && rchSC)
                 {
-                    //it's conflicting
-                    conflictingObject = rchGO;
-                    coHasRB2D = rchRB2D;
-                    coHasSC = rchSC;
-                    break;
+                    //You can build here anyway
+                    continue;
                 }
+                //If the conflicting object is not solid,
+                else if (coll2d.isTrigger)
+                {
+                    //You can build here anyway
+                    continue;
+                }
+                //If the conflicting object is non-moving or is not a shot,
                 else
                 {
-                    continue;
+                    //Double-check to make sure the sprites overlap
+                    SpriteRenderer coSR = rchGO.GetComponent<SpriteRenderer>();
+                    bool overlap = previewDisplayer.boundsIntersects(coSR.bounds);
+                    if (overlap)
+                    {
+                        //it's conflicting
+                        conflictingObject = rchGO;
+                        coHasRB2D = rchRB2D;
+                        coHasSC = rchSC;
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
         }
@@ -208,7 +207,7 @@ public class ChargedGunController : PlayerAbility
                     //delete the object already there
                     targetObject = conflictingObject;
                     preview.transform.position = conflictingObject.transform.position;
-                    previewSpriteRenderer.sprite = conflictingObject.GetComponent<ChargedShotController>().previewSprite;
+                    previewDisplayer.updatePreviewSprite(conflictingObject.GetComponent<ChargedShotController>().previewSprite);
                     return PreviewDisplayer.PreviewState.DESTROY;
                 }
             }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PreviewDisplayer : MonoBehaviour
@@ -17,25 +18,54 @@ public class PreviewDisplayer : MonoBehaviour
         UPGRADE
     }
 
-    private SpriteRenderer sr;
+    private List<SpriteRenderer> srs;
+    private List<Sprite> sprites;
 
     private void Start()
     {
-        sr = GetComponent<SpriteRenderer>();
+        //SpriteRenderers
+        srs = new List<SpriteRenderer>();
+        srs.Add(GetComponent<SpriteRenderer>());
+        srs.AddRange(GetComponentsInChildren<SpriteRenderer>());
+        srs.RemoveAll(sr => sr == null);
+        //Sprites
+        sprites = srs.ConvertAll(sr => sr.sprite);
     }
 
-    public void updatePreview(PreviewState state)
+    public void updatePreviewSprite(Sprite sprite = null)
     {
-        if (!sr)
+        if (sprite)
+        {
+            srs.ForEach(sr => sr.sprite = sprite);
+        }
+        else
+        {
+            for (int i = 0; i < srs.Count; i++)
+            {
+                srs[i].sprite = sprites[i];
+            }
+        }
+    }
+
+    public void updatePreviewColor(PreviewState state)
+    {
+        if (srs == null || srs.Count == 0)
         {
             Start();
         }
+        Color color = Color.white;
         switch (state)
         {
-            case PreviewState.BUILD: sr.color = buildColor; break;
-            case PreviewState.NONE: sr.color = invalidColor; break;
-            case PreviewState.DESTROY: sr.color = destroyColor; break;
-            case PreviewState.UPGRADE: sr.color = upgradeColor; break;
+            case PreviewState.BUILD: color = buildColor; break;
+            case PreviewState.NONE: color = invalidColor; break;
+            case PreviewState.DESTROY: color = destroyColor; break;
+            case PreviewState.UPGRADE: color = upgradeColor; break;
         }
+        srs.ForEach(sr => sr.color = color);
+    }
+
+    public bool boundsIntersects(Bounds bounds)
+    {
+        return srs.Any(sr => sr.bounds.Intersects(bounds));
     }
 }
