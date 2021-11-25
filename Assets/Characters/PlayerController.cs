@@ -11,8 +11,14 @@ public class PlayerController : MonoBehaviour
     public AbilityContext AbilityContext
     {
         get { return abilityContext; }
-        set { abilityContext = value; }
+        set
+        {
+            abilityContext = value;
+            onAbilityContextChanged?.Invoke(abilityContext);
+        }
     }
+    public delegate void OnAbilityContextChanged(AbilityContext context);
+    public event OnAbilityContextChanged onAbilityContextChanged;
 
     private List<PlayerAbility> processingAbilities = new List<PlayerAbility>();//used for abilities that have lasting effects
 
@@ -137,7 +143,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-    }    
+    }
 
     public void processAbility(PlayerAbility ability, bool process = true)
     {
