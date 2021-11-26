@@ -13,4 +13,6 @@ public class ObjectSpawnInfo : ScriptableObject
     public bool rotateShot = true;
     [Tooltip("Should this object be put on the same team as its spawner? If not, it will be neutral")]
     public bool inheritTeamToken = true;
+    [Tooltip("Add this vector to the given spawn location. Useful when the object's pivot is not its center")]
+    public Vector2 spawnOffset = Vector2.zero;
 }

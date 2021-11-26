@@ -52,6 +52,7 @@ public class ObjectSpawner : MonoBehaviour
             ObjectSpawnInfo osi = objectSpawnInfoList[index];
             string pathName = Path.Combine("PhotonPrefabs", folderName, osi.objectName);
             Vector2 position = pos + (dir * osi.spawnBuffer);
+            position += osi.spawnOffset;
             Quaternion rotation = (osi.rotateShot)
                 ? Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, dir))
                 : Quaternion.Euler(0, 0, 0);
