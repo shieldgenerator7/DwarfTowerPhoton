@@ -1057,6 +1057,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7fea9959ab8a51645a83774371fe55f9, type: 2}
   - {fileID: 11400000, guid: ba874eaf7ebd1c442b578cafc6e0b469, type: 2}
   - {fileID: 11400000, guid: 2a669681d75b3a448bd48183355d7958, type: 2}
+  allColors: []
 --- !u!1 &1252216527
 GameObject:
   m_ObjectHideFlags: 0

@@ -154,7 +154,6 @@ MonoBehaviour:
   damagesShots: 1
   damagesObjects: 1
   damagesPlayers: 1
-  owner: {fileID: 0}
   statMax:
     moveSpeed: -1
     maxHits: 100

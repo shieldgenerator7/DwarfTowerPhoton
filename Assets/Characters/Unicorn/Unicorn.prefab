@@ -465,5 +465,4 @@ MonoBehaviour:
   buttonName: Ability1
   hidesOtherInputs: 0
   abilityID: 0
-  maxTime: 5
   carriedShotIndex: 0

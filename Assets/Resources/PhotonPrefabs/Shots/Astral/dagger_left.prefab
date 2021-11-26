@@ -228,7 +228,6 @@ MonoBehaviour:
     damage: 10
     size: 1
   previewSprite: {fileID: 0}
-  wielder: {fileID: 0}
   dataBase: {fileID: 11400000, guid: c8a1dc4359dbc074ea556e0a6d8f4c83, type: 2}
   dataFinal: {fileID: 11400000, guid: 3b8a804221adcc84db4b14ff1a16a34f, type: 2}
   swingSpeed: 3

@@ -66,7 +66,7 @@ public class ShotController : MonoBehaviour
     }
 
 
-    public PlayerController owner;
+    protected PlayerController owner;
 
     // Start is called before the first frame update
     protected virtual void Start()
