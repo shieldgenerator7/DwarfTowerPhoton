@@ -30,6 +30,9 @@ public class AminaMeterController : MonoBehaviour
                 focusAminaPool.onAminaChanged += onAminaChanged;
                 prevAmina = focusAminaPool.Amina;
                 onAminaChanged(prevAmina);
+                //Meter color
+                Color playerColor = focusAminaPool.gameObject.FindComponent<SpriteRenderer>().color;
+                aminaMeter.color = playerColor;
             }
         }
     }
