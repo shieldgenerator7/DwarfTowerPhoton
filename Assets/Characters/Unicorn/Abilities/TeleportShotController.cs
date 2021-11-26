@@ -20,6 +20,13 @@ public class TeleportShotController : ShotController
             }
             //Teleport like usual
             Utility.teleportObject(hp.gameObject, teleportPos);
+            //If it's a WeaponController (like the weapons from Astral)
+            WeaponController weapon = collision.gameObject.FindComponent<WeaponController>();
+            if (weapon)
+            {
+                //Make it unowned
+                weapon.switchOwner(null);
+            }
             //and then destroy this shot
             health.Health = 0;
         }
