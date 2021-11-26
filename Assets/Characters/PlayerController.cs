@@ -62,8 +62,23 @@ public class PlayerController : MonoBehaviour
             healthPool.onDied += () => { stunnable.triggerStun(); };
             stunnable.onStunned += (stunned) =>
             {
-                if (!stunned)
+                if (stunned)
                 {
+                    //Cancel abilities
+                    foreach (PlayerAbility ability in abilityContext.abilities)
+                    {
+                        bool buttonUp = Input.GetButtonUp(ability.buttonName);
+                        if (Input.GetButton(ability.buttonName) || buttonUp)
+                        {
+                            ability.OnButtonCanceled();
+                        }
+                    }
+                    //Stop processing ongoing abilities
+                    processingAbilities.Clear();
+                }
+                else
+                {
+                    //Restore health after unstunned
                     healthPool.Health = healthPool.MaxHealth;
                 }
             };

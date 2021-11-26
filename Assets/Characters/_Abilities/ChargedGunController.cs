@@ -113,6 +113,18 @@ public class ChargedGunController : PlayerAbility
         }
     }
 
+    public override void OnButtonCanceled()
+    {
+        base.OnButtonCanceled();
+
+        aminaPool.cancelReservedAmina();
+
+        if (preview)
+        {
+            preview.SetActive(false);
+        }
+    }
+
     /// <summary>
     /// Reacts to a shot being fired from this gun controller
     /// </summary>

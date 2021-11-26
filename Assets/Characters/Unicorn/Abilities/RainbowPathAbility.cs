@@ -54,6 +54,12 @@ public class RainbowPathAbility : PlayerAbility
         deactivate();
     }
 
+    public override void OnButtonCanceled()
+    {
+        base.OnButtonCanceled();
+        deactivate();
+    }
+
     public void activate()
     {
         active = true;

@@ -64,6 +64,13 @@ public class CarriedGunController : PlayerAbility
         releaseShot();
     }
 
+    public override void OnButtonCanceled()
+    {
+        base.OnButtonCanceled();
+
+        releaseShot();
+    }
+
     private void carryNewShot()
     {
         Vector2 spawnPos = playerController.SpawnCenter;

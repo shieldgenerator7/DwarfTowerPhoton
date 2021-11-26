@@ -29,6 +29,13 @@ public class DashAbility : PlayerAbility
         }
     }
 
+    public override void OnButtonCanceled()
+    {
+        base.OnButtonCanceled();
+
+        deactivate();
+    }
+
     void activate()
     {
         Vector2 moveDir = playerMovement.LastMoveDirection.normalized;

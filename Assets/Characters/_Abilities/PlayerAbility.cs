@@ -106,6 +106,11 @@ public abstract class PlayerAbility : MonoBehaviour
     }
 
     /// <summary>
+    /// Processing that happens when this ability's button is pressed when the player is interrupted
+    /// </summary>
+    public virtual void OnButtonCanceled() { }
+
+    /// <summary>
     /// Processing that happens even after the button is not pressed until the ability's effect ends
     /// </summary>
     public virtual void OnContinuedProcessing()
