@@ -6,23 +6,8 @@ using UnityEngine;
 
 public class CarriedGunController : PlayerAbility
 {
-    [Tooltip("Max time until the carried shot reaches max level")]
-    public float maxTime = 5;
     [Tooltip("The index of carried shot in the object spawner")]
     public int carriedShotIndex;
-
-    public float CarryTime
-    {
-        get
-        {
-            if (carryStartTime > 0)
-            {
-                return Time.time - carryStartTime;
-            }
-            return -1;
-        }
-    }
-    private float carryStartTime = -1;
 
     protected CarriedShotController carriedShot;
 
@@ -81,7 +66,6 @@ public class CarriedGunController : PlayerAbility
 
     private void carryNewShot()
     {
-        carryStartTime = Time.time;
         Vector2 spawnPos = playerController.SpawnCenter;
         Vector2 dir = ((Vector2)Utility.MouseWorldPos - spawnPos).normalized;
         carriedShot = objectSpawner.spawnObject<CarriedShotController>(
@@ -89,7 +73,7 @@ public class CarriedGunController : PlayerAbility
             spawnPos,
             dir
             );
-        carriedShot.switchOwner(this);
+        carriedShot.switchOwner(playerController);
     }
 
     private void releaseShot()
@@ -98,7 +82,6 @@ public class CarriedGunController : PlayerAbility
         {
             carriedShot.release();
             carriedShot = null;
-            carryStartTime = -1;
         }
     }
 }

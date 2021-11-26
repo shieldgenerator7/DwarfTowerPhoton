@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 SpawnCenter => (Vector2)transform.position + (Vector2.up * 0.5f);
 
     protected AminaPool aminaPool;
-    protected PlayerMovement playerMovement;
+    public PlayerMovement playerMovement { get; private set; }
     protected StatKeeper statKeeper;
 
     // Start is called before the first frame update

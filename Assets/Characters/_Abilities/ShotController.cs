@@ -65,6 +65,9 @@ public class ShotController : MonoBehaviour
         }
     }
 
+
+    public PlayerController owner;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -142,5 +145,32 @@ public class ShotController : MonoBehaviour
     protected void RPC_SelfDestruct()
     {
         health.Health = 0;
+    }
+
+    public void switchOwner(PlayerController pc)
+    {
+        int ownerID = -1;
+        if (pc)
+        {
+            PV.TransferOwnership(pc.PV.Owner);
+            ownerID = pc.PV.ViewID;
+        }
+        PV.RPC("RPC_SwitchOwner", RpcTarget.AllBuffered, ownerID);
+    }
+
+    [PunRPC]
+    protected void RPC_SwitchOwner(int ownerID)
+    {
+        owner = null;
+        if (ownerID >= 0)
+        {
+            foreach (PlayerController pc in FindObjectsOfType<PlayerController>())
+            {
+                if (pc.PV.ViewID == ownerID)
+                {
+                    owner = pc;
+                }
+            }
+        }
     }
 }

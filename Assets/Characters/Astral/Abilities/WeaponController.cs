@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class WeaponController : ChargedShotController
 {
-    public PlayerController wielder;
     public WeaponControllerData dataBase;
     public WeaponControllerData dataFinal;
     private WeaponControllerData dataCurrent;
@@ -33,9 +32,9 @@ public class WeaponController : ChargedShotController
     {
         get
         {
-            if (wielder)
+            if (owner)
             {
-                Vector2 wielderCenter = (Vector2)wielder.transform.position + (Vector2.up * 0.5f);
+                Vector2 wielderCenter = (Vector2)owner.transform.position + (Vector2.up * 0.5f);
                 return wielderCenter;
             }
             else
@@ -58,9 +57,9 @@ public class WeaponController : ChargedShotController
     // Update is called once per frame
     void Update()
     {
-        if (wielder)
+        if (owner)
         {
-            if (wielder.PV.IsMine)
+            if (owner.PV.IsMine)
             {
                 //
                 // Swing
@@ -96,17 +95,17 @@ public class WeaponController : ChargedShotController
         bool onSameTeam = TeamToken.onSameTeam(gameObject, collision.gameObject);
         if (onSameTeam)
         {
-            if (wielder == null)
+            if (owner == null)
             {
                 bool targetIsPlayer = collision.gameObject.CompareTag("Player");
                 if (targetIsPlayer)
                 {
-                    wielder = collision.gameObject.GetComponent<PlayerController>();
+                    owner = collision.gameObject.GetComponent<PlayerController>();
                     rb2d.velocity = Vector2.zero;
                     //Photon Take Over
                     if (PV.IsMine)
                     {
-                        switchOwner(wielder);
+                        switchOwner(owner);
                     }
                 }
             }
@@ -115,32 +114,6 @@ public class WeaponController : ChargedShotController
         {
             rb2d.velocity = Vector2.zero;
             processCollision(collision, true);
-        }
-    }
-
-    void switchOwner(PlayerController pc)
-    {
-        int ownerID = -1;
-        if (pc) {
-            PV.TransferOwnership(pc.PV.Owner);
-            ownerID = pc.PV.ViewID;
-        }
-        PV.RPC("RPC_SwitchOwner", RpcTarget.AllBuffered, ownerID);
-    }
-
-    [PunRPC]
-    void RPC_SwitchOwner(int ownerID)
-    {
-        wielder = null;
-        if (ownerID >= 0)
-        {
-            foreach (PlayerController pc in FindObjectsOfType<PlayerController>())
-            {
-                if (pc.PV.ViewID == ownerID)
-                {
-                    wielder = pc;
-                }
-            }
         }
     }
 }
