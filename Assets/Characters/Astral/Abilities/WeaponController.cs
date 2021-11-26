@@ -44,6 +44,23 @@ public class WeaponController : ChargedShotController
         }
     }
 
+    protected override PlayerController owner
+    {
+        set
+        {
+            if (owner)
+            {
+                owner.stunnable.onStunned -= releaseFromOwner;
+            }
+            base.owner = value;
+            if (owner)
+            {
+                owner.stunnable.onStunned -= releaseFromOwner;
+                owner.stunnable.onStunned += releaseFromOwner;
+            }
+        }
+    }
+
     private SpriteRenderer sr;
 
     protected override void Start()
@@ -100,12 +117,16 @@ public class WeaponController : ChargedShotController
                 bool targetIsPlayer = collision.gameObject.CompareTag("Player");
                 if (targetIsPlayer)
                 {
-                    owner = collision.gameObject.GetComponent<PlayerController>();
-                    rb2d.velocity = Vector2.zero;
-                    //Photon Take Over
-                    if (PV.IsMine)
+                    PlayerController pc = collision.gameObject.GetComponent<PlayerController>(); 
+                    if (!pc.stunnable.Stunned)
                     {
-                        switchOwner(owner);
+                        owner = pc;
+                        rb2d.velocity = Vector2.zero;
+                        //Photon Take Over
+                        if (PV.IsMine)
+                        {
+                            switchOwner(owner);
+                        }
                     }
                 }
             }
@@ -114,6 +135,14 @@ public class WeaponController : ChargedShotController
         {
             rb2d.velocity = Vector2.zero;
             processCollision(collision, true);
+        }
+    }
+
+    void releaseFromOwner(bool release)
+    {
+        if (release)
+        {
+            switchOwner(null);
         }
     }
 }

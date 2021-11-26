@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
 
     public Vector2 SpawnCenter => (Vector2)transform.position + (Vector2.up * 0.5f);
 
+    public Stunnable stunnable { get; private set; }
     protected AminaPool aminaPool;
     public PlayerMovement playerMovement { get; private set; }
     protected StatKeeper statKeeper;
@@ -57,7 +58,7 @@ public class PlayerController : MonoBehaviour
         if (PV.IsMine)
         {
             //Hook up Stunnable with HealthPool
-            Stunnable stunnable = gameObject.FindComponent<Stunnable>();
+            stunnable = gameObject.FindComponent<Stunnable>();
             HealthPool healthPool = gameObject.FindComponent<HealthPool>();
             healthPool.onDied += () => { stunnable.triggerStun(); };
             stunnable.onStunned += (stunned) =>
