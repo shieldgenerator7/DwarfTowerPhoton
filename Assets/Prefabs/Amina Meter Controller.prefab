@@ -670,6 +670,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aminaDrainAminDelay: 0.5
   aminaDrainAnimRate: 20
+  brightnessAdjust: 0.3
   focusAminaPool: {fileID: 0}
   aminaMeter: {fileID: 6656830445078269064}
   aminaReserveMeter: {fileID: 6656830446067276418}

@@ -9,6 +9,9 @@ public class AminaMeterController : MonoBehaviour
     public float aminaDrainAminDelay = 0.5f;
     [Tooltip("How many amina ticks per second it drains during the animation")]
     public float aminaDrainAnimRate = 5;
+    [Range(0,1)]
+    [Tooltip("How much to increase color brightness by")]
+    public float brightnessAdjust = 0.1f;
 
     //public float maxAnimaPerRing = 100;
 
@@ -31,8 +34,7 @@ public class AminaMeterController : MonoBehaviour
                 prevAmina = focusAminaPool.Amina;
                 onAminaChanged(prevAmina);
                 //Meter color
-                Color playerColor = focusAminaPool.gameObject.FindComponent<SpriteRenderer>().color;
-                aminaMeter.color = playerColor;
+                updateMeterColor(focusAminaPool.gameObject.FindComponent<SpriteRenderer>().color);                
             }
         }
     }
@@ -51,6 +53,17 @@ public class AminaMeterController : MonoBehaviour
         {
             updateMeter(0, 1, 0);
         }
+    }
+
+    void updateMeterColor(Color meterColor)
+    {
+        aminaMeter.color = meterColor;
+        Color c = meterColor;
+        c.r += brightnessAdjust;
+        c.g += brightnessAdjust;
+        c.b += brightnessAdjust;
+        c.a = aminaReserveMeter.color.a;
+        aminaReserveMeter.color = c;
     }
 
     void onAminaChanged(float amina)
