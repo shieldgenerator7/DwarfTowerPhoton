@@ -154,6 +154,7 @@ MonoBehaviour:
   damagesShots: 0
   damagesObjects: 0
   damagesPlayers: 0
+  owner: {fileID: 0}
 --- !u!114 &2497037802111640309
 MonoBehaviour:
   m_ObjectHideFlags: 0
