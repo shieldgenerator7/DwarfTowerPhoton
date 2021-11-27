@@ -68,13 +68,11 @@ public class ObjectSpawner : MonoBehaviour
             //Color
             if (osi.inheritColor)
             {
-                Color playerColor = PlayerColor;
-                go.FindComponents<SpriteRenderer>()
-                    .ForEach(sr => sr.color = playerColor);
-                go.FindComponents<ObjectSpawner>()
-                    .ForEach(os => os.PlayerColor = playerColor);
-                go.FindComponents<ObjectAutoSpawner>()
-                    .ForEach(oas => oas.PlayerColor = playerColor);
+                ShotController sc = go.FindComponent<ShotController>();
+                if (sc)
+                {
+                    sc.setColor(PlayerColor);
+                }
             }
             //Delegate
             onObjectSpawned?.Invoke(go, position, dir);

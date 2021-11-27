@@ -41,9 +41,11 @@ public class ObjectAutoSpawner : MonoBehaviour
                         transform.rotation
                         );
                     //Color
-                    Color playerColor = PlayerColor;
-                    go.FindComponents<SpriteRenderer>()
-                        .ForEach(sr => sr.color = playerColor);
+                    ShotController sc = go.FindComponent<ShotController>();
+                    if (sc)
+                    {
+                        sc.setColor(PlayerColor);
+                    }
                     //Delegate
                     if (onObjectSpawned != null)
                     {
