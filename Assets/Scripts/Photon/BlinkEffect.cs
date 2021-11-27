@@ -33,7 +33,7 @@ public class BlinkEffect : MonoBehaviour
             return photonView;
         }
     }
-    private void Start()
+    public void Start()
     {
         srs = new List<SpriteRenderer>(GetComponentsInChildren<SpriteRenderer>());
     }

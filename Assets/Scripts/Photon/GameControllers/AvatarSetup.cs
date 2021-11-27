@@ -43,6 +43,7 @@ public class AvatarSetup : MonoBehaviour
         //Stunned Delegate
         myCharacter.GetComponent<Stunnable>().onStunned +=
             (stunned) => GetComponent<BlinkEffect>().Blinking = stunned;
+        GetComponent<BlinkEffect>().Start();
     }
 
     //Moved here because the AvatarSetup is on the same object as the PhotonView,
