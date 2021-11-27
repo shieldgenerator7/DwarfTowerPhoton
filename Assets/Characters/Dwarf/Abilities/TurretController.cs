@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TurretController : GunController
 {
+    public Transform turretBase;
+
     private ShotController sc;
     private GunController turretFireTrigger;//the gun controller that causes the turrets to fire
     public GunController Trigger
@@ -39,6 +41,7 @@ public class TurretController : GunController
             if (PV.IsMine)
             {
                 this.transform.up = turretFireTrigger.playerController.LookDirection;
+                turretBase.up = Vector2.up;
             }
         }
     }

@@ -150,6 +150,7 @@ public class ChargedGunController : PlayerAbility
     private PreviewDisplayer.PreviewState getPreviewState(Vector2 position)
     {
         preview.transform.position = position;
+        preview.transform.up = Vector2.up;
         previewDisplayer.updatePreviewSprite();
         GameObject conflictingObject = null;
         bool coHasRB2D = false;
@@ -211,6 +212,7 @@ public class ChargedGunController : PlayerAbility
                     //upgrade the one there
                     targetObject = conflictingObject;
                     preview.transform.position = conflictingObject.transform.position;
+                    preview.transform.up = conflictingObject.transform.up;
                     return PreviewDisplayer.PreviewState.UPGRADE;
                 }
                 //else if they're not the same type,
@@ -220,6 +222,7 @@ public class ChargedGunController : PlayerAbility
                     //delete the object already there
                     targetObject = conflictingObject;
                     preview.transform.position = conflictingObject.transform.position;
+                    preview.transform.up = conflictingObject.transform.up;
                     previewDisplayer.updatePreviewSprite(conflictingObject.GetComponent<ChargedShotController>().previewSprite);
                     return PreviewDisplayer.PreviewState.DESTROY;
                 }

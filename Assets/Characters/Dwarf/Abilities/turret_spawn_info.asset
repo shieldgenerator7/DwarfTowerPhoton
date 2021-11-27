@@ -16,4 +16,4 @@ MonoBehaviour:
   spawnBuffer: 1.3
   rotateShot: 0
   inheritTeamToken: 1
-  spawnOffset: {x: 0, y: -0.5}
+  spawnOffset: {x: 0, y: 0}
