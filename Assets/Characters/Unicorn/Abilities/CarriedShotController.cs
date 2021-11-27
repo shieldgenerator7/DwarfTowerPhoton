@@ -62,6 +62,10 @@ public class CarriedShotController : ShotController
         CarryPercent = 0;
         origScale = transform.localScale;
         carryStartTime = Time.time;
+        if (owner)
+        {
+            destroyOnIndestructible = false;
+        }
     }
 
     // Update is called once per frame
@@ -89,6 +93,7 @@ public class CarriedShotController : ShotController
     public void release()
     {
         rb2d.velocity = owner.playerMovement.LastMoveDirection;
+        destroyOnIndestructible = true;
         switchOwner(null);
     }
 }

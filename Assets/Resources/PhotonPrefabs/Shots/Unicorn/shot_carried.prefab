@@ -154,6 +154,7 @@ MonoBehaviour:
   damagesShots: 1
   damagesObjects: 1
   damagesPlayers: 1
+  destroyOnIndestructible: 1
   statMax:
     moveSpeed: -1
     maxHits: 100
