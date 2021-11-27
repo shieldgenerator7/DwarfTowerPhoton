@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 5902248853494502521}
   - component: {fileID: 4563028908691043183}
   - component: {fileID: 3980440854220922252}
+  - component: {fileID: -370048005802176888}
   m_Layer: 0
   m_Name: shot_teleport
   m_TagString: Untagged
@@ -247,3 +248,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24076d868ace5cb44bd253f181ccc375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-370048005802176888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6261132995686225064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dbb34bdc9fc63f41a859d4e6c6ae4c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  damagableTypes: 

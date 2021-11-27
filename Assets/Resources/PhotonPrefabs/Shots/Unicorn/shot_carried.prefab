@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 508065936224665636}
   - component: {fileID: 5017439048823165453}
   - component: {fileID: -4268039625931081603}
+  - component: {fileID: -8513909346525139241}
   m_Layer: 0
   m_Name: shot_carried
   m_TagString: Untagged
@@ -256,3 +257,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24076d868ace5cb44bd253f181ccc375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-8513909346525139241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dbb34bdc9fc63f41a859d4e6c6ae4c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  damagableTypes: 000000000100000002000000

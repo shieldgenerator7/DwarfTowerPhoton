@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 3158633092025413174}
   - component: {fileID: 6160328844216468952}
   - component: {fileID: 1567083782174426373}
+  - component: {fileID: 1589231887393888136}
   m_Layer: 0
   m_Name: Unicorn
   m_TagString: Player
@@ -321,6 +322,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateEveryFrame: 1
+--- !u!114 &1589231887393888136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532201618779257096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dbb34bdc9fc63f41a859d4e6c6ae4c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  damagableTypes: 00000000
 --- !u!1 &3887385788853543116
 GameObject:
   m_ObjectHideFlags: 0
