@@ -38,8 +38,14 @@ public class PlayerInfo : MonoBehaviour
         get => (colorIndex >= 0)
             ? colorIndex
             : allColors.IndexOf(SelectedCharacter.defaultColor);
-        set => colorIndex = Mathf.Clamp(value, 0, allColors.Count);
+        set
+        {
+            colorIndex = Mathf.Clamp(value, -1, allColors.Count);
+            onSelectedColorChanged?.Invoke(ColorIndex);
+        }
     }
+    public event OnSelectedIndexChanged onSelectedColorChanged;
+
     public Color SelectedColor
     {
         get => (colorIndex >= 0)
