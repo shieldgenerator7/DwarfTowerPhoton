@@ -68,10 +68,10 @@ public class ObjectSpawner : MonoBehaviour
             //Color
             if (osi.inheritColor)
             {
-                ShotController sc = go.FindComponent<ShotController>();
-                if (sc)
+                ColorInitializer colorInit = go.FindComponent<ColorInitializer>();
+                if (colorInit)
                 {
-                    sc.setColor(PlayerColor);
+                    colorInit.setColor(PlayerColor);
                 }
             }
             //Delegate

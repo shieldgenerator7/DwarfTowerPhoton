@@ -182,26 +182,5 @@ public class ShotController : MonoBehaviour
                 }
             }
         }
-    }
-
-    public void setColor(Color color)
-    {
-        PV.RPC(
-            "RPC_SetColor",
-            RpcTarget.All,
-            (int)PlayerInfo.instance.allColors.IndexOf(color)
-            );
-    }
-
-    [PunRPC]
-    void RPC_SetColor(int index)
-    {
-        Color color = PlayerInfo.instance.allColors[index];
-        gameObject.FindComponents<SpriteRenderer>()
-            .ForEach(sr => sr.color = color);
-        gameObject.FindComponents<ObjectSpawner>()
-            .ForEach(os => os.PlayerColor = color);
-        gameObject.FindComponents<ObjectAutoSpawner>()
-            .ForEach(oas => oas.PlayerColor = color);
-    }
+    } 
 }

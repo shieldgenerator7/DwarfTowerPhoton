@@ -41,10 +41,10 @@ public class ObjectAutoSpawner : MonoBehaviour
                         transform.rotation
                         );
                     //Color
-                    ShotController sc = go.FindComponent<ShotController>();
-                    if (sc)
+                    ColorInitializer colorInit = go.FindComponent<ColorInitializer>();
+                    if (colorInit)
                     {
-                        sc.setColor(PlayerColor);
+                        colorInit.setColor(PlayerColor);
                     }
                     //Delegate
                     if (onObjectSpawned != null)
