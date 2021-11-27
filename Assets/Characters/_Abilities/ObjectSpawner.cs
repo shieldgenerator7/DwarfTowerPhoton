@@ -31,9 +31,9 @@ public class ObjectSpawner : MonoBehaviour
         }
     }
 
-    public T spawnObject<T>(int index, Vector2 pos, Vector2 dir)
+    public T spawnObject<T>(int index, Vector2 pos, Vector2 dir) where T : Component
     {
-        return spawnObject(index, pos, dir).GetComponent<T>();
+        return spawnObject(index, pos, dir).FindComponent<T>();
     }
 
     public GameObject spawnObject(int index, Vector2 pos, Vector2 dir)
