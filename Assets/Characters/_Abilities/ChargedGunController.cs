@@ -149,7 +149,8 @@ public class ChargedGunController : PlayerAbility
 
     private PreviewDisplayer.PreviewState getPreviewState(Vector2 position)
     {
-        preview.transform.position = position;
+        ObjectSpawnInfo osi = objectSpawner.objectSpawnInfoList[chargedShotIndex];
+        preview.transform.position = position + osi.spawnOffset;
         preview.transform.up = Vector2.up;
         previewDisplayer.updatePreviewSprite();
         GameObject conflictingObject = null;
@@ -204,6 +205,8 @@ public class ChargedGunController : PlayerAbility
             //If this player owns the conflicting object,
             if (TeamToken.ownedBySamePlayer(gameObject, conflictingObject))
             {
+                ChargedShotController csc = conflictingObject.GetComponent<ChargedShotController>();
+                Sprite conflictingSprite = csc.previewSprite;
                 //if they're the same type,
                 if (conflictingObject.name.Contains(
                     objectSpawner.objectSpawnInfoList[chargedShotIndex].objectName
@@ -223,7 +226,7 @@ public class ChargedGunController : PlayerAbility
                     targetObject = conflictingObject;
                     preview.transform.position = conflictingObject.transform.position;
                     preview.transform.up = conflictingObject.transform.up;
-                    previewDisplayer.updatePreviewSprite(conflictingObject.GetComponent<ChargedShotController>().previewSprite);
+                    previewDisplayer.updatePreviewSprite(conflictingSprite);
                     return PreviewDisplayer.PreviewState.DESTROY;
                 }
             }
