@@ -173,6 +173,7 @@ MonoBehaviour:
     damage: 1
     size: 1
   previewSprite: {fileID: 21300000, guid: 73cc7530856002240a7109884895d36f, type: 3}
+  aminaRefund: 20
 --- !u!114 &7473864452702116121
 MonoBehaviour:
   m_ObjectHideFlags: 0

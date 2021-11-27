@@ -11,6 +11,9 @@ public class ChargedShotController : ShotController
 
     public Sprite previewSprite;//used for constructs that can be manually destroyed / upgraded
 
+    [Tooltip("If manually deconstructed, how much amina is refunded")]
+    public float aminaRefund = 20;
+
     protected override void Start()
     {
         base.Start();

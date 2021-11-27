@@ -117,8 +117,11 @@ public class ChargedGunController : PlayerAbility
         }
         else if (buildAction == PreviewDisplayer.PreviewState.DESTROY)
         {
+            ChargedShotController csc = targetObject.FindComponent<ChargedShotController>();
+            float refund = csc.aminaRefund;
             PhotonNetwork.Destroy(targetObject);
             aminaPool.cancelReservedAmina();
+            aminaPool.rechargeAmina(refund);
         }
         else if (buildAction == PreviewDisplayer.PreviewState.NONE)
         {
