@@ -219,9 +219,7 @@ MonoBehaviour:
     fireRate: 0
     damage: 0
     size: 0
-  damagesShots: 1
-  damagesObjects: 1
-  damagesPlayers: 1
+  damagableTypes: 000000000100000002000000
   destroyOnIndestructible: 0
   multiplierLayer:
     moveSpeed: -1
@@ -230,6 +228,7 @@ MonoBehaviour:
     damage: -1
     size: 1
   previewSprite: {fileID: 0}
+  aminaRefund: 20
   dataBase: {fileID: 11400000, guid: a54cc1828eee1a348923f104b7c1488b, type: 2}
   dataFinal: {fileID: 11400000, guid: 5f4b7b90287e76345b63232b7195e0e2, type: 2}
   swingSpeed: 6

@@ -152,9 +152,7 @@ MonoBehaviour:
     fireRate: 0
     damage: 0
     size: 0
-  damagesShots: 0
-  damagesObjects: 0
-  damagesPlayers: 0
+  damagableTypes: 
   destroyOnIndestructible: 1
 --- !u!114 &2497037802111640309
 MonoBehaviour:

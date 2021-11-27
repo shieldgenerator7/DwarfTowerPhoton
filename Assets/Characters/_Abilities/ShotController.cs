@@ -25,12 +25,7 @@ public class ShotController : MonoBehaviour
     private StatLayer _stats;
 
     [Tooltip("The EntityTypes that this shot can damage")]
-    private List<EntityType> damagableTypes;
-
-    //TODO: Remove these checkboxes when Unity fixes its editor list bug
-    public bool damagesShots = false;
-    public bool damagesObjects = false;
-    public bool damagesPlayers = false;
+    public List<EntityType> damagableTypes;
 
     [Tooltip("Should this shot destroy itself when it hits an undestroyable object (ex: border walls, caravan)?")]
     public bool destroyOnIndestructible = true;
@@ -82,21 +77,6 @@ public class ShotController : MonoBehaviour
         if (rb2d)
         {
             rb2d.velocity = transform.up * _stats.moveSpeed;
-        }
-        //TODO: remove this damageable types section when Unity fixes their editor list bug
-        //Damagable Types
-        damagableTypes = new List<EntityType>();
-        if (damagesShots)
-        {
-            damagableTypes.Add(EntityType.SHOT);
-        }
-        if (damagesObjects)
-        {
-            damagableTypes.Add(EntityType.OBJECT);
-        }
-        if (damagesPlayers)
-        {
-            damagableTypes.Add(EntityType.PLAYER);
         }
         //HealthPool
         health = GetComponent<HealthPool>();

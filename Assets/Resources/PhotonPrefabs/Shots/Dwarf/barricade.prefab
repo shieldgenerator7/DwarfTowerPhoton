@@ -162,9 +162,7 @@ MonoBehaviour:
     fireRate: 0
     damage: 0
     size: 0
-  damagesShots: 1
-  damagesObjects: 0
-  damagesPlayers: 0
+  damagableTypes: 00000000
   destroyOnIndestructible: 1
   multiplierLayer:
     moveSpeed: -1
