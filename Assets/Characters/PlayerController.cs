@@ -46,6 +46,9 @@ public class PlayerController : MonoBehaviour
     }
 
     public Vector2 SpawnCenter => (Vector2)transform.position + (Vector2.up * 0.5f);
+    /// <summary>
+    /// The looking direction of the player. Includes magnitude, NOT a unit vector
+    /// </summary>
     public Vector2 LookDirection => (Vector2)Utility.MouseWorldPos - SpawnCenter;
 
     public Stunnable stunnable { get; private set; }

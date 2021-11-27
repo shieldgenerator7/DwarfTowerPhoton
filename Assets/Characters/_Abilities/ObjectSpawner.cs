@@ -31,12 +31,12 @@ public class ObjectSpawner : MonoBehaviour
         }
     }
 
-    public T spawnObject<T>(int index, Vector2 pos, Vector2 dir) where T : Component
+    public T spawnObject<T>(int index, Vector2 pos, Vector2 dir, float addSpawnBuffer = 0) where T : Component
     {
-        return spawnObject(index, pos, dir).FindComponent<T>();
+        return spawnObject(index, pos, dir, addSpawnBuffer).FindComponent<T>();
     }
 
-    public GameObject spawnObject(int index, Vector2 pos, Vector2 dir)
+    public GameObject spawnObject(int index, Vector2 pos, Vector2 dir, float addSpawnBuffer = 0)
     {
         if (PV.IsMine)
         {
@@ -51,7 +51,7 @@ public class ObjectSpawner : MonoBehaviour
             //Initialize arguments
             ObjectSpawnInfo osi = objectSpawnInfoList[index];
             string pathName = Path.Combine("PhotonPrefabs", folderName, osi.objectName);
-            Vector2 position = pos + (dir * osi.spawnBuffer);
+            Vector2 position = pos + (dir * (osi.spawnBuffer + addSpawnBuffer));
             position += osi.spawnOffset;
             Quaternion rotation = (osi.rotateShot)
                 ? Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, dir))

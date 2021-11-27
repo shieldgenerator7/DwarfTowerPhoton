@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: turret_spawn_info
   m_EditorClassIdentifier: 
   objectName: turret
-  spawnBuffer: 1.3
+  spawnBuffer: 1
   rotateShot: 0
   inheritTeamToken: 1
   spawnOffset: {x: 0, y: 0}

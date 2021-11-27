@@ -14,8 +14,24 @@ public class ChargedGunController : PlayerAbility
     public float minAminaReserved = 5.1f;
     [Tooltip("The index of the charged shot in the object spawner")]
     public int chargedShotIndex;
+    [Range(0, 5)]
+    [Tooltip("The max amount above its spawn buffer the charged shot can spawn")]
+    public int maxSpawnBufferExtension = 0;
     [Tooltip("The display-only prefab to spawn while charging the shot")]
     public GameObject previewPrefab;
+
+    public ObjectSpawnInfo ChargedShotSpawnInfo
+        => objectSpawner.objectSpawnInfoList[chargedShotIndex];
+
+    /// <summary>
+    /// Returns how much of the max spawn buffer extension it uses
+    /// </summary>
+    private float SpawnBufferExtension
+        => Mathf.Clamp(
+            playerController.LookDirection.magnitude - ChargedShotSpawnInfo.spawnBuffer,
+            0,
+            maxSpawnBufferExtension
+            );
 
     private GameObject preview;
     private Collider2D previewCollider;
@@ -76,7 +92,8 @@ public class ChargedGunController : PlayerAbility
                 ChargedShotController chargedShot = objectSpawner.spawnObject<ChargedShotController>(
                     chargedShotIndex,
                     spawnPos,
-                    dir
+                    dir,
+                    SpawnBufferExtension
                     );
                 float aminaObtained = aminaPool.collectReservedAmina();
                 float aminaMultiplier = aminaObtained / expectedAnimaReserved;
@@ -143,14 +160,13 @@ public class ChargedGunController : PlayerAbility
         Vector2 targetPos = Utility.MouseWorldPos;
         Vector2 targetDir = (targetPos - playerPos).normalized;
         Vector2 pos = playerPos +
-            (targetDir * objectSpawner.objectSpawnInfoList[chargedShotIndex].spawnBuffer);
+            (targetDir * (ChargedShotSpawnInfo.spawnBuffer + SpawnBufferExtension));
         return getPreviewState(pos);
     }
 
     private PreviewDisplayer.PreviewState getPreviewState(Vector2 position)
     {
-        ObjectSpawnInfo osi = objectSpawner.objectSpawnInfoList[chargedShotIndex];
-        preview.transform.position = position + osi.spawnOffset;
+        preview.transform.position = position + ChargedShotSpawnInfo.spawnOffset;
         preview.transform.up = Vector2.up;
         previewDisplayer.updatePreviewSprite();
         GameObject conflictingObject = null;
@@ -205,12 +221,8 @@ public class ChargedGunController : PlayerAbility
             //If this player owns the conflicting object,
             if (TeamToken.ownedBySamePlayer(gameObject, conflictingObject))
             {
-                ChargedShotController csc = conflictingObject.GetComponent<ChargedShotController>();
-                Sprite conflictingSprite = csc.previewSprite;
                 //if they're the same type,
-                if (conflictingObject.name.Contains(
-                    objectSpawner.objectSpawnInfoList[chargedShotIndex].objectName
-                    ))
+                if (conflictingObject.name.Contains(ChargedShotSpawnInfo.objectName))
                 {
                     //upgrade the one there
                     targetObject = conflictingObject;
@@ -222,6 +234,8 @@ public class ChargedGunController : PlayerAbility
                 //but still both constructs
                 else if (coHasSC)
                 {
+                    ChargedShotController csc = conflictingObject.FindComponent<ChargedShotController>();
+                    Sprite conflictingSprite = csc.previewSprite;
                     //delete the object already there
                     targetObject = conflictingObject;
                     preview.transform.position = conflictingObject.transform.position;
