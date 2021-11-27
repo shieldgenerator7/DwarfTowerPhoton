@@ -113,6 +113,12 @@ public class PlayerInfo : MonoBehaviour
         players.ForEach(
             plyr => untakenColors.Remove(allColors.IndexOf(plyr.playerColor))
             );
+        //Select untaken color from SelectedColor
+        int selectedIndex = ColorIndex;
+        if (untakenColors.Contains(selectedIndex))
+        {
+            return selectedIndex;
+        }
         //Select untaken color from preferences
         foreach(int colorIndex in colorPreferences)
         {
