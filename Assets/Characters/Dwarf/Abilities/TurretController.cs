@@ -32,11 +32,22 @@ public class TurretController : GunController
         sc = GetComponentInParent<ShotController>();
     }
 
+    private void Update()
+    {
+        if (turretFireTrigger)
+        {
+            if (PV.IsMine)
+            {
+                this.transform.up = turretFireTrigger.playerController.LookDirection;
+            }
+        }
+    }
+
     private void fireInDirection(GameObject shot, Vector2 targetPos, Vector2 targetDir)
     {
         objectSpawner.spawnObject(
             shotIndex,
-            transform.position, 
+            transform.position,
             targetDir
             );
     }
