@@ -24,9 +24,6 @@ public class ShotController : MonoBehaviour
     [SerializeField]
     private StatLayer _stats;
 
-    [Tooltip("The EntityTypes that this shot can damage")]
-    public List<EntityType> damagableTypes;
-
     [Tooltip("Should this shot destroy itself when it hits an undestroyable object (ex: border walls, caravan)?")]
     public bool destroyOnIndestructible = true;
 
@@ -106,26 +103,19 @@ public class ShotController : MonoBehaviour
 
     protected virtual void processCollision(Collider2D collision, bool useInitialDamage)
     {
-        if (TeamToken.onSameTeam(gameObject, collision.gameObject))
+        //If this shot should destroy itself on indestructibles,
+        if (destroyOnIndestructible)
         {
-            //don't damage teammates
-            return;
-        }
-        HealthPool hp = collision.gameObject.GetComponent<HealthPool>();
-        if (hp)
-        {
-            if (damagableTypes.Contains(hp.entityType))
+            if (TeamToken.onSameTeam(gameObject, collision.gameObject))
             {
-                if (useInitialDamage)
-                {
-                    hp.Health += -_stats.damage;
-                }
+                //don't get destroyed on teammates objects
+                return;
             }
-        }
-        else if (!collision.isTrigger)
-        {
-            if (destroyOnIndestructible)
+            //If object is indestructible and solid,
+            HealthPool hp = collision.gameObject.GetComponent<HealthPool>();
+            if (!hp && !collision.isTrigger)
             {
+                //Destroy this shot
                 health.Health = 0;
             }
         }
@@ -162,5 +152,5 @@ public class ShotController : MonoBehaviour
                 }
             }
         }
-    } 
+    }
 }
