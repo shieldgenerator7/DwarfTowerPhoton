@@ -101,7 +101,6 @@ MonoBehaviour:
     fireRate: 0
     damage: 0
     size: 0
-  damagableTypes: 000000000100000002000000
   destroyOnIndestructible: 1
   multiplierLayer:
     moveSpeed: 1
