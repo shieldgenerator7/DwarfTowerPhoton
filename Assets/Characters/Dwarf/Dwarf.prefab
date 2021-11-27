@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23da9a48fa26f9543ac4db8ff387053f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerColor: {r: 1, g: 1, b: 1, a: 1}
   aminaReloader: {fileID: 3369071877670158181}
   abilityContext: {fileID: 9215063378857821938}
 --- !u!114 &9215063378857821938

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: shot_carried
   spawnBuffer: 0.75
+  spawnOffset: {x: 0, y: 0}
   rotateShot: 1
   inheritTeamToken: 1
-  spawnOffset: {x: 0, y: 0}
+  inheritColor: 1

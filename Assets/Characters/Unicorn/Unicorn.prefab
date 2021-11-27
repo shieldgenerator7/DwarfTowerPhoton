@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3a1368f6ffef0047b3bc902d56f2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerColor: {r: 1, g: 1, b: 1, a: 1}
   aminaReloader: {fileID: 0}
   abilityContext: {fileID: 3769535869663102263}
   aminaDecayRate: 5

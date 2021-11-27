@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: turret
   spawnBuffer: 1
+  spawnOffset: {x: 0, y: 0}
   rotateShot: 0
   inheritTeamToken: 1
-  spawnOffset: {x: 0, y: 0}
+  inheritColor: 1

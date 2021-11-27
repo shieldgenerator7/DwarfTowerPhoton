@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: scythe_arm_left
   spawnBuffer: 0
+  spawnOffset: {x: 0, y: 0}
   rotateShot: 1
   inheritTeamToken: 1
-  spawnOffset: {x: 0, y: 0}
+  inheritColor: 1

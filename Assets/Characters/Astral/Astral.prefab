@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23da9a48fa26f9543ac4db8ff387053f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerColor: {r: 1, g: 1, b: 1, a: 1}
   aminaReloader: {fileID: 3369071877670158181}
   abilityContext: {fileID: 3769535869663102263}
 --- !u!114 &3769535869663102263
@@ -455,6 +456,7 @@ MonoBehaviour:
   expectedAnimaReserved: 10
   minAminaReserved: 20
   chargedShotIndex: 1
+  maxSpawnBufferExtension: 0
   previewPrefab: {fileID: 4883769523225080588, guid: 39b210406ffe9854fa027309da46ceb5,
     type: 3}
 --- !u!114 &8823400307403786068
@@ -477,6 +479,7 @@ MonoBehaviour:
   expectedAnimaReserved: 5
   minAminaReserved: 5
   chargedShotIndex: 2
+  maxSpawnBufferExtension: 0
   previewPrefab: {fileID: 4883769523225080588, guid: ab146c3e616663d4aa005573f3b930d8,
     type: 3}
 --- !u!114 &7366886583290664003
@@ -499,6 +502,7 @@ MonoBehaviour:
   expectedAnimaReserved: 5
   minAminaReserved: 0.1
   chargedShotIndex: 5
+  maxSpawnBufferExtension: 0
   previewPrefab: {fileID: 4883769523225080588, guid: ca7cd4e6505fb744f9d155be37a70961,
     type: 3}
 --- !u!1 &3887385788853543116
