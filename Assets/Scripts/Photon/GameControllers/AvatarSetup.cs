@@ -20,7 +20,7 @@ public class AvatarSetup : MonoBehaviour
                 "RPC_AddCharacter", 
                 RpcTarget.AllBuffered, 
                 PlayerInfo.instance.SelectedIndex,
-                PlayerInfo.instance.ColorIndex
+                PlayerInfo.instance.getUniqueColorIndex()
                 );
             Camera.main.GetComponent<CameraController>().FocusObject = gameObject;
         }

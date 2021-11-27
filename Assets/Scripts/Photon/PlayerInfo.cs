@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerInfo : MonoBehaviour
@@ -41,10 +42,19 @@ public class PlayerInfo : MonoBehaviour
         set
         {
             colorIndex = Mathf.Clamp(value, -1, allColors.Count);
+            if (colorIndex >= 0)
+            {
+                if (colorPreferences.Contains(colorIndex))
+                {
+                    colorPreferences.Remove(colorIndex);
+                }
+                colorPreferences.Insert(0, colorIndex);
+            }
             onSelectedColorChanged?.Invoke(ColorIndex);
         }
     }
     public event OnSelectedIndexChanged onSelectedColorChanged;
+    private List<int> colorPreferences = new List<int>();
 
     public Color SelectedColor
     {
@@ -86,5 +96,33 @@ public class PlayerInfo : MonoBehaviour
         //    mySelectedCharacter = 0;
         //    PlayerPrefs.SetInt("MyCharacter", mySelectedCharacter);
         //}
+    }
+
+    public int getUniqueColorIndex()
+    {
+        //Get list of all other players
+        List<PlayerController> players = FindObjectsOfType<PlayerController>().ToList();
+        //Our player has not been made yet, so no need to remove it from the list
+        //players.RemoveAll(plyr => plyr.PV.IsMine);
+        //Get list of all untaken colors
+        List<int> untakenColors = new List<int>();
+        for (int i = 0; i < allColors.Count; i++)
+        {
+            untakenColors.Add(i);
+        }
+        players.ForEach(
+            plyr => untakenColors.Remove(allColors.IndexOf(plyr.playerColor))
+            );
+        //Select untaken color from preferences
+        foreach(int colorIndex in colorPreferences)
+        {
+            if (untakenColors.Contains(colorIndex))
+            {
+                return colorIndex;
+            }
+        }
+        //No preferences available, so choose random one
+        int randIndex = Random.Range(0, untakenColors.Count);
+        return untakenColors[randIndex];
     }
 }
