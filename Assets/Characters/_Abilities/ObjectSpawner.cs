@@ -15,7 +15,7 @@ public class ObjectSpawner : MonoBehaviour
     public List<ObjectSpawnInfo> objectSpawnInfoList;
 
     private TeamToken teamToken;
-    private PhotonView PV;
+    public PhotonView PV { get; private set; }
 
     private void Start()
     {

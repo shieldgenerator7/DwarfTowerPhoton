@@ -26,11 +26,14 @@ public class TreeForestPopulator : MonoBehaviour
     {
         //Object Spawner
         objectSpawner = GetComponent<ObjectSpawner>();
-        //Area
-        min = new Vector2(-playArea.width / 2 + 1, -playArea.height / 2 + 1);
-        max = new Vector2(playArea.width / 2 - 1, playArea.height / 2 - 1);
-        //Populate
-        populate();
+        if (objectSpawner.PV.IsMine)
+        {
+            //Area
+            min = new Vector2(-playArea.width / 2 + 1, -playArea.height / 2 + 1);
+            max = new Vector2(playArea.width / 2 - 1, playArea.height / 2 - 1);
+            //Populate
+            populate();
+        }
     }
 
     void populate()
@@ -44,7 +47,7 @@ public class TreeForestPopulator : MonoBehaviour
                 );
             tree.transform.parent = folder;
             tree.GetComponentsInChildren<SpriteRenderer>().ToList()
-                .ForEach(sr=>sr.updateSortingOrder());
+                .ForEach(sr => sr.updateSortingOrder());
         }
     }
 
