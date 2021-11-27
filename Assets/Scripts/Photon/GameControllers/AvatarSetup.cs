@@ -16,21 +16,31 @@ public class AvatarSetup : MonoBehaviour
         PV = GetComponent<PhotonView>();
         if (PV.IsMine)
         {
-            PV.RPC("RPC_AddCharacter", RpcTarget.AllBuffered, PlayerInfo.instance.SelectedIndex);
+            PV.RPC(
+                "RPC_AddCharacter", 
+                RpcTarget.AllBuffered, 
+                PlayerInfo.instance.SelectedIndex,
+                PlayerInfo.instance.ColorIndex
+                );
             Camera.main.GetComponent<CameraController>().FocusObject = gameObject;
         }
     }
 
     [PunRPC]
-    void RPC_AddCharacter(int characterIndex)
+    void RPC_AddCharacter(int characterIndex, int colorIndex)
     {
         characterValue = characterIndex;
+        //Character
         myCharacter = Instantiate(
             PlayerInfo.instance.allCharacters[characterIndex].prefab,
             transform.position,
             transform.rotation,
             transform
             );
+        //Color
+        myCharacter.FindComponent<PlayerController>().playerColor =
+            PlayerInfo.instance.allColors[colorIndex];
+        //Stunned Delegate
         myCharacter.GetComponent<Stunnable>().onStunned +=
             (stunned) => GetComponent<BlinkEffect>().Blinking = stunned;
     }

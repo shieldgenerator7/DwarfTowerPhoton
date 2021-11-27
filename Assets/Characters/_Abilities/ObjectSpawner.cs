@@ -14,6 +14,8 @@ public class ObjectSpawner : MonoBehaviour
     [Tooltip("Info for what objects can be spawned")]
     public List<ObjectSpawnInfo> objectSpawnInfoList;
 
+    public Color PlayerColor { get; set; } = Color.white;
+
     private TeamToken teamToken;
     public PhotonView PV { get; private set; }
 
@@ -62,6 +64,15 @@ public class ObjectSpawner : MonoBehaviour
             if (osi.inheritTeamToken)
             {
                 TeamToken.seeRecruiter(go, teamToken.owner, true);
+            }
+            //Color
+            if (osi.inheritColor)
+            {
+                Color playerColor = PlayerColor;
+                go.FindComponents<SpriteRenderer>()
+                    .ForEach(sr => sr.color = playerColor);
+                go.FindComponents<ObjectSpawner>()
+                    .ForEach(os => os.PlayerColor = playerColor);
             }
             //Delegate
             onObjectSpawned?.Invoke(go, position, dir);

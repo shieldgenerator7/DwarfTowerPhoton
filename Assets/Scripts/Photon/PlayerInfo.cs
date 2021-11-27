@@ -32,6 +32,26 @@ public class PlayerInfo : MonoBehaviour
 
     public List<CharacterInfo> allCharacters;
 
+    private int colorIndex = -1;
+    public int ColorIndex
+    {
+        get => (colorIndex >= 0)
+            ? colorIndex
+            : allColors.IndexOf(SelectedCharacter.defaultColor);
+        set => colorIndex = Mathf.Clamp(value, 0, allColors.Count);
+    }
+    public Color SelectedColor
+    {
+        get => (colorIndex >= 0)
+            ? allColors[colorIndex]
+            : SelectedCharacter.defaultColor;
+        set
+        {
+            ColorIndex = allColors.IndexOf(value);
+        }
+    }
+    public List<Color> allColors;
+
     private void Awake()
     {
         if (instance == null)

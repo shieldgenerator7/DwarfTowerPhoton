@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public Color playerColor = Color.white;
     public AminaReloader aminaReloader;//ability called by default when the player runs out of amina
     [SerializeField]
     private AbilityContext abilityContext;
@@ -55,6 +56,7 @@ public class PlayerController : MonoBehaviour
     protected AminaPool aminaPool;
     public PlayerMovement playerMovement { get; private set; }
     protected StatKeeper statKeeper;
+    private ObjectSpawner objectSpawner;
 
     // Start is called before the first frame update
     void Start()
@@ -110,6 +112,9 @@ public class PlayerController : MonoBehaviour
             }
             //PlayerMovement
             playerMovement = gameObject.FindComponent<PlayerMovement>();
+            //ObjectSpawner
+            objectSpawner = gameObject.FindComponent<ObjectSpawner>();
+            objectSpawner.PlayerColor = playerColor;
         }
         foreach (string input in new string[] { "Ability1", "Ability2", "Ability3", "Reload" })
         {

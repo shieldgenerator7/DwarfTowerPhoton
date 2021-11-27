@@ -43,6 +43,18 @@ public static class Utility
         return comp;
     }
 
+    public static List<T> FindComponents<T>(this GameObject go, bool searchChildren = true) where T : Component
+    {
+        List<T> compList = new List<T>();
+        compList.Add(go.GetComponent<T>());
+        if (searchChildren)
+        {
+            compList.AddRange(go.GetComponentsInChildren<T>());
+        }
+        compList.RemoveAll(t => !t);
+        return compList;
+    }
+
     public static bool isMoving(this Rigidbody2D rb2d)
     {
         return rb2d.velocity.sqrMagnitude > 0.1f;
