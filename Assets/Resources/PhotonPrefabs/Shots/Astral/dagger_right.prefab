@@ -221,6 +221,7 @@ MonoBehaviour:
   damagesShots: 1
   damagesObjects: 1
   damagesPlayers: 1
+  destroyOnIndestructible: 0
   multiplierLayer:
     moveSpeed: -1
     maxHits: -1

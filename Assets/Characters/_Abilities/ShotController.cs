@@ -32,6 +32,9 @@ public class ShotController : MonoBehaviour
     public bool damagesObjects = false;
     public bool damagesPlayers = false;
 
+    [Tooltip("Should this shot destroy itself when it hits an undestroyable object (ex: border walls, caravan)?")]
+    public bool destroyOnIndestructible = true;
+
     //
     // Components
     //
@@ -141,7 +144,10 @@ public class ShotController : MonoBehaviour
         }
         else if (!collision.isTrigger)
         {
-            health.Health = 0;
+            if (destroyOnIndestructible)
+            {
+                health.Health = 0;
+            }
         }
     }
 
