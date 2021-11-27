@@ -112,9 +112,11 @@ public class PlayerController : MonoBehaviour
             }
             //PlayerMovement
             playerMovement = gameObject.FindComponent<PlayerMovement>();
-            //ObjectSpawner
+            //ObjectSpawner and Color
             objectSpawner = gameObject.FindComponent<ObjectSpawner>();
             objectSpawner.PlayerColor = playerColor;
+            gameObject.FindComponents<SpriteRenderer>()
+                .ForEach(sr => sr.color = playerColor);
         }
         foreach (string input in new string[] { "Ability1", "Ability2", "Ability3", "Reload" })
         {

@@ -73,6 +73,8 @@ public class ObjectSpawner : MonoBehaviour
                     .ForEach(sr => sr.color = playerColor);
                 go.FindComponents<ObjectSpawner>()
                     .ForEach(os => os.PlayerColor = playerColor);
+                go.FindComponents<ObjectAutoSpawner>()
+                    .ForEach(oas => oas.PlayerColor = playerColor);
             }
             //Delegate
             onObjectSpawned?.Invoke(go, position, dir);
