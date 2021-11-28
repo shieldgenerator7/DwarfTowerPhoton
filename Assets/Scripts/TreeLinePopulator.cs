@@ -43,7 +43,10 @@ public class TreeLinePopulator : MonoBehaviour
     }
     void populateTree(Vector2 pos, float buffer)
     {
-        GameObject tree = Instantiate(treePrefab, transform);
+        GameObject tree = (GameObject)PrefabUtility.InstantiatePrefab(
+            treePrefab, 
+            gameObject.scene
+            );
         setTreePosition(tree, pos + (Vector2.up * buffer));
         trees.Add(tree);
         tree.transform.parent = folder;
