@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ChargedShotController : ShotController
 {
-    public StatLayer multiplierLayer = new StatLayer();
+    public StatMatrixComponent multiplierLayer;
 
     protected float multiplier = 0;
 
@@ -32,7 +32,7 @@ public class ChargedShotController : ShotController
     [PunRPC]
     public void RPC_ChargeStats(float multiplier)
     {
-        stats = statBase.Charge(multiplier, multiplierLayer);
+        StatLayer stats = statKeeper.selfStats.StatBase.Charge(multiplier, multiplierLayer.Stats);
     }
 
     /// <summary>
