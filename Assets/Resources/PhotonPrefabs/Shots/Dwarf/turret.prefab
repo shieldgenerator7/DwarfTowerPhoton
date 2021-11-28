@@ -376,3 +376,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   damagableTypes: 00000000
+  damageOnTrigger: 1
+  damageOnCollide: 1
+  damageFriendlies: 0

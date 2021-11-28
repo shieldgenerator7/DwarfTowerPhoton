@@ -161,6 +161,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   damagableTypes: 00000000
+  damageOnTrigger: 1
+  damageOnCollide: 1
+  damageFriendlies: 0
 --- !u!114 &3164144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -825,6 +828,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   damagableTypes: 00000000
+  damageOnTrigger: 1
+  damageOnCollide: 1
+  damageFriendlies: 0
 --- !u!114 &205528651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1192,6 +1198,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   damagableTypes: 00000000
+  damageOnTrigger: 1
+  damageOnCollide: 1
+  damageFriendlies: 0
 --- !u!114 &441869301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1382,6 +1391,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   damagableTypes: 00000000
+  damageOnTrigger: 1
+  damageOnCollide: 1
+  damageFriendlies: 0
 --- !u!114 &477844005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2064,6 +2076,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   damagableTypes: 00000000
+  damageOnTrigger: 1
+  damageOnCollide: 1
+  damageFriendlies: 0
 --- !u!114 &760215699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2309,6 +2324,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   damagableTypes: 00000000
+  damageOnTrigger: 1
+  damageOnCollide: 1
+  damageFriendlies: 0
 --- !u!114 &917246120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2810,6 +2828,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   damagableTypes: 00000000
+  damageOnTrigger: 1
+  damageOnCollide: 1
+  damageFriendlies: 0
 --- !u!114 &1057769683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3000,6 +3021,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   damagableTypes: 00000000
+  damageOnTrigger: 1
+  damageOnCollide: 1
+  damageFriendlies: 0
 --- !u!114 &1097759878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3336,6 +3360,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   damagableTypes: 00000000
+  damageOnTrigger: 1
+  damageOnCollide: 1
+  damageFriendlies: 0
 --- !u!114 &1362350471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3778,6 +3805,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   damagableTypes: 00000000
+  damageOnTrigger: 1
+  damageOnCollide: 1
+  damageFriendlies: 0
 --- !u!114 &1641088223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4193,6 +4223,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   damagableTypes: 00000000
+  damageOnTrigger: 1
+  damageOnCollide: 1
+  damageFriendlies: 0
 --- !u!114 &1856098952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4383,6 +4416,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   damagableTypes: 00000000
+  damageOnTrigger: 1
+  damageOnCollide: 1
+  damageFriendlies: 0
 --- !u!114 &1876390514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4665,6 +4701,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   damagableTypes: 00000000
+  damageOnTrigger: 1
+  damageOnCollide: 1
+  damageFriendlies: 0
 --- !u!114 &1917806124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4855,6 +4894,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   damagableTypes: 00000000
+  damageOnTrigger: 1
+  damageOnCollide: 1
+  damageFriendlies: 0
 --- !u!114 &2088959234
 MonoBehaviour:
   m_ObjectHideFlags: 0
