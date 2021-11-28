@@ -84,6 +84,18 @@ public class PlayerInfo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Check default colors
+        foreach (CharacterInfo charInfo in allCharacters)
+        {
+            if (!allColors.Contains(charInfo.defaultColor))
+            {
+                allColors.Add(charInfo.defaultColor);
+                Debug.LogError(
+                    "defaultColor not in the list! adding color: "
+                    + ColorUtility.ToHtmlStringRGB(charInfo.defaultColor)
+                    );
+            }
+        }
         //if (PlayerPrefs.HasKey("MyCharacter"))
         //{
         //    mySelectedCharacter = PlayerPrefs.GetInt("MyCharacter");
