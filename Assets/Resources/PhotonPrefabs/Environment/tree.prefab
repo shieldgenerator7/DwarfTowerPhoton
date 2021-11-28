@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab49dea0eb78a7a43aafe9024717e71c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  health: 100
+  maxHealth: 10
+  health: 10
   entityType: 1
 --- !u!114 &9084698518903380132
 MonoBehaviour:
