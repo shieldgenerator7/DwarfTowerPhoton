@@ -19,10 +19,13 @@ public class ShotController : MonoBehaviour
         protected set
         {
             _stats = value;
+            onStatsChanged?.Invoke(_stats);
         }
     }
     [SerializeField]
     private StatLayer _stats;
+    public delegate void OnStatsChanged(StatLayer stats);
+    public event OnStatsChanged onStatsChanged;
 
     [Tooltip("Should this shot destroy itself when it hits an undestroyable object (ex: border walls, caravan)?")]
     public bool destroyOnIndestructible = true;
@@ -67,6 +70,8 @@ public class ShotController : MonoBehaviour
         set => _owner = value;
     }
 
+    protected Damager damager { get; private set; }
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -90,6 +95,39 @@ public class ShotController : MonoBehaviour
                 GetComponent<Collider2D>().enabled = false;
             }
         };
+        //Damage
+        damager = gameObject.FindComponent<Damager>();
+        //Delegates
+        onStatsChanged += updateFromStats;
+        updateFromStats(stats);
+    }
+
+    protected virtual void updateFromStats(StatLayer statLayer)
+    {
+        //TODO: Implement all these stats, and more
+        ////Move Speed
+        //if (statLayer.moveSpeed != StatLayer.STAT_IGNORE)
+        //{
+        //    if (rb2d)
+        //    {
+        //        rb2d.velocity = rb2d.velocity.normalized * statLayer.moveSpeed;
+        //    }
+        //}
+        ////HealthPool
+        //if (statLayer.maxHits != StatLayer.STAT_IGNORE)
+        //{
+        //    health.MaxHealth = statLayer.maxHits;
+        //}
+        //Damage
+        if (statLayer.damage != StatLayer.STAT_IGNORE)
+        {
+            damager.damage = statLayer.damage;
+        }
+        ////Size
+        //if (statLayer.size != StatLayer.STAT_IGNORE)
+        //{
+        //    transform.localScale = Vector3.one * statLayer.size;
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
