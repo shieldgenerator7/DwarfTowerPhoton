@@ -13,6 +13,8 @@ public class CaravanController : MonoBehaviour
     public Collider2D detectionColl;//the collider that detects which players are pushing
     private RaycastHit2D[] rch2ds = new RaycastHit2D[100];//used for detection
 
+    public SpriteRenderer contestEffect;
+
     private Dictionary<TeamTokenCaptain, float> teamCaptains = new Dictionary<TeamTokenCaptain, float>();
 
     private static CaravanController instance;
@@ -34,6 +36,7 @@ public class CaravanController : MonoBehaviour
             teamCaptains.Add(ttc, 0);
         }
         updateDirection();
+        contestEffect.enabled = false;
     }
 
     private void Update()
@@ -115,6 +118,25 @@ public class CaravanController : MonoBehaviour
             }
             //Turn off the caravan for good
             Destroy(this);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //Show contest effect only for the contesting player
+        PlayerController pc = collision.gameObject.FindComponent<PlayerController>();
+        if (pc && pc.PV.IsMine)
+        {
+            contestEffect.enabled = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        //Hide contest effect only for the contesting player
+        PlayerController pc = collision.gameObject.FindComponent<PlayerController>();
+        if (pc && pc.PV.IsMine)
+        {
+            contestEffect.enabled = false;
         }
     }
 }
