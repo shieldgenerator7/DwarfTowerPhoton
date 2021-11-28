@@ -179,4 +179,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
-  damagableTypes: 00000000
+  damagableTypes: 0000000001000000
