@@ -1015,7 +1015,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 708f42734f49d704991a74e1913a0966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInfo: {fileID: 1002606577}
   characterImage: {fileID: 21162455}
   characterImageBackground: {fileID: 2029497891}
   characterSelectGroup: {fileID: 339120245}

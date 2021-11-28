@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class MenuDisplay : MonoBehaviour
 {
-    public PlayerInfo playerInfo;
     [Header("Character Select")]
     public Image characterImage;
     public Image characterImageBackground;
@@ -17,6 +16,7 @@ public class MenuDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PlayerInfo playerInfo = PlayerInfo.instance;
         playerInfo.onSelectedIndexChanged += updateCharacterImage;
         playerInfo.SelectedIndex = Random.Range(0, playerInfo.allCharacters.Count);
         updateCharacterImage(playerInfo.SelectedIndex);
@@ -25,10 +25,17 @@ public class MenuDisplay : MonoBehaviour
         populateCharacterSelect();
         populateColorSelect();
     }
+    private void OnDestroy()
+    {
+        PlayerInfo playerInfo = PlayerInfo.instance;
+        playerInfo.onSelectedIndexChanged -= updateCharacterImage;
+        playerInfo.onSelectedColorChanged -= updateColorImage;
+    }
     void populateCharacterSelect()
     {
+        List<CharacterInfo> allCharacters = PlayerInfo.instance.allCharacters;
         //Create character select buttons
-        foreach (CharacterInfo charInfo in playerInfo.allCharacters)
+        foreach (CharacterInfo charInfo in allCharacters)
         {
             GameObject btnCharSel = Instantiate(characterSelectButtonPrefab);
             btnCharSel.transform.parent = characterSelectGroup.transform;
@@ -45,7 +52,7 @@ public class MenuDisplay : MonoBehaviour
         }
         //Resize grid layout
         RectTransform rect = characterSelectGroup.GetComponent<RectTransform>();
-        int charCount = playerInfo.allCharacters.Count;
+        int charCount = allCharacters.Count;
         int width = charCount * 100 + (charCount + 1) * 10;
         rect.sizeDelta = new Vector2(
             width,
@@ -61,8 +68,9 @@ public class MenuDisplay : MonoBehaviour
 
     void populateColorSelect()
     {
+        List<Color> allColors = PlayerInfo.instance.allColors;
         //Create character select buttons
-        foreach (Color color in playerInfo.allColors)
+        foreach (Color color in allColors)
         {
             GameObject btnColorSel = Instantiate(colorSelectButtonPrefab);
             btnColorSel.transform.parent = colorSelectGroup.transform;
@@ -86,6 +94,7 @@ public class MenuDisplay : MonoBehaviour
 
     void updateCharacterImage(int index)
     {
+        PlayerInfo playerInfo = PlayerInfo.instance;
         CharacterInfo charInfo = playerInfo.allCharacters[index];
         characterImage.sprite = charInfo.sprite;
         characterImage.color = playerInfo.SelectedColor;
@@ -93,6 +102,6 @@ public class MenuDisplay : MonoBehaviour
 
     void updateColorImage(int index)
     {
-        characterImage.color = playerInfo.allColors[index];
+        characterImage.color = PlayerInfo.instance.allColors[index];
     }
 }

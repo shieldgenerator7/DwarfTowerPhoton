@@ -73,15 +73,12 @@ public class PlayerInfo : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
         else
         {
-            if (instance != this)
-            {
-                Destroy(this.gameObject);
-            }
+            Destroy(this.gameObject);
         }
-        DontDestroyOnLoad(this.gameObject);
     }
 
     // Start is called before the first frame update
@@ -120,7 +117,7 @@ public class PlayerInfo : MonoBehaviour
             return selectedIndex;
         }
         //Select untaken color from preferences
-        foreach(int colorIndex in colorPreferences)
+        foreach (int colorIndex in colorPreferences)
         {
             if (untakenColors.Contains(colorIndex))
             {
