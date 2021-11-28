@@ -43,8 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c84324157417744a760960dd61b69c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamCaptain: {fileID: 0}
-  owner: {fileID: 0}
+  teamCaptain: {fileID: 7351537156668849939}
+  owner: {fileID: 7351537156668849939}
 --- !u!1 &1852675302
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,8 +88,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c84324157417744a760960dd61b69c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamCaptain: {fileID: 0}
-  owner: {fileID: 0}
+  teamCaptain: {fileID: 7351537156668849939}
+  owner: {fileID: 7351537156668849939}
 --- !u!1 &1385570900420768267
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,6 +103,8 @@ GameObject:
   - component: {fileID: 4608137011960805165}
   - component: {fileID: 748800143414026977}
   - component: {fileID: 7351537156668849939}
+  - component: {fileID: 4379444278133548352}
+  - component: {fileID: 487115809389237599}
   - component: {fileID: 8966888087346444359}
   m_Layer: 6
   m_Name: flag
@@ -242,7 +244,35 @@ MonoBehaviour:
   teamCaptain: {fileID: 7351537156668849939}
   owner: {fileID: 7351537156668849939}
   spawnPoints:
-  - {fileID: 1385570900420768267}
+  - {fileID: 861237106}
+  - {fileID: 1852675302}
+--- !u!114 &4379444278133548352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385570900420768267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8838f0ed66cfee448af35cb4b9193873, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &487115809389237599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385570900420768267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab49dea0eb78a7a43aafe9024717e71c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10000
+  health: 10000
+  entityType: 1
 --- !u!114 &8966888087346444359
 MonoBehaviour:
   m_ObjectHideFlags: 0

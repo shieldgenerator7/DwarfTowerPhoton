@@ -92,30 +92,9 @@ public class CaravanController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        HealthPool hp = collision.gameObject.FindComponent<HealthPool>();
-        if (hp)
-        {
-            hp.Health -= hp.MaxHealth;
-        }
         //Checking if the game should end (when the caravan hits a team flag)
         if (collision.gameObject.CompareTag("TeamFlag"))
-        {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                TeamTokenCaptain ttc = collision.gameObject.GetComponent<TeamTokenCaptain>();
-                if (teamCaptains.ContainsKey(ttc))
-                {
-                    teamCaptains.Remove(ttc);
-                }
-                if (teamCaptains.Count == 1)
-                {
-                    foreach (TeamTokenCaptain ttcWin in teamCaptains.Keys)
-                    {
-                        GameSetup.showResultsScreen(ttcWin);
-                        break;//only let one team win
-                    }
-                }
-            }
+        {            
             //Turn off the caravan for good
             Destroy(this);
         }

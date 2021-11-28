@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 5805177630514372060}
   - component: {fileID: 6696323203719167965}
   - component: {fileID: 8316750907752029666}
+  - component: {fileID: 5183398110805307343}
   m_Layer: 7
   m_Name: caravan
   m_TagString: Untagged
@@ -326,3 +327,20 @@ MonoBehaviour:
   maxAllowedDistance: 3
   detectionColl: {fileID: 6696323203719167965}
   contestEffect: {fileID: 1099762645652554341}
+--- !u!114 &5183398110805307343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5805177630514372061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dbb34bdc9fc63f41a859d4e6c6ae4c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10000
+  damagableTypes: 000000000100000002000000
+  damageOnTrigger: 0
+  damageOnCollide: 1
+  damageFriendlies: 1
