@@ -125,9 +125,18 @@ public class CaravanController : MonoBehaviour
     {
         //Show contest effect only for the contesting player
         PlayerController pc = collision.gameObject.FindComponent<PlayerController>();
-        if (pc && pc.PV.IsMine)
+        if (pc && pc.PV.IsMine && !pc.stunnable.Stunned)
         {
             contestEffect.enabled = true;
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        //Show contest effect only for the contesting player
+        PlayerController pc = collision.gameObject.FindComponent<PlayerController>();
+        if (pc && pc.PV.IsMine )
+        {
+            contestEffect.enabled = !pc.stunnable.Stunned;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
