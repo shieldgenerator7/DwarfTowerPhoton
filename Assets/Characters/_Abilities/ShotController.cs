@@ -113,11 +113,11 @@ public class ShotController : MonoBehaviour
         //        rb2d.velocity = rb2d.velocity.normalized * statLayer.moveSpeed;
         //    }
         //}
-        ////HealthPool
-        //if (statLayer.maxHits != StatLayer.STAT_IGNORE)
-        //{
-        //    health.MaxHealth = statLayer.maxHits;
-        //}
+        //HealthPool
+        if (statLayer.maxHits != StatLayer.STAT_IGNORE)
+        {
+            health.MaxHealth = statLayer.maxHits;
+        }
         //Damage
         if (statLayer.damage != StatLayer.STAT_IGNORE)
         {

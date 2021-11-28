@@ -271,7 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statBase:
     moveSpeed: 0
-    maxHits: 100
+    maxHits: 5
     fireRate: -1
     damage: 1
     size: 1
@@ -302,8 +302,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab49dea0eb78a7a43aafe9024717e71c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
-  health: 0
+  maxHealth: 5
+  health: 5
   entityType: 1
 --- !u!114 &8747221168754918979
 MonoBehaviour:
