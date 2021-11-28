@@ -34,6 +34,8 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
         }
     }
 
+    public bool showTimeContinually = false;
+
     //Delayed Start
     private bool readyToCount;
     private bool readyToStart;
@@ -89,9 +91,12 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        if (Mathf.Approximately(Time.time, Mathf.Floor(Time.time)))
+        if (showTimeContinually)
         {
-            Debug.Log("Update: time: " + Time.time);
+            if (Mathf.Approximately(Time.time, Mathf.Floor(Time.time)))
+            {
+                Debug.Log("Update: time: " + Time.time);
+            }
         }
         if (MultiplayerSetting.instance.delayStart)
         {

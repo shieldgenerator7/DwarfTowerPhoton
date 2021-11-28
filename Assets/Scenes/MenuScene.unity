@@ -1096,6 +1096,7 @@ MonoBehaviour:
   playersInRoom: 0
   myNumberInRoom: 0
   _playersInGame: 0
+  showTimeContinually: 0
 --- !u!1 &1002606570
 GameObject:
   m_ObjectHideFlags: 0
