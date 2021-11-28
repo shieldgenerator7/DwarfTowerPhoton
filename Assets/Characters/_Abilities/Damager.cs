@@ -18,6 +18,14 @@ public class Damager : MonoBehaviour
     //{
     //    processCollision(collision, false);
     //}
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        processCollision(collision.collider, true);
+    }
+    //private void OnCollisionStay2D(Collision2D collision)
+    //{
+    //    processCollision(collision.collider, false);
+    //}
 
     protected virtual void processCollision(Collider2D collision, bool useInitialDamage)
     {
