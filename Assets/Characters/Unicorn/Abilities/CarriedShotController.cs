@@ -7,7 +7,7 @@ public class CarriedShotController : ShotController
 {
     [SerializeField]
     [Tooltip("The max stats this shot can reach at full charge")]
-    private StatMatrixComponent statMax;
+    private StatLayer statMax = new StatLayer();
     [Tooltip("Max time until the carried shot reaches max level")]
     public float maxTime = 5;
     [Tooltip("The initial position data")]
@@ -30,7 +30,7 @@ public class CarriedShotController : ShotController
                 dataCurrent.rotationAngle = Mathf.Lerp(dataBase.rotationAngle, dataFinal.rotationAngle, carryPercent);
                 dataCurrent.holdBuffer = Mathf.Lerp(dataBase.holdBuffer, dataFinal.holdBuffer, carryPercent);
                 dataCurrent.size = Mathf.Lerp(dataBase.size, dataFinal.size, carryPercent);
-                StatLayer stats = StatLayer.Lerp(statKeeper.selfStats.StatBase, statMax.statMatrix.Stats, carryPercent);
+                stats = StatLayer.Lerp(statBase, statMax, carryPercent);
             }
         }
     }

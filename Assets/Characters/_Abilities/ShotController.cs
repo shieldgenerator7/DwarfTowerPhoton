@@ -5,18 +5,48 @@ using UnityEngine;
 
 public class ShotController : MonoBehaviour
 {
+    //
+    // Settings
+    //
+    [SerializeField]
+    protected StatLayer statBase = new StatLayer();
+    /// <summary>
+    /// Current stats
+    /// </summary>
+    public StatLayer stats
+    {
+        get => _stats;
+        protected set
+        {
+            _stats = value;
+        }
+    }
+    [SerializeField]
+    private StatLayer _stats;
+
     [Tooltip("Should this shot destroy itself when it hits an undestroyable object (ex: border walls, caravan)?")]
     public bool destroyOnIndestructible = true;
 
     //
     // Components
     //
-    protected StatKeeper statKeeper { get; private set; }
 
     protected HealthPool health { get; private set; }
-    
-    protected Rigidbody2D rb2d { get; private set; }
 
+
+    private new Rigidbody2D rigidbody2D;
+    protected Rigidbody2D rb2d
+    {
+        get
+        {
+            if (rigidbody2D == null)
+            {
+                rigidbody2D = GetComponent<Rigidbody2D>();
+            }
+            return rigidbody2D;
+        }
+        private set { rigidbody2D = value; }
+    }
     protected PhotonView photonView;
     public PhotonView PV
     {
@@ -40,14 +70,15 @@ public class ShotController : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        //RB2D
-        rb2d = gameObject.FindComponent<Rigidbody2D>(); 
+        stats = statBase;
         if (rb2d)
         {
-            rb2d.velocity = transform.up;
+            rb2d.velocity = transform.up * _stats.moveSpeed;
         }
         //HealthPool
         health = GetComponent<HealthPool>();
+        health.MaxHealth = _stats.maxHits;
+        health.Health = health.MaxHealth;
         health.onDied += () =>
         {
             if (PV.IsMine)
@@ -59,20 +90,6 @@ public class ShotController : MonoBehaviour
                 GetComponent<Collider2D>().enabled = false;
             }
         };
-        //StatKeeper
-        statKeeper = gameObject.FindComponent<StatKeeper>();
-        statKeeper.selfStats.onStatChanged += onStatsChanged;
-        onStatsChanged(statKeeper.selfStats.Stats);
-        health.Health = health.MaxHealth;
-    }
-
-    protected virtual void onStatsChanged(StatLayer stats)
-    {
-        if (rb2d)
-        {
-            rb2d.velocity = rb2d.velocity.normalized * stats.moveSpeed;
-        }
-        health.MaxHealth = stats.maxHits;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

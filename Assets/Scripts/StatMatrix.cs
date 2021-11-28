@@ -8,7 +8,6 @@ public class StatMatrix
     [SerializeField]
     [Tooltip("The base stats. Does not change during runtime")]
     private StatLayer statBase = new StatLayer();
-    public StatLayer StatBase => statBase;
 
     [SerializeField]
     [Tooltip("The current stats. Exposed for test purposes")]
