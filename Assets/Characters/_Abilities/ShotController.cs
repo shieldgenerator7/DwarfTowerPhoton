@@ -82,19 +82,22 @@ public class ShotController : MonoBehaviour
         }
         //HealthPool
         health = GetComponent<HealthPool>();
-        health.MaxHealth = _stats.maxHits;
-        health.Health = health.MaxHealth;
-        health.onDied += () =>
+        if (health)
         {
-            if (PV.IsMine)
+            health.MaxHealth = _stats.maxHits;
+            health.Health = health.MaxHealth;
+            health.onDied += () =>
             {
-                PhotonNetwork.Destroy(this.gameObject);
-            }
-            else
-            {
-                GetComponent<Collider2D>().enabled = false;
-            }
-        };
+                if (PV.IsMine)
+                {
+                    PhotonNetwork.Destroy(this.gameObject);
+                }
+                else
+                {
+                    GetComponent<Collider2D>().enabled = false;
+                }
+            };
+        }
         //Damage
         damager = gameObject.FindComponent<Damager>();
         //Delegates
@@ -114,9 +117,12 @@ public class ShotController : MonoBehaviour
         //    }
         //}
         //HealthPool
-        if (statLayer.maxHits != StatLayer.STAT_IGNORE)
+        if (health)
         {
-            health.MaxHealth = statLayer.maxHits;
+            if (statLayer.maxHits != StatLayer.STAT_IGNORE)
+            {
+                health.MaxHealth = statLayer.maxHits;
+            }
         }
         //Damage
         if (statLayer.damage != StatLayer.STAT_IGNORE)

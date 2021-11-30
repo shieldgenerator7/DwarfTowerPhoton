@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilities:
-  - {fileID: 5500888993561376432}
+  - {fileID: 5940706724890032380}
   - {fileID: 7965155679531435341}
   - {fileID: 8666854124826083951}
   - {fileID: 3369071877670158181}
@@ -322,7 +322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   folderName: Shots/Sniper
   objectSpawnInfoList:
-  - {fileID: 11400000, guid: 08a9426390ca6b04fa30b8300e014ada, type: 2}
+  - {fileID: 11400000, guid: 22f4757fab66bcb42b55a060c6a8e3f2, type: 2}
   - {fileID: 11400000, guid: dadd55cf382070149be453676d395c29, type: 2}
   - {fileID: 11400000, guid: 9d4795a8ace1bfc499512b93904cce28, type: 2}
 --- !u!114 &-3464993547012377175
@@ -445,7 +445,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6220889621231917683}
-  - component: {fileID: 5500888993561376432}
+  - component: {fileID: 5940706724890032380}
   m_Layer: 0
   m_Name: Ability1
   m_TagString: Untagged
@@ -467,7 +467,7 @@ Transform:
   m_Father: {fileID: 1073061482865175048}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5500888993561376432
+--- !u!114 &5940706724890032380
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -476,12 +476,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7577088886736187312}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83413c13fefadf64bab9596e5332f75f, type: 3}
+  m_Script: {fileID: 11500000, guid: 4972108ce15f5d0409335d1c7583cfc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 5
+  manaCost: 25
   buttonName: Ability1
-  hidesOtherInputs: 0
-  abilityID: 2
-  fireDelay: 0.5
-  shotIndex: 0
+  hidesOtherInputs: 1
+  abilityID: 0
+  laserIndex: 0
