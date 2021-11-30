@@ -141,11 +141,11 @@ MonoBehaviour:
     size: 0
   destroyOnIndestructible: 0
   startWidth: 1
-  endWidth: 0.1
-  startAlpha: 0.1
+  endWidth: 0.2
+  startAlpha: 0.2
   endAlpha: 1
-  closeInDuration: 0.5
-  stayDuration: 0.2
+  closeInDuration: 1
+  stayDuration: 0.5
   range: 100
 --- !u!114 &571
 MonoBehaviour:
