@@ -137,9 +137,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilities:
-  - {fileID: 7133168848261502530}
-  - {fileID: 8666854124826083951}
   - {fileID: 5500888993561376432}
+  - {fileID: 7965155679531435341}
+  - {fileID: 8666854124826083951}
   - {fileID: 3369071877670158181}
 --- !u!114 &3854592228582004885
 MonoBehaviour:
@@ -323,7 +323,7 @@ MonoBehaviour:
   folderName: Shots/Sniper
   objectSpawnInfoList:
   - {fileID: 11400000, guid: 08a9426390ca6b04fa30b8300e014ada, type: 2}
-  - {fileID: 11400000, guid: d682e5faad624fa4482ee30a419b27a4, type: 2}
+  - {fileID: 11400000, guid: dadd55cf382070149be453676d395c29, type: 2}
   - {fileID: 11400000, guid: 9d4795a8ace1bfc499512b93904cce28, type: 2}
 --- !u!114 &-3464993547012377175
 MonoBehaviour:
@@ -347,7 +347,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1913788795788701171}
-  - component: {fileID: 7133168848261502530}
+  - component: {fileID: 7965155679531435341}
   m_Layer: 0
   m_Name: Ability2
   m_TagString: Untagged
@@ -369,7 +369,7 @@ Transform:
   m_Father: {fileID: 1073061482865175048}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7133168848261502530
+--- !u!114 &7965155679531435341
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -378,21 +378,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2299017120802892305}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 410d7b1fe69fd9248838e7e67f6ada50, type: 3}
+  m_Script: {fileID: 11500000, guid: 83413c13fefadf64bab9596e5332f75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 0
+  manaCost: 10
   buttonName: Ability2
-  hidesOtherInputs: 1
+  hidesOtherInputs: 0
   abilityID: 3
-  aminaReservedPerSecond: 5
-  expectedAnimaReserved: 10
-  minAminaReserved: 5.1
-  chargedShotIndex: 1
-  maxSpawnBufferExtension: 0
-  previewPrefab: {fileID: 3363737750353282456, guid: c61aa5d8c6dad3f43806362e06c103e5,
-    type: 3}
-  turretFireTrigger: {fileID: 5500888993561376432}
+  fireDelay: 1
+  shotIndex: 1
 --- !u!1 &3107006109710722385
 GameObject:
   m_ObjectHideFlags: 0
