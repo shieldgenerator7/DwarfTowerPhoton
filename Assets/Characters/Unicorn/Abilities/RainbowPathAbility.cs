@@ -19,7 +19,7 @@ public class RainbowPathAbility : PlayerAbility
     {
         base.OnButtonDown();
 
-        if (rb2d.isMoving())
+        if (CanActivate)
         {
             activate();
         }
@@ -41,7 +41,7 @@ public class RainbowPathAbility : PlayerAbility
         }
         else
         {
-            if (rb2d.isMoving())
+            if (CanActivate)
             {
                 activate();
             }
@@ -59,6 +59,8 @@ public class RainbowPathAbility : PlayerAbility
         base.OnButtonCanceled();
         deactivate();
     }
+
+    bool CanActivate => rb2d.isMoving() && !playerMovement.ForcingMovement;
 
     public void activate()
     {
@@ -83,19 +85,22 @@ public class RainbowPathAbility : PlayerAbility
     {
         active = false;
         playerMovement.forceMovement(false);
-        rainbowPath.finish(prevRainbowPath);
-        prevRainbowPath = rainbowPath;
-        rainbowPath = null;
-        prevRainbowPath.onDestroy += (rpc) =>
+        if (rainbowPath)
         {
-            if (rpc == prevRainbowPath)
+            rainbowPath.finish(prevRainbowPath);
+            prevRainbowPath = rainbowPath;
+            rainbowPath = null;
+            prevRainbowPath.onDestroy += (rpc) =>
             {
-                prevRainbowPath = null;
-            }
-            if (rpc == rainbowPath)
-            {
-                throw new UnityException("I didn't expect this to happen.");
-            }
-        };
+                if (rpc == prevRainbowPath)
+                {
+                    prevRainbowPath = null;
+                }
+                if (rpc == rainbowPath)
+                {
+                    throw new UnityException("I didn't expect this to happen.");
+                }
+            };
+        }
     }
 }

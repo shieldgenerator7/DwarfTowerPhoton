@@ -27,6 +27,8 @@ public class TrapController : ShotController
             {
                 //untrap player
                 trappedPlayer.forceMovement(false);
+                //unset startTime
+                trapStartTime = -2;
                 //destroy trap
                 if (PV.IsMine)
                 {
@@ -55,11 +57,18 @@ public class TrapController : ShotController
             if (trapTypes.Contains(hp.entityType))
             {
                 //TODO: enable trapping other types
-                trappedPlayer = hp.gameObject.FindComponent<PlayerMovement>();
-                trappedPlayer.forceMovement(Vector2.zero);
-                trappedPlayer.rb2d.transform.position = transform.position;
-                trapStartTime = Time.time;
+                trapPlayer(hp.gameObject.FindComponent<PlayerController>());
             }
         }
+    }
+
+    void trapPlayer(PlayerController playerController)
+    {
+        playerController.cancelAbilities();
+        trappedPlayer = playerController.playerMovement;
+        trappedPlayer.rb2d.velocity = Vector2.zero;
+        trappedPlayer.forceMovement(Vector2.zero);
+        trappedPlayer.rb2d.transform.position = transform.position;
+        trapStartTime = Time.time;
     }
 }

@@ -71,17 +71,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (stunned)
                 {
-                    //Cancel abilities
-                    foreach (PlayerAbility ability in abilityContext.abilities)
-                    {
-                        bool buttonUp = Input.GetButtonUp(ability.buttonName);
-                        if (Input.GetButton(ability.buttonName) || buttonUp)
-                        {
-                            ability.OnButtonCanceled();
-                        }
-                    }
-                    //Stop processing ongoing abilities
-                    processingAbilities.Clear();
+                    cancelAbilities();
                 }
                 else
                 {
@@ -185,5 +175,20 @@ public class PlayerController : MonoBehaviour
         {
             processingAbilities.Remove(ability);
         }
+    }
+
+    public void cancelAbilities()
+    {
+        //Cancel abilities
+        foreach (PlayerAbility ability in abilityContext.abilities)
+        {
+            bool buttonUp = Input.GetButtonUp(ability.buttonName);
+            if (Input.GetButton(ability.buttonName) || buttonUp)
+            {
+                ability.OnButtonCanceled();
+            }
+        }
+        //Stop processing ongoing abilities
+        processingAbilities.Clear();
     }
 }

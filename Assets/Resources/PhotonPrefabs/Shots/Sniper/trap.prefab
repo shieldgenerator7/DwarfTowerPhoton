@@ -132,7 +132,7 @@ MonoBehaviour:
     damage: 0
     size: 0
   destroyOnIndestructible: 1
-  trapDuration: 2
+  trapDuration: 10
   trapTypes: 02000000
 --- !u!114 &-845759806725884248
 MonoBehaviour:
@@ -181,7 +181,7 @@ MonoBehaviour:
   observableSearch: 0
   ObservedComponents:
   - {fileID: 0}
-  sceneViewId: 1
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &508065936224665636
