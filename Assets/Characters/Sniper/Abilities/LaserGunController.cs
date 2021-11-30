@@ -14,7 +14,7 @@ public class LaserGunController : PlayerAbility
     {
         base.OnButtonDown();
 
-        if (aminaPool.requestAmina(manaCost) > 0)
+        if (aminaPool.requestAmina(manaCost) == manaCost)
         {
             activate();
         }
@@ -76,11 +76,9 @@ public class LaserGunController : PlayerAbility
     {
         if (laserShotController)
         {
-            if (PV.IsMine)
-            {
-                PhotonNetwork.DestroyAll(laserShotController.PV.gameObject);
-            }
+            laserShotController.destroy();
             playerController.processAbility(this, false);
+            laserShotController = null;
         }
     }
 

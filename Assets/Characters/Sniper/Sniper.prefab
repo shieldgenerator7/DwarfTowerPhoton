@@ -479,7 +479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4972108ce15f5d0409335d1c7583cfc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 25
+  manaCost: 24
   buttonName: Ability1
   hidesOtherInputs: 1
   abilityID: 0

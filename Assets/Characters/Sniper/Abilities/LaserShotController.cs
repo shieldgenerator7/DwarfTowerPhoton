@@ -136,15 +136,20 @@ public class LaserShotController : ShotController
                 }
                 if (Time.time >= fireStartTime + closeInDuration + stayDuration)
                 {
-                    onLaserEnded?.Invoke();
-                    if (PV.IsMine)
-                    {
-                        PhotonNetwork.Destroy(PV.gameObject);
-                    }
+                    destroy();
                 }
             }
         }
     }
     public delegate void LaserEvent();
     public event LaserEvent onLaserEnded;
+
+    public void destroy()
+    {
+        onLaserEnded?.Invoke();
+        if (PV.IsMine)
+        {
+            PhotonNetwork.Destroy(PV.gameObject);
+        }
+    }
 }
