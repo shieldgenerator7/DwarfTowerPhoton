@@ -130,7 +130,14 @@ public class CustomMenu
     public static void testWindows()
     {
         runWindows();
-        //EditorApplication.EnterPlaymode();
+        GameLauncherSettings gls = GameObject.FindObjectOfType<GameLauncherSettings>();
+        if (gls)
+        {
+            if (gls.enterPlayMode)
+            {
+                EditorApplication.EnterPlaymode();
+            }
+        }
     }
 
     [MenuItem("SG7/Test/Build and Test Windows %#t")]
@@ -147,14 +154,50 @@ public class CustomMenu
         GameLauncherSettings gls = GameObject.FindObjectOfType<GameLauncherSettings>();
         if (gls)
         {
-            foreach (Process proc in gls.buildProcesses)
+            if (gls.enterPlayMode && EditorApplication.isPlaying)
             {
-                if (!proc.HasExited)
+                EditorApplication.ExitPlaymode();
+                EditorApplication.playModeStateChanged -= killProcessesOnPlayStateChanged;
+                EditorApplication.playModeStateChanged += killProcessesOnPlayStateChanged;
+            }
+            foreach (int procId in gls.buildProcesses)
+            {
+                try
                 {
-                    proc.Kill();
+                    Process proc = Process.GetProcessById(procId);
+                    if (!proc.HasExited)
+                    {
+                        if (proc.ProcessName == PlayerSettings.productName)
+                        {
+                            proc.Kill();
+                        }
+                        else
+                        {
+                            Debug.LogWarning("Can't kill process " + proc.ProcessName + " (" + proc.Id + ")" +
+                                " because it is not a process of " + PlayerSettings.productName);
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Can't kill process (" + proc.Id + ")" +
+                            " because it has already exited");
+                    }
+                }
+                catch (System.ArgumentException)
+                {
+                    //Debug.LogWarning("Process with id " + procId + " already terminated");
                 }
             }
             gls.buildProcesses.Clear();
+            EditorUtility.SetDirty(gls);
+        }
+    }
+    static void killProcessesOnPlayStateChanged(PlayModeStateChange pmsc)
+    {
+        if (pmsc == PlayModeStateChange.EnteredEditMode)
+        {
+            killProcesses();
+            EditorApplication.playModeStateChanged -= killProcessesOnPlayStateChanged;
         }
     }
 
@@ -171,6 +214,13 @@ public class CustomMenu
                 killProcesses();
             }
         }
+        else
+        {
+            Debug.LogWarning(
+                "No GameLauncherSettings object found!" +
+                " Make a new one or open up the Tools scene to make this tool more useful."
+                );
+        }
         string extension = "exe";
         string buildName = getBuildNamePath(extension);
         Debug.Log("Launching: " + buildName);
@@ -178,13 +228,17 @@ public class CustomMenu
         {
             // Run the game (Process class from System.Diagnostics).
             Process proc = new Process();
-            if (gls)
-            {
-                gls.buildProcesses.Add(proc);
-            }
             proc.StartInfo.FileName = buildName;
             proc.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
             proc.Start();
+            if (gls)
+            {
+                gls.buildProcesses.Add(proc.Id);
+            }
+        }
+        if (gls)
+        {
+            EditorUtility.SetDirty(gls);
         }
     }
 
