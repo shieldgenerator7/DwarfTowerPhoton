@@ -28,7 +28,10 @@ public class TrapController : ShotController
                 //untrap player
                 trappedPlayer.forceMovement(false);
                 //destroy trap
-                PhotonNetwork.Destroy(this.gameObject);
+                if (PV.IsMine)
+                {
+                    health.Health = 0;
+                }
             }
         }
     }
@@ -36,6 +39,11 @@ public class TrapController : ShotController
     protected override void processCollision(Collider2D collision, bool useInitialDamage)
     {
         base.processCollision(collision, useInitialDamage);
+        if (trapStartTime != -1)
+        {
+            //don't trap twice
+            return;
+        }
         if (TeamToken.onSameTeam(gameObject, collision.gameObject))
         {
             //don't trap teammates
