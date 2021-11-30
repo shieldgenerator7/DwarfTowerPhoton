@@ -142,6 +142,8 @@ MonoBehaviour:
   destroyOnIndestructible: 0
   startWidth: 1
   endWidth: 0.1
+  startAlpha: 0.1
+  endAlpha: 1
   closeInDuration: 0.5
   stayDuration: 0.2
   range: 100
@@ -165,7 +167,7 @@ MonoBehaviour:
   observableSearch: 0
   ObservedComponents:
   - {fileID: 2766652573436431190}
-  sceneViewId: 1
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &508065936224665636
