@@ -7,6 +7,7 @@ public class MenuDisplay : MonoBehaviour
 {
     [Header("Character Select")]
     public Image characterImage;
+    public Text characterTypeText;
     public Image characterImageBackground;
     public GridLayoutGroup characterSelectGroup;
     public GameObject characterSelectButtonPrefab;
@@ -98,6 +99,7 @@ public class MenuDisplay : MonoBehaviour
         CharacterInfo charInfo = playerInfo.allCharacters[index];
         characterImage.sprite = charInfo.sprite;
         characterImage.color = playerInfo.SelectedColor;
+        characterTypeText.text = charInfo.typeString;
     }
 
     void updateColorImage(int index)
