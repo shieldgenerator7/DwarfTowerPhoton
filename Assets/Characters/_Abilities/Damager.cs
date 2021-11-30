@@ -42,8 +42,9 @@ public class Damager : MonoBehaviour
     //    processCollision(collision.collider, false);
     //}
 
-    protected virtual void processCollision(Collider2D collision, bool useInitialDamage)
+    public void processCollision(Collider2D collision, bool useInitialDamage)
     {
+        Debug.Log("process damage from " + gameObject.name + " to " + collision.name);
         if (!damageFriendlies && TeamToken.onSameTeam(gameObject, collision.gameObject))
         {
             //don't damage teammates

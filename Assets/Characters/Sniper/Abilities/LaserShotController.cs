@@ -132,7 +132,10 @@ public class LaserShotController : ShotController
             {
                 if (!coll2d.enabled)
                 {
+                    //gameObject.SetActive(false);
                     coll2d.enabled = true;
+                    //gameObject.SetActive(true);
+                    dealInitialDamage();
                 }
                 if (Time.time >= fireStartTime + closeInDuration + stayDuration)
                 {
@@ -150,6 +153,18 @@ public class LaserShotController : ShotController
         if (PV.IsMine)
         {
             PhotonNetwork.Destroy(PV.gameObject);
+        }
+    }
+
+    void dealInitialDamage()
+    {
+        RaycastHit2D[] rch2d = new RaycastHit2D[100];
+        int count = coll2d.Cast(Vector2.zero, rch2d);
+        Damager damager = gameObject.FindComponent<Damager>();
+        for (int i = 0; i < count; i++)
+        {
+            Debug.Log("found collider: " + rch2d[i].collider.name);
+            damager.processCollision(rch2d[i].collider, true);
         }
     }
 }
