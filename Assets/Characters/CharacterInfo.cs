@@ -15,15 +15,13 @@ public class CharacterInfo : ScriptableObject
     {
         get
         {
-            string types = "";
+            string separator = " | ";// " \u2B24 ";
+            string types = separator;
             //Add all types to string
             foreach(CharacterType charType in typeList)
             {
-                types += charType + ", ";
+                types += charType + separator;
             }
-            //Trim off ending comma
-            types = types.Trim();
-            types = types.Substring(0, types.Length - 1);
             //Return
             return types;
         }
