@@ -34,6 +34,10 @@ public class TrapController : ShotController
                 {
                     health.Health = 0;
                 }
+                //Make it disappear even if it doesn't actually get destroyed
+                gameObject.FindComponent<SpriteRenderer>().enabled = false;
+                gameObject.FindComponent<Collider2D>().enabled = false;
+                this.enabled = false;
             }
         }
     }

@@ -132,7 +132,7 @@ MonoBehaviour:
     damage: 0
     size: 0
   destroyOnIndestructible: 1
-  trapDuration: 10
+  trapDuration: 2
   trapTypes: 02000000
 --- !u!114 &-845759806725884248
 MonoBehaviour:

@@ -156,7 +156,7 @@ MonoBehaviour:
   clientCount: 1
   resetClients: 1
   enterPlayMode: 1
-  buildProcesses: 0c760000
+  buildProcesses: 
 --- !u!4 &583353027
 Transform:
   m_ObjectHideFlags: 0
