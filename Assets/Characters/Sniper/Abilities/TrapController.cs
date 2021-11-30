@@ -49,6 +49,7 @@ public class TrapController : ShotController
                 //TODO: enable trapping other types
                 trappedPlayer = hp.gameObject.FindComponent<PlayerMovement>();
                 trappedPlayer.forceMovement(Vector2.zero);
+                trappedPlayer.rb2d.transform.position = transform.position;
                 trapStartTime = Time.time;
             }
         }

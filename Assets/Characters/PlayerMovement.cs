@@ -18,13 +18,13 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 LastMoveDirection { get; private set; }
 
     private PhotonView PV;
-    private Rigidbody2D rb2d;
+    public Rigidbody2D rb2d { get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
         PV = GetComponentInParent<PhotonView>();
-        rb2d = GetComponentInParent<Rigidbody2D>();
+        rb2d = gameObject.FindComponent<Rigidbody2D>();
         GetComponent<StatKeeper>().selfStats.onStatChanged += (stats) =>
         {
             movementSpeed = stats.moveSpeed;
