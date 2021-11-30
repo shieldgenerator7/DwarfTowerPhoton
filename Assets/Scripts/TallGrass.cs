@@ -32,8 +32,8 @@ public class TallGrass : MonoBehaviour
 
     void checkSetAlpha(GameObject go)
     {
-        PlayerController pc = go.GetComponent<PlayerController>();
-        if (pc)
+        HealthPool hp = go.GetComponent<HealthPool>();
+        if (hp)
         {
             if (coll2d.OverlapPoint(go.transform.position))
             {
