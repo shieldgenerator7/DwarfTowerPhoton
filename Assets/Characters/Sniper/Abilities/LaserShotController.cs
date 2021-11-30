@@ -73,12 +73,15 @@ public class LaserShotController : ShotController
     private void updateWidth()
     {
         float percent = Mathf.Clamp(
-            ((fireStartTime + closeInDuration) - Time.time) / closeInDuration,
+            1-(((fireStartTime + closeInDuration) - Time.time) / closeInDuration),
             0,
             1
             );
+        float diff = ((endWidth - startWidth) * percent);
+        float width = diff + startWidth;
+        Debug.Log("percent: " + percent + ", diff: " + diff + ", width: " + width);
         Vector3 scale = transform.localScale;
-        scale.x = ((endWidth - startWidth) * percent) + startWidth;
+        scale.x = width;
         transform.localScale = scale;
     }
 
@@ -92,6 +95,10 @@ public class LaserShotController : ShotController
         base.Start();
         coll2d = gameObject.FindComponent<Collider2D>();
         coll2d.enabled = false;
+        //Start Width
+        Vector3 scale = transform.localScale;
+        scale.x = startWidth;
+        transform.localScale = scale;
     }
 
     // Update is called once per frame
