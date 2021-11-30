@@ -179,13 +179,12 @@ public class CustomMenu
                     }
                     else
                     {
-                        Debug.LogWarning("Can't kill process (" + proc.Id + ")" +
-                            " because it has already exited");
+                        Debug.LogWarning("Process (" + proc.Id + ") has already exited");
                     }
                 }
                 catch (System.ArgumentException)
                 {
-                    //Debug.LogWarning("Process with id " + procId + " already terminated");
+                    Debug.LogWarning("Process (" + procId + ") not found, probably already terminated");
                 }
             }
             gls.buildProcesses.Clear();
