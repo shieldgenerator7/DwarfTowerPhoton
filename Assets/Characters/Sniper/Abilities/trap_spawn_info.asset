@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: trap_spawn_info
   m_EditorClassIdentifier: 
   objectName: trap
-  spawnBuffer: 0
+  spawnBuffer: 0.5
   spawnOffset: {x: 0, y: 0}
   rotateShot: 0
   inheritTeamToken: 1
