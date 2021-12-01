@@ -93,6 +93,8 @@ public class LaserShotController : ShotController
         Vector2 size = sr.size;
         size.x = width;
         sr.size = size;
+        //Coll width
+        bc2d.size = size;//use same width as sprite renderer
         //Sprite Alpha
         float alpha = (percent == 1) ? endAlpha : startAlpha;
         Color color = sr.color;
@@ -102,15 +104,15 @@ public class LaserShotController : ShotController
 
     private float fireStartTime = -1;
 
-    private Collider2D coll2d;
+    private BoxCollider2D bc2d;
     private SpriteRenderer sr;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        coll2d = gameObject.FindComponent<Collider2D>();
-        coll2d.enabled = false;
+        bc2d = gameObject.FindComponent<BoxCollider2D>();
+        bc2d.enabled = false;
         sr = gameObject.FindComponent<SpriteRenderer>();
         //Start Width
         Vector2 size = sr.size;
@@ -130,9 +132,9 @@ public class LaserShotController : ShotController
             updateWidth();
             if (Time.time >= fireStartTime + closeInDuration)
             {
-                if (!coll2d.enabled)
+                if (!bc2d.enabled)
                 {
-                    coll2d.enabled = true;
+                    bc2d.enabled = true;
                     dealInitialDamage();
                 }
                 if (Time.time >= fireStartTime + closeInDuration + stayDuration)
@@ -157,7 +159,7 @@ public class LaserShotController : ShotController
     void dealInitialDamage()
     {
         RaycastHit2D[] rch2d = new RaycastHit2D[100];
-        int count = coll2d.Cast(transform.up, rch2d, range, true);
+        int count = bc2d.Cast(transform.up, rch2d, range, true);
         for (int i = 0; i < count; i++)
         {
             damager.processCollision(rch2d[i].collider, true);
