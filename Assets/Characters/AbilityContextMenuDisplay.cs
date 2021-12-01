@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class AbilityContextMenuDisplay : MonoBehaviour
 {
-    public List<Image> separators;
+    public List<Image> colorImages;
     public List<Image> abilityIcons;
     public string reloadTextLabel = "R: ";
     public Text reloadText;
@@ -36,7 +36,7 @@ public class AbilityContextMenuDisplay : MonoBehaviour
         }
         if (acd == this.acd || !this.acd)
         {
-            separators.ForEach(img => img.enabled = show);
+            colorImages.ForEach(img => img.enabled = show);
             abilityIcons.ForEach(img => img.enabled = show);
             reloadText.enabled = show;
             if (show)
@@ -45,7 +45,9 @@ public class AbilityContextMenuDisplay : MonoBehaviour
                 abilityIcons[1].sprite = acd.ability2Sprite;
                 abilityIcons[2].sprite = acd.ability3Sprite;
                 abilityIcons.ForEach(img => img.color = acd.playerColor);
+                colorImages.ForEach(img => img.color = acd.playerColor);
                 reloadText.text = reloadTextLabel + acd.reloadText;
+                reloadText.color = acd.playerColor;
             }
             else
             {
