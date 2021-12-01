@@ -6,16 +6,16 @@ using UnityEngine;
 public class LaserShotController : ShotController
 {
     [Range(0, 2)]
-    [Tooltip("The initial width it is when it closes in")]
+    [Tooltip("The initial sprite width it is when it closes in")]
     public float startWidth = 1;
     [Range(0, 2)]
-    [Tooltip("The final width it is when it deals damage")]
+    [Tooltip("The final sprite width it is when it deals damage")]
     public float endWidth = 0.1f;
     [Range(0, 1)]
-    [Tooltip("The initial alpha it is when it closes in")]
+    [Tooltip("The alpha while closing in")]
     public float startAlpha = 0.1f;
     [Range(0, 1)]
-    [Tooltip("The final alpha it is when it deals damage")]
+    [Tooltip("The alpha while dealing damage")]
     public float endAlpha = 1;
     [Range(0, 2)]
     [Tooltip("The amount of seconds to deal damage after releasing")]
@@ -87,15 +87,14 @@ public class LaserShotController : ShotController
             0,
             1
             );
-        //Width
+        //Sprite Width
         float widthDiff = ((endWidth - startWidth) * percent);
         float width = widthDiff + startWidth;
-        Vector3 scale = transform.localScale;
-        scale.x = width;
-        transform.localScale = scale;
-        //Sprite alpha
-        float alphaDiff = ((endAlpha - startAlpha) * percent);
-        float alpha = alphaDiff + startAlpha;
+        Vector2 size = sr.size;
+        size.x = width;
+        sr.size = size;
+        //Sprite Alpha
+        float alpha = (percent == 1) ? endAlpha : startAlpha;
         Color color = sr.color;
         color.a = alpha;
         sr.color = color;
@@ -114,9 +113,9 @@ public class LaserShotController : ShotController
         coll2d.enabled = false;
         sr = gameObject.FindComponent<SpriteRenderer>();
         //Start Width
-        Vector3 scale = transform.localScale;
-        scale.x = startWidth;
-        transform.localScale = scale;
+        Vector2 size = sr.size;
+        size.x = startWidth;
+        sr.size = size;
         //Start alpha
         Color color = sr.color;
         color.a = startAlpha;
