@@ -49,4 +49,18 @@ public class HealthPool : MonoBehaviour
     [Tooltip("The type of entity this health pool represents")]
     public EntityType entityType;
 
+    private void Start()
+    {
+        //Check for rb2d
+        //rb2d (even a static one) needed for some hit detection to work (like Sniper's laser)
+        Rigidbody2D rb2d = gameObject.FindComponent<Rigidbody2D>();
+        if (!rb2d)
+        {
+            Debug.LogError(
+                "HealthPool on object " + name + " does not have a Rigidbody2D!",
+                gameObject
+                );
+        }
+    }
+
 }
