@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: grass_tall
   spawnBuffer: 0
-  spawnOffset: {x: 0, y: -1}
+  spawnOffset: {x: 0, y: -1.01}
   rotateShot: 0
   inheritTeamToken: 1
   inheritColor: 0

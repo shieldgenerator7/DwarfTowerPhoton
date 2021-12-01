@@ -144,7 +144,7 @@ MonoBehaviour:
   endWidth: 0.12
   startAlpha: 0.4
   endAlpha: 1
-  closeInDuration: 1
+  closeInDuration: 0.5
   stayDuration: 0.5
   range: 100
 --- !u!114 &571
