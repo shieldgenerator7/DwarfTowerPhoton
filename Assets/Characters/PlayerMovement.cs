@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     public Vector2 ForceMoveDirection { get; private set; }
     private bool forceMovementInput = false;
+    public bool ForcingMovement => forceMovementInput;
 
     private Vector2 prevVelocity;
     public Vector2 LastMoveDirection { get; private set; }

@@ -68,8 +68,6 @@ public class LaserShotController : ShotController
         }
     }
 
-    private List<GameObject> dealtInitialDamage = new List<GameObject>();
-
     private void recalculatePositions()
     {
         //Calculate EndPos
@@ -89,12 +87,13 @@ public class LaserShotController : ShotController
             0,
             1
             );
+        //Width
         float widthDiff = ((endWidth - startWidth) * percent);
         float width = widthDiff + startWidth;
         Vector3 scale = transform.localScale;
         scale.x = width;
         transform.localScale = scale;
-        //Sprite transparency
+        //Sprite alpha
         float alphaDiff = ((endAlpha - startAlpha) * percent);
         float alpha = alphaDiff + startAlpha;
         Color color = sr.color;
@@ -113,7 +112,6 @@ public class LaserShotController : ShotController
         base.Start();
         coll2d = gameObject.FindComponent<Collider2D>();
         coll2d.enabled = false;
-        Debug.Log("coll2d: " + coll2d);
         sr = gameObject.FindComponent<SpriteRenderer>();
         //Start Width
         Vector3 scale = transform.localScale;
@@ -135,9 +133,7 @@ public class LaserShotController : ShotController
             {
                 if (!coll2d.enabled)
                 {
-                    //gameObject.SetActive(false);
                     coll2d.enabled = true;
-                    //gameObject.SetActive(true);
                     dealInitialDamage();
                 }
                 if (Time.time >= fireStartTime + closeInDuration + stayDuration)
@@ -162,23 +158,10 @@ public class LaserShotController : ShotController
     void dealInitialDamage()
     {
         RaycastHit2D[] rch2d = new RaycastHit2D[100];
-        //ContactFilter2D filter = new ContactFilter2D();
         int count = coll2d.Cast(transform.up, rch2d, range, true);
-        Debug.Log("found colliders: " + count);
         for (int i = 0; i < count; i++)
         {
-            Debug.Log("found collider: " + rch2d[i].collider.name);
             damager.processCollision(rch2d[i].collider, true);
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D coll2d)
-    {
-        if (!dealtInitialDamage.Contains(coll2d.gameObject))
-        {
-            Debug.Log("found collider: " + coll2d.name);
-            dealtInitialDamage.Add(coll2d.gameObject);
-            damager.processCollision(coll2d, true);
         }
     }
 }
