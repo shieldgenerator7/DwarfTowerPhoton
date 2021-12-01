@@ -9,15 +9,19 @@ public class LaserGunController : PlayerAbility
     public int laserIndex;
 
     private LaserShotController laserShotController;
+    private bool tryingToShoot = false;
+    public bool Active => laserShotController || tryingToShoot;
 
     public override void OnButtonDown()
     {
         base.OnButtonDown();
 
-        if (aminaPool.requestAmina(manaCost) == manaCost)
+        tryingToShoot = true;
+        if (aminaPool.requestAmina(manaCost) > 0)
         {
             activate();
         }
+        tryingToShoot = false;
     }
 
     public override void OnButtonHeld()

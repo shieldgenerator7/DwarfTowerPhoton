@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
     private ObjectSpawner objectSpawner;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         if (PV.IsMine)
         {
@@ -92,13 +92,7 @@ public class PlayerController : MonoBehaviour
             //Auto-Reloading
             if (aminaReloader)
             {
-                aminaPool.onAminaEmpty += (amina) =>
-                {
-                    if (amina == 0 && aminaPool.ReservedAmina == 0 && !aminaReloader.Reloading)
-                    {
-                        aminaReloader.reload();
-                    }
-                };
+                aminaPool.onAminaEmpty += onAminaEmpty;
             }
             //PlayerMovement
             playerMovement = gameObject.FindComponent<PlayerMovement>();
@@ -165,6 +159,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    protected virtual void onAminaEmpty(float amina)
+    {
+        if (amina == 0 && aminaPool.ReservedAmina == 0 && !aminaReloader.Reloading)
+        {
+            aminaReloader.reload();
+        }
+    }
+
     public void processAbility(PlayerAbility ability, bool process = true)
     {
         if (process)
@@ -175,7 +177,13 @@ public class PlayerController : MonoBehaviour
         {
             processingAbilities.Remove(ability);
         }
+        if (processingAbilities.Count == 0)
+        {
+            onProcessingFinished?.Invoke();
+        }
     }
+    public delegate void OnProcessingFinished();
+    public event OnProcessingFinished onProcessingFinished;
 
     public void cancelAbilities()
     {
