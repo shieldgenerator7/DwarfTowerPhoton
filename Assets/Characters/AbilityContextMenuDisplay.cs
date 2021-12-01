@@ -54,5 +54,7 @@ public class AbilityContextMenuDisplay : MonoBehaviour
                 this.acd = null;
             }
         }
+        //Hide cursor if there's a menu
+        Cursor.visible = !this.acd;
     }
 }
