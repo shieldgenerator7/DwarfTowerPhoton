@@ -213,7 +213,7 @@ MonoBehaviour:
     moveSpeed: 7
     maxHits: 1
     fireRate: -1
-    damage: 10
+    damage: 1
     size: 1
   _stats:
     moveSpeed: 0
@@ -223,11 +223,11 @@ MonoBehaviour:
     size: 0
   destroyOnIndestructible: 0
   multiplierLayer:
-    moveSpeed: -1
-    maxHits: -1
+    moveSpeed: 2
+    maxHits: 5
     fireRate: -1
-    damage: 10
-    size: 1
+    damage: -1
+    size: -1
   previewSprite: {fileID: 0}
   aminaRefund: 20
   dataBase: {fileID: 11400000, guid: a5b42e1790c761145ad60f549e4f668e, type: 2}

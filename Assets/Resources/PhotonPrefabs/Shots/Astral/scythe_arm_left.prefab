@@ -211,7 +211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statBase:
     moveSpeed: 2
-    maxHits: 150
+    maxHits: 10
     fireRate: -1
     damage: 1
     size: 1
@@ -224,10 +224,10 @@ MonoBehaviour:
   destroyOnIndestructible: 0
   multiplierLayer:
     moveSpeed: -1
-    maxHits: 2
+    maxHits: 5
     fireRate: -1
     damage: -1
-    size: 1
+    size: -1
   previewSprite: {fileID: 0}
   aminaRefund: 20
   dataBase: {fileID: 11400000, guid: a54cc1828eee1a348923f104b7c1488b, type: 2}

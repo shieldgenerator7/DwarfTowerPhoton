@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 505}
   - component: {fileID: -995880849394706857}
   - component: {fileID: 5520040029629572068}
+  - component: {fileID: -7645458921032243568}
   - component: {fileID: 571}
   - component: {fileID: 8902093542985066328}
   - component: {fileID: 508065936224665636}
@@ -143,7 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statBase:
     moveSpeed: -1
-    maxHits: 11
+    maxHits: 3
     fireRate: -1
     damage: 1
     size: 1
@@ -156,9 +157,9 @@ MonoBehaviour:
   destroyOnIndestructible: 1
   statMax:
     moveSpeed: -1
-    maxHits: 101
+    maxHits: 10
     fireRate: -1
-    damage: 100
+    damage: 50
     size: 2
   maxTime: 5
   dataBase: {fileID: 11400000, guid: 956030f09354aff4881cc98aee9263a8, type: 2}
@@ -175,9 +176,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab49dea0eb78a7a43aafe9024717e71c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 11
-  health: 11
+  maxHealth: 3
+  health: 3
   entityType: 0
+--- !u!114 &-7645458921032243568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf1d5e3f79e1da94884919a30c2202e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &571
 MonoBehaviour:
   m_ObjectHideFlags: 0

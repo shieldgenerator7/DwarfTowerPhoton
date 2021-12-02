@@ -398,7 +398,7 @@ MonoBehaviour:
   buttonName: Ability2
   hidesOtherInputs: 0
   abilityID: 3
-  fireDelay: 1
+  fireDelay: 0.5
   shotIndex: 1
 --- !u!1 &3107006109710722385
 GameObject:
