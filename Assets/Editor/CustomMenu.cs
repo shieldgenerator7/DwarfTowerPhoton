@@ -73,16 +73,16 @@ public class CustomMenu
     {
         build(BuildTarget.StandaloneWindows, "exe");
     }
-    [MenuItem("SG7/Build/Build Linux %l")]
-    public static void buildLinux()
-    {
-        build(BuildTarget.StandaloneLinux, "x86");
-    }
-    [MenuItem("SG7/Build/Build Mac OS X %#l")]
-    public static void buildMacOSX()
-    {
-        build(BuildTarget.StandaloneOSX, "");
-    }
+    //[MenuItem("SG7/Build/Build Linux %l")]
+    //public static void buildLinux()
+    //{
+    //    build(BuildTarget.StandaloneLinux, "x86");
+    //}
+    //[MenuItem("SG7/Build/Build Mac OS X %#l")]
+    //public static void buildMacOSX()
+    //{
+    //    build(BuildTarget.StandaloneOSX, "");
+    //}
     public static void build(BuildTarget buildTarget, string extension, bool openDialog = true)
     {
         string defaultPath = getDefaultBuildPath();
