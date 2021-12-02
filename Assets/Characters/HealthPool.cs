@@ -36,15 +36,21 @@ public class HealthPool : MonoBehaviour
         get => health;
         set
         {
+            float prevHealth = health;
             health = Mathf.Clamp(value, 0, maxHealth);
+            if (health < prevHealth)
+            {
+                onDamaged?.Invoke();
+            }
             if (health <= 0)
             {
                 onDied?.Invoke();
             }
         }
     }
-    public delegate void OnDied();
-    public event OnDied onDied;
+    public delegate void HealthEvent();
+    public event HealthEvent onDamaged;
+    public event HealthEvent onDied;
 
     [Tooltip("The type of entity this health pool represents")]
     public EntityType entityType;
