@@ -261,8 +261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf1d5e3f79e1da94884919a30c2202e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashDuration: 0.1
-  flashColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &5431171971898091153
 MonoBehaviour:
   m_ObjectHideFlags: 0

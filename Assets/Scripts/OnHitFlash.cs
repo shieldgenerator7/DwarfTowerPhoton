@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class OnHitFlash : MonoBehaviour
 {
-    [Tooltip("How many seconds the flash lasts")]
-    public float flashDuration = 0.1f;
-    [Tooltip("The color it flashes")]
-    public Color flashColor = Color.red;
+    private float flashDuration = 0.1f;
+    private Color flashColor = Color.red;
 
     private float flashStartTime = -1;
     private List<SpriteRenderer> srs;
@@ -19,6 +17,8 @@ public class OnHitFlash : MonoBehaviour
         gameObject.FindComponent<HealthPool>().onDamaged += startFlash;
         srs = gameObject.FindComponents<SpriteRenderer>();
         origColors = srs.ConvertAll(sr => sr.color);
+        this.flashDuration = EffectManager.instance.flashDuration;
+        this.flashColor = EffectManager.instance.flashColor;
     }
 
     // Update is called once per frame
