@@ -28,6 +28,21 @@ public class HealthPoolEditor : Editor
                 }
             }
         }
+        //OnHitFlash
+        bool anyNeedsOHF = targets.ToList().Any(t => !hasOnHitFlash(t as HealthPool));
+        if (anyNeedsOHF)
+        {
+            if (GUILayout.Button("Flash on hit (Editor Only)"))
+            {
+                foreach (object t in targets)
+                {
+                    if (!hasOnHitFlash(t as HealthPool))
+                    {
+                        addOnHitFlash(t as HealthPool);
+                    }
+                }
+            }
+        }
         //Static Rigidbody2D
         bool anyNeedsRB2D = targets.ToList().Any(t => !hasRB2D(t as HealthPool));
         if (anyNeedsRB2D)
@@ -49,11 +64,22 @@ public class HealthPoolEditor : Editor
 
     void addOnDieDestroy(HealthPool hp) => addComponent<OnDieDestroy>(hp);
 
+    bool hasOnHitFlash(HealthPool hp) => hasComponent<OnHitFlash>(hp);
+
+    void addOnHitFlash(HealthPool hp)
+    {
+        int indexOffset = 1;
+        if (hasOnDieDestroy(hp)) { indexOffset++; }
+        addComponent<OnHitFlash>(hp, indexOffset);
+    }
+
     bool hasRB2D(HealthPool hp) => hasComponent<Rigidbody2D>(hp);
 
     void addStaticRB2D(HealthPool hp)
     {
-        int indexOffset = (hasOnDieDestroy(hp)) ? 2 : 1;
+        int indexOffset = 1;
+        if (hasOnDieDestroy(hp)) { indexOffset++; }
+        if (hasOnHitFlash(hp)) { indexOffset++; }
         Rigidbody2D rb2d = addComponent<Rigidbody2D>(hp, indexOffset);
         //Make it static
         rb2d.bodyType = RigidbodyType2D.Static;
