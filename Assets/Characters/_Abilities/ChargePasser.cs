@@ -12,7 +12,7 @@ public class ChargePasser : ChargedShotController
 
     void passCharge(GameObject go)
     {
-        Debug.Log("passcharge on go: " + go.name + ", " + this.gameObject.name);
+        Debug.Log($"passcharge on go: {go.name }, {this.gameObject.name}");
         go.GetComponent<ChargedShotController>().chargeStats(multiplier);
     }
 }

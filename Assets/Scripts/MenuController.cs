@@ -7,7 +7,7 @@ public class MenuController : MonoBehaviour
     
     public void OnClickCharacterPick(int characterIndex)
     {
-        Debug.Log("Character Picked: " + characterIndex);
+        Debug.Log($"Character Picked: {characterIndex}");
         if (PlayerInfo.instance != null)
         {
             PlayerInfo.instance.SelectedIndex = characterIndex;

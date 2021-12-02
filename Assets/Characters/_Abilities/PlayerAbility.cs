@@ -115,6 +115,6 @@ public abstract class PlayerAbility : MonoBehaviour
     /// </summary>
     public virtual void OnContinuedProcessing()
     {
-        throw new System.NotImplementedException("PlayerAbility.OnContinuedProcessing() is not implemented in subtype " + this.GetType());
+        throw new System.NotImplementedException($"PlayerAbility.OnContinuedProcessing() is not implemented in subtype {this.GetType()}");
     }
 }

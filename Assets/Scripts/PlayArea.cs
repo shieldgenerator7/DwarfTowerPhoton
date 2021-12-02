@@ -22,7 +22,7 @@ public class PlayArea : MonoBehaviour
 
     public void adjustPlayArea()
     {
-        Debug.Log("width: " + width + ", height: " + height);
+        Debug.Log($"width: {width}, height: {height}");
         //Field
         grass.size = new Vector2(width, height);
         //Border size

@@ -57,7 +57,7 @@ public class HealthPool : MonoBehaviour
         if (!rb2d)
         {
             Debug.LogError(
-                "HealthPool on object " + name + " does not have a Rigidbody2D!",
+                $"HealthPool on object {name} does not have a Rigidbody2D!",
                 gameObject
                 );
         }

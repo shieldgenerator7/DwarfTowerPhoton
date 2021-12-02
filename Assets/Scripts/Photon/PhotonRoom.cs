@@ -95,7 +95,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
         {
             if (Mathf.Approximately(Time.time, Mathf.Floor(Time.time)))
             {
-                Debug.Log("Update: time: " + Time.time);
+                Debug.Log($"Update: time: {Time.time}");
             }
         }
         if (MultiplayerSetting.instance.delayStart)
@@ -117,10 +117,10 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
                     lessThanMaxPlayers -= Time.deltaTime;
                     timeToStart = lessThanMaxPlayers;
                 }
-                Debug.Log("Display time to start to the players " + timeToStart);
+                Debug.Log($"Display time to start to the players {timeToStart}");
                 if (readyToStart || timeToStart <= 0)
                 {
-                    Debug.Log("Update, calling StartGame: ready?: " + readyToStart + ", timeToStart: " + timeToStart);
+                    Debug.Log($"Update, calling StartGame: ready?: {readyToStart}, timeToStart: {timeToStart}");
                     StartGame();
                 }
             }
@@ -134,10 +134,10 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
         photonPlayers = PhotonNetwork.PlayerList;
         playersInRoom = photonPlayers.Length;
         myNumberInRoom = playersInRoom;
-        PhotonNetwork.NickName = "" + myNumberInRoom;
+        PhotonNetwork.NickName = $"{myNumberInRoom}";
         if (MultiplayerSetting.instance.delayStart)
         {
-            Debug.Log("(Joined) DIsplayer players in room out of max players possible (" + playersInRoom + ":" + MultiplayerSetting.instance.maxPlayers + ")");
+            Debug.Log($"(Joined) Players in room out of max players possible ({playersInRoom}:{MultiplayerSetting.instance.maxPlayers})");
             if (playersInRoom > 1)
             {
                 readyToCount = true;
@@ -154,7 +154,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
         }
         else
         {
-            Debug.Log("No delay, so starting. delay?: " + MultiplayerSetting.instance.delayStart);
+            Debug.Log($"No delay, so starting. delay?: {MultiplayerSetting.instance.delayStart}");
             StartGame();
         }
     }
@@ -167,7 +167,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
         playersInRoom++;
         if (MultiplayerSetting.instance.delayStart)
         {
-            Debug.Log("(PlayerEntered) Displayer players in room out of max players possible (" + playersInRoom + ":" + MultiplayerSetting.instance.maxPlayers + ")");
+            Debug.Log($"(PlayerEntered) Players in room out of max players possible ({playersInRoom}:{MultiplayerSetting.instance.maxPlayers})");
             if (playersInRoom > 1)
             {
                 readyToCount = true;
@@ -207,7 +207,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
 
     void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("OnSceneFinishedLoading: scene: " + scene.name + ", mode: " + mode);
+        Debug.Log($"OnSceneFinishedLoading: scene: {scene.name}, mode: {mode}");
         currentScene = scene.buildIndex;
         if (currentScene == MultiplayerSetting.instance.menuScene)
         {

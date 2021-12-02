@@ -46,7 +46,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
         Debug.Log("Trying to create a new Room");
         int randomRoomName = Random.Range(0, 10000);
         RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)MultiplayerSetting.instance.maxPlayers };
-        PhotonNetwork.CreateRoom("Room" + randomRoomName, roomOps);
+        PhotonNetwork.CreateRoom($"Room{randomRoomName}", roomOps);
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)

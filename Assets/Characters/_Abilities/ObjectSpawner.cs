@@ -28,7 +28,10 @@ public class ObjectSpawner : MonoBehaviour
             //Subfoldername
             if (string.IsNullOrEmpty(folderName))
             {
-                throw new UnityException("folderName is null! foldername: " + folderName + ", gameObject: " + gameObject.name);
+                throw new UnityException(
+                    $"folderName is null! foldername: {folderName}, " +
+                    $"gameObject: {gameObject.name}"
+                    );
             }
         }
     }
@@ -46,8 +49,8 @@ public class ObjectSpawner : MonoBehaviour
             if (!Mathf.Approximately(dir.sqrMagnitude, 1))
             {
                 throw new System.ArgumentException(
-                    "dir needs to be a unit vector! dir: " + dir + "," +
-                    "sqrMagnitude: " + dir.sqrMagnitude
+                    $"dir needs to be a unit vector! dir: {dir}, " +
+                    $"sqrMagnitude: {dir.sqrMagnitude}"
                     );
             }
             //Initialize arguments

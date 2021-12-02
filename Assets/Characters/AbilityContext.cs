@@ -11,13 +11,14 @@ public class AbilityContext : MonoBehaviour
     {
         //Check to make sure all abilities have unique abilityIDs
         List<int> knownIDs = new List<int>();
-        foreach(PlayerAbility pa in abilities)
+        foreach (PlayerAbility pa in abilities)
         {
             if (knownIDs.Contains(pa.abilityID))
             {
                 Debug.LogError(
-                    "Player ability has duplicate abilityID! abilityID: " + pa.abilityID
-                    + ", ability: " + pa.name,
+                    $"Player ability has duplicate abilityID! " +
+                    $"abilityID: {pa.abilityID}, " +
+                    $"ability: {pa.name}",
                     pa.gameObject
                     );
             }

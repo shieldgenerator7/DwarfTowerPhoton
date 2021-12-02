@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
 using UnityEditor.SceneManagement;
+using System;
 
 public class CustomMenu
 {
@@ -31,28 +32,31 @@ public class CustomMenu
         }
         Debug.Log(string.Format("Searched {0} GameObjects, {1} components, found {2} missing", go_count, components_count, missing_count));
     }
-    private static void FindInGO(GameObject g)
+    private static void FindInGO(GameObject go)
     {
         go_count++;
-        Component[] components = g.GetComponents<Component>();
+        Component[] components = go.GetComponents<Component>();
         for (int i = 0; i < components.Length; i++)
         {
             components_count++;
             if (components[i] == null)
             {
                 missing_count++;
-                string s = g.name;
-                Transform t = g.transform;
+                string s = go.name;
+                Transform t = go.transform;
                 while (t.parent != null)
                 {
-                    s = t.parent.name + "/" + s;
+                    s = $"{t.parent.name}/{s}";
                     t = t.parent;
                 }
-                Debug.Log(s + " has an empty script attached in position: " + i, g);
+                Debug.Log(
+                    $"{s} has an empty script attached in position: {i}", 
+                    go
+                    );
             }
         }
         // Now recurse through each child GO (if there are any):
-        foreach (Transform childT in g.transform)
+        foreach (Transform childT in go.transform)
         {
             FindInGO(childT.gameObject);
         }
@@ -103,8 +107,8 @@ public class CustomMenu
             return;
 
         string path = buildName.Substring(0, buildName.LastIndexOf("/"));
-        Debug.Log("BUILDNAME: " + buildName);
-        Debug.Log("PATH: " + path);
+        Debug.Log($"BUILDNAME: {buildName}");
+        Debug.Log($"PATH: {path}");
 
         string[] levels = new string[EditorBuildSettings.scenes.Length];
         for (int i = 0; i < EditorBuildSettings.scenes.Length; i++)
@@ -173,18 +177,18 @@ public class CustomMenu
                         }
                         else
                         {
-                            Debug.LogWarning("Can't kill process " + proc.ProcessName + " (" + proc.Id + ")" +
-                                " because it is not a process of " + PlayerSettings.productName);
+                            Debug.LogWarning($"Can't kill process {proc.ProcessName} ({proc.Id})" +
+                                $" because it is not a process of {PlayerSettings.productName}");
                         }
                     }
                     else
                     {
-                        Debug.LogWarning("Process (" + proc.Id + ") has already exited");
+                        Debug.LogWarning($"Process ({proc.Id}) has already exited");
                     }
                 }
                 catch (System.ArgumentException)
                 {
-                    Debug.LogWarning("Process (" + procId + ") not found, probably already terminated");
+                    Debug.LogWarning($"Process ({procId}) not found, probably already terminated");
                 }
             }
             gls.buildProcesses.Clear();
@@ -222,7 +226,7 @@ public class CustomMenu
         }
         string extension = "exe";
         string buildName = getBuildNamePath(extension);
-        Debug.Log("Launching: " + buildName);
+        Debug.Log($"Launching: {buildName}");
         for (int i = 0; i < windowCount; i++)
         {
             // Run the game (Process class from System.Diagnostics).
@@ -252,16 +256,20 @@ public class CustomMenu
 
     public static string getDefaultBuildPath()
     {
-        return System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/Unity/DwarfTowerPhoton/Builds/" + PlayerSettings.productName + "_" + PlayerSettings.bundleVersion.Replace(".", "_");
+        return $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}" +
+            $"/Unity/DwarfTowerPhoton/Builds/" +
+            $"{PlayerSettings.productName}_{PlayerSettings.bundleVersion.Replace(".", "_")}";
     }
     public static string getBuildNamePath(string extension, bool checkFolderExists = true)
     {
         string defaultPath = getDefaultBuildPath();
         if (checkFolderExists && !System.IO.Directory.Exists(defaultPath))
         {
-            throw new UnityException("You need to build the " + extension + " for " + PlayerSettings.productName + " (Version " + PlayerSettings.bundleVersion + ") first!");
+            throw new UnityException(
+                $"You need to build the {extension} for {PlayerSettings.productName} " +
+                $"(Version {PlayerSettings.bundleVersion}) first!");
         }
-        string buildName = defaultPath + "/" + PlayerSettings.productName + "." + extension;
+        string buildName = $"{defaultPath}/{PlayerSettings.productName}.{extension}";
         return buildName;
     }
 
@@ -278,7 +286,7 @@ public class CustomMenu
         PlayerSettings.bundleVersion = newVersion;
         //Save and Log
         EditorSceneManager.SaveOpenScenes();
-        Debug.LogWarning("Updated build version number from " + oldVersion + " to " + newVersion);
+        Debug.LogWarning($"Updated build version number from {oldVersion} to {newVersion}");
     }
 
     [MenuItem("SG7/Session/Finish Session")]

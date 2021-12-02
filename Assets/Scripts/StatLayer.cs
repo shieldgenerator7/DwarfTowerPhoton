@@ -29,7 +29,7 @@ public struct StatLayer
     {
         if (multiplier < 0)
         {
-            throw new ArgumentException("multiplier is less than 0! " + multiplier);
+            throw new ArgumentException($"multiplier is less than 0! {multiplier}");
         }
         StatLayer layer = new StatLayer();
         layer.moveSpeed = MultiplyStat(this.moveSpeed, multiplier);

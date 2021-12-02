@@ -28,7 +28,7 @@ public class AbilityContextMenuDisplay : MonoBehaviour
     {
         if (show && !acd)
         {
-            throw new UnityException("Can't ask to show a null AbilityContextDisplay! acd: " + acd);
+            throw new UnityException($"Can't ask to show a null AbilityContextDisplay! acd: {acd}");
         }
         if (show)
         {
