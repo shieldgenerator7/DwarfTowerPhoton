@@ -17,4 +17,4 @@ MonoBehaviour:
   defaultColor: {r: 0.16470589, g: 0.61960787, b: 1, a: 1}
   prefab: {fileID: 532201618779257096, guid: 95c79e13db999da4a83e76b9e2b273aa, type: 3}
   difficulty: 3
-  typeList: 020000000300000004000000
+  typeList: 0200000004000000
