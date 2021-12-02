@@ -5,12 +5,18 @@ using UnityEngine.UI;
 
 public class MenuDisplay : MonoBehaviour
 {
-    [Header("Character Select")]
+    [Header("Character Display")]
     public Image characterImage;
-    public Text characterTypeText;
     public Image characterImageBackground;
+    [Header("Character Info")]
+    public Text characterTypeText;
+    public List<Image> difficultyStars;
+    public Sprite starFull;
+    public Sprite starEmpty;
+    [Header("Character Select")]
     public GridLayoutGroup characterSelectGroup;
     public GameObject characterSelectButtonPrefab;
+    [Header("Color Select")]
     public GridLayoutGroup colorSelectGroup;
     public GameObject colorSelectButtonPrefab;
 
@@ -99,7 +105,15 @@ public class MenuDisplay : MonoBehaviour
         CharacterInfo charInfo = playerInfo.allCharacters[index];
         characterImage.sprite = charInfo.sprite;
         characterImage.color = playerInfo.SelectedColor;
+        //Type
         characterTypeText.text = charInfo.typeString;
+        //Difficulty
+        for (int i = 0; i < difficultyStars.Count; i++)
+        {
+            difficultyStars[i].sprite = (i < charInfo.difficulty)
+                ? starFull
+                : starEmpty;
+        }
     }
 
     void updateColorImage(int index)
