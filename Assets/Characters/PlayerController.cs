@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     private List<PlayerAbility> processingAbilities = new List<PlayerAbility>();//used for abilities that have lasting effects
 
-    public Dictionary<string, InputState> inputs = new Dictionary<string, InputState>();
+    public Dictionary<string, ButtonState> inputs = new Dictionary<string, ButtonState>();
 
     private PhotonView photonView;
     public PhotonView PV
@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
         //Inputs
         foreach (string input in new string[] { "Ability1", "Ability2", "Ability3", "Reload" })
         {
-            inputs.Add(input, InputState.NONE);
+            inputs.Add(input, ButtonState.NONE);
         }
     }
 
