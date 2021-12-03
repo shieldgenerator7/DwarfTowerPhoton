@@ -23,13 +23,6 @@ public class PlayerController : MonoBehaviour
 
     private List<PlayerAbility> processingAbilities = new List<PlayerAbility>();//used for abilities that have lasting effects
 
-    public enum InputState
-    {
-        NONE,
-        DOWN,
-        HELD,
-        UP
-    }
     public Dictionary<string, InputState> inputs = new Dictionary<string, InputState>();
 
     private PhotonView photonView;
