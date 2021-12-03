@@ -19,6 +19,8 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    private Bounds playAreaBounds;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,14 +28,39 @@ public class CameraController : MonoBehaviour
         {
             FocusObject = focusObject;
         }
+        playAreaBounds = FindObjectOfType<PlayArea>().Bounds;
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if (focusObject != null)
         {
             transform.position = focusObject.transform.position + offset;
+            boundCameraPosition();
         }
+    }
+
+    void boundCameraPosition()
+    {
+        //2021-12-03: copied from http://answers.unity.com/answers/1719329/view.html
+        //Convert screen sizes to world coordinates
+        Vector2 cameraSizeWorld =
+            Camera.main.ViewportToWorldPoint(Vector2.one)
+            - Camera.main.ViewportToWorldPoint(Vector2.zero);
+        Vector2 halfSize = cameraSizeWorld / 2;
+        //Use camera size to keep it in the bounds
+        Vector3 pos = transform.position;
+        pos.x = Mathf.Clamp(
+            pos.x,
+            playAreaBounds.min.x + halfSize.x,
+            playAreaBounds.max.x - halfSize.x
+            );
+        pos.y = Mathf.Clamp(
+            pos.y,
+            playAreaBounds.min.y + halfSize.y,
+            playAreaBounds.max.y - halfSize.y
+            );
+        transform.position = pos;
     }
 }

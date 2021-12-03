@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class PlayArea : MonoBehaviour
 {
-    [Range(10,100)]
+    [Range(10, 100)]
     [Tooltip("The width of the play area")]
     public float width;
     [Range(10, 100)]
     [Tooltip("The height of the play area")]
     public float height;
+
+    public Bounds Bounds =>
+        new Bounds(Vector2.zero, new Vector2(width + 1, height + 1));
 
 #if UNITY_EDITOR
 
