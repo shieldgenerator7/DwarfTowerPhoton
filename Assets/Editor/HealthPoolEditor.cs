@@ -8,52 +8,61 @@ using UnityEngine;
 [CustomEditor(typeof(HealthPool))]
 public class HealthPoolEditor : Editor
 {
+    static bool foldout = false;
+
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
 
         GUI.enabled = !EditorApplication.isPlaying;
-        //OnDieDestroy
         bool anyNeedsODD = targets.ToList().Any(t => !hasOnDieDestroy(t as HealthPool));
-        if (anyNeedsODD)
-        {
-            if (GUILayout.Button("Destroy on die (Editor Only)"))
-            {
-                foreach (object t in targets)
-                {
-                    if (!hasOnDieDestroy(t as HealthPool))
-                    {
-                        addOnDieDestroy(t as HealthPool);
-                    }
-                }
-            }
-        }
-        //OnHitFlash
         bool anyNeedsOHF = targets.ToList().Any(t => !hasOnHitFlash(t as HealthPool));
-        if (anyNeedsOHF)
+        bool anyNeedsRB2D = targets.ToList().Any(t => !hasRB2D(t as HealthPool));
+        if (anyNeedsODD || anyNeedsOHF || anyNeedsRB2D)
         {
-            if (GUILayout.Button("Flash on hit (Editor Only)"))
+            foldout = EditorGUILayout.Foldout(foldout, "Recommended components (Editor Only)", true);
+            if (foldout)
             {
-                foreach (object t in targets)
+                //OnDieDestroy
+                if (anyNeedsODD)
                 {
-                    if (!hasOnHitFlash(t as HealthPool))
+                    if (GUILayout.Button("Destroy on die"))
                     {
-                        addOnHitFlash(t as HealthPool);
+                        foreach (object t in targets)
+                        {
+                            if (!hasOnDieDestroy(t as HealthPool))
+                            {
+                                addOnDieDestroy(t as HealthPool);
+                            }
+                        }
                     }
                 }
-            }
-        }
-        //Static Rigidbody2D
-        bool anyNeedsRB2D = targets.ToList().Any(t => !hasRB2D(t as HealthPool));
-        if (anyNeedsRB2D)
-        {
-            if (GUILayout.Button("Static RB2D (Editor Only)"))
-            {
-                foreach (object t in targets)
+                //OnHitFlash
+                if (anyNeedsOHF)
                 {
-                    if (!hasRB2D(t as HealthPool))
+                    if (GUILayout.Button("Flash on hit"))
                     {
-                        addStaticRB2D(t as HealthPool);
+                        foreach (object t in targets)
+                        {
+                            if (!hasOnHitFlash(t as HealthPool))
+                            {
+                                addOnHitFlash(t as HealthPool);
+                            }
+                        }
+                    }
+                }
+                //Static Rigidbody2D
+                if (anyNeedsRB2D)
+                {
+                    if (GUILayout.Button("Static RB2D"))
+                    {
+                        foreach (object t in targets)
+                        {
+                            if (!hasRB2D(t as HealthPool))
+                            {
+                                addStaticRB2D(t as HealthPool);
+                            }
+                        }
                     }
                 }
             }
