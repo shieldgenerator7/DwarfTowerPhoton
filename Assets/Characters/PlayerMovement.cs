@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     private bool forceMovementInput = false;
     public bool ForcingMovement => forceMovementInput;
 
+    public Vector2 InputDirection { get; set; } = Vector2.zero;
+    public bool InputMoveTowardsCursor { get; set; } = false;
+
     private Vector2 prevVelocity;
     public Vector2 LastMoveDirection { get; private set; }
 
@@ -52,18 +55,13 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            //Get inputs
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
             //If there are movement inputs,
-            if (horizontal != 0 || vertical != 0)
+            if (InputDirection.magnitude > 0)
             {
                 //Set desired velocity
-                desiredVelocity =
-                    ((Vector2.up * vertical) + (Vector2.right * horizontal)).normalized
-                    * movementSpeed;
+                desiredVelocity = InputDirection.normalized * movementSpeed;
             }
-            else if (Input.GetButton("MoveToCursor"))
+            else if (InputMoveTowardsCursor)
             {
                 desiredVelocity =
                     ((Vector2)(Utility.MouseWorldPos - transform.position)).normalized

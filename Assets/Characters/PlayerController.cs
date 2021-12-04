@@ -97,6 +97,8 @@ public class PlayerController : MonoBehaviour
             playerInput.onInputChanged += (inputState) =>
             {
                 this.inputState = inputState;
+                playerMovement.InputDirection = inputState.movement;
+                playerMovement.InputMoveTowardsCursor = inputState.moveTowardsCursor.Bool();
             };
         }
         //ObjectSpawner and Color
