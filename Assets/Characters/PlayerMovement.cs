@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {//2019-03-15: made by following this tutorial: https://www.youtube.com/watch?v=JjfPaY57dDM
 
-    private float movementSpeed = 4;
+    public float MovementSpeed { get; set; } = 4;
 
     /// <summary>
     /// The direction the player is forced to choose
@@ -15,57 +15,39 @@ public class PlayerMovement : MonoBehaviour
     private bool forceMovementInput = false;
     public bool ForcingMovement => forceMovementInput;
 
-    public Vector2 InputDirection { get; set; } = Vector2.zero;
-    public bool InputMoveTowardsCursor { get; set; } = false;
-
     private Vector2 prevVelocity;
     public Vector2 LastMoveDirection { get; private set; }
 
-    private PhotonView PV;
     public Rigidbody2D rb2d { get; private set; }
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-        PV = GetComponentInParent<PhotonView>();
         rb2d = gameObject.FindComponent<Rigidbody2D>();
-        GetComponent<StatKeeper>().selfStats.onStatChanged += (stats) =>
-        {
-            movementSpeed = stats.moveSpeed;
-        };
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (PV.IsMine)
-        {
-            BasicMovement();
-        }
-    }
-
-    void BasicMovement()
+    public void BasicMovement(InputState inputState)
     {
         //Declare desired velocity
         Vector2 desiredVelocity;
         if (forceMovementInput)
         {
             //Move in the force movement direction
-            desiredVelocity = ForceMoveDirection * movementSpeed;
+            desiredVelocity = ForceMoveDirection * MovementSpeed;
         }
         else
         {
             //If there are movement inputs,
-            if (InputDirection.magnitude > 0)
+            if (inputState.movement.magnitude > 0)
             {
                 //Set desired velocity
-                desiredVelocity = InputDirection.normalized * movementSpeed;
+                desiredVelocity = inputState.movement.normalized * MovementSpeed;
             }
-            else if (InputMoveTowardsCursor)
+            else if (inputState.moveTowardsCursor.Bool())
             {
                 desiredVelocity =
                     ((Vector2)(Utility.MouseWorldPos - transform.position)).normalized
-                    * movementSpeed;
+                    * MovementSpeed;
             }
             else
             {

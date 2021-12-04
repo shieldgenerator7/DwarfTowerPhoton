@@ -76,13 +76,6 @@ public class PlayerController : MonoBehaviour
                     healthPool.Health = healthPool.MaxHealth;
                 }
             };
-            //StatKeeper
-            statKeeper = gameObject.FindComponent<StatKeeper>();
-            statKeeper.selfStats.onStatChanged += (stats) =>
-            {
-                healthPool.MaxHealth = stats.maxHits;
-            };
-            statKeeper.triggerEvents();
             //Amina
             aminaPool = gameObject.FindComponent<AminaPool>();
             FindObjectOfType<AminaMeterController>().FocusAminaPool = aminaPool;
@@ -93,14 +86,21 @@ public class PlayerController : MonoBehaviour
             }
             //PlayerMovement
             playerMovement = gameObject.FindComponent<PlayerMovement>();
+            playerMovement.Start();
             //PlayerInput
             PlayerInput playerInput = gameObject.FindComponent<PlayerInput>();
             playerInput.onInputChanged += (inputState) =>
             {
                 this.inputState = inputState;
-                playerMovement.InputDirection = inputState.movement;
-                playerMovement.InputMoveTowardsCursor = inputState.moveTowardsCursor.Bool();
             };
+            //StatKeeper
+            statKeeper = gameObject.FindComponent<StatKeeper>();
+            statKeeper.selfStats.onStatChanged += (stats) =>
+            {
+                healthPool.MaxHealth = stats.maxHits;
+                playerMovement.MovementSpeed = stats.moveSpeed;
+            };
+            statKeeper.triggerEvents();
         }
         //ObjectSpawner and Color
         objectSpawner = gameObject.FindComponent<ObjectSpawner>();
@@ -116,6 +116,8 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
+        //Process Movement
+        playerMovement.BasicMovement(inputState);
         //Processing Abilities
         bool processingHidesInputs = false;
         for (int i = processingAbilities.Count - 1; i >= 0; i--)
