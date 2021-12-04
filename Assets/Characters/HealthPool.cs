@@ -56,7 +56,7 @@ public class HealthPool : MonoBehaviour
     [Tooltip("The type of entity this health pool represents")]
     public EntityType entityType;
 
-    private void Start()
+    public void Start()
     {
         //Set initial health value
         health = maxHealth;
