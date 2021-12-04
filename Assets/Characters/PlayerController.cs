@@ -49,10 +49,11 @@ public abstract class PlayerController : MonoBehaviour
     public Vector2 LookDirection => (Vector2)Utility.MouseWorldPos - SpawnCenter;
 
     public Stunnable stunnable { get; private set; }
-    protected AminaPool aminaPool;
-    protected HealthPool healthPool;
+    protected AminaPool aminaPool { get; private set; }
+    protected HealthPool healthPool { get; private set; }
+    protected Damager damager { get; private set; }
     public PlayerMovement playerMovement { get; private set; }
-    protected StatKeeper statKeeper;
+    protected StatKeeper statKeeper { get; private set; }
     private ObjectSpawner objectSpawner;
 
     // Start is called before the first frame update
@@ -60,6 +61,8 @@ public abstract class PlayerController : MonoBehaviour
     {
         if (PV.IsMine)
         {
+            //Damager
+            damager = gameObject.FindComponent<Damager>();
             //Hook up Stunnable with HealthPool
             stunnable = gameObject.FindComponent<Stunnable>();
             healthPool = gameObject.FindComponent<HealthPool>();
@@ -71,11 +74,17 @@ public abstract class PlayerController : MonoBehaviour
                 if (stunned)
                 {
                     cancelAbilities();
+                    //Damage other players while stunned
+                    damager.damagableTypes.Add(EntityType.PLAYER);
+                    damager.damageFriendlies = true;
                 }
                 else
                 {
                     //Restore health after unstunned
                     healthPool.Health = healthPool.MaxHealth;
+                    //Stop damaging other players upon recovering
+                    damager.damagableTypes.Remove(EntityType.PLAYER);
+                    damager.damageFriendlies = false;
                 }
             };
             //Amina
