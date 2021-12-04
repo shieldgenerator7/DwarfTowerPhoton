@@ -30,7 +30,7 @@ public class OnHitFlash : MonoBehaviour
         }
     }
 
-    void startFlash()
+    void startFlash(float hp)
     {
         flashStartTime = Time.time;
         srs.ForEach(sr => sr.color = flashColor);

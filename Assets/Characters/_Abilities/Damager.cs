@@ -5,7 +5,7 @@ using UnityEngine;
 public class Damager : MonoBehaviour
 {
     [Tooltip("How much damage to deal")]
-    public float damage;
+    public float damage = 1;
 
     [Tooltip("The EntityTypes that this damager can damage")]
     public List<EntityType> damagableTypes;

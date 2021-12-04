@@ -14,7 +14,7 @@ public class OnDieDestroy : MonoBehaviour
     {
         PV = GetComponent<PhotonView>();
         healthPool = GetComponent<HealthPool>();
-        healthPool.onDied += () =>
+        healthPool.onDied += (hp) =>
         {
             if (PV.IsMine)
             {

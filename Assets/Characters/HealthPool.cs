@@ -6,15 +6,16 @@ public class HealthPool : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("The maximum amount of health this entity can have")]
-    private float maxHealth;
+    private float maxHealth = 1;
     public float MaxHealth
     {
         get => maxHealth;
         set
         {
+            float prevMaxHealth = maxHealth;
             //TODO: What does it mean for max health to be 0??
-            float newMaxHealth = Mathf.Clamp(value, 0, value);
-            float diff = newMaxHealth - maxHealth;
+            maxHealth = Mathf.Clamp(value, 0, value);
+            float diff = maxHealth - prevMaxHealth;
             if (diff > 0)
             {
                 //Increase health with max health increase
@@ -25,8 +26,10 @@ public class HealthPool : MonoBehaviour
                 //Make sure health doesn't end up above max health
                 Health += 0;
             }
+            onMaxHealthChanged?.Invoke(maxHealth);
         }
     }
+    public event HealthEvent onMaxHealthChanged;
 
     /// <summary>
     /// The current amount of health this entity has
@@ -38,18 +41,28 @@ public class HealthPool : MonoBehaviour
         {
             float prevHealth = health;
             health = Mathf.Clamp(value, 0, maxHealth);
-            if (health < prevHealth)
+            if (prevHealth != health)
             {
-                onDamaged?.Invoke();
-            }
-            if (health <= 0)
-            {
-                onDied?.Invoke();
+                onChanged?.Invoke(health);
+                if (health > prevHealth)
+                {
+                    onHealed?.Invoke(health);
+                }
+                else if (health < prevHealth)
+                {
+                    onDamaged?.Invoke(health);
+                    if (health <= 0)
+                    {
+                        onDied?.Invoke(health);
+                    }
+                }
             }
         }
     }
     private float health;
-    public delegate void HealthEvent();
+    public delegate void HealthEvent(float health);
+    public event HealthEvent onChanged;
+    public event HealthEvent onHealed;
     public event HealthEvent onDamaged;
     public event HealthEvent onDied;
 

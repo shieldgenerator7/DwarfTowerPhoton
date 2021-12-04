@@ -21,7 +21,7 @@ public class FlagController : MonoBehaviour
         teamCaptains = FindObjectsOfType<TeamTokenCaptain>().ToList();
     }
 
-    void checkGameOver()
+    void checkGameOver(float hp)
     {
         if (PhotonNetwork.IsMasterClient)
         {

@@ -85,7 +85,7 @@ public class ShotController : MonoBehaviour
         {
             health.MaxHealth = _stats.maxHits;
             health.Health = health.MaxHealth;
-            health.onDied += () =>
+            health.onDied += (hp) =>
             {
                 if (PV.IsMine)
                 {

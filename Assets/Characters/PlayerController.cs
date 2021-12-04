@@ -67,7 +67,9 @@ public abstract class PlayerController : MonoBehaviour
             stunnable = gameObject.FindComponent<Stunnable>();
             healthPool = gameObject.FindComponent<HealthPool>();
             healthPool.Start();
-            healthPool.onDied += () => { stunnable.triggerStun(); };
+            healthPool.onMaxHealthChanged += (hp) => { damager.damage = hp; };
+            damager.damage = healthPool.MaxHealth;
+            healthPool.onDied += (hp) => { stunnable.triggerStun(); };
             stunnable.onStunned += (stunned) =>
             {
                 this.enabled = !stunned;
