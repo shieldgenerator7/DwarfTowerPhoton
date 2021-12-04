@@ -22,7 +22,7 @@ public class OnDieDestroy : MonoBehaviour
             }
             else
             {
-                GetComponent<Collider2D>().enabled = false;
+                Destroy(this.gameObject);
             }
         };
     }

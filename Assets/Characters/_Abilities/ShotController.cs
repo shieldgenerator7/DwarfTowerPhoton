@@ -85,17 +85,6 @@ public class ShotController : MonoBehaviour
         {
             health.MaxHealth = _stats.maxHits;
             health.Health = health.MaxHealth;
-            health.onDied += (hp) =>
-            {
-                if (PV.IsMine)
-                {
-                    PhotonNetwork.Destroy(this.gameObject);
-                }
-                else
-                {
-                    GetComponent<Collider2D>().enabled = false;
-                }
-            };
         }
         //Damage
         damager = gameObject.FindComponent<Damager>();
