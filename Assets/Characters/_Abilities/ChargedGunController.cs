@@ -173,7 +173,6 @@ public class ChargedGunController : PlayerAbility
         preview.transform.up = Vector2.up;
         previewDisplayer.updatePreviewSprite();
         GameObject conflictingObject = null;
-        bool coHasRB2D = false;
         bool coHasSC = false;
         if (previewCollider)
         {
@@ -182,12 +181,11 @@ public class ChargedGunController : PlayerAbility
             for (int i = 0; i < count; i++)
             {
                 RaycastHit2D rch2d = rch2ds[i];
-                GameObject rchGO = rch2d.collider.gameObject;
-                Rigidbody2D rchRB2D = rchGO.GetComponent<Rigidbody2D>();
-                ShotController rchSC = rchGO.GetComponent<ShotController>();
-                Collider2D coll2d = rchGO.GetComponent<Collider2D>();
+                Collider2D coll2d = rch2d.collider;
+                GameObject rchGO = coll2d.gameObject;
+                HealthPool hp = rchGO.FindComponent<HealthPool>();
                 //If the conflicting object is a regular moving shot,
-                if (rchRB2D && rchSC)
+                if (hp && hp.entityType == EntityType.SHOT)
                 {
                     //You can build here anyway
                     continue;
@@ -202,14 +200,13 @@ public class ChargedGunController : PlayerAbility
                 else
                 {
                     //Double-check to make sure the sprites overlap
-                    SpriteRenderer coSR = rchGO.GetComponent<SpriteRenderer>();
+                    SpriteRenderer coSR = rchGO.FindComponent<SpriteRenderer>();
                     bool overlap = previewDisplayer.boundsIntersects(coSR.bounds);
                     if (overlap)
                     {
                         //it's conflicting
                         conflictingObject = rchGO;
-                        coHasRB2D = rchRB2D;
-                        coHasSC = rchSC;
+                        coHasSC = rchGO.FindComponent<ShotController>();
                         break;
                     }
                     else
