@@ -44,6 +44,7 @@ public class PlayerInput : MonoBehaviour
         newInput.ability2 = getButtonState("Ability2");
         newInput.ability3 = getButtonState("Ability3");
         newInput.reload = getButtonState("Reload");
+        newInput.moveTowardsCursor = getButtonState("MoveTowardsCursor");
         InputState = newInput;
     }
 
