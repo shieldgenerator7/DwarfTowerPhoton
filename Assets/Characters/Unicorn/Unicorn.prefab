@@ -162,12 +162,6 @@ MonoBehaviour:
       fireRate: -1
       damage: -1
       size: -1
-    statCurrent:
-      moveSpeed: -1
-      maxHits: -1
-      fireRate: -1
-      damage: -1
-      size: -1
   shotStats:
     statBase:
       moveSpeed: -1
@@ -175,20 +169,8 @@ MonoBehaviour:
       fireRate: -1
       damage: -1
       size: -1
-    statCurrent:
-      moveSpeed: -1
-      maxHits: -1
-      fireRate: -1
-      damage: -1
-      size: -1
   constructStats:
     statBase:
-      moveSpeed: -1
-      maxHits: -1
-      fireRate: -1
-      damage: -1
-      size: -1
-    statCurrent:
       moveSpeed: -1
       maxHits: -1
       fireRate: -1
@@ -207,7 +189,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
-  health: 1
   entityType: 2
 --- !u!114 &-7350582565912498744
 MonoBehaviour:
@@ -234,8 +215,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAmina: 100
-  amina: 0
-  reservedAmina: 0
 --- !u!114 &4410195784120660945
 MonoBehaviour:
   m_ObjectHideFlags: 0

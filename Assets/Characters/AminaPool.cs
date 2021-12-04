@@ -7,9 +7,9 @@ public class AminaPool : MonoBehaviour
     [Tooltip("The max amount of amina this pool can have")]
     public float maxAmina = 100;
 
-    [SerializeField]
-    [Tooltip("The current amount of amina, exposed for test purposes")]
-    private float amina;//basically mana
+    /// <summary>
+    /// The current amount of amina
+    /// </summary>
     public float Amina
     {
         get { return amina; }
@@ -19,7 +19,7 @@ public class AminaPool : MonoBehaviour
             //Set amina
             amina = Mathf.Clamp(value, 0, maxAmina);
             //Delegates
-            if(prevAmina != amina)
+            if (prevAmina != amina)
             {
                 onAminaChanged?.Invoke(amina);
             }
@@ -33,19 +33,22 @@ public class AminaPool : MonoBehaviour
             }
         }
     }
+    private float amina;//basically mana
     public delegate void AminaEvent(float amina);
     public event AminaEvent onAminaFull;
     public event AminaEvent onAminaEmpty;
     public event AminaEvent onAminaChanged;
 
-    [Tooltip("The current amount of reserved amina, exposed for test purposes")]
-    [SerializeField]
-    private float reservedAmina;//amina reserved for a specific ability that requires charge time
+    /// <summary>
+    /// The current amount of reserved amina,
+    /// Amina reserved for a specific ability that requires charge time
+    /// </summary>
     public float ReservedAmina
     {
-        get { return reservedAmina; }
-        private set { reservedAmina = Mathf.Clamp(value, 0, maxAmina); }
+        get => reservedAmina;
+        private set => reservedAmina = Mathf.Clamp(value, 0, maxAmina);
     }
+    private float reservedAmina;
 
     private void Start()
     {

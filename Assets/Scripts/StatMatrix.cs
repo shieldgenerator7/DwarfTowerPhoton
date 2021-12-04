@@ -9,9 +9,9 @@ public class StatMatrix
     [Tooltip("The base stats. Does not change during runtime")]
     private StatLayer statBase = new StatLayer();
 
-    [SerializeField]
-    [Tooltip("The current stats. Exposed for test purposes")]
-    private StatLayer statCurrent = new StatLayer();
+    /// <summary>
+    /// The current stats
+    /// </summary>
     public StatLayer Stats
     {
         get => statCurrent;
@@ -21,11 +21,13 @@ public class StatMatrix
             onStatChanged?.Invoke(Stats);
         }
     }
+    private StatLayer statCurrent;
     public delegate void OnStatChanged(StatLayer layer);
     public event OnStatChanged onStatChanged;
 
-    [SerializeField]
-    [Tooltip("The layers to multiply to the base to get the current. Exposed for test purposes")]
+    /// <summary>
+    /// The layers to multiply to the base to get the current
+    /// </summary>
     private Dictionary<int, StatLayer> multipliers = new Dictionary<int, StatLayer>();
 
     public void init()

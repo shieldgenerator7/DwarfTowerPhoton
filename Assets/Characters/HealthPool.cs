@@ -28,9 +28,9 @@ public class HealthPool : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    [Tooltip("The current amount of health this entity has")]
-    private float health;
+    /// <summary>
+    /// The current amount of health this entity has
+    /// </summary>
     public float Health
     {
         get => health;
@@ -48,6 +48,7 @@ public class HealthPool : MonoBehaviour
             }
         }
     }
+    private float health;
     public delegate void HealthEvent();
     public event HealthEvent onDamaged;
     public event HealthEvent onDied;
@@ -57,6 +58,8 @@ public class HealthPool : MonoBehaviour
 
     private void Start()
     {
+        //Set initial health value
+        health = maxHealth;
         //Check for rb2d
         //rb2d (even a static one) needed for some hit detection to work (like Sniper's laser)
         Rigidbody2D rb2d = gameObject.FindComponent<Rigidbody2D>();

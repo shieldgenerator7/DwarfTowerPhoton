@@ -22,7 +22,6 @@ public class ShotController : MonoBehaviour
             onStatsChanged?.Invoke(_stats);
         }
     }
-    [SerializeField]
     private StatLayer _stats;
     public delegate void OnStatsChanged(StatLayer stats);
     public event OnStatsChanged onStatsChanged;

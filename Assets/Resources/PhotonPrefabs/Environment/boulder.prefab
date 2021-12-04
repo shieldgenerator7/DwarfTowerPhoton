@@ -119,7 +119,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
-  health: 50
   entityType: 1
 --- !u!114 &5697240913717994948
 MonoBehaviour:
