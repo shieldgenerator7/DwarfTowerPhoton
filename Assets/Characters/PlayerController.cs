@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     private List<PlayerAbility> processingAbilities = new List<PlayerAbility>();//used for abilities that have lasting effects
 
-    public Dictionary<string, ButtonState> inputs = new Dictionary<string, ButtonState>();
+    public InputState inputState { get; private set; }
 
     private PhotonView photonView;
     public PhotonView PV
@@ -39,6 +39,9 @@ public class PlayerController : MonoBehaviour
         private set { photonView = value; }
     }
 
+    /// <summary>
+    /// The center position for use in object spawn location calculations (use this instead of transform.position)
+    /// </summary>
     public Vector2 SpawnCenter => (Vector2)transform.position + (Vector2.up * 0.5f);
     /// <summary>
     /// The looking direction of the player. Includes magnitude, NOT a unit vector
@@ -89,17 +92,18 @@ public class PlayerController : MonoBehaviour
             }
             //PlayerMovement
             playerMovement = gameObject.FindComponent<PlayerMovement>();
+            //PlayerInput
+            PlayerInput playerInput = gameObject.FindComponent<PlayerInput>();
+            playerInput.onInputChanged += (inputState) =>
+            {
+                this.inputState = inputState;
+            };
         }
         //ObjectSpawner and Color
         objectSpawner = gameObject.FindComponent<ObjectSpawner>();
         objectSpawner.PlayerColor = playerColor;
         gameObject.FindComponents<SpriteRenderer>()
             .ForEach(sr => sr.color = playerColor);
-        //Inputs
-        foreach (string input in new string[] { "Ability1", "Ability2", "Ability3", "Reload" })
-        {
-            inputs.Add(input, ButtonState.NONE);
-        }
     }
 
     // Update is called once per frame
@@ -128,20 +132,14 @@ public class PlayerController : MonoBehaviour
         //Ability Inputs
         foreach (PlayerAbility ability in abilityContext.abilities)
         {
-            bool buttonUp = Input.GetButtonUp(ability.buttonName);
-            if (Input.GetButton(ability.buttonName) || buttonUp)
+            ButtonState button = inputState.Button(ability.abilitySlot);
+            if (button.Bool())
             {
-                if (Input.GetButtonDown(ability.buttonName))
+                switch (button)
                 {
-                    ability.OnButtonDown();
-                }
-                else if (buttonUp)
-                {
-                    ability.OnButtonUp();
-                }
-                else
-                {
-                    ability.OnButtonHeld();
+                    case ButtonState.DOWN: ability.OnButtonDown(); break;
+                    case ButtonState.HELD: ability.OnButtonHeld(); break;
+                    case ButtonState.UP: ability.OnButtonUp(); break;
                 }
                 if (ability.hidesOtherInputs)
                 {
@@ -183,8 +181,8 @@ public class PlayerController : MonoBehaviour
         //Cancel abilities
         foreach (PlayerAbility ability in abilityContext.abilities)
         {
-            bool buttonUp = Input.GetButtonUp(ability.buttonName);
-            if (Input.GetButton(ability.buttonName) || buttonUp)
+            ButtonState button = inputState.Button(ability.abilitySlot);
+            if (button.Bool())
             {
                 ability.OnButtonCanceled();
             }

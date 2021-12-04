@@ -11,6 +11,18 @@ public struct InputState
     public ButtonState reload;//reload
     public ButtonState moveTowardsCursor;//move towards cursor
 
+    public ButtonState Button(AbilitySlot slot)
+    {
+        switch (slot)
+        {
+            case AbilitySlot.Ability1: return ability1;
+            case AbilitySlot.Ability2: return ability2;
+            case AbilitySlot.Ability3: return ability3;
+            case AbilitySlot.Reload: return reload;
+        }
+        throw new System.ArgumentException($"AbilitySlot not recognized! slot: {slot}");
+    }
+
     public override bool Equals(object obj)
     {
         if (!(obj is InputState))
