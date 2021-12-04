@@ -55,6 +55,12 @@ public static class Utility
         return compList;
     }
 
+    public static bool isPhotonViewMine(this Component comp)
+    {
+        PhotonView pv = comp.gameObject.FindComponent<PhotonView>();
+        return pv.IsMine;
+    }
+
     public static bool isMoving(this Rigidbody2D rb2d)
     {
         return rb2d.velocity.sqrMagnitude > 0.1f;
