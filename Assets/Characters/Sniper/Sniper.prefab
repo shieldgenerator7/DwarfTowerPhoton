@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 0
-  buttonName: Reload
+  abilitySlot: 3
   hidesOtherInputs: 1
   abilityID: 1
   reloadDuration: 2
@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 1913788795788701171}
   - component: {fileID: 7965155679531435341}
   m_Layer: 0
-  m_Name: Ability2
+  m_Name: Trap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -395,7 +395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 10
-  buttonName: Ability2
+  abilitySlot: 1
   hidesOtherInputs: 0
   abilityID: 3
   fireDelay: 0.5
@@ -411,7 +411,7 @@ GameObject:
   - component: {fileID: 8736292213951035431}
   - component: {fileID: 8666854124826083951}
   m_Layer: 0
-  m_Name: Ability3
+  m_Name: Tall Grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 10
-  buttonName: Ability3
+  abilitySlot: 2
   hidesOtherInputs: 0
   abilityID: 4
   fireDelay: 1
@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 6220889621231917683}
   - component: {fileID: 5940706724890032380}
   m_Layer: 0
-  m_Name: Ability1
+  m_Name: Sniper Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -493,7 +493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 20
-  buttonName: Ability1
+  abilitySlot: 0
   hidesOtherInputs: 1
   abilityID: 0
   laserIndex: 0

@@ -318,7 +318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 0
-  buttonName: Reload
+  abilitySlot: 3
   hidesOtherInputs: 1
   abilityID: 1
   reloadDuration: 2
@@ -413,7 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 0
-  buttonName: Ability2
+  abilitySlot: 1
   hidesOtherInputs: 1
   abilityID: 3
   aminaReservedPerSecond: 5
@@ -468,7 +468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 0
-  buttonName: Ability3
+  abilitySlot: 2
   hidesOtherInputs: 1
   abilityID: 4
   aminaReservedPerSecond: 10
@@ -522,7 +522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 5
-  buttonName: Ability1
+  abilitySlot: 0
   hidesOtherInputs: 0
   abilityID: 2
   fireDelay: 0.5

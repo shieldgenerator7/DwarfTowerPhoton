@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 0
-  buttonName: Ability2
+  abilitySlot: 1
   hidesOtherInputs: 0
   abilityID: 2
   abilityContext: {fileID: 5518924279983056713}
@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 0
-  buttonName: Reload
+  abilitySlot: 3
   hidesOtherInputs: 1
   abilityID: 3
   reloadDuration: 2
@@ -459,7 +459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 0
-  buttonName: Reload
+  abilitySlot: 3
   hidesOtherInputs: 0
   abilityID: 5
   abilityContext: {fileID: 3769535869663102263}
@@ -480,7 +480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 0
-  buttonName: Ability1
+  abilitySlot: 0
   hidesOtherInputs: 1
   abilityID: 6
   aminaReservedPerSecond: 10
@@ -503,7 +503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 0
-  buttonName: Ability2
+  abilitySlot: 1
   hidesOtherInputs: 1
   abilityID: 7
   aminaReservedPerSecond: 5
@@ -526,7 +526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 0
-  buttonName: Ability3
+  abilitySlot: 2
   hidesOtherInputs: 1
   abilityID: 8
   aminaReservedPerSecond: 5
@@ -580,7 +580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 5
-  buttonName: Ability3
+  abilitySlot: 2
   hidesOtherInputs: 1
   abilityID: 9
   dashDistance: 5
@@ -677,7 +677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 1
-  buttonName: Ability1
+  abilitySlot: 0
   hidesOtherInputs: 0
   abilityID: 4
   fireDelay: 1

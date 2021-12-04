@@ -396,7 +396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 0
-  buttonName: Ability3
+  abilitySlot: 2
   hidesOtherInputs: 0
   abilityID: 2
   rainbowPathIndex: 2
@@ -445,7 +445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 10
-  buttonName: Ability2
+  abilitySlot: 1
   hidesOtherInputs: 0
   abilityID: 1
   fireDelay: 1
@@ -494,7 +494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 5
-  buttonName: Ability1
+  abilitySlot: 0
   hidesOtherInputs: 0
   abilityID: 0
   carriedShotIndex: 0

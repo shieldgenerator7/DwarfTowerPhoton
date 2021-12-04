@@ -17,11 +17,10 @@ public abstract class PlayerAbility : MonoBehaviour
     public float manaCost;
 
     /// <summary>
-    /// The name of the button that activates this ability
-    /// Options: Look in Edit->Project Settings->Input
+    /// Which ability slot this ability fits into
     /// </summary>
-    [Tooltip("The name of the button that activates this ability,\nas listed in Edit->Project Settings->Input")]
-    public string buttonName = "Ability1";
+    [Tooltip("Which ability slot this ability fits into")]
+    public AbilitySlot abilitySlot = AbilitySlot.Ability1;
     /// <summary>
     /// Whether or not this ability prevents any further abilities from activating
     /// </summary>
