@@ -10,11 +10,11 @@ public abstract class PlayerAbility : MonoBehaviour
     //
 
     /// <summary>
-    /// How much mana it costs to use this ability, 
+    /// How much amina it costs to use this ability, 
     /// either one-time or per second
     /// </summary>
-    [Tooltip("How much mana it costs to use this ability, either one-time or per second")]
-    public float manaCost;
+    [Tooltip("How much amina it costs to use this ability, either one-time or per second")]
+    public float aminaCost;
 
     /// <summary>
     /// Which ability slot this ability fits into

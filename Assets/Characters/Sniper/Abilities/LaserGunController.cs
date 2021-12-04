@@ -17,7 +17,7 @@ public class LaserGunController : PlayerAbility
         base.OnButtonDown();
 
         tryingToShoot = true;
-        if (aminaPool.requestAmina(manaCost) > 0)
+        if (aminaPool.requestAmina(aminaCost) > 0)
         {
             activate();
         }

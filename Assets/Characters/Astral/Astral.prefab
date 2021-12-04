@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df414be81b43da34984ee39b3f7d8c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 0
+  aminaCost: 0
   abilitySlot: 1
   hidesOtherInputs: 0
   abilityID: 2
@@ -316,7 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b3994f5d6328d4ea5a2534d14ad54b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 0
+  aminaCost: 0
   abilitySlot: 3
   hidesOtherInputs: 1
   abilityID: 3
@@ -437,7 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df414be81b43da34984ee39b3f7d8c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 0
+  aminaCost: 0
   abilitySlot: 3
   hidesOtherInputs: 0
   abilityID: 5
@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1146f130182c8b468babded8c5cb840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 0
+  aminaCost: 0
   abilitySlot: 0
   hidesOtherInputs: 1
   abilityID: 6
@@ -481,7 +481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1146f130182c8b468babded8c5cb840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 0
+  aminaCost: 0
   abilitySlot: 1
   hidesOtherInputs: 1
   abilityID: 7
@@ -504,7 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1146f130182c8b468babded8c5cb840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 0
+  aminaCost: 0
   abilitySlot: 2
   hidesOtherInputs: 1
   abilityID: 8
@@ -558,7 +558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffb3005b132eaa840861a6b0b1f72844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 5
+  aminaCost: 5
   abilitySlot: 2
   hidesOtherInputs: 1
   abilityID: 9
@@ -655,7 +655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83413c13fefadf64bab9596e5332f75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 1
+  aminaCost: 1
   abilitySlot: 0
   hidesOtherInputs: 0
   abilityID: 4

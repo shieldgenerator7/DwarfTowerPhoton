@@ -26,7 +26,7 @@ public class GunController : PlayerAbility
         //base.OnButtonHeld();
         if (Time.time > lastFireTime + fireDelay)
         {
-            if (manaCost <= 0 || aminaPool.requestAmina(manaCost) > 0)
+            if (aminaCost <= 0 || aminaPool.requestAmina(aminaCost) > 0)
             {
                 Vector2 spawnPos = playerController.SpawnCenter;
                 lastFireTime = lastFireTime + fireDelay;

@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88cc2c3035b6cd4478ee73e5317d1b4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 0
+  aminaCost: 0
   abilitySlot: 0
   hidesOtherInputs: 0
   abilityID: 0

@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb9da9c92c361704f9ddf46d83b0c6d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 0
+  aminaCost: 0
   abilitySlot: 2
   hidesOtherInputs: 0
   abilityID: 2
@@ -423,7 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83413c13fefadf64bab9596e5332f75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 10
+  aminaCost: 10
   abilitySlot: 1
   hidesOtherInputs: 0
   abilityID: 1
@@ -472,7 +472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f76bcf7659545f640bb9bd5d977a5398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaCost: 5
+  aminaCost: 5
   abilitySlot: 0
   hidesOtherInputs: 0
   abilityID: 0
