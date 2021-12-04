@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 0
-  buttonName: ability1
+  abilitySlot: 0
   hidesOtherInputs: 0
   abilityID: 0
   fireDelay: 0.1
