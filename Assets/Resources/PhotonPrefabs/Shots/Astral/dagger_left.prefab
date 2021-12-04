@@ -228,6 +228,8 @@ MonoBehaviour:
   dataFinal: {fileID: 11400000, guid: 3b8a804221adcc84db4b14ff1a16a34f, type: 2}
   swingSpeed: 3
   throwSpeed: 7
+  swingAbilitySlot: 0
+  throwAbilitySlot: 1
 --- !u!114 &1868033082892837353
 MonoBehaviour:
   m_ObjectHideFlags: 0

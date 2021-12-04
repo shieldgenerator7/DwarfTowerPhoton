@@ -11,6 +11,9 @@ public class WeaponController : ChargedShotController
     public float swingSpeed = 1;
     public float throwSpeed = 3;
 
+    public AbilitySlot swingAbilitySlot = AbilitySlot.Ability1;
+    public AbilitySlot throwAbilitySlot = AbilitySlot.Ability2;
+
     private float swingPercent = -1;//how much has been swung
     public float SwingPercent
     {
@@ -81,7 +84,7 @@ public class WeaponController : ChargedShotController
                 //
                 // Swing
                 //
-                if (Input.GetButton("Ability1"))
+                if (owner.inputState.Button(swingAbilitySlot).Bool())
                 {
                     SwingPercent += swingSpeed * Time.deltaTime;
                 }
@@ -98,7 +101,7 @@ public class WeaponController : ChargedShotController
                 //
                 // Throw
                 //
-                if (Input.GetButtonDown("Ability2"))
+                if (owner.inputState.Button(throwAbilitySlot) == ButtonState.DOWN)
                 {
                     switchOwner(null);
                     rb2d.velocity = pointDir * throwSpeed;
@@ -117,7 +120,7 @@ public class WeaponController : ChargedShotController
                 bool targetIsPlayer = collision.gameObject.CompareTag("Player");
                 if (targetIsPlayer)
                 {
-                    PlayerController pc = collision.gameObject.GetComponent<PlayerController>(); 
+                    PlayerController pc = collision.gameObject.GetComponent<PlayerController>();
                     if (!pc.stunnable.Stunned)
                     {
                         owner = pc;
