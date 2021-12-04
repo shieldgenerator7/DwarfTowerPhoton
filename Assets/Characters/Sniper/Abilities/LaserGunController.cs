@@ -66,7 +66,7 @@ public class LaserGunController : PlayerAbility
     }
     void release()
     {
-        laserShotController.ReadyToFire = true;
+        laserShotController.setReadyToFire(true);
         playerMovement.forceMovement(Vector2.zero);
         laserShotController.onLaserEnded += () =>
         {

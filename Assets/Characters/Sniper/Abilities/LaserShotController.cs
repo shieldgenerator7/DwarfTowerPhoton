@@ -27,7 +27,7 @@ public class LaserShotController : ShotController
     public float range = 100;
 
     private bool readyToFire = false;
-    public bool ReadyToFire
+    private bool ReadyToFire
     {
         get => readyToFire;
         set
@@ -154,6 +154,10 @@ public class LaserShotController : ShotController
         {
             PhotonNetwork.Destroy(PV.gameObject);
         }
+        else
+        {
+            Destroy(PV.gameObject);
+        }
     }
 
     void dealInitialDamage()
@@ -164,5 +168,18 @@ public class LaserShotController : ShotController
         {
             damager.processCollision(rch2d[i].collider, true);
         }
+    }
+
+    public void setReadyToFire(bool ready)
+    {
+        if (PV.IsMine)
+        {
+            PV.RPC("RPC_ReadyToFire", RpcTarget.All, ready);
+        }
+    }
+    [PunRPC]
+    void RPC_ReadyToFire(bool ready)
+    {
+        ReadyToFire = ready;
     }
 }
