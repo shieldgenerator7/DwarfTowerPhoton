@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
     public Stunnable stunnable { get; private set; }
     protected AminaPool aminaPool;
+    protected HealthPool healthPool;
     public PlayerMovement playerMovement { get; private set; }
     protected StatKeeper statKeeper;
     private ObjectSpawner objectSpawner;
@@ -61,11 +62,12 @@ public class PlayerController : MonoBehaviour
         {
             //Hook up Stunnable with HealthPool
             stunnable = gameObject.FindComponent<Stunnable>();
-            HealthPool healthPool = gameObject.FindComponent<HealthPool>();
+            healthPool = gameObject.FindComponent<HealthPool>();
             healthPool.Start();
             healthPool.onDied += () => { stunnable.triggerStun(); };
             stunnable.onStunned += (stunned) =>
             {
+                this.enabled = !stunned;
                 if (stunned)
                 {
                     cancelAbilities();

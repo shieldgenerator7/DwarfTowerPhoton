@@ -213,11 +213,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f058152a2edad5a4c91a5fd6bd76ad4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 2
+  stunDuration: 2
   knockbackDistance: 5
-  stunnableScripts:
-  - {fileID: 307085991090335124}
-  - {fileID: 4517987756410504376}
 --- !u!61 &9144531418077418824
 BoxCollider2D:
   m_ObjectHideFlags: 0

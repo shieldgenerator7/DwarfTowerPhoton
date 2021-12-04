@@ -5,47 +5,30 @@ using UnityEngine;
 
 public class Stunnable : MonoBehaviour
 {
-    public float duration = 2;
+    public float stunDuration = 2;
     public float knockbackDistance = 5;
-    //the scripts to be turned off while stunned
-    public List<MonoBehaviour> stunnableScripts = new List<MonoBehaviour>();
 
-    private float stunDuration = 0;
+    private float stunTimeLeft = 0;
 
     private Rigidbody2D rb2d;
-    protected PhotonView photonView;
-    public PhotonView PV
-    {
-        get
-        {
-            if (photonView == null)
-            {
-                photonView = GetComponent<PhotonView>();
-            }
-            if (photonView == null)
-            {
-                photonView = GetComponentInParent<PhotonView>();
-            }
-            return photonView;
-        }
-    }
+    protected PhotonView PV;
 
     private void Start()
     {
-        rb2d = GetComponentInParent<Rigidbody2D>();
+        rb2d = gameObject.FindComponent<Rigidbody2D>();
+        PV = gameObject.FindComponent<PhotonView>();
     }
 
     private void Update()
     {
         if (Stunned)
         {
-            stunDuration -= Time.deltaTime;
-            if (stunDuration <= 0)
+            stunTimeLeft -= Time.deltaTime;
+            if (stunTimeLeft <= 0)
             {
                 if (PV.IsMine)
                 {
                     rb2d.velocity = Vector2.zero;
-                    enableScripts(true);
                 }
                 onStunned?.Invoke(false);
             }
@@ -54,18 +37,17 @@ public class Stunnable : MonoBehaviour
     public delegate void OnStunned(bool stunned);
     public event OnStunned onStunned;
 
-    public bool Stunned => stunDuration > 0;
+    public bool Stunned => stunTimeLeft > 0;
 
     public void stun()
     {
-        stunDuration = duration;
+        stunTimeLeft = stunDuration;
         if (PV.IsMine)
         {
-            float knockbackPerSecond = knockbackDistance / stunDuration;
+            float knockbackPerSecond = knockbackDistance / stunTimeLeft;
             rb2d.velocity =
                 (transform.position - CaravanController.Caravan.transform.position).normalized
                 * knockbackPerSecond;
-            enableScripts(false);
         }
         onStunned?.Invoke(true);
     }
@@ -87,12 +69,4 @@ public class Stunnable : MonoBehaviour
     //{
     //    stun();
     //}
-
-    private void enableScripts(bool enable)
-    {
-        foreach (MonoBehaviour mb in stunnableScripts)
-        {
-            mb.enabled = enable;
-        }
-    }
 }
