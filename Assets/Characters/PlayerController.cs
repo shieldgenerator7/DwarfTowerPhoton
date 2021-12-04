@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public abstract class PlayerController : MonoBehaviour
 {
-    public Color playerColor = Color.white;
+    public Color playerColor { get; set; } = Color.white;
     public AminaReloader aminaReloader;//ability called by default when the player runs out of amina
     [SerializeField]
     private AbilityContext abilityContext;

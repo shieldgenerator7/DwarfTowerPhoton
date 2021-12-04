@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1073061482865175048}
   - component: {fileID: 3256913579671747826}
-  - component: {fileID: 307085991090335124}
   - component: {fileID: 8891596049456344743}
+  - component: {fileID: 307085991090335124}
   - component: {fileID: 3769535869663102263}
   - component: {fileID: 4380998440617942234}
   - component: {fileID: 1916908965083646283}
@@ -98,18 +98,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &307085991090335124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532201618779257096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 013f7295e52709646ab9a665825342c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8891596049456344743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,11 +110,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3a1368f6ffef0047b3bc902d56f2cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerColor: {r: 1, g: 1, b: 1, a: 1}
   aminaReloader: {fileID: 0}
   abilityContext: {fileID: 3769535869663102263}
   aminaDecayRate: 5
   rainbowPathAbility: {fileID: 2613285986018779774}
+--- !u!114 &307085991090335124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532201618779257096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013f7295e52709646ab9a665825342c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3769535869663102263
 MonoBehaviour:
   m_ObjectHideFlags: 0
