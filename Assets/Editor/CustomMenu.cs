@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
 using UnityEditor.SceneManagement;
 using System;
+using System.Linq;
 
 public class CustomMenu
 {
@@ -50,7 +51,7 @@ public class CustomMenu
                     t = t.parent;
                 }
                 Debug.Log(
-                    $"{s} has an empty script attached in position: {i}", 
+                    $"{s} has an empty script attached in position: {i}",
                     go
                     );
             }
@@ -161,46 +162,31 @@ public class CustomMenu
             if (gls.enterPlayMode && EditorApplication.isPlaying)
             {
                 EditorApplication.ExitPlaymode();
-                EditorApplication.playModeStateChanged -= killProcessesOnPlayStateChanged;
-                EditorApplication.playModeStateChanged += killProcessesOnPlayStateChanged;
             }
-            foreach (int procId in gls.buildProcesses)
-            {
-                try
-                {
-                    Process proc = Process.GetProcessById(procId);
-                    if (!proc.HasExited)
-                    {
-                        if (proc.ProcessName == PlayerSettings.productName)
-                        {
-                            proc.Kill();
-                        }
-                        else
-                        {
-                            Debug.LogWarning($"Can't kill process {proc.ProcessName} ({proc.Id})" +
-                                $" because it is not a process of {PlayerSettings.productName}");
-                        }
-                    }
-                    else
-                    {
-                        Debug.LogWarning($"Process ({proc.Id}) has already exited");
-                    }
-                }
-                catch (System.ArgumentException)
-                {
-                    Debug.LogWarning($"Process ({procId}) not found, probably already terminated");
-                }
-            }
-            gls.buildProcesses.Clear();
-            EditorUtility.SetDirty(gls);
         }
-    }
-    static void killProcessesOnPlayStateChanged(PlayModeStateChange pmsc)
-    {
-        if (pmsc == PlayModeStateChange.EnteredEditMode)
+        string gameProcName = PlayerSettings.productName;
+        List<Process> gameProcList = Process.GetProcesses().ToList().FindAll(
+            proc => proc.ProcessName == gameProcName
+            );
+        Debug.Log($"Kill Processes: killing {gameProcList.Count} {gameProcName} processes");
+        foreach (Process proc in gameProcList)
         {
-            killProcesses();
-            EditorApplication.playModeStateChanged -= killProcessesOnPlayStateChanged;
+            if (!proc.HasExited)
+            {
+                if (proc.ProcessName == gameProcName)
+                {
+                    proc.Kill();
+                }
+                else
+                {
+                    Debug.LogWarning($"Can't kill process {proc.ProcessName} ({proc.Id})" +
+                        $" because it is not a process of {gameProcName}");
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"Process ({proc.Id}) has already exited");
+            }
         }
     }
 
@@ -234,14 +220,6 @@ public class CustomMenu
             proc.StartInfo.FileName = buildName;
             proc.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
             proc.Start();
-            if (gls)
-            {
-                gls.buildProcesses.Add(proc.Id);
-            }
-        }
-        if (gls)
-        {
-            EditorUtility.SetDirty(gls);
         }
     }
 
