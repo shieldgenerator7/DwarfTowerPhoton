@@ -1560,18 +1560,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 306b627cbc1b03545accd10d73614d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPosition: {x: 0, y: -35}
-  endPosition: {x: 0, y: 35}
-  forceRectangularPaths: 1
-  minLength: 70
-  maxLength: 490
-  minSegmentLength: 1
-  maxSegmentLength: 20
+  pathGenerationRequirements:
+    forceRectangularPaths: 1
+    minLength: 70
+    maxLength: 200
+    bounds:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
+    startPos: {x: 0, y: -35}
+    endPos: {x: 0, y: 35}
+    middle: {x: 0, y: 0}
   boundPadding: 5
   playArea: {fileID: 860326090}
-  checkBounds: 1
-  checkFlagY: 1
-  checkLowerHalf: 1
+  mapPathGeneratorAlgorithm: {fileID: 11400000, guid: c32543f59853e7140819b211dc46c12c,
+    type: 2}
 --- !u!1 &920702076
 GameObject:
   m_ObjectHideFlags: 0
