@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class MapPath
+[System.Serializable]
+public class MapPath : IEnumerable
 {
     private List<Vector2> points;
 
@@ -97,6 +98,8 @@ public class MapPath
         }
         throw new UnityException("Something went wrong calculating position from distance!");
     }
+
+    public IEnumerator GetEnumerator() => points.GetEnumerator();
 
     public static implicit operator List<Vector2>(MapPath mp)
         => mp.points.ToList();
