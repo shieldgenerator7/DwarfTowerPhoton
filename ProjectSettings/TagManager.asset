@@ -46,6 +46,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Shot
+    uniqueID: 3937995741
+    locked: 0
   - name: UI
     uniqueID: 4041585015
     locked: 0
