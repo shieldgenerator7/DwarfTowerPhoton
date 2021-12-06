@@ -46,6 +46,7 @@ public class PhotonPlayer : MonoBehaviour
             yield return null;
         }
         rb2d.isKinematic = false;
+        myAvatar.GetComponent<AvatarSetup>().setTeamIndicator();
         yield return null;
     }
 }

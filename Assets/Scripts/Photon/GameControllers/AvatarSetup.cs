@@ -11,6 +11,8 @@ public class AvatarSetup : MonoBehaviour
     public GameObject myCharacter;
     public SpriteRenderer shadowSR;
 
+    private TeamToken teamToken;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,9 +27,32 @@ public class AvatarSetup : MonoBehaviour
                 );
             Camera.main.GetComponent<CameraController>().FocusObject = gameObject;
         }
+        teamToken = TeamToken.getTeamToken(gameObject);
+        if (teamToken.teamCaptain)
+        {
+            setTeamIndicator();
+        }
+    }
+
+    public void setTeamIndicator()
+    {
+        if (!teamToken)
+        {
+            teamToken = TeamToken.getTeamToken(gameObject);
+        }
         shadowSR.color = shadowSR.color.setRGB(
-            GetComponent<TeamToken>().teamCaptain.teamColor
+            teamToken.teamCaptain.teamColor
             );
+        if (PV.IsMine)
+        {
+            PV.RPC("RPC_SetTeamIndicator", RpcTarget.OthersBuffered);
+        }
+    }
+
+    [PunRPC]
+    void RPC_SetTeamIndicator()
+    {
+        setTeamIndicator();
     }
 
     [PunRPC]
