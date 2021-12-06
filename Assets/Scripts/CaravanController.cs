@@ -15,6 +15,8 @@ public class CaravanController : MonoBehaviour
 
     public SpriteRenderer contestEffect;
 
+    public MapPathGenerator pathGenerator;
+
     private Dictionary<TeamTokenCaptain, float> teamCaptains = new Dictionary<TeamTokenCaptain, float>();
 
     private static CaravanController instance;
@@ -22,6 +24,8 @@ public class CaravanController : MonoBehaviour
     {
         get { return instance; }
     }
+
+    private float distanceFromStart;
 
     private PhotonView PV;
     private Rigidbody2D rb2d;
@@ -37,6 +41,7 @@ public class CaravanController : MonoBehaviour
         }
         updateDirection();
         contestEffect.enabled = false;
+        distanceFromStart = pathGenerator.mapPath.Length / 2;
     }
 
     private void Update()
@@ -87,14 +92,17 @@ public class CaravanController : MonoBehaviour
         }
         float magnitude = direction.magnitude;
         magnitude = Mathf.Clamp(magnitude, 0, maxMoveSpeed);
-        rb2d.velocity = direction.normalized * magnitude;
+        distanceFromStart += direction.normalized.y * magnitude * Time.deltaTime;
+        Vector2 desiredPos = pathGenerator.mapPath.getPosition(distanceFromStart);
+        direction = (desiredPos - (Vector2)transform.position).normalized;
+        rb2d.velocity = direction * magnitude;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //Checking if the game should end (when the caravan hits a team flag)
         if (collision.gameObject.CompareTag("TeamFlag"))
-        {            
+        {
             //Turn off the caravan for good
             Destroy(this);
         }
@@ -113,7 +121,7 @@ public class CaravanController : MonoBehaviour
     {
         //Show contest effect only for the contesting player
         PlayerController pc = collision.gameObject.FindComponent<PlayerController>();
-        if (pc && pc.PV.IsMine )
+        if (pc && pc.PV.IsMine)
         {
             contestEffect.enabled = !pc.stunnable.Stunned;
         }

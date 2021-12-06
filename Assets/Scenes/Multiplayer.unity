@@ -3981,6 +3981,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: caravan
       objectReference: {fileID: 0}
+    - target: {fileID: 8316750907752029666, guid: 7f9045df571f5b44cb1ab08b5c55b501,
+        type: 3}
+      propertyPath: pathGenerator
+      value: 
+      objectReference: {fileID: 860326092}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f9045df571f5b44cb1ab08b5c55b501, type: 3}
 --- !u!4 &5805177630291831718 stripped

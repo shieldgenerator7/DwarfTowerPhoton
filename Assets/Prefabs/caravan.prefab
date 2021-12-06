@@ -232,7 +232,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 5
+  m_Constraints: 4
 --- !u!61 &5805177630514372063
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -327,6 +327,7 @@ MonoBehaviour:
   maxAllowedDistance: 3
   detectionColl: {fileID: 6696323203719167965}
   contestEffect: {fileID: 1099762645652554341}
+  pathGenerator: {fileID: 0}
 --- !u!114 &5183398110805307343
 MonoBehaviour:
   m_ObjectHideFlags: 0
