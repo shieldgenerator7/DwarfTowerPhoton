@@ -14,6 +14,8 @@ public class MapPathGenerator : MonoBehaviour
     public bool forceRectangularPaths = true;
     public float minLength = 70;
     public float maxLength = 490;
+    [Range(3, 15)]
+    public int segmentCount = 9;
     public float minSegmentLength = 1;
     public float maxSegmentLength = 20;
     [Tooltip("How far inside the play bounds it must stay")]
@@ -45,7 +47,19 @@ public class MapPathGenerator : MonoBehaviour
     public void generateMapPath()
     {
         //Initialize MapPath
-        mapPath = generateMapPath(Vector2.zero);
+        int safetyEject = 100;
+        do
+        {
+            mapPath = generateMapPath(Vector2.zero);
+            safetyEject--;
+            if (safetyEject == 0)
+            {
+                Debug.Log($"Safety eject! mapPath: {mapPath.Length}");
+                break;
+            }
+        }
+        while (!validMapPath(mapPath));
+        Debug.Log($"Generated map path. Length: {mapPath.Length}");
         //Delegate
         onMapPathGenerated?.Invoke(mapPath);
     }
@@ -75,7 +89,7 @@ public class MapPathGenerator : MonoBehaviour
         mapPath.addToStart(buildPos, true);
         //Add middle points
         Vector2 prevBuildDir = buildDir;
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < segmentCount - 3; i++)
         {
             int safetyEject = 100;
             do
@@ -101,26 +115,6 @@ public class MapPathGenerator : MonoBehaviour
         return mapPath;
     }
 
-    private Vector2 generatePathPos(Vector2 start, Vector2 buildDir)
-    {
-        float length = Random.Range(minSegmentLength, maxSegmentLength);
-        return start + (buildDir.normalized * length);
-    }
-
-    private bool validPosition(Vector2 pos)
-        => true
-        && (!checkBounds || withinBounds(pos))
-        && (!checkFlagY || withinStartAndEndY(pos))
-        && (!checkLowerHalf || withinLowerHalf(pos))
-        ;
-    private bool withinBounds(Vector2 pos)
-        => paddedBounds.Contains(pos);
-    private bool withinStartAndEndY(Vector2 pos)
-        => pos.y >= mapPath.Start.y
-        && pos.y <= mapPath.End.y;
-    private bool withinLowerHalf(Vector2 pos)
-        => pos.y < 0;
-
     private Vector2 generateNewDirection(Vector2 prevDirection)
     {
         if (forceRectangularPaths)
@@ -145,4 +139,30 @@ public class MapPathGenerator : MonoBehaviour
             return Random.rotation.eulerAngles;
         }
     }
+    private Vector2 generatePathPos(Vector2 start, Vector2 buildDir)
+    {
+        float length = Random.Range(minSegmentLength, maxSegmentLength);
+        return start + (buildDir.normalized * length);
+    }
+
+    private bool validPosition(Vector2 pos)
+        => true
+        && (!checkBounds || withinBounds(pos))
+        && (!checkFlagY || withinStartAndEndY(pos))
+        && (!checkLowerHalf || withinLowerHalf(pos))
+        ;
+    private bool withinBounds(Vector2 pos)
+        => paddedBounds.Contains(pos);
+    private bool withinStartAndEndY(Vector2 pos)
+        => pos.y >= mapPath.Start.y
+        && pos.y <= mapPath.End.y;
+    private bool withinLowerHalf(Vector2 pos)
+        => pos.y < 0;
+
+    private bool validMapPath(MapPath mapPath)
+    {
+        float length = mapPath.Length;
+        return length >= minLength && length <= maxLength;
+    }
+
 }
