@@ -9,6 +9,7 @@ public class AvatarSetup : MonoBehaviour
     private PhotonView PV;
     public int characterValue;
     public GameObject myCharacter;
+    public SpriteRenderer shadowSR;
 
     // Start is called before the first frame update
     void Start()
@@ -17,13 +18,16 @@ public class AvatarSetup : MonoBehaviour
         if (PV.IsMine)
         {
             PV.RPC(
-                "RPC_AddCharacter", 
-                RpcTarget.AllBuffered, 
+                "RPC_AddCharacter",
+                RpcTarget.AllBuffered,
                 PlayerInfo.instance.SelectedIndex,
                 PlayerInfo.instance.getUniqueColorIndex()
                 );
             Camera.main.GetComponent<CameraController>().FocusObject = gameObject;
         }
+        shadowSR.color = shadowSR.color.setRGB(
+            GetComponent<TeamToken>().teamCaptain.teamColor
+            );
     }
 
     [PunRPC]
