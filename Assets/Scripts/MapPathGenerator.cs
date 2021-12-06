@@ -53,13 +53,17 @@ public class MapPathGenerator : MonoBehaviour
             }
         }
         //Add initial point
-        generatePathSegment(buildDir);
+        Vector2 buildPos = generatePathPos(mapPath.Start, buildDir);
+        mapPath.addToStart(buildPos, true);
         //Add middle points
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 6; i++)
         {
             buildDir = generateNewDirection(buildDir);
-            generatePathSegment(buildDir);
+            buildPos = generatePathPos(mapPath.Start, buildDir);
+            mapPath.addToStart(buildPos, true);
         }
+        //Add second to last point
+        mapPath.addToStart(new Vector2(startPosition.x, mapPath.Start.y), true);
         //Add last point
         mapPath.addToStart(startPosition, true);
         //Delegate
@@ -68,19 +72,13 @@ public class MapPathGenerator : MonoBehaviour
     public delegate void OnMapPathGenerated(MapPath mapPath);
     public event OnMapPathGenerated onMapPathGenerated;
 
-    private void generatePathSegment(Vector2 buildDir)
+    private Vector2 generatePathPos(Vector2 start, Vector2 buildDir)
     {
-        Vector2 newPos;
-        do
-        {
-            float length = Random.Range(minSegmentLength, maxSegmentLength);
-            newPos = mapPath.Start + (buildDir.normalized * length);
-        }
-        while (!withinBounds(newPos));
-        mapPath.addToStart(newPos, true);
+        float length = Random.Range(minSegmentLength, maxSegmentLength);
+        return start + (buildDir.normalized * length);
     }
 
-    private bool withinBounds(Vector2 pos) => true || paddedBounds.Contains(pos);
+    private bool withinBounds(Vector2 pos) => paddedBounds.Contains(pos);
 
     private Vector2 generateNewDirection(Vector2 prevDirection)
     {
