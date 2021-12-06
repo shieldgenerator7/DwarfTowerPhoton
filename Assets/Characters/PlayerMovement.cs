@@ -6,6 +6,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {//2019-03-15: made by following this tutorial: https://www.youtube.com/watch?v=JjfPaY57dDM
 
+    [Tooltip("Should this movement conserve some previous momentum when changing directions?")]
+    public bool floaty = false;
+
     public float MovementSpeed { get; set; } = 4;
 
     /// <summary>
@@ -55,16 +58,24 @@ public class PlayerMovement : MonoBehaviour
                 desiredVelocity = Vector2.zero;
             }
         }
-        //If velocity hasn't changed since last frame,
-        if (prevVelocity == rb2d.velocity)
+        if (floaty)
         {
-            //Give exactly desired velocity
-            rb2d.velocity = desiredVelocity;
+            //If velocity hasn't changed since last frame,
+            if (prevVelocity == rb2d.velocity)
+            {
+                //Give exactly desired velocity
+                rb2d.velocity = desiredVelocity;
+            }
+            else
+            {
+                //Else add desired to current velocity
+                rb2d.velocity += desiredVelocity;
+            }
         }
         else
         {
-            //Else add desired to current velocity
-            rb2d.velocity += desiredVelocity;
+            //Give exactly desired velocity
+            rb2d.velocity = desiredVelocity;
         }
         //Record current velocity for next frame
         prevVelocity = rb2d.velocity;
