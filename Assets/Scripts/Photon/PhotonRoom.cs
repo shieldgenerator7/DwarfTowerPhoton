@@ -61,6 +61,15 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
         DontDestroyOnLoad(this.gameObject);
 
         PV = GetComponent<PhotonView>();
+
+        //Make sure MAX_VIEW_IDS is correct
+        if (PhotonNetwork.MAX_VIEW_IDS != 10000)
+        {
+            throw new UnityException(
+                $"PhotonNetwork.MAX_VIEWS_IDS is {PhotonNetwork.MAX_VIEW_IDS}," +
+                $" but it needs to be {10000}!"
+                );
+        }
     }
 
     public override void OnEnable()
