@@ -97,9 +97,7 @@ public class LaserShotController : ShotController
         bc2d.size = size;//use same width as sprite renderer
         //Sprite Alpha
         float alpha = (percent == 1) ? endAlpha : startAlpha;
-        Color color = sr.color;
-        color.a = alpha;
-        sr.color = color;
+        sr.color = sr.color.setAlpha(alpha);
     }
 
     private float fireStartTime = -1;
@@ -119,9 +117,7 @@ public class LaserShotController : ShotController
         size.x = startWidth;
         sr.size = size;
         //Start alpha
-        Color color = sr.color;
-        color.a = startAlpha;
-        sr.color = color;
+        sr.color = sr.color.setAlpha(startAlpha);
     }
 
     // Update is called once per frame

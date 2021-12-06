@@ -71,4 +71,16 @@ public static class Utility
     {
         sr.sortingOrder = -(int)(sr.transform.position.y * 100);
     }
+
+    public static Color setRGB(this Color color, Color rgb)
+    {
+        rgb.a = color.a;
+        return rgb;
+    }
+
+    public static Color setAlpha(this Color color, float alpha)
+    {
+        color.a = alpha;
+        return color;
+    }
 }

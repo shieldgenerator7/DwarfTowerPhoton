@@ -80,8 +80,8 @@ public class BlinkEffect : MonoBehaviour
 
     private void blink(SpriteRenderer sr, bool forceOpaque = false)
     {
-        Color c = sr.color;
-        c.a = (forceOpaque) ? 1 : 1 - c.a;
-        sr.color = c;
+        sr.color = sr.color.setAlpha(
+            (forceOpaque) ? 1 : 1 - sr.color.a
+            );
     }
 }

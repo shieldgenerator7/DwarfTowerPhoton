@@ -49,8 +49,6 @@ public class TallGrass : MonoBehaviour
     void setAlpha(GameObject go, float alpha)
     {
         SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
-        Color color = sr.color;
-        color.a = alpha;
-        sr.color = color;
+        sr.color = sr.color.setAlpha(alpha);
     }
 }

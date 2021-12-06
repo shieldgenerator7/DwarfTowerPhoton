@@ -21,7 +21,7 @@ public class AbilityContextDisplay : MonoBehaviour
     {
         playerController = gameObject.FindComponent<PlayerController>();
         playerController.onAbilityContextChanged += checkAbilityContext;
-        playerColor = playerController.gameObject.FindComponent<SpriteRenderer>().color;
+        playerColor = playerController.playerColor;
         acmd = FindObjectOfType<AbilityContextMenuDisplay>();
     }
 
