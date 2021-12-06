@@ -35,8 +35,22 @@ public class MapPathGenerator : MonoBehaviour
         size.x -= boundPadding * 2;
         size.y -= boundPadding * 2;
         paddedBounds.size = size;
+        generateMapPath();
+    }
+
+    public void generateMapPath()
+    {
         //Initialize MapPath
-        mapPath = new MapPath();
+        mapPath = generateMapPath(Vector2.zero);
+        //Delegate
+        onMapPathGenerated?.Invoke(mapPath);
+    }
+    public delegate void OnMapPathGenerated(MapPath mapPath);
+    public event OnMapPathGenerated onMapPathGenerated;
+
+    private MapPath generateMapPath(Vector2 middle)
+    {
+        MapPath mapPath = new MapPath(middle);
         //Get build dir
         Vector2 buildDir = startPosition - endPosition;
         if (forceRectangularPaths)
