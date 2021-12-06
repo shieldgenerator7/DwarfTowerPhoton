@@ -25,6 +25,10 @@ public class MapPathGenerator : MonoBehaviour
     private Bounds playBounds;
     private Bounds paddedBounds;
 
+    public bool checkBounds = true;
+    public bool checkFlagY = true;
+    public bool checkLowerHalf = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -105,9 +109,9 @@ public class MapPathGenerator : MonoBehaviour
 
     private bool validPosition(Vector2 pos)
         => true
-        && withinBounds(pos)
-        && withinStartAndEndY(pos)
-        && withinLowerHalf(pos)
+        && (!checkBounds || withinBounds(pos))
+        && (!checkFlagY || withinStartAndEndY(pos))
+        && (!checkLowerHalf || withinLowerHalf(pos))
         ;
     private bool withinBounds(Vector2 pos)
         => paddedBounds.Contains(pos);

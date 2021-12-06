@@ -1569,6 +1569,9 @@ MonoBehaviour:
   maxSegmentLength: 20
   boundPadding: 5
   playArea: {fileID: 860326090}
+  checkBounds: 1
+  checkFlagY: 1
+  checkLowerHalf: 1
 --- !u!1 &920702076
 GameObject:
   m_ObjectHideFlags: 0
