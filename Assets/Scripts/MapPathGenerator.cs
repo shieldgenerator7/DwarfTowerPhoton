@@ -70,21 +70,32 @@ public class MapPathGenerator : MonoBehaviour
         Vector2 buildPos = generatePathPos(mapPath.Start, buildDir);
         mapPath.addToStart(buildPos, true);
         //Add middle points
+        Vector2 prevBuildDir = buildDir;
         for (int i = 0; i < 6; i++)
         {
-            buildDir = generateNewDirection(buildDir);
-            buildPos = generatePathPos(mapPath.Start, buildDir);
+            int safetyEject = 100;
+            do
+            {
+                buildDir = generateNewDirection(prevBuildDir);
+                buildPos = generatePathPos(mapPath.Start, buildDir);
+                safetyEject--;
+                if (safetyEject == 0)
+                {
+                    Debug.Log($"Safety eject! buildPos: {buildPos}");
+                    break;
+                }
+            }
+            while (!validPosition(buildPos));
+            prevBuildDir = buildDir;
             mapPath.addToStart(buildPos, true);
         }
         //Add second to last point
         mapPath.addToStart(new Vector2(startPosition.x, mapPath.Start.y), true);
         //Add last point
         mapPath.addToStart(startPosition, true);
-        //Delegate
-        onMapPathGenerated?.Invoke(mapPath);
+        //Return
+        return mapPath;
     }
-    public delegate void OnMapPathGenerated(MapPath mapPath);
-    public event OnMapPathGenerated onMapPathGenerated;
 
     private Vector2 generatePathPos(Vector2 start, Vector2 buildDir)
     {
@@ -92,7 +103,19 @@ public class MapPathGenerator : MonoBehaviour
         return start + (buildDir.normalized * length);
     }
 
-    private bool withinBounds(Vector2 pos) => paddedBounds.Contains(pos);
+    private bool validPosition(Vector2 pos)
+        => true
+        && withinBounds(pos)
+        && withinStartAndEndY(pos)
+        && withinLowerHalf(pos)
+        ;
+    private bool withinBounds(Vector2 pos)
+        => paddedBounds.Contains(pos);
+    private bool withinStartAndEndY(Vector2 pos)
+        => pos.y >= mapPath.Start.y
+        && pos.y <= mapPath.End.y;
+    private bool withinLowerHalf(Vector2 pos)
+        => pos.y < 0;
 
     private Vector2 generateNewDirection(Vector2 prevDirection)
     {
