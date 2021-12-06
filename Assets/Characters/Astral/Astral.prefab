@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df414be81b43da34984ee39b3f7d8c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityName: Conjure Weapon Menu
   aminaCost: 0
   abilitySlot: 1
   hidesOtherInputs: 0
@@ -313,6 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b3994f5d6328d4ea5a2534d14ad54b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityName: Amina Reloader
   aminaCost: 0
   abilitySlot: 3
   hidesOtherInputs: 1
@@ -434,6 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df414be81b43da34984ee39b3f7d8c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityName: Exit Menu
   aminaCost: 0
   abilitySlot: 3
   hidesOtherInputs: 0
@@ -455,6 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1146f130182c8b468babded8c5cb840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityName: Conjure Sword
   aminaCost: 0
   abilitySlot: 0
   hidesOtherInputs: 1
@@ -478,6 +482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1146f130182c8b468babded8c5cb840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityName: Conjure Daggers
   aminaCost: 0
   abilitySlot: 1
   hidesOtherInputs: 1
@@ -501,6 +506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1146f130182c8b468babded8c5cb840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityName: Conjure Arm Scythes
   aminaCost: 0
   abilitySlot: 2
   hidesOtherInputs: 1
@@ -555,6 +561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffb3005b132eaa840861a6b0b1f72844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityName: Dash
   aminaCost: 5
   abilitySlot: 2
   hidesOtherInputs: 1
@@ -620,7 +627,7 @@ GameObject:
   - component: {fileID: 6220889621231917683}
   - component: {fileID: 5500888993561376432}
   m_Layer: 0
-  m_Name: Star Shot
+  m_Name: Astral Shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -652,6 +659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83413c13fefadf64bab9596e5332f75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityName: Astral Shot
   aminaCost: 1
   abilitySlot: 0
   hidesOtherInputs: 0

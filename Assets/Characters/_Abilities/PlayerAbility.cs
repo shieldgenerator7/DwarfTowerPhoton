@@ -9,6 +9,10 @@ public abstract class PlayerAbility : MonoBehaviour
     // Settings
     //
 
+    [SerializeField]
+    [Tooltip("Used to identify it in the inspector. Not used in the code")]
+    private string abilityName;
+
     /// <summary>
     /// How much amina it costs to use this ability, 
     /// either one-time or per second

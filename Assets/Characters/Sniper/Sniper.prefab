@@ -293,6 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b3994f5d6328d4ea5a2534d14ad54b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityName: Amina Reloader
   aminaCost: 0
   abilitySlot: 3
   hidesOtherInputs: 1
@@ -388,6 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83413c13fefadf64bab9596e5332f75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityName: Trap
   aminaCost: 10
   abilitySlot: 1
   hidesOtherInputs: 0
@@ -437,6 +439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83413c13fefadf64bab9596e5332f75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityName: Tall Grass
   aminaCost: 10
   abilitySlot: 2
   hidesOtherInputs: 0
@@ -486,6 +489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4972108ce15f5d0409335d1c7583cfc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityName: Laser Shot
   aminaCost: 20
   abilitySlot: 0
   hidesOtherInputs: 1
