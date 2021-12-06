@@ -9,7 +9,7 @@ public class GameSetup : MonoBehaviour
 {//2019-03-15: made by following this tutorial: https://www.youtube.com/watch?v=JjfPaY57dDM
 
 
-    public GameObject spawnPoint;
+    public Transform spawnPoint;
     public Canvas endScreen;
     public Image winScreen;
     public Image loseScreen;

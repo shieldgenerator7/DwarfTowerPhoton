@@ -25,12 +25,11 @@ public class PhotonPlayer : MonoBehaviour
 
     IEnumerator spawn()
     {
-        GameObject spawn = GameSetup.instance.spawnPoint;
+        Transform spawn = GameSetup.instance.spawnPoint;
         myAvatar = PhotonNetwork.Instantiate(
             Path.Combine("PhotonPrefabs", "PlayerAvatar"),
-            spawn.transform.position,
-            spawn.transform.rotation,
-            0
+            spawn.position,
+            Quaternion.identity
             );
         TeamToken teamToken = TeamToken.getTeamToken(myAvatar);
         teamToken.assignTeam();
@@ -41,9 +40,9 @@ public class PhotonPlayer : MonoBehaviour
         spawn = teamToken.teamCaptain.getNextSpawnPoint();
         Rigidbody2D rb2d = myAvatar.GetComponent<Rigidbody2D>();
         rb2d.isKinematic = true;
-        while (myAvatar.transform.position != spawn.transform.position)
+        while (myAvatar.transform.position != spawn.position)
         {
-            myAvatar.transform.position = spawn.transform.position;
+            myAvatar.transform.position = spawn.position;
             yield return null;
         }
         rb2d.isKinematic = false;

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class TeamTokenCaptain : TeamToken
 {
-    public GameObject[] spawnPoints;
+    public Color teamColor = Color.white;
+
+    public List<Transform> spawnPoints;
 
     private int nextSpawn = 0;
 
@@ -15,11 +17,11 @@ public class TeamTokenCaptain : TeamToken
         teamCaptain = this;
     }
 
-    public GameObject getNextSpawnPoint()
+    public Transform getNextSpawnPoint()
     {
-        GameObject spawn = spawnPoints[nextSpawn];
+        Transform spawn = spawnPoints[nextSpawn];
         nextSpawn++;
-        nextSpawn = nextSpawn % spawnPoints.Length;
+        nextSpawn = nextSpawn % spawnPoints.Count;
         return spawn;
     }
 }
