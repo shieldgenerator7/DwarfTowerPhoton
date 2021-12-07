@@ -4,21 +4,16 @@ using UnityEngine;
 
 public class MapPathGenerator : MonoBehaviour
 {
-    public PathGenerationRequirements pathGenerationRequirements;
-
-    [Header("Components")]
-    public MapPathGeneratorAlgorithm mapPathGeneratorAlgorithm;
 
     public MapPath mapPath { get; private set; }
 
-    public void generateMapPath(Bounds generatableBounds)
+    public void generateMapPath(MapProfile mapProfile)
     {
-        pathGenerationRequirements.bounds = generatableBounds;
         //Initialize MapPath
         int safetyEject = 100;
         do
         {
-            mapPath = mapPathGeneratorAlgorithm.generate(pathGenerationRequirements);
+            mapPath = mapProfile.caravanPathAlgorithm.generate(mapProfile.caravanPathReqs);
             safetyEject--;
             if (safetyEject == 0)
             {
@@ -26,7 +21,7 @@ public class MapPathGenerator : MonoBehaviour
                 break;
             }
         }
-        while (!validMapPath(mapPath));
+        while (!mapProfile.caravanPathReqs.validMapPath(mapPath));
         Debug.Log($"Generated map path. Length: {mapPath.Length}");
         //Delegate
         onMapPathGenerated?.Invoke(mapPath);
@@ -35,12 +30,7 @@ public class MapPathGenerator : MonoBehaviour
     public event OnMapPathGenerated onMapPathGenerated;
 
 
-    private bool validMapPath(MapPath mapPath)
-    {
-        float length = mapPath.Length;
-        return length >= pathGenerationRequirements.minLength
-            && length <= pathGenerationRequirements.maxLength;
-    }
+
 
 
 

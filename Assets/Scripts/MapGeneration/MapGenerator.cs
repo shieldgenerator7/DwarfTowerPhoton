@@ -5,14 +5,12 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
+    public MapProfile mapProfile;
+
+    [Header("Components")]
     public PlayArea playArea;
     public MapPathGenerator caravanPathGenerator;
     public ObstaclePopulator obstaclePopulator;
-
-    [Tooltip("How far inside the play bounds it must stay")]
-    public float boundPadding = 2;
-
-    public Bounds generatableBounds { get; private set; }
 
     private PhotonView PV;
 
@@ -28,27 +26,27 @@ public class MapGenerator : MonoBehaviour
 
     public void generateMap(int seed = -1, bool generateCaravanPath = true, bool generateObstacles = true)
     {
+        //Initialize random seed
         if (seed <= 0)
         {
             seed = (int)System.DateTime.Now.Ticks;
         }
         Random.InitState(seed);
-        //Initialize bounds
-        Bounds bounds = playArea.PlayBounds;
-        Vector2 size = bounds.size;
-        size.x -= boundPadding * 2;
-        size.y -= boundPadding * 2;
-        bounds.size = size;
-        generatableBounds = bounds;
+        //Init MapProfile
+        mapProfile.init();
+        //Adjust Play Area
+        playArea.ground.sprite = mapProfile.groundSprite;
+        playArea.ground.color = mapProfile.groundColor;
+        playArea.adjustPlayArea(mapProfile.playAreaSize.x, mapProfile.playAreaSize.y);
         //Caravan Path
         if (generateCaravanPath)
         {
-            caravanPathGenerator.generateMapPath(generatableBounds);
+            caravanPathGenerator.generateMapPath(mapProfile);
         }
         //Obstacles
         if (generateObstacles)
         {
-            obstaclePopulator.populateObstacles(generatableBounds);
+            obstaclePopulator.populateObstacles(mapProfile);
         }
         //RPC
         if (PV.IsMine)

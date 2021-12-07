@@ -617,11 +617,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   folder: {fileID: 333080598}
   mapPathGenerator: {fileID: 333080603}
-  obstaclesToSpawn:
-  - {fileID: 11400000, guid: 218ebe945d19dcf4486510f2774f13a2, type: 2}
-  - {fileID: 11400000, guid: 529aa5275dedbbd48a8a0b9524c3cf4e, type: 2}
-  - {fileID: 11400000, guid: 85d5f4cb3ff115d44bf189018adb2f2e, type: 2}
-  - {fileID: 11400000, guid: 08fe6e76c2a54c04197efd247c8ddeb1, type: 2}
   avoidPosList:
   - {fileID: 208752787}
   - {fileID: 1792526548}
@@ -657,18 +652,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 306b627cbc1b03545accd10d73614d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathGenerationRequirements:
-    forceRectangularPaths: 1
-    minLength: 70
-    maxLength: 200
-    bounds:
-      m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 0, y: 0, z: 0}
-    startPos: {x: 0, y: -35}
-    endPos: {x: 0, y: 35}
-    middle: {x: 0, y: 0}
-  mapPathGeneratorAlgorithm: {fileID: 11400000, guid: ba6655d0b2d55924dbfc2a219a53e742,
-    type: 2}
 --- !u!114 &333080604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -681,10 +664,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d55dfdb29348df40a467dc038a16687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapProfile: {fileID: 11400000, guid: 1678a82ad2b0db44e88cac4778bf96c3, type: 2}
   playArea: {fileID: 860326090}
   caravanPathGenerator: {fileID: 333080603}
   obstaclePopulator: {fileID: 333080601}
-  boundPadding: 2
 --- !u!1 &484094122
 GameObject:
   m_ObjectHideFlags: 0
@@ -1142,7 +1125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 80
   height: 100
-  grass: {fileID: 1843476649}
+  ground: {fileID: 1843476649}
   left: {fileID: 32418570}
   right: {fileID: 679818867}
   top: {fileID: 215792496}
@@ -1854,7 +1837,7 @@ GameObject:
   - component: {fileID: 1843476650}
   - component: {fileID: 1843476649}
   m_Layer: 0
-  m_Name: grass
+  m_Name: ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1900,15 +1883,15 @@ SpriteRenderer:
   m_SortingLayerID: 1339478635
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: dff721c87934b504bb6a1a57e980048a, type: 3}
-  m_Color: {r: 0.36450982, g: 0.56078434, b: 0.38631812, a: 1}
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
   m_Size: {x: 80, y: 100}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1843476650

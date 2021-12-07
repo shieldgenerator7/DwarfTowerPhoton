@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4db789a01f92ff4e8934942b11f3934, type: 3}
+  m_Name: Map Default
+  m_EditorClassIdentifier: 
+  playAreaSize: {x: 80, y: 100}
+  groundSprite: {fileID: 21300000, guid: dff721c87934b504bb6a1a57e980048a, type: 3}
+  groundColor: {r: 0.3647059, g: 0.56078434, b: 0.3882353, a: 1}
+  borderPadding: 2
+  caravanPathReqs:
+    forceRectangularPaths: 1
+    minLength: 70
+    maxLength: 200
+    startPos: {x: 0, y: -35}
+    endPos: {x: 0, y: 35}
+    middle: {x: 0, y: 0}
+  caravanPathAlgorithm: {fileID: 11400000, guid: ba6655d0b2d55924dbfc2a219a53e742,
+    type: 2}
+  obstacleList:
+  - {fileID: 11400000, guid: 218ebe945d19dcf4486510f2774f13a2, type: 2}
+  - {fileID: 11400000, guid: 529aa5275dedbbd48a8a0b9524c3cf4e, type: 2}
+  - {fileID: 11400000, guid: 85d5f4cb3ff115d44bf189018adb2f2e, type: 2}
+  - {fileID: 11400000, guid: 08fe6e76c2a54c04197efd247c8ddeb1, type: 2}

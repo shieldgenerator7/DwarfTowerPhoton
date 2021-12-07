@@ -14,12 +14,19 @@ public class MapPathGeneratorEditor : Editor
         GUI.enabled = EditorApplication.isPlaying;
         if (GUILayout.Button("Generate (Play mode only)"))
         {
-            (target as MapPathGenerator).generateMapPath(FindObjectOfType<MapGenerator>().generatableBounds);
+            regenerate(target as MapPathGenerator);
         }
         autoRegenerate = GUILayout.Toggle(autoRegenerate, "Auto Regenerate");
         if (autoRegenerate)
         {
-            (target as MapPathGenerator).generateMapPath(FindObjectOfType<MapGenerator>().generatableBounds);
+            regenerate(target as MapPathGenerator);
         }
+    }
+
+    void regenerate(MapPathGenerator mpg)
+    {
+        mpg.generateMapPath(
+            FindObjectOfType<MapGenerator>().mapProfile
+            );
     }
 }

@@ -10,8 +10,6 @@ public class ObstaclePopulator : MonoBehaviour
 
     public MapPathGenerator mapPathGenerator;
 
-    public List<ObstacleInfo> obstaclesToSpawn;
-
     public List<Transform> avoidPosList;
 
     public ObjectSpawner objectSpawner;
@@ -19,12 +17,12 @@ public class ObstaclePopulator : MonoBehaviour
     private Vector2 min;
     private Vector2 max;
 
-    public void populateObstacles(Bounds generatableBounds)
+    public void populateObstacles(MapProfile mapProfile)
     {
-        min = generatableBounds.min;
-        max = generatableBounds.max;
+        min = mapProfile.GeneratableBounds.min;
+        max = mapProfile.GeneratableBounds.max;
         //Populate
-        foreach (ObstacleInfo obstacle in obstaclesToSpawn)
+        foreach (ObstacleInfo obstacle in mapProfile.obstacleList)
         {
             populate(obstacle);
         }
@@ -79,7 +77,7 @@ public class ObstaclePopulator : MonoBehaviour
                 Debug.Log($"Safety eject! obstacle: {obstacle}");
                 break;
             }
-        } 
+        }
         while (pathToAvoid.distanceFromPath(pos, obstacle.pathAvoidRadius) <= obstacle.pathAvoidRadius);
         return pos;
     }
