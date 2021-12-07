@@ -42,6 +42,7 @@ public class CaravanController : MonoBehaviour
         updateDirection();
         contestEffect.enabled = false;
         distanceFromStart = pathGenerator.mapPath.Length / 2;
+        pathGenerator.onMapPathGenerated += (mapPath) => { distanceFromStart = mapPath.Length / 2; };
     }
 
     private void Update()
