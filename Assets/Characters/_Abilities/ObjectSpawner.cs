@@ -43,6 +43,10 @@ public class ObjectSpawner : MonoBehaviour
 
     public GameObject spawnObject(int index, Vector2 pos, Vector2 dir, float addSpawnBuffer = 0)
     {
+        return spawnObject(objectSpawnInfoList[index], pos, dir, addSpawnBuffer);
+    }
+    public GameObject spawnObject(ObjectSpawnInfo osi, Vector2 pos, Vector2 dir, float addSpawnBuffer = 0)
+    {
         if (PV.IsMine)
         {
             //Make sure dir is a unit vector
@@ -54,7 +58,6 @@ public class ObjectSpawner : MonoBehaviour
                     );
             }
             //Initialize arguments
-            ObjectSpawnInfo osi = objectSpawnInfoList[index];
             string pathName = Path.Combine("PhotonPrefabs", folderName, osi.objectName);
             Vector2 position = pos + (dir * (osi.spawnBuffer + addSpawnBuffer));
             position += osi.spawnOffset;

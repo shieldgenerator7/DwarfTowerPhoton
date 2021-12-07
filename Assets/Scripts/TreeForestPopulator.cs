@@ -5,19 +5,15 @@ using UnityEngine;
 
 public class TreeForestPopulator : MonoBehaviour
 {
-    [Range(0, 1000)]
-    public int treeCount = 100;
-    public int treeIndex = 0;
+    
     public Transform folder;
 
     public PlayArea playArea;
     public MapPathGenerator mapPathGenerator;
 
+    public List<ObstacleInfo> obstaclesToSpawn;
+
     public List<Transform> avoidPosList;
-    [Range(1, 10)]
-    public float avoidRadius = 5;
-    [Range(1, 10)]
-    public float pathAvoidRadius = 5;
 
     private ObjectSpawner objectSpawner;
 
@@ -35,17 +31,20 @@ public class TreeForestPopulator : MonoBehaviour
             min = new Vector2(-playArea.width / 2 + 1, -playArea.height / 2 + 1);
             max = new Vector2(playArea.width / 2 - 1, playArea.height / 2 - 1);
             //Populate
-            populate();
+            foreach (ObstacleInfo obstacle in obstaclesToSpawn)
+            {
+                populate(obstacle);
+            }
         }
     }
 
-    void populate()
+    void populate(ObstacleInfo obstacle)
     {
-        for (int i = 0; i < treeCount; i++)
+        for (int i = 0; i < obstacle.treeCount; i++)
         {
             GameObject tree = objectSpawner.spawnObject(
-                treeIndex,
-                getRandomPosition(mapPathGenerator.mapPath),
+                obstacle.spawnInfo,
+                getRandomPosition(obstacle, mapPathGenerator.mapPath),
                 Vector2.up
                 );
             tree.transform.parent = folder;
@@ -54,7 +53,7 @@ public class TreeForestPopulator : MonoBehaviour
         }
     }
 
-    Vector2 getRandomPosition()
+    Vector2 getRandomPosition(ObstacleInfo obstacle)
     {
         Vector2 pos = Vector2.zero;
         do
@@ -63,18 +62,18 @@ public class TreeForestPopulator : MonoBehaviour
             pos.y = Random.Range(min.y, max.y);
         }
         while (avoidPosList.Any(
-            t => Vector2.Distance(t.position, pos) <= avoidRadius
+            t => Vector2.Distance(t.position, pos) <= obstacle.avoidRadius
             ));
         return pos;
     }
 
-    Vector2 getRandomPosition(MapPath pathToAvoid)
+    Vector2 getRandomPosition(ObstacleInfo obstacle, MapPath pathToAvoid)
     {
-        Vector2 pos = Vector2.zero;
+        Vector2 pos;
         do
         {
-            pos = getRandomPosition();
-        } while (pathToAvoid.distanceFromPath(pos, pathAvoidRadius) <= pathAvoidRadius);
+            pos = getRandomPosition(obstacle);
+        } while (pathToAvoid.distanceFromPath(pos, obstacle.pathAvoidRadius) <= obstacle.pathAvoidRadius);
         return pos;
     }
 }
