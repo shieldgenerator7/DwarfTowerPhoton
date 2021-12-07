@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec7f8c660d5cdbf47a2f9e4a89595cf7, type: 3}
   m_Name: obstacle_tree
   m_EditorClassIdentifier: 
-  treeCount: 700
+  spawnCount: 700
   spawnInfo: {fileID: 11400000, guid: 3187eb11651f2be40a6d051c53eda6eb, type: 2}
   avoidRadius: 5
   pathAvoidRadius: 1
