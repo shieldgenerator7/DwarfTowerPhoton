@@ -6,7 +6,7 @@ using UnityEngine;
 public class ObstacleInfo : ScriptableObject
 {
     [Range(0, 1000)]
-    public int treeCount = 100;
+    public int spawnCount = 100;
     public ObjectSpawnInfo spawnInfo;
     [Range(1, 10)]
     public float avoidRadius = 5;

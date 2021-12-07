@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class TreeForestPopulator : MonoBehaviour
+public class ObstaclePopulator : MonoBehaviour
 {
     
     public Transform folder;
@@ -40,7 +40,7 @@ public class TreeForestPopulator : MonoBehaviour
 
     void populate(ObstacleInfo obstacle)
     {
-        for (int i = 0; i < obstacle.treeCount; i++)
+        for (int i = 0; i < obstacle.spawnCount; i++)
         {
             GameObject tree = objectSpawner.spawnObject(
                 obstacle.spawnInfo,
