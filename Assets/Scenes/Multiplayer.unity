@@ -1572,7 +1572,7 @@ MonoBehaviour:
     middle: {x: 0, y: 0}
   boundPadding: 5
   playArea: {fileID: 860326090}
-  mapPathGeneratorAlgorithm: {fileID: 11400000, guid: c32543f59853e7140819b211dc46c12c,
+  mapPathGeneratorAlgorithm: {fileID: 11400000, guid: ba6655d0b2d55924dbfc2a219a53e742,
     type: 2}
 --- !u!1 &920702076
 GameObject:

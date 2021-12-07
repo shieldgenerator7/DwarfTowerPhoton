@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6958549b3227cf844b53262d74f216a0, type: 3}
-  m_Name: Caravan SFC
+  m_Script: {fileID: 11500000, guid: b0ac26ab85f56fb439d8df6a4f233dc3, type: 3}
+  m_Name: Caravan PC
   m_EditorClassIdentifier: 
-  segmentCount: 9
-  minSegmentLength: 1
-  maxSegmentLength: 20
-  checkBounds: 1
-  checkFlagY: 1
-  checkLowerHalf: 1
+  pointCount: 5
+  buffer: 5
