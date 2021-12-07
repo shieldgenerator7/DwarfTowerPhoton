@@ -99,6 +99,36 @@ public class MapPath : IEnumerable
         throw new UnityException("Something went wrong calculating position from distance!");
     }
 
+    public Vector2 getPositionFromPercentage(float percentage)
+    {
+        percentage = Mathf.Clamp(percentage, 0, 1);
+        return getPosition(Length * percentage);
+    }
+
+    /// <summary>
+    /// Returns the minimum distance between the given point and this path
+    /// </summary>
+    /// <param name="point"></param>
+    /// <param name="minimum"></param>
+    /// <returns></returns>
+    public float distanceFromPath(Vector2 point, float minimum = 0)
+    {
+        float minDistance = float.MaxValue;
+        for (int i = 1; i < points.Count; i++)
+        {
+            minDistance = Mathf.Min(
+                minDistance,
+                Utility.distanceToSegment(point, points[i - 1], points[i])
+                );
+            //Return if found minimum early
+            if (minDistance <= minimum)
+            {
+                return minimum;
+            }
+        }
+        return minDistance;
+    }
+
     public IEnumerator GetEnumerator() => points.GetEnumerator();
 
     public static implicit operator List<Vector2>(MapPath mp)

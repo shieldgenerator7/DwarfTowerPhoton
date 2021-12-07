@@ -83,4 +83,53 @@ public static class Utility
         color.a = alpha;
         return color;
     }
+
+    public static float distanceToSegment(Vector2 point, Vector2 vertexA, Vector2 vertexB)
+    {
+        Vector2 closest = Vector2.zero;
+        return distanceToSegment(point, vertexA, vertexB, out closest);
+    }
+    public static float distanceToSegment(Vector2 point, Vector2 vertexA, Vector2 vertexB, out Vector2 closest)
+    {
+        //2021-12-07: copied from http://csharphelper.com/blog/2016/09/find-the-shortest-distance-between-a-point-and-a-line-segment-in-c/
+        // Calculate the distance between
+        // point pt and the segment p1 --> p2.
+        float dx = vertexB.x - vertexA.x;
+        float dy = vertexB.y - vertexA.y;
+        if ((dx == 0) && (dy == 0))
+        {
+            // It's a point not a line segment.
+            closest = vertexA;
+            dx = point.x - vertexA.x;
+            dy = point.y - vertexA.y;
+            return Mathf.Sqrt(dx * dx + dy * dy);
+        }
+
+        // Calculate the t that minimizes the distance.
+        float t = ((point.x - vertexA.x) * dx + (point.y - vertexA.y) * dy) /
+            (dx * dx + dy * dy);
+
+        // See if this represents one of the segment's
+        // end points or a point in the middle.
+        if (t < 0)
+        {
+            closest = new Vector2(vertexA.x, vertexA.y);
+            dx = point.x - vertexA.x;
+            dy = point.y - vertexA.y;
+        }
+        else if (t > 1)
+        {
+            closest = new Vector2(vertexB.x, vertexB.y);
+            dx = point.x - vertexB.x;
+            dy = point.y - vertexB.y;
+        }
+        else
+        {
+            closest = new Vector2(vertexA.x + t * dx, vertexA.y + t * dy);
+            dx = point.x - closest.x;
+            dy = point.y - closest.y;
+        }
+        return Mathf.Sqrt(dx * dx + dy * dy);
+    }
+
 }

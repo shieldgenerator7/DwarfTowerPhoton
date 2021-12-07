@@ -11,10 +11,13 @@ public class TreeForestPopulator : MonoBehaviour
     public Transform folder;
 
     public PlayArea playArea;
+    public MapPathGenerator mapPathGenerator;
 
     public List<Transform> avoidPosList;
     [Range(1, 10)]
     public float avoidRadius = 5;
+    [Range(1, 10)]
+    public float pathAvoidRadius = 5;
 
     private ObjectSpawner objectSpawner;
 
@@ -42,7 +45,7 @@ public class TreeForestPopulator : MonoBehaviour
         {
             GameObject tree = objectSpawner.spawnObject(
                 treeIndex,
-                getRandomPosition(),
+                getRandomPosition(mapPathGenerator.mapPath),
                 Vector2.up
                 );
             tree.transform.parent = folder;
@@ -62,6 +65,16 @@ public class TreeForestPopulator : MonoBehaviour
         while (avoidPosList.Any(
             t => Vector2.Distance(t.position, pos) <= avoidRadius
             ));
+        return pos;
+    }
+
+    Vector2 getRandomPosition(MapPath pathToAvoid)
+    {
+        Vector2 pos = Vector2.zero;
+        do
+        {
+            pos = getRandomPosition();
+        } while (pathToAvoid.distanceFromPath(pos, pathAvoidRadius) <= pathAvoidRadius);
         return pos;
     }
 }
