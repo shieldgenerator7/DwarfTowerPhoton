@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,25 +9,30 @@ public class MapGenerator : MonoBehaviour
     public MapPathGenerator caravanPathGenerator;
     public ObstaclePopulator obstaclePopulator;
 
-    public bool generateCaravanPath = true;
-    public bool generateObstacles = true;
-
     [Tooltip("How far inside the play bounds it must stay")]
     public float boundPadding = 2;
 
     public Bounds generatableBounds { get; private set; }
 
+    private PhotonView PV;
+
     // Start is called before the first frame update
     void Awake()
     {
-        if (this.isPhotonViewMine())
+        PV = gameObject.FindComponent<PhotonView>();
+        if (PV.IsMine)
         {
             generateMap();
         }
     }
 
-    public void generateMap()
+    public void generateMap(int seed = -1, bool generateCaravanPath = true, bool generateObstacles = true)
     {
+        if (seed <= 0)
+        {
+            seed = (int)System.DateTime.Now.Ticks;
+        }
+        Random.InitState(seed);
         //Initialize bounds
         Bounds bounds = playArea.PlayBounds;
         Vector2 size = bounds.size;
@@ -44,5 +50,16 @@ public class MapGenerator : MonoBehaviour
         {
             obstaclePopulator.populateObstacles(generatableBounds);
         }
+        //RPC
+        if (PV.IsMine)
+        {
+            PV.RPC("RPC_GenerateMap", RpcTarget.OthersBuffered, seed);
+        }
+    }
+
+    [PunRPC]
+    void RPC_GenerateMap(int seed)
+    {
+        generateMap(seed, true, false);
     }
 }

@@ -684,8 +684,6 @@ MonoBehaviour:
   playArea: {fileID: 860326090}
   caravanPathGenerator: {fileID: 333080603}
   obstaclePopulator: {fileID: 333080601}
-  generateCaravanPath: 1
-  generateObstacles: 1
   boundPadding: 2
 --- !u!1 &484094122
 GameObject:
