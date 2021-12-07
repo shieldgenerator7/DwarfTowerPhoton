@@ -5,33 +5,15 @@ using UnityEngine;
 public class MapPathGenerator : MonoBehaviour
 {
     public PathGenerationRequirements pathGenerationRequirements;
-    public MapPath mapPath;
-    [Tooltip("How far inside the play bounds it must stay")]
-    public float boundPadding = 5;
 
     [Header("Components")]
-    public PlayArea playArea;
-    private Bounds playBounds;
-    private Bounds paddedBounds;
     public MapPathGeneratorAlgorithm mapPathGeneratorAlgorithm;
 
+    public MapPath mapPath { get; private set; }
 
-    // Start is called before the first frame update
-    void Start()
+    public void generateMapPath(Bounds generatableBounds)
     {
-        //Initialize bounds
-        playBounds = playArea.Bounds;
-        paddedBounds = playBounds;
-        Vector2 size = paddedBounds.size;
-        size.x -= boundPadding * 2;
-        size.y -= boundPadding * 2;
-        paddedBounds.size = size;
-        pathGenerationRequirements.bounds = paddedBounds;
-        generateMapPath();
-    }
-
-    public void generateMapPath()
-    {
+        pathGenerationRequirements.bounds = generatableBounds;
         //Initialize MapPath
         int safetyEject = 100;
         do

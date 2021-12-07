@@ -5,15 +5,26 @@ using UnityEngine;
 
 public class PlayArea : MonoBehaviour
 {
+    //public float Width => width;
+    [SerializeField]
     [Range(10, 100)]
     [Tooltip("The width of the play area")]
     public float width;
+
+    //public float Height => Height;
+    [SerializeField]
     [Range(10, 100)]
     [Tooltip("The height of the play area")]
     public float height;
 
-    public Bounds Bounds =>
-        new Bounds(Vector2.zero, new Vector2(width + 1, height + 1));
+    public Bounds VisibleBounds { get; private set; }
+    public Bounds PlayBounds { get; private set; }
+
+    private void Awake()
+    {
+        VisibleBounds = new Bounds(Vector2.zero, new Vector2(width + 1, height + 1));
+        PlayBounds = new Bounds(Vector2.zero, new Vector2(width - 1, height - 1));
+    }
 
 #if UNITY_EDITOR
 

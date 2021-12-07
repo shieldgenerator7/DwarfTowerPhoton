@@ -19,7 +19,7 @@ public class ObjectSpawner : MonoBehaviour
     private TeamToken teamToken;
     public PhotonView PV { get; private set; }
 
-    private void Start()
+    private void Awake()
     {
         teamToken = TeamToken.getTeamToken(gameObject);
         PV = gameObject.FindComponent<PhotonView>();

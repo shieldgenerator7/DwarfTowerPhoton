@@ -5,36 +5,28 @@ using UnityEngine;
 
 public class ObstaclePopulator : MonoBehaviour
 {
-    
+
     public Transform folder;
 
-    public PlayArea playArea;
     public MapPathGenerator mapPathGenerator;
 
     public List<ObstacleInfo> obstaclesToSpawn;
 
     public List<Transform> avoidPosList;
 
-    private ObjectSpawner objectSpawner;
+    public ObjectSpawner objectSpawner;
 
     private Vector2 min;
     private Vector2 max;
 
-    // Start is called before the first frame update
-    void Start()
+    public void populateObstacles(Bounds generatableBounds)
     {
-        //Object Spawner
-        objectSpawner = GetComponent<ObjectSpawner>();
-        if (objectSpawner.PV.IsMine)
+        min = generatableBounds.min;
+        max = generatableBounds.max;
+        //Populate
+        foreach (ObstacleInfo obstacle in obstaclesToSpawn)
         {
-            //Area
-            min = new Vector2(-playArea.width / 2 + 1, -playArea.height / 2 + 1);
-            max = new Vector2(playArea.width / 2 - 1, playArea.height / 2 - 1);
-            //Populate
-            foreach (ObstacleInfo obstacle in obstaclesToSpawn)
-            {
-                populate(obstacle);
-            }
+            populate(obstacle);
         }
     }
 
@@ -42,24 +34,31 @@ public class ObstaclePopulator : MonoBehaviour
     {
         for (int i = 0; i < obstacle.spawnCount; i++)
         {
-            GameObject tree = objectSpawner.spawnObject(
+            GameObject obst = objectSpawner.spawnObject(
                 obstacle.spawnInfo,
                 getRandomPosition(obstacle, mapPathGenerator.mapPath),
                 Vector2.up
                 );
-            tree.transform.parent = folder;
-            tree.GetComponentsInChildren<SpriteRenderer>().ToList()
+            obst.transform.parent = folder;
+            obst.GetComponentsInChildren<SpriteRenderer>().ToList()
                 .ForEach(sr => sr.updateSortingOrder());
         }
     }
 
     Vector2 getRandomPosition(ObstacleInfo obstacle)
     {
+        int safetyEject = 100;
         Vector2 pos = Vector2.zero;
         do
         {
             pos.x = Random.Range(min.x, max.x);
             pos.y = Random.Range(min.y, max.y);
+            safetyEject--;
+            if (safetyEject == 0)
+            {
+                Debug.Log($"Safety eject! obstacle: {obstacle}");
+                break;
+            }
         }
         while (avoidPosList.Any(
             t => Vector2.Distance(t.position, pos) <= obstacle.avoidRadius
@@ -69,11 +68,19 @@ public class ObstaclePopulator : MonoBehaviour
 
     Vector2 getRandomPosition(ObstacleInfo obstacle, MapPath pathToAvoid)
     {
+        int safetyEject = 100;
         Vector2 pos;
         do
         {
             pos = getRandomPosition(obstacle);
-        } while (pathToAvoid.distanceFromPath(pos, obstacle.pathAvoidRadius) <= obstacle.pathAvoidRadius);
+            safetyEject--;
+            if (safetyEject == 0)
+            {
+                Debug.Log($"Safety eject! obstacle: {obstacle}");
+                break;
+            }
+        } 
+        while (pathToAvoid.distanceFromPath(pos, obstacle.pathAvoidRadius) <= obstacle.pathAvoidRadius);
         return pos;
     }
 }

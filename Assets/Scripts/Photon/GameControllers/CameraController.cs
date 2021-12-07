@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour
         {
             FocusObject = focusObject;
         }
-        playAreaBounds = FindObjectOfType<PlayArea>().Bounds;
+        playAreaBounds = FindObjectOfType<PlayArea>().VisibleBounds;
     }
 
     // Update is called once per frame
