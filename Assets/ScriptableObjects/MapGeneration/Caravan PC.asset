@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ac26ab85f56fb439d8df6a4f233dc3, type: 3}
   m_Name: Caravan PC
   m_EditorClassIdentifier: 
-  pointCount: 5
-  buffer: 5
+  pointCount: 4
+  minPointDiff: 1.5
+  bufferY: 5
+  avoidPointList:
+  - {x: 0, y: 0}
