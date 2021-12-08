@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ public class MenuDisplay : MonoBehaviour
     public Image characterImage;
     public Image characterImageBackground;
     [Header("Character Info")]
-    public Text characterTypeText;
+    public TMP_Text characterTypeText;
     public List<Image> difficultyStars;
     public Sprite starFull;
     public Sprite starEmpty;
@@ -49,7 +50,7 @@ public class MenuDisplay : MonoBehaviour
             Image img = btnCharSel.GetComponent<Image>();
             img.sprite = charInfo.sprite;
             img.color = charInfo.defaultColor;
-            Text txt = btnCharSel.GetComponentInChildren<Text>();
+            TMP_Text txt = btnCharSel.GetComponentInChildren<TMP_Text>();
             txt.text = charInfo.characterName.ToUpper();
             Button btn = btnCharSel.GetComponent<Button>();
             btn.onClick.AddListener(() =>
