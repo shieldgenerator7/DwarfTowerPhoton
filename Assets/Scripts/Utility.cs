@@ -132,4 +132,21 @@ public static class Utility
         return Mathf.Sqrt(dx * dx + dy * dy);
     }
 
+    /// <summary>
+    /// Returns the position that the given ray 
+    /// (starting from the center of the given rectangle) 
+    /// intersects the given rectangle
+    /// </summary>
+    /// <param name="ray">The ray starting from the rectangle's center</param>
+    /// <param name="rect">The rectangle</param>
+    /// <returns></returns>
+    public static Vector2 rayIntersectRectangle(Vector2 ray, Rect rect)
+    {
+        Vector2 center = rect.center;
+        float rectDiagonalLength = (rect.max - rect.min).magnitude;
+        LineEquation line = new LineEquation(center, ray.normalized * rectDiagonalLength);
+        Vector2 intersection = line.GetIntersectionWithLineForRay(rect).End;
+        return intersection;
+    }
+
 }
