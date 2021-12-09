@@ -29,7 +29,15 @@ public class MapGenerator : MonoBehaviour
         //Initialize random seed
         if (seed <= 0)
         {
-            seed = (int)System.DateTime.Now.Ticks;
+            string mapName = PlayerInfo.instance.mapName;
+            if (!string.IsNullOrEmpty(mapName))
+            {
+                seed = mapName.GetHashCode();
+            }
+            else
+            {
+                seed = (int)System.DateTime.Now.Ticks;
+            }
         }
         Random.InitState(seed);
         //Init MapProfile

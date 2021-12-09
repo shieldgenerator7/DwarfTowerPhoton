@@ -8,6 +8,9 @@ public class PlayerInfo : MonoBehaviour
 
     public static PlayerInfo instance;
 
+    [Tooltip("The name of the map that the player wants to go to")]
+    public string mapName;
+
     [SerializeField]
     private int mySelectedCharacter;
     public int SelectedIndex
@@ -127,5 +130,14 @@ public class PlayerInfo : MonoBehaviour
         //No preferences available, so choose random one
         int randIndex = Random.Range(0, untakenColors.Count);
         return untakenColors[randIndex];
+    }
+
+    /// <summary>
+    /// This is here so it works well with the TextMeshPro InputField
+    /// </summary>
+    /// <param name="mapName"></param>
+    public void setMapName(string mapName)
+    {
+        this.mapName = mapName;
     }
 }

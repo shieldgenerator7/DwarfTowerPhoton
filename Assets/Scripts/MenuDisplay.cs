@@ -20,11 +20,14 @@ public class MenuDisplay : MonoBehaviour
     [Header("Color Select")]
     public GridLayoutGroup colorSelectGroup;
     public GameObject colorSelectButtonPrefab;
+    [Header("Map Name")]
+    public TMP_InputField txtMapName;
 
     // Start is called before the first frame update
     void Start()
     {
         PlayerInfo playerInfo = PlayerInfo.instance;
+        txtMapName.text = PlayerInfo.instance.mapName;
         playerInfo.onSelectedIndexChanged += updateCharacterImage;
         playerInfo.SelectedIndex = Random.Range(0, playerInfo.allCharacters.Count);
         updateCharacterImage(playerInfo.SelectedIndex);
