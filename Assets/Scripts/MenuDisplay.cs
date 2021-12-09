@@ -8,7 +8,6 @@ public class MenuDisplay : MonoBehaviour
 {
     [Header("Character Display")]
     public Image characterImage;
-    public Image characterImageBackground;
     [Header("Character Info")]
     public TMP_Text characterTypeText;
     public List<Image> difficultyStars;
@@ -22,6 +21,8 @@ public class MenuDisplay : MonoBehaviour
     public GameObject colorSelectButtonPrefab;
     [Header("Map Name")]
     public TMP_InputField txtMapName;
+    [Header("Other")]
+    public List<RectTransform> elementsToWiden;
 
     // Start is called before the first frame update
     void Start()
@@ -62,19 +63,21 @@ public class MenuDisplay : MonoBehaviour
             });
         }
         //Resize grid layout
-        RectTransform rect = characterSelectGroup.GetComponent<RectTransform>();
+        RectTransform rectCSG = characterSelectGroup.GetComponent<RectTransform>();
         int charCount = allCharacters.Count;
         int width = charCount * 100 + (charCount + 1) * 10;
-        rect.sizeDelta = new Vector2(
+        rectCSG.sizeDelta = new Vector2(
             width,
-            rect.sizeDelta.y
+            rectCSG.sizeDelta.y
             );
-        //Resize background
-        RectTransform rectBG = characterImageBackground.GetComponent<RectTransform>();
-        rectBG.sizeDelta = new Vector2(
-            width,
-            rectBG.sizeDelta.y
-            );
+        //Resize elements to widen
+        foreach (RectTransform rect in elementsToWiden)
+        {
+            rect.sizeDelta = new Vector2(
+                width,
+                rect.sizeDelta.y
+                );
+        }
     }
 
     void populateColorSelect()
