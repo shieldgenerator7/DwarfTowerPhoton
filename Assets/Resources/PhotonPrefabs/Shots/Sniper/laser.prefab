@@ -140,7 +140,7 @@ MonoBehaviour:
   endAlpha: 1
   closeInDuration: 0.5
   stayDuration: 0.5
-  range: 100
+  range: 200
 --- !u!114 &571
 MonoBehaviour:
   m_ObjectHideFlags: 0
