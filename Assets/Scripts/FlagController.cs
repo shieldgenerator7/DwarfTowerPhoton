@@ -2,6 +2,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class FlagController : MonoBehaviour
@@ -11,6 +12,8 @@ public class FlagController : MonoBehaviour
 
     private List<TeamTokenCaptain> teamCaptains;
 
+    private TMP_Text txtMapName;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +22,9 @@ public class FlagController : MonoBehaviour
         healthPool.onDied += checkGameOver;
         //Team Token Captains
         teamCaptains = FindObjectsOfType<TeamTokenCaptain>().ToList();
+        //Text Map Name
+        txtMapName = gameObject.FindComponent<TMP_Text>();
+        txtMapName.text = PlayerInfo.instance.mapName;
     }
 
     void checkGameOver(float hp)
