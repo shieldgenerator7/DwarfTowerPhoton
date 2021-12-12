@@ -306,7 +306,7 @@ MonoBehaviour:
   observableSearch: 0
   ObservedComponents:
   - {fileID: 0}
-  sceneViewId: 1
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!61 &748800143414026977
@@ -368,6 +368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8838f0ed66cfee448af35cb4b9193873, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flagMarkerInfo: {fileID: 11400000, guid: ebc593c2bf932104287c74a60dce6f60, type: 2}
 --- !u!114 &487115809389237599
 MonoBehaviour:
   m_ObjectHideFlags: 0

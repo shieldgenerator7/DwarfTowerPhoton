@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class FlagController : MonoBehaviour
 {
+    public MapMarkerInfo flagMarkerInfo;
+
     private HealthPool healthPool;
     private TeamTokenCaptain teamTokenCaptain;
 
