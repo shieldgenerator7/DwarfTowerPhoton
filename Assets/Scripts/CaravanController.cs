@@ -13,6 +13,8 @@ public class CaravanController : MonoBehaviour
     public Collider2D detectionColl;//the collider that detects which players are pushing
     private RaycastHit2D[] rch2ds = new RaycastHit2D[100];//used for detection
 
+    public MapMarkerInfo caravanMarkerInfo;
+
     public SpriteRenderer contestEffect;
 
     public MapPathGenerator pathGenerator;
@@ -43,6 +45,12 @@ public class CaravanController : MonoBehaviour
         contestEffect.enabled = false;
         distanceFromStart = pathGenerator.mapPath.Length / 2;
         pathGenerator.onMapPathGenerated += (mapPath) => { distanceFromStart = mapPath.Length / 2; };
+        //Marker
+        FindObjectOfType<MapMarkerManager>().CreateMapMarker(
+            transform,
+            caravanMarkerInfo,
+            null
+            );
     }
 
     private void Update()

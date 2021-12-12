@@ -330,6 +330,7 @@ MonoBehaviour:
   maxMoveSpeed: 1
   maxAllowedDistance: 3
   detectionColl: {fileID: 6696323203719167965}
+  caravanMarkerInfo: {fileID: 11400000, guid: 8c9b17c543a867c49a5a9e07dc892828, type: 2}
   contestEffect: {fileID: 1099762645652554341}
   pathGenerator: {fileID: 0}
 --- !u!114 &5183398110805307343

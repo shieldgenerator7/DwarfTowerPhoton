@@ -17,15 +17,20 @@ public class MapMarker : MonoBehaviour
 
     public void Init(MapMarkerInfo info, TeamToken placer)
     {
-        init(info, placer, placer.teamCaptain.teamColor, placer.teamCaptain.teamColor);
+        Init(
+            info,
+            placer,
+            placer?.teamCaptain.teamColor ?? Color.white,
+            placer?.teamCaptain.teamColor ?? Color.white
+            );
     }
 
-    public void init(MapMarkerInfo info, Color iconColor, Color markerColor)
+    public void Init(MapMarkerInfo info, Color iconColor, Color markerColor)
     {
-        init(info, null, iconColor, markerColor);
+        Init(info, null, iconColor, markerColor);
     }
 
-    public void init(MapMarkerInfo info, TeamToken placer, Color iconColor, Color markerColor)
+    public void Init(MapMarkerInfo info, TeamToken placer, Color iconColor, Color markerColor)
     {
         this.info = info;
         this.placer = placer;
@@ -46,10 +51,11 @@ public class MapMarker : MonoBehaviour
         }
     }
 
-    public void mark(Transform followObject)
+    public void Mark(Transform followObject)
     {
         if (info.canFollowObject)
         {
+            this.followObj = followObject;
             targetPosition = followObj.transform.position;
         }
         else
