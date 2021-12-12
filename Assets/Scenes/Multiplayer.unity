@@ -218,7 +218,7 @@ RectTransform:
   - {fileID: 971488177}
   - {fileID: 671631990}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -412,7 +412,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &208752787 stripped
 Transform:
@@ -747,6 +747,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 484094122}
   m_CullTransparentMesh: 0
+--- !u!1 &565006803
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 565006804}
+  - component: {fileID: 565006805}
+  m_Layer: 0
+  m_Name: MarkerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &565006804
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565006803}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &565006805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565006803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 814c6b7b275925a47981ecd4e58a47a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  markerPrefabName: PhotonPrefabs/Effects/MapMarker
 --- !u!1 &671631989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,7 +1115,7 @@ RectTransform:
   - {fileID: 1612652016}
   - {fileID: 1229427825}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1109,7 +1153,7 @@ Transform:
   - {fileID: 333080598}
   - {fileID: 1077490579}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &860326090
 MonoBehaviour:
@@ -1292,7 +1336,7 @@ PrefabInstance:
     - target: {fileID: 8677406063159426298, guid: 5817b41b881aa6a438dae4afac09a8fb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8677406063159426298, guid: 5817b41b881aa6a438dae4afac09a8fb,
         type: 3}
@@ -1973,7 +2017,7 @@ PrefabInstance:
     - target: {fileID: 8677406063159426298, guid: 5817b41b881aa6a438dae4afac09a8fb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8677406063159426298, guid: 5817b41b881aa6a438dae4afac09a8fb,
         type: 3}
@@ -2131,7 +2175,7 @@ PrefabInstance:
     - target: {fileID: 5805177630514372058, guid: 7f9045df571f5b44cb1ab08b5c55b501,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5805177630514372058, guid: 7f9045df571f5b44cb1ab08b5c55b501,
         type: 3}

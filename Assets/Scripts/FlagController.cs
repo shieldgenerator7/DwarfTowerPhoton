@@ -27,6 +27,12 @@ public class FlagController : MonoBehaviour
         //Text Map Name
         txtMapName = gameObject.FindComponent<TMP_Text>();
         txtMapName.text = PlayerInfo.instance.mapName;
+        //Marker
+        FindObjectOfType<MapMarkerManager>().createMapMarker(
+            transform.position,
+            flagMarkerInfo,
+            teamTokenCaptain
+            );
     }
 
     void checkGameOver(float hp)
