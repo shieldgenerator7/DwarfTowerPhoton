@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5581507ea640dda46bfc0c5fbb64307b, type: 3}
   m_Name: FlagMarker
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 0981315fcaf7fdc46b2e32a4ae07cf04, type: 3}
+  icon: {fileID: 21300000, guid: 7eae0464bf8b7b74e9f3901a40ca5140, type: 3}
   canMarkPosition: 1
   canFollowObject: 0
   showWhileInView: 0
+  permission: 0

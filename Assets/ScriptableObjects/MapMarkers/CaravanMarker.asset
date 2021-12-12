@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5581507ea640dda46bfc0c5fbb64307b, type: 3}
   m_Name: CaravanMarker
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: e6c1af20e59915c408ef63923afff8c9, type: 3}
+  icon: {fileID: 21300000, guid: 6997ff9edd85f1642845e759505f08e7, type: 3}
   canMarkPosition: 0
   canFollowObject: 1
   showWhileInView: 0
+  permission: 0
