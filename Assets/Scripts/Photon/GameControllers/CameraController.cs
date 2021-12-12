@@ -80,9 +80,10 @@ public class CameraController : MonoBehaviour
             && screenPoint.y > 0 + buffer && screenPoint.y < 1 - buffer;
     }
     public Rect ViewRect
+        //TODO: make this more efficient
         => new Rect(
-            transform.position,
-            Cam.ViewportToWorldPoint(new Vector2(1, 0))
-                - Cam.ViewportToWorldPoint(new Vector2(0, 1))
+            Cam.ViewportToWorldPoint(new Vector2(0, 0)),
+            Cam.ViewportToWorldPoint(new Vector2(1, 1))
+                - Cam.ViewportToWorldPoint(new Vector2(0, 0))
             );
 }

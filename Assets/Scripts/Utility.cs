@@ -144,7 +144,10 @@ public static class Utility
     {
         Vector2 center = rect.center;
         float rectDiagonalLength = (rect.max - rect.min).magnitude;
-        LineEquation line = new LineEquation(center, ray.normalized * rectDiagonalLength);
+        LineEquation line = new LineEquation(
+            center,
+            center + (ray.normalized * rectDiagonalLength)
+            );
         Vector2 intersection = line.GetIntersectionWithLineForRay(rect).End;
         return intersection;
     }
