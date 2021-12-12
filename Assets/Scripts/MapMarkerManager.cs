@@ -7,7 +7,7 @@ public class MapMarkerManager : MonoBehaviour
 {
     public string markerPrefabName;
 
-    public MapMarker createMapMarker(Vector2 pos, MapMarkerInfo markerInfo, TeamToken placer)
+    public MapMarker CreateMapMarker(Vector2 pos, MapMarkerInfo markerInfo, TeamToken placer)
     {
         GameObject go = PhotonNetwork.Instantiate(
             markerPrefabName,
@@ -15,7 +15,8 @@ public class MapMarkerManager : MonoBehaviour
             Quaternion.identity
             );
         MapMarker marker = go.FindComponent<MapMarker>();
-        marker.init(markerInfo, placer); //placer.teamCaptain.teamColor, Color.white);
+        marker.Init(markerInfo, placer); //placer.teamCaptain.teamColor, Color.white);
+        marker.Mark(pos);
         return marker;
     }
 }

@@ -4,16 +4,7 @@ using UnityEngine;
 
 public class MapMarker : MonoBehaviour
 {
-    private Vector2 _position;
-    private Vector2 targetPosition
-    {
-        get => _position;
-        set
-        {
-            _position = value;
-            transform.position = _position;
-        }
-    }
+    private Vector2 targetPosition;
     private Transform followObj;
     private MapMarkerInfo info;
     private TeamToken placer;
@@ -24,7 +15,7 @@ public class MapMarker : MonoBehaviour
     public SpriteRenderer iconSR;
     public SpriteRenderer markerSR;
 
-    public void init(MapMarkerInfo info, TeamToken placer)
+    public void Init(MapMarkerInfo info, TeamToken placer)
     {
         init(info, placer, placer.teamCaptain.teamColor, placer.teamCaptain.teamColor);
     }
@@ -43,7 +34,7 @@ public class MapMarker : MonoBehaviour
         markerSR.color = markerColor;
     }
 
-    public void mark(Vector2 pos)
+    public void Mark(Vector2 pos)
     {
         if (info.canMarkPosition)
         {
@@ -82,6 +73,14 @@ public class MapMarker : MonoBehaviour
         {
             targetPosition = followObj.position;
         }
+        updatePosition();
+    }
+
+    void updatePosition()
+    {
+        //Position
+        transform.position = targetPosition;
+        //Rotation
         transform.up = ((Vector2)cam.transform.position - targetPosition);
         //Make sure icon is always the right way up
         iconSR.transform.up = Vector2.up;
