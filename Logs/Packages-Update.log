@@ -103,3 +103,14 @@ The following packages were updated:
   com.unity.purchasing from version 3.0.1 to 4.1.0
   com.unity.test-framework from version 1.1.24 to 1.1.29
   com.unity.textmeshpro from version 3.0.4 to 3.0.6
+
+=== Sun Dec 12 15:59:02 2021
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.2d.animation from version 5.0.9 to 7.0.2
+  com.unity.2d.pixel-perfect from version 4.0.1 to 5.0.1
+The following packages were removed:
+  com.unity.quicksearch@2.0.2
