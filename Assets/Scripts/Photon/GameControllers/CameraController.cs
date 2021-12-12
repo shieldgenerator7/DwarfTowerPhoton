@@ -20,10 +20,12 @@ public class CameraController : MonoBehaviour
     }
 
     private Bounds playAreaBounds;
+    public Camera Cam { get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
+        Cam = Camera.main;
         if (focusObject != null)
         {
             FocusObject = focusObject;
@@ -46,8 +48,8 @@ public class CameraController : MonoBehaviour
         //2021-12-03: copied from http://answers.unity.com/answers/1719329/view.html
         //Convert screen sizes to world coordinates
         Vector2 cameraSizeWorld =
-            Camera.main.ViewportToWorldPoint(Vector2.one)
-            - Camera.main.ViewportToWorldPoint(Vector2.zero);
+            Cam.ViewportToWorldPoint(Vector2.one)
+            - Cam.ViewportToWorldPoint(Vector2.zero);
         Vector2 halfSize = cameraSizeWorld / 2;
         //Use camera size to keep it in the bounds
         Vector3 pos = transform.position;
@@ -63,4 +65,24 @@ public class CameraController : MonoBehaviour
             );
         transform.position = pos;
     }
+
+    /// <summary>
+    /// Returns whether or not the given position is in the camera's view
+    /// </summary>
+    /// <param name="position"></param>
+    /// <returns></returns>
+    public bool IsInView(Vector2 position, float buffer = 0)
+    {
+        //2021-12-12: copied from Stonicorn.CameraController.inView()
+        //2017-10-31: copied from an answer by Taylor-Libonati: http://answers.unity3d.com/questions/720447/if-game-object-is-in-cameras-field-of-view.html
+        Vector3 screenPoint = Cam.WorldToViewportPoint(position);
+        return screenPoint.x > 0 + buffer && screenPoint.x < 1 - buffer
+            && screenPoint.y > 0 + buffer && screenPoint.y < 1 - buffer;
+    }
+    public Rect ViewRect
+        => new Rect(
+            transform.position,
+            Cam.ViewportToWorldPoint(new Vector2(1, 0))
+                - Cam.ViewportToWorldPoint(new Vector2(0, 1))
+            );
 }

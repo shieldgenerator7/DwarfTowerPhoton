@@ -58,12 +58,12 @@ public class MapMarker : MonoBehaviour
         }
     }
 
-    private Camera cam;
+    private CameraController camCtr;
 
     // Start is called before the first frame update
     void Start()
     {
-        cam = Camera.main;
+        camCtr = FindObjectOfType<CameraController>();
     }
 
     // Update is called once per frame
@@ -73,15 +73,26 @@ public class MapMarker : MonoBehaviour
         {
             targetPosition = followObj.position;
         }
-        updatePosition();
+        updatePositionOnScreen();
     }
 
-    void updatePosition()
+    void updatePositionOnScreen()
     {
-        //Position
-        transform.position = targetPosition;
-        //Rotation
-        transform.up = ((Vector2)cam.transform.position - targetPosition);
+        if (camCtr.IsInView(targetPosition))
+        {
+            //Position
+            transform.position = targetPosition;
+            //Rotation
+            transform.up = Vector2.up;
+        }
+        else
+        {
+            Vector2 pointDir = targetPosition - (Vector2)camCtr.transform.position;
+            //Position
+            transform.position = Utility.rayIntersectRectangle(pointDir, camCtr.ViewRect);
+            //Rotation
+            transform.up = -pointDir;
+        }
         //Make sure icon is always the right way up
         iconSR.transform.up = Vector2.up;
     }
