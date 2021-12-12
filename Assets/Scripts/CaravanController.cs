@@ -47,6 +47,7 @@ public class CaravanController : MonoBehaviour
         pathGenerator.onMapPathGenerated += (mapPath) => { distanceFromStart = mapPath.Length / 2; };
         //Marker
         FindObjectOfType<MapMarkerManager>().CreateMapMarker(
+            gameObject.FindComponent<PhotonView>().ViewID,
             transform,
             caravanMarkerInfo,
             null
