@@ -42,7 +42,12 @@ public class CameraController : MonoBehaviour
         if (focusObject != null)
         {
             transform.position = focusObject.transform.position + offset;
-            boundCameraPosition();
+            //If player is inside the play bounds,
+            if (playAreaBounds.Contains(focusObject.transform.position))
+            {
+                //Make sure the camera can't see outside the play bounds
+                boundCameraPosition();
+            }
         }
     }
 
