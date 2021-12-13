@@ -166,7 +166,7 @@ public class CustomMenu
         }
         string gameProcName = PlayerSettings.productName;
         List<Process> gameProcList = Process.GetProcesses().ToList().FindAll(
-            proc => proc.ProcessName == gameProcName
+            proc => !proc.HasExited && proc.ProcessName == gameProcName
             );
         Debug.Log($"Kill Processes: killing {gameProcList.Count} {gameProcName} processes");
         foreach (Process proc in gameProcList)
