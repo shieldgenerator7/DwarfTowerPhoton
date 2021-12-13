@@ -9,6 +9,7 @@ public class TrapController : ShotController
     public float trapDuration = 2;
     [Tooltip("The entity types this trap can trap")]
     public List<EntityType> trapTypes;
+    public MapMarkerInfo trapMarkerInfo;
 
     private float trapStartTime = -1;
     private PlayerMovement trappedPlayer;
@@ -74,5 +75,12 @@ public class TrapController : ShotController
         trappedPlayer.forceMovement(Vector2.zero);
         trappedPlayer.rb2d.transform.position = transform.position;
         trapStartTime = Time.time;
+        //Map marker
+        FindObjectOfType<MapMarkerManager>().CreateMapMarker(
+            PV.ViewID,
+            transform.position,
+            trapMarkerInfo,
+            gameObject.FindComponent<TeamToken>()
+            );
     }
 }

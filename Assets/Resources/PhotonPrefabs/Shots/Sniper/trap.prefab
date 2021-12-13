@@ -132,6 +132,7 @@ MonoBehaviour:
   destroyOnIndestructible: 1
   trapDuration: 2
   trapTypes: 02000000
+  trapMarkerInfo: {fileID: 11400000, guid: 57a5943aa6615d744ba6754db8b30a9f, type: 2}
 --- !u!114 &-845759806725884248
 MonoBehaviour:
   m_ObjectHideFlags: 0
