@@ -77,10 +77,9 @@ public class TrapController : ShotController
         trapStartTime = Time.time;
         //Map marker
         FindObjectOfType<MapMarkerManager>().CreateMapMarker(
-            PV.ViewID,
+            PV,
             transform.position,
-            trapMarkerInfo,
-            gameObject.FindComponent<TeamToken>()
+            trapMarkerInfo
             );
     }
 }

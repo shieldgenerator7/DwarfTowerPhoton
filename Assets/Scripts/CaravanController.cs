@@ -50,10 +50,9 @@ public class CaravanController : MonoBehaviour
         }
         //Marker
         FindObjectOfType<MapMarkerManager>().CreateMapMarker(
-            gameObject.FindComponent<PhotonView>().ViewID,
+            PhotonView.Get( gameObject),
             transform,
-            caravanMarkerInfo,
-            null
+            caravanMarkerInfo
             );
     }
 

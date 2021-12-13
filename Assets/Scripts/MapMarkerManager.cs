@@ -11,27 +11,27 @@ public class MapMarkerManager : MonoBehaviour
 
     private Dictionary<int, MapMarker> mapMarkerMap = new Dictionary<int, MapMarker>();
 
-    public MapMarker CreateMapMarker(int id, Vector2 pos, MapMarkerInfo markerInfo, TeamToken placer, bool callRPC = true)
+    public MapMarker CreateMapMarker(PhotonView placer, Vector2 pos, MapMarkerInfo markerInfo, bool callRPC = true)
     {
-        MapMarker marker = GetOrCreateMapMarker(id);
-        marker.Init(markerInfo, placer); //placer.teamCaptain.teamColor, Color.white);
+        MapMarker marker = GetOrCreateMapMarker(placer.ViewID);
+        marker.Init(markerInfo, TeamToken.getTeamToken(placer.gameObject)); //placer.teamCaptain.teamColor, Color.white);
         marker.Mark(pos);
         if (callRPC)
         {
             PV.RPC(
                 "RPC_CreateMapMarkerPos",
                 RpcTarget.Others,
-                id,
+                placer,
                 pos,
                 knownMarkerInfos.IndexOf(markerInfo)
                 );
         }
         return marker;
     }
-    public MapMarker CreateMapMarker(int id, Transform follow, MapMarkerInfo markerInfo, TeamToken placer)
+    public MapMarker CreateMapMarker(PhotonView placer, Transform follow, MapMarkerInfo markerInfo)
     {
-        MapMarker marker = GetOrCreateMapMarker(id);
-        marker.Init(markerInfo, placer); //placer.teamCaptain.teamColor, Color.white);
+        MapMarker marker = GetOrCreateMapMarker(placer.ViewID);
+        marker.Init(markerInfo, TeamToken.getTeamToken(placer.gameObject)); //placer.teamCaptain.teamColor, Color.white);
         marker.Mark(follow);
         return marker;
     }
@@ -56,8 +56,13 @@ public class MapMarkerManager : MonoBehaviour
     }
 
     [PunRPC]
-    void RPC_CreateMapMarkerPos(int id, Vector2 pos, int markerInfoIndex)
+    void RPC_CreateMapMarkerPos(int placerId, Vector2 pos, int markerInfoIndex)
     {
-        CreateMapMarker(id, pos, knownMarkerInfos[markerInfoIndex], null, false);
+        CreateMapMarker(
+            PhotonView.Find(placerId),
+            pos,
+            knownMarkerInfos[markerInfoIndex],
+            false
+            );
     }
 }
