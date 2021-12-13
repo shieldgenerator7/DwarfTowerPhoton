@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5581507ea640dda46bfc0c5fbb64307b, type: 3}
   m_Name: trap_marker_info
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 893574da408afa64685bece847759c27, type: 3}
+  icon: {fileID: 21300000, guid: c4c68e8fc4ddcff468b9e42085371a8b, type: 3}
   canMarkPosition: 1
   canFollowObject: 0
   showWhileInView: 1

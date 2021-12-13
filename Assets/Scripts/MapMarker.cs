@@ -21,7 +21,7 @@ public class MapMarker : MonoBehaviour
             info,
             placer,
             placer?.teamCaptain.teamColor ?? Color.white,
-            placer?.teamCaptain.teamColor ?? Color.white
+            Color.white //placer?.teamCaptain.teamColor ?? Color.white
             );
     }
 
