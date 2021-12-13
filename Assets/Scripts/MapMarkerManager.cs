@@ -6,14 +6,26 @@ using UnityEngine;
 public class MapMarkerManager : MonoBehaviour
 {
     public GameObject markerPrefab;
+    public List<MapMarkerInfo> knownMarkerInfos;//TODO: serialize MapMarkerInfo with Photon so that we don't have to store references to all known marker infos
+    public PhotonView PV;
 
     private Dictionary<int, MapMarker> mapMarkerMap = new Dictionary<int, MapMarker>();
 
-    public MapMarker CreateMapMarker(int id, Vector2 pos, MapMarkerInfo markerInfo, TeamToken placer)
+    public MapMarker CreateMapMarker(int id, Vector2 pos, MapMarkerInfo markerInfo, TeamToken placer, bool callRPC = true)
     {
         MapMarker marker = GetOrCreateMapMarker(id);
         marker.Init(markerInfo, placer); //placer.teamCaptain.teamColor, Color.white);
         marker.Mark(pos);
+        if (callRPC)
+        {
+            PV.RPC(
+                "RPC_CreateMapMarkerPos",
+                RpcTarget.Others,
+                id,
+                pos,
+                knownMarkerInfos.IndexOf(markerInfo)
+                );
+        }
         return marker;
     }
     public MapMarker CreateMapMarker(int id, Transform follow, MapMarkerInfo markerInfo, TeamToken placer)
@@ -41,5 +53,11 @@ public class MapMarkerManager : MonoBehaviour
             mapMarkerMap.Add(id, marker);
             return marker;
         }
+    }
+
+    [PunRPC]
+    void RPC_CreateMapMarkerPos(int id, Vector2 pos, int markerInfoIndex)
+    {
+        CreateMapMarker(id, pos, knownMarkerInfos[markerInfoIndex], null, false);
     }
 }
