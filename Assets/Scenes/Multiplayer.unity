@@ -795,7 +795,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 814c6b7b275925a47981ecd4e58a47a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  markerPrefabName: PhotonPrefabs/Effects/MapMarker
+  markerPrefab: {fileID: 2538578805757144419, guid: 06a52769864872a43bd443fe6665e80f,
+    type: 3}
 --- !u!1 &671631989
 GameObject:
   m_ObjectHideFlags: 0
