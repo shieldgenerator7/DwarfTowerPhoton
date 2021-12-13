@@ -61,7 +61,10 @@ public class MapGenerator : MonoBehaviour
         {
             PV.RPC("RPC_GenerateMap", RpcTarget.OthersBuffered, seed);
         }
+        onMapGenerated?.Invoke(mapProfile);
     }
+    public delegate void OnMapGenerated(MapProfile mapProfile);
+    public event OnMapGenerated onMapGenerated;
 
     [PunRPC]
     void RPC_GenerateMap(int seed)

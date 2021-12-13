@@ -30,7 +30,10 @@ public class CameraController : MonoBehaviour
         {
             FocusObject = focusObject;
         }
-        playAreaBounds = FindObjectOfType<MapGenerator>().mapProfile.VisibleBounds;
+        MapGenerator mapGenerator = FindObjectOfType<MapGenerator>();
+        playAreaBounds = mapGenerator.mapProfile.VisibleBounds;
+        mapGenerator.onMapGenerated +=
+            (mapProfile) => playAreaBounds = mapProfile.VisibleBounds;
     }
 
     // Update is called once per frame
@@ -46,11 +49,8 @@ public class CameraController : MonoBehaviour
     void boundCameraPosition()
     {
         //2021-12-03: copied from http://answers.unity.com/answers/1719329/view.html
-        //Convert screen sizes to world coordinates
-        Vector2 cameraSizeWorld =
-            Cam.ViewportToWorldPoint(Vector2.one)
-            - Cam.ViewportToWorldPoint(Vector2.zero);
-        Vector2 halfSize = cameraSizeWorld / 2;
+        //Get half size in world coordinates
+        Vector2 halfSize = CamSizeWorld / 2;
         //Use camera size to keep it in the bounds
         Vector3 pos = transform.position;
         pos.x = Mathf.Clamp(
@@ -83,7 +83,10 @@ public class CameraController : MonoBehaviour
         //TODO: make this more efficient
         => new Rect(
             Cam.ViewportToWorldPoint(new Vector2(0, 0)),
-            Cam.ViewportToWorldPoint(new Vector2(1, 1))
-                - Cam.ViewportToWorldPoint(new Vector2(0, 0))
+            CamSizeWorld
             );
+    public Vector2 CamSizeWorld
+        //TODO: store this, and update it when screen size changes
+        => Cam.ViewportToWorldPoint(Vector2.one)
+            - Cam.ViewportToWorldPoint(Vector2.zero);
 }
