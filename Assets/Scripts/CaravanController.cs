@@ -43,7 +43,6 @@ public class CaravanController : MonoBehaviour
         }
         updateDirection();
         contestEffect.enabled = false;
-        this.enabled = false;
         pathGenerator.onMapPathGenerated += updatePositionOnPath;
         if (pathGenerator.mapPath != null)
         {
@@ -104,17 +103,23 @@ public class CaravanController : MonoBehaviour
             direction += (Vector2)(transform.position - ttc.transform.position).normalized
                 * teamCaptains[ttc];
         }
-        float magnitude = direction.magnitude;
-        magnitude = Mathf.Clamp(magnitude, 0, maxMoveSpeed);
-        distanceFromStart += direction.normalized.y * magnitude * Time.deltaTime;
-        Vector2 desiredPos = pathGenerator.mapPath.getPosition(distanceFromStart);
-        direction = (desiredPos - (Vector2)transform.position).normalized;
-        rb2d.velocity = direction * magnitude;
+        if (pathGenerator.mapPath != null)
+        {
+            float magnitude = direction.magnitude;
+            magnitude = Mathf.Clamp(magnitude, 0, maxMoveSpeed);
+            distanceFromStart += direction.normalized.y * magnitude * Time.deltaTime;
+            Vector2 desiredPos = pathGenerator.mapPath.getPosition(distanceFromStart);
+            direction = (desiredPos - (Vector2)transform.position).normalized;
+            rb2d.velocity = direction * magnitude;
+        }
+        else
+        {
+            rb2d.velocity = direction;
+        }
     }
 
     void updatePositionOnPath(MapPath mapPath)
     {
-        this.enabled = true;
         distanceFromStart = mapPath.Length / 2;
     }
 
