@@ -78,7 +78,7 @@ public class TrapController : ShotController
         //Map marker
         FindObjectOfType<MapMarkerManager>().CreateMapMarker(
             PV,
-            transform.position,
+            (Vector2)transform.position + (Vector2.up * 0.5f),
             trapMarkerInfo
             );
     }
