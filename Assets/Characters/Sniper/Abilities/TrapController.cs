@@ -39,6 +39,10 @@ public class TrapController : ShotController
                 gameObject.FindComponent<SpriteRenderer>().enabled = false;
                 gameObject.FindComponent<Collider2D>().enabled = false;
                 this.enabled = false;
+                //Destroy marker
+                FindObjectOfType<MapMarkerManager>().DestroyMapMarker(  
+                    PV
+                    );
             }
         }
     }

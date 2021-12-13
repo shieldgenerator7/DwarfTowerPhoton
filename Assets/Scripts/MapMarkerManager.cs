@@ -21,7 +21,7 @@ public class MapMarkerManager : MonoBehaviour
             PV.RPC(
                 "RPC_CreateMapMarkerPos",
                 RpcTarget.Others,
-                placer,
+                placer.ViewID,
                 pos,
                 knownMarkerInfos.IndexOf(markerInfo)
                 );
@@ -34,6 +34,26 @@ public class MapMarkerManager : MonoBehaviour
         marker.Init(markerInfo, TeamToken.getTeamToken(placer.gameObject)); //placer.teamCaptain.teamColor, Color.white);
         marker.Mark(follow);
         return marker;
+    }
+
+    public void DestroyMapMarker(PhotonView placer, bool callRPC = true)
+    {
+        if (mapMarkerMap.ContainsKey(placer.ViewID))
+        {
+            //Destroy marker
+            Destroy(mapMarkerMap[placer.ViewID].gameObject);
+            //Remove from list
+            mapMarkerMap.Remove(placer.ViewID);
+            //RPC
+            if (callRPC)
+            {
+                PV.RPC(
+                    "RPC_DestroyMapMarker",
+                    RpcTarget.Others,
+                    placer.ViewID
+                    );
+            }
+        }
     }
 
     private MapMarker GetOrCreateMapMarker(int id)
@@ -55,6 +75,7 @@ public class MapMarkerManager : MonoBehaviour
         }
     }
 
+    //TODO: Make a version like this for follow objects
     [PunRPC]
     void RPC_CreateMapMarkerPos(int placerId, Vector2 pos, int markerInfoIndex)
     {
@@ -62,6 +83,15 @@ public class MapMarkerManager : MonoBehaviour
             PhotonView.Find(placerId),
             pos,
             knownMarkerInfos[markerInfoIndex],
+            false
+            );
+    }
+
+    [PunRPC]
+    void RPC_DestroyMapMarker(int placerId)
+    {
+        DestroyMapMarker(
+            PhotonView.Find(placerId),
             false
             );
     }
