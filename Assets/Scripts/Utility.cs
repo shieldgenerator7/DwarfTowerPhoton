@@ -143,13 +143,20 @@ public static class Utility
     public static Vector2 rayIntersectRectangle(Vector2 ray, Rect rect)
     {
         Vector2 center = rect.center;
-        float rectDiagonalLength = (rect.max - rect.min).magnitude;
+        float rectDiagonalLength = rect.size.magnitude;
         LineEquation line = new LineEquation(
             center,
             center + (ray.normalized * rectDiagonalLength * 10)
             );
-        Vector2 intersection = line.GetIntersectionWithLineForRay(rect).End;
-        return intersection;
+        try
+        {
+            return line.GetIntersectionWithRectangle(rect).Value;
+        }
+        catch (System.InvalidOperationException)
+        {
+            Debug.LogError($"rayIntersectRectangle failed! ray: {ray}, rect: {rect}");
+        }
+        return center + ray;
     }
 
 }
