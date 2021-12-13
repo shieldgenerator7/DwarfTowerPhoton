@@ -43,8 +43,12 @@ public class CaravanController : MonoBehaviour
         }
         updateDirection();
         contestEffect.enabled = false;
-        distanceFromStart = pathGenerator.mapPath.Length / 2;
-        pathGenerator.onMapPathGenerated += (mapPath) => { distanceFromStart = mapPath.Length / 2; };
+        this.enabled = false;
+        pathGenerator.onMapPathGenerated += updatePositionOnPath;
+        if (pathGenerator.mapPath != null)
+        {
+            updatePositionOnPath(pathGenerator.mapPath);
+        }
         //Marker
         FindObjectOfType<MapMarkerManager>().CreateMapMarker(
             gameObject.FindComponent<PhotonView>().ViewID,
@@ -106,6 +110,12 @@ public class CaravanController : MonoBehaviour
         Vector2 desiredPos = pathGenerator.mapPath.getPosition(distanceFromStart);
         direction = (desiredPos - (Vector2)transform.position).normalized;
         rb2d.velocity = direction * magnitude;
+    }
+
+    void updatePositionOnPath(MapPath mapPath)
+    {
+        this.enabled = true;
+        distanceFromStart = mapPath.Length / 2;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
