@@ -146,7 +146,7 @@ public static class Utility
         float rectDiagonalLength = (rect.max - rect.min).magnitude;
         LineEquation line = new LineEquation(
             center,
-            center + (ray.normalized * rectDiagonalLength)
+            center + (ray.normalized * rectDiagonalLength * 10)
             );
         Vector2 intersection = line.GetIntersectionWithLineForRay(rect).End;
         return intersection;
