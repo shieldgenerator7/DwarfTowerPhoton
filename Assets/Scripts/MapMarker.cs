@@ -86,13 +86,21 @@ public class MapMarker : MonoBehaviour
     {
         if (camCtr.IsInView(targetPosition))
         {
-            //Position
-            transform.position = targetPosition;
-            //Rotation
-            transform.up = Vector2.up;
+            if (info.showWhileInView)
+            {
+                //Position
+                transform.position = targetPosition;
+                //Rotation
+                transform.up = Vector2.up;
+            }
+            else
+            {
+                ShowMarker(false);
+            }
         }
         else
         {
+            ShowMarker(true);
             Vector2 pointDir = targetPosition - (Vector2)camCtr.transform.position;
             //Position
             transform.position = Utility.rayIntersectRectangle(pointDir, camCtr.ViewRect);
@@ -103,5 +111,9 @@ public class MapMarker : MonoBehaviour
         iconSR.transform.up = Vector2.up;
     }
 
-
+    private void ShowMarker(bool show)
+    {
+        iconSR.enabled = show;
+        markerSR.enabled = show;
+    }
 }
