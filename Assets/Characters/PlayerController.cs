@@ -59,6 +59,7 @@ public abstract class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        playerMovement = gameObject.FindComponent<PlayerMovement>();
         if (PV.IsMine)
         {
             //Damager
@@ -98,7 +99,6 @@ public abstract class PlayerController : MonoBehaviour
                 aminaPool.onAminaEmpty += onAminaEmpty;
             }
             //PlayerMovement
-            playerMovement = gameObject.FindComponent<PlayerMovement>();
             playerMovement.Start();
             //PlayerInput
             PlayerInput playerInput = gameObject.FindComponent<PlayerInput>();
