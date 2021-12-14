@@ -80,7 +80,7 @@ public class TrapController : ShotController
         trappedPlayer.rb2d.transform.position = transform.position;
         trapStartTime = Time.time;
         //Map marker
-        FindObjectOfType<MapMarkerManager>().CreateMapMarker(
+        MapMarkerManager.CreateMapMarker(
             PV,
             (Vector2)transform.position + (Vector2.up * 0.5f),
             trapMarkerInfo
