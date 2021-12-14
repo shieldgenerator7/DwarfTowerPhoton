@@ -26,7 +26,9 @@ public class FlagController : MonoBehaviour
         teamCaptains = FindObjectsOfType<TeamTokenCaptain>().ToList();
         //Text Map Name
         txtMapName = gameObject.FindComponent<TMP_Text>();
-        txtMapName.text = PlayerInfo.instance.mapName;
+        MapGenerator mapGenerator = FindObjectOfType<MapGenerator>();
+        txtMapName.text = mapGenerator.mapName;
+        mapGenerator.onMapNameChanged += (mapName) => txtMapName.text = mapName;
         //Marker
         MapMarkerManager.CreateMapMarker(
             PhotonView.Get(gameObject),

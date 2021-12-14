@@ -16,6 +16,8 @@ public class MapGenerator : MonoBehaviour
             onMapNameChanged?.Invoke(_mapName);
         }
     }
+    public delegate void OnMapNameChanged(string mapName);
+    public event OnMapNameChanged onMapNameChanged;
     private string _mapName = "";
 
     [Header("Components")]
