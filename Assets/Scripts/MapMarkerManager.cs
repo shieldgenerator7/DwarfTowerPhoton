@@ -66,13 +66,13 @@ public class MapMarkerManager : MonoBehaviour
         {
             marker = instance.CreateMapMarkerFollow(placer, follow, markerInfo);
         }
-        //instance.PV.RPC(
-        //    "RPC_CreateMapMarkerPos",
-        //    RpcTarget.Others,
-        //    placer.ViewID,
-        //    pos,
-        //    instance.knownMarkerInfos.IndexOf(markerInfo)
-        //    );
+        instance.PV.RPC(
+            "RPC_CreateMapMarkerFollow",
+            RpcTarget.Others,
+            placer.ViewID,
+            follow.gameObject.FindComponent<PhotonView>().ViewID,
+            instance.knownMarkerInfos.IndexOf(markerInfo)
+            );
         return marker;
     }
 
@@ -140,7 +140,6 @@ public class MapMarkerManager : MonoBehaviour
         throw new System.InvalidOperationException($"No such permission handled: {permission}");
     }
 
-    //TODO: Make a version like this for follow objects
     [PunRPC]
     void RPC_CreateMapMarkerPos(int placerId, Vector2 pos, int markerInfoIndex)
     {
@@ -151,6 +150,22 @@ public class MapMarkerManager : MonoBehaviour
             CreateMapMarkerPos(
                 placer,
                 pos,
+                markerInfo
+                );
+        }
+    }
+
+    [PunRPC]
+    void RPC_CreateMapMarkerFollow(int placerId, int followId, int markerInfoIndex)
+    {
+        PhotonView placer = PhotonView.Find(placerId);
+        PhotonView follow = PhotonView.Find(followId);
+        MapMarkerInfo markerInfo = knownMarkerInfos[markerInfoIndex];
+        if (CanCreateMapMarker(placer, markerInfo.permission))
+        {
+            CreateMapMarkerFollow(
+                placer,
+                follow.transform,
                 markerInfo
                 );
         }
