@@ -17,10 +17,30 @@ public class MapMarkerManager : MonoBehaviour
         instance = this;
     }
 
+    private TeamToken localPlayerTeamToken
+    {
+        get
+        {
+            //NO, we CANNOT set this in Start() or Awake()!
+            //It takes time for PhotonPlayer.localPlayer to be set
+            //(and no, PhotonView.isMine doesn't get set any earlier)
+            //2021-12-13: PP.lP and PV.iM are not set before Start()
+            if (!_lptt)
+            {
+                _lptt = PhotonPlayer.localPlayer.myAvatar.FindComponent<TeamToken>();
+            }
+            return _lptt;
+        }
+    }
+    private TeamToken _lptt;
+
     public static MapMarker CreateMapMarker(PhotonView placer, Vector2 pos, MapMarkerInfo markerInfo)
     {
         MapMarker marker = null;
+        if (instance.CanCreateMapMarker(placer, markerInfo.permission))
+        {
             marker = instance.CreateMapMarkerPos(placer, pos, markerInfo);
+        }
         instance.PV.RPC(
             "RPC_CreateMapMarkerPos",
             RpcTarget.Others,
@@ -42,6 +62,7 @@ public class MapMarkerManager : MonoBehaviour
     public static MapMarker CreateMapMarker(PhotonView placer, Transform follow, MapMarkerInfo markerInfo)
     {
         MapMarker marker = null;
+        if (instance.CanCreateMapMarker(placer, markerInfo.permission))
         {
             marker = instance.CreateMapMarkerFollow(placer, follow, markerInfo);
         }
@@ -104,17 +125,35 @@ public class MapMarkerManager : MonoBehaviour
         }
     }
 
+    private bool CanCreateMapMarker(PhotonView placerPV, MapMarkerPermission permission)
+    {
+        TeamToken placer = TeamToken.getTeamToken(placerPV.gameObject);
+        switch (permission)
+        {
+            case MapMarkerPermission.EVERYONE:
+                return true;
+            case MapMarkerPermission.ALLIES_ONLY:
+                return placer.onSameTeam(localPlayerTeamToken);
+            case MapMarkerPermission.SELF_ONLY:
+                return placer.ownedBySamePlayer(localPlayerTeamToken);
+        }
+        throw new System.InvalidOperationException($"No such permission handled: {permission}");
+    }
+
     //TODO: Make a version like this for follow objects
     [PunRPC]
     void RPC_CreateMapMarkerPos(int placerId, Vector2 pos, int markerInfoIndex)
     {
         PhotonView placer = PhotonView.Find(placerId);
         MapMarkerInfo markerInfo = knownMarkerInfos[markerInfoIndex];
+        if (CanCreateMapMarker(placer, markerInfo.permission))
+        {
             CreateMapMarkerPos(
                 placer,
                 pos,
                 markerInfo
                 );
+        }
     }
 
     [PunRPC]
