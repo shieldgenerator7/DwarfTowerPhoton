@@ -7,6 +7,17 @@ public class MapGenerator : MonoBehaviour
 {
     public MapProfile mapProfile;
 
+    public string mapName
+    {
+        get => _mapName;
+        private set
+        {
+            _mapName = value;
+            onMapNameChanged?.Invoke(_mapName);
+        }
+    }
+    private string _mapName = "";
+
     [Header("Components")]
     public PlayArea playArea;
     public MapPathGenerator caravanPathGenerator;
@@ -20,25 +31,23 @@ public class MapGenerator : MonoBehaviour
         PV = gameObject.FindComponent<PhotonView>();
         if (PV.IsMine)
         {
-            generateMap();
+            mapName = PlayerInfo.instance.mapName;
+            if (string.IsNullOrEmpty(mapName))
+            {
+                mapName = $"{(int)System.DateTime.Now.Ticks}";
+                mapName = mapName.Substring(mapName.Length - 5);
+            }
+            generateMap(mapName);
+            //RPC
+            PV.RPC("RPC_GenerateMap", RpcTarget.OthersBuffered, mapName);
         }
     }
 
-    public void generateMap(int seed = -1, bool generateCaravanPath = true, bool generateObstacles = true)
+    public void generateMap(string mapName, bool generateCaravanPath = true, bool generateObstacles = true)
     {
         //Initialize random seed
-        if (seed <= 0)
-        {
-            string mapName = PlayerInfo.instance.mapName;
-            if (!string.IsNullOrEmpty(mapName))
-            {
-                seed = mapName.GetHashCode();
-            }
-            else
-            {
-                seed = (int)System.DateTime.Now.Ticks;
-            }
-        }
+        this.mapName = mapName;
+        int seed = mapName.GetHashCode();
         Random.InitState(seed);
         //Init MapProfile
         mapProfile.init();
@@ -56,19 +65,14 @@ public class MapGenerator : MonoBehaviour
         {
             obstaclePopulator.populateObstacles(mapProfile);
         }
-        //RPC
-        if (PV.IsMine)
-        {
-            PV.RPC("RPC_GenerateMap", RpcTarget.OthersBuffered, seed);
-        }
         onMapGenerated?.Invoke(mapProfile);
     }
     public delegate void OnMapGenerated(MapProfile mapProfile);
     public event OnMapGenerated onMapGenerated;
 
     [PunRPC]
-    void RPC_GenerateMap(int seed)
+    void RPC_GenerateMap(string mapName)
     {
-        generateMap(seed, true, false);
+        generateMap(mapName, true, false);
     }
 }
