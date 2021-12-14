@@ -11,24 +11,51 @@ public class MapMarkerManager : MonoBehaviour
 
     private Dictionary<int, MapMarker> mapMarkerMap = new Dictionary<int, MapMarker>();
 
-    public MapMarker CreateMapMarker(PhotonView placer, Vector2 pos, MapMarkerInfo markerInfo, bool callRPC = true)
+    private static MapMarkerManager instance;
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    public static MapMarker CreateMapMarker(PhotonView placer, Vector2 pos, MapMarkerInfo markerInfo)
+    {
+        MapMarker marker = null;
+            marker = instance.CreateMapMarkerPos(placer, pos, markerInfo);
+        instance.PV.RPC(
+            "RPC_CreateMapMarkerPos",
+            RpcTarget.Others,
+            placer.ViewID,
+            pos,
+            instance.knownMarkerInfos.IndexOf(markerInfo)
+            );
+        return marker;
+    }
+
+    private MapMarker CreateMapMarkerPos(PhotonView placer, Vector2 pos, MapMarkerInfo markerInfo)
     {
         MapMarker marker = GetOrCreateMapMarker(placer.ViewID);
         marker.Init(markerInfo, TeamToken.getTeamToken(placer.gameObject)); //placer.teamCaptain.teamColor, Color.white);
         marker.Mark(pos);
-        if (callRPC)
-        {
-            PV.RPC(
-                "RPC_CreateMapMarkerPos",
-                RpcTarget.Others,
-                placer.ViewID,
-                pos,
-                knownMarkerInfos.IndexOf(markerInfo)
-                );
-        }
         return marker;
     }
-    public MapMarker CreateMapMarker(PhotonView placer, Transform follow, MapMarkerInfo markerInfo)
+
+    public static MapMarker CreateMapMarker(PhotonView placer, Transform follow, MapMarkerInfo markerInfo)
+    {
+        MapMarker marker = null;
+        {
+            marker = instance.CreateMapMarkerFollow(placer, follow, markerInfo);
+        }
+        //instance.PV.RPC(
+        //    "RPC_CreateMapMarkerPos",
+        //    RpcTarget.Others,
+        //    placer.ViewID,
+        //    pos,
+        //    instance.knownMarkerInfos.IndexOf(markerInfo)
+        //    );
+        return marker;
+    }
+
+    private MapMarker CreateMapMarkerFollow(PhotonView placer, Transform follow, MapMarkerInfo markerInfo)
     {
         MapMarker marker = GetOrCreateMapMarker(placer.ViewID);
         marker.Init(markerInfo, TeamToken.getTeamToken(placer.gameObject)); //placer.teamCaptain.teamColor, Color.white);
@@ -36,7 +63,18 @@ public class MapMarkerManager : MonoBehaviour
         return marker;
     }
 
-    public void DestroyMapMarker(PhotonView placer, bool callRPC = true)
+    public static void DestroyMapMarker(PhotonView placer)
+    {
+        instance.DestroyMapMarkerNow(placer);
+        //RPC
+        instance.PV.RPC(
+            "RPC_DestroyMapMarker",
+            RpcTarget.Others,
+            placer.ViewID
+            );
+    }
+
+    private void DestroyMapMarkerNow(PhotonView placer)
     {
         if (mapMarkerMap.ContainsKey(placer.ViewID))
         {
@@ -44,15 +82,6 @@ public class MapMarkerManager : MonoBehaviour
             Destroy(mapMarkerMap[placer.ViewID].gameObject);
             //Remove from list
             mapMarkerMap.Remove(placer.ViewID);
-            //RPC
-            if (callRPC)
-            {
-                PV.RPC(
-                    "RPC_DestroyMapMarker",
-                    RpcTarget.Others,
-                    placer.ViewID
-                    );
-            }
         }
     }
 
@@ -79,20 +108,20 @@ public class MapMarkerManager : MonoBehaviour
     [PunRPC]
     void RPC_CreateMapMarkerPos(int placerId, Vector2 pos, int markerInfoIndex)
     {
-        CreateMapMarker(
-            PhotonView.Find(placerId),
-            pos,
-            knownMarkerInfos[markerInfoIndex],
-            false
-            );
+        PhotonView placer = PhotonView.Find(placerId);
+        MapMarkerInfo markerInfo = knownMarkerInfos[markerInfoIndex];
+            CreateMapMarkerPos(
+                placer,
+                pos,
+                markerInfo
+                );
     }
 
     [PunRPC]
     void RPC_DestroyMapMarker(int placerId)
     {
-        DestroyMapMarker(
-            PhotonView.Find(placerId),
-            false
+        DestroyMapMarkerNow(
+            PhotonView.Find(placerId)
             );
     }
 }

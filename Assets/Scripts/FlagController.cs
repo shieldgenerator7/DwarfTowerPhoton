@@ -28,7 +28,7 @@ public class FlagController : MonoBehaviour
         txtMapName = gameObject.FindComponent<TMP_Text>();
         txtMapName.text = PlayerInfo.instance.mapName;
         //Marker
-        FindObjectOfType<MapMarkerManager>().CreateMapMarker(
+        MapMarkerManager.CreateMapMarker(
             PhotonView.Get(gameObject),
             transform.position,
             flagMarkerInfo

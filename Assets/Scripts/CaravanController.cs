@@ -49,7 +49,7 @@ public class CaravanController : MonoBehaviour
             updatePositionOnPath(pathGenerator.mapPath);
         }
         //Marker
-        FindObjectOfType<MapMarkerManager>().CreateMapMarker(
+        MapMarkerManager.CreateMapMarker(
             PhotonView.Get( gameObject),
             transform,
             caravanMarkerInfo
