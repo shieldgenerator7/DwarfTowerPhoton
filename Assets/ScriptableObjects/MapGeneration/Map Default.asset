@@ -26,7 +26,19 @@ MonoBehaviour:
   caravanPathAlgorithm: {fileID: 11400000, guid: ba6655d0b2d55924dbfc2a219a53e742,
     type: 2}
   obstacleList:
-  - {fileID: 11400000, guid: 218ebe945d19dcf4486510f2774f13a2, type: 2}
-  - {fileID: 11400000, guid: 529aa5275dedbbd48a8a0b9524c3cf4e, type: 2}
-  - {fileID: 11400000, guid: 85d5f4cb3ff115d44bf189018adb2f2e, type: 2}
-  - {fileID: 11400000, guid: 08fe6e76c2a54c04197efd247c8ddeb1, type: 2}
+  - spawnCount: 700
+    spawnInfo: {fileID: 11400000, guid: 3187eb11651f2be40a6d051c53eda6eb, type: 2}
+    avoidRadius: 5
+    pathAvoidRadius: 1
+  - spawnCount: 200
+    spawnInfo: {fileID: 11400000, guid: d68362b6a0ca6a94790c372891685b7e, type: 2}
+    avoidRadius: 5
+    pathAvoidRadius: 1.5
+  - spawnCount: 75
+    spawnInfo: {fileID: 11400000, guid: 7a3c2bf77260e2346b804b0d95729b07, type: 2}
+    avoidRadius: 5
+    pathAvoidRadius: 1.5
+  - spawnCount: 30
+    spawnInfo: {fileID: 11400000, guid: 6eb4fbf3d530bdd45bd2f430826b51ea, type: 2}
+    avoidRadius: 5
+    pathAvoidRadius: 2

@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ObstacleInfo", menuName = "Map Generation/Obstacle", order = 1)]
-public class ObstacleInfo : ScriptableObject
+[System.Serializable]
+public class ObstacleInfo
 {
     [Range(0, 1000)]
     public int spawnCount = 100;
