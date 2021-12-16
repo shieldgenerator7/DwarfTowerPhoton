@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class SnowmanController : PlayerController
 {
-    [Tooltip("How much roll he loses when damaged")]
-    public float hitRollLoss = 1;
+    [Header("Settings")]
+
+    [Tooltip("How much roll he gains/loses when healed/damaged")]
+    public float hpRollChange = 1;
 
     public StatLayer minLayer;
     public StatLayer maxLayer;
+
+    [Header("Components")]
 
     public RollAbility rollAbility;
 
@@ -21,9 +25,17 @@ public class SnowmanController : PlayerController
         {
             //Register delegates
             rollAbility.onRollChanged += UpdateStats;
+            healthPool.onHealed += (hp) =>
+            {
+                rollAbility.RollAmount += hpRollChange;
+            };
             healthPool.onDamaged += (hp) =>
             {
-                rollAbility.RollAmount -= hitRollLoss;
+                rollAbility.RollAmount -= hpRollChange;
+            };
+            healthPool.onDied += (hp) =>
+            {
+                rollAbility.RollAmount = 0;
             };
             //Init values
             UpdateStats(rollAbility.RollAmount);
