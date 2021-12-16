@@ -54,6 +54,7 @@ public class ObstaclePopulator : MonoBehaviour
             }
             obst.transform.parent = folder;
             obst.GetComponentsInChildren<SpriteRenderer>().ToList()
+                .FindAll(sr => sr.sortingLayerName == "Default")
                 .ForEach(sr => sr.updateSortingOrder());
         }
     }
