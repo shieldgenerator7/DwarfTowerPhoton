@@ -9,6 +9,8 @@ public class RainbowPathController : MonoBehaviour
     public StatLayer enemyMultiplier;
     public float duration = 10;
     public float fadeSpeed = 1;
+    [Tooltip("How much amina to regen each second while active")]
+    public float aminaRegenRate = 10;
 
     /// <summary>
     /// The ability id to use when granting speed boosts
@@ -89,6 +91,21 @@ public class RainbowPathController : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         checkAddLayer(collision.gameObject);
+        //Add amina if it's moving
+        AminaPool aminaPool = collision.gameObject.FindComponent<AminaPool>();
+        if (aminaPool)
+        {
+            bool onSameTeam = TeamToken.onSameTeam(gameObject, collision.gameObject);
+            if (onSameTeam)
+            {
+                Rigidbody2D rb2d = collision.gameObject.FindComponent<Rigidbody2D>();
+                if (rb2d && rb2d.velocity.magnitude > 0)
+                {
+
+                    aminaPool.rechargeAmina(aminaRegenRate * Time.deltaTime);
+                }
+            }
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
