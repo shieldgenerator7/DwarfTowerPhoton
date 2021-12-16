@@ -1784,5 +1784,11 @@ PrefabInstance:
       propertyPath: avoidPosList.Array.data[2]
       value: 
       objectReference: {fileID: 5805177630291831718}
+    - target: {fileID: 8731464238423190252, guid: e80b87e12b864e146ae2b6f4827f939c,
+        type: 3}
+      propertyPath: mapProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 94e4cde9444f157448ec3ff9fb4a039c,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e80b87e12b864e146ae2b6f4827f939c, type: 3}
