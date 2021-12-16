@@ -32,6 +32,7 @@ public class OnHitFlash : MonoBehaviour
 
     void startFlash(float hp)
     {
+        cleanSrs();
         flashStartTime = Time.time;
         srs.ForEach(sr => sr.color = flashColor);
         enabled = true;
@@ -39,11 +40,17 @@ public class OnHitFlash : MonoBehaviour
 
     void endFlash()
     {
+        cleanSrs();
         flashStartTime = -1;
-        for(int i = 0; i < srs.Count; i++)
+        for (int i = 0; i < srs.Count; i++)
         {
             srs[i].color = origColors[i];
         }
         enabled = false;
+    }
+
+    void cleanSrs()
+    {
+        srs.RemoveAll(sr => sr == null);
     }
 }

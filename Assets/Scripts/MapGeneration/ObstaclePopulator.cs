@@ -36,7 +36,6 @@ public class ObstaclePopulator : MonoBehaviour
 
     void populate(ObstacleInfo obstacle)
     {
-        Debug.Log($"Calling RPC visual effects (0): obstacle: {obstacle}, visual effect: {obstacle.visualEffects}");
         for (int i = 0; i < obstacle.spawnCount; i++)
         {
             GameObject obst = objectSpawner.spawnObject(
@@ -46,7 +45,6 @@ public class ObstaclePopulator : MonoBehaviour
                 );
             if (obstacle.visualEffects)
             {
-                Debug.Log("Calling RPC visual effects (1)");
                 PV.RPC(
                     "RPC_AddVisualEffect",
                     RpcTarget.All,
@@ -102,7 +100,6 @@ public class ObstaclePopulator : MonoBehaviour
     [PunRPC]
     void RPC_AddVisualEffect(int viewId, int obstacleIndex)
     {
-        Debug.Log("Running RPC visual effects (2)");
         GameObject obstacle = PhotonView.Find(viewId).gameObject;
         GameObject visualEffect = Instantiate(
             mapProfile.obstacleList[obstacleIndex].visualEffects
