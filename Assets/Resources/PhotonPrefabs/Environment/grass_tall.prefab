@@ -392,3 +392,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hiddenAlpha: 0.1
+  hideableTypes: 0100000002000000

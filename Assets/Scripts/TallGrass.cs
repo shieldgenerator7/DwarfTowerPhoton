@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class TallGrass : MonoBehaviour
 {
-    [Range(0,1)]
+    [Range(0, 1)]
     [Tooltip("The alpha value of player sprites when inside the tall grass")]
     public float hiddenAlpha = 0.5f;
+
+    [Tooltip("The type of objects this tall grass can hide")]
+    public List<EntityType> hideableTypes;
 
     private Collider2D coll2d;
 
@@ -33,7 +36,7 @@ public class TallGrass : MonoBehaviour
     void checkSetAlpha(GameObject go)
     {
         HealthPool hp = go.GetComponent<HealthPool>();
-        if (hp)
+        if (hp && hideableTypes.Contains(hp.entityType))
         {
             if (coll2d.OverlapPoint(go.transform.position))
             {

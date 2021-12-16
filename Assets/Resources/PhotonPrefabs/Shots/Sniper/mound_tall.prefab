@@ -393,6 +393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hiddenAlpha: 0.1
+  hideableTypes: 0100000002000000
 --- !u!114 &7118402431197862615
 MonoBehaviour:
   m_ObjectHideFlags: 0
