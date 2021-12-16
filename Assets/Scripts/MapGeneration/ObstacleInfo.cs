@@ -8,6 +8,7 @@ public class ObstacleInfo
     [Range(0, 1000)]
     public int spawnCount = 100;
     public ObjectSpawnInfo spawnInfo;
+    public GameObject visualEffects;
     [Range(1, 10)]
     public float avoidRadius = 5;
     [Range(1, 10)]

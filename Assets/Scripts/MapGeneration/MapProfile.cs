@@ -8,7 +8,7 @@ public class MapProfile : ScriptableObject
     public Vector2 playAreaSize = new Vector2(40, 80);
     public Sprite groundSprite;
     public Color groundColor = Color.white;
-    [Tooltip("How close to the border objects are allowed to spawn")]
+    [Tooltip("How close to the border the objects are allowed to spawn")]
     public float borderPadding = 2;
     public PathGenerationRequirements caravanPathReqs;
     public MapPathGeneratorAlgorithm caravanPathAlgorithm;

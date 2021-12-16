@@ -155,6 +155,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   objectSpawner: {fileID: 8731464238423190248}
+  PV: {fileID: 8731464238423190247}
 --- !u!114 &8731464238423190248
 MonoBehaviour:
   m_ObjectHideFlags: 0

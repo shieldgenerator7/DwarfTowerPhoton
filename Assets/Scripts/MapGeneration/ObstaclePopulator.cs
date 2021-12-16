@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,16 @@ public class ObstaclePopulator : MonoBehaviour
 
     public ObjectSpawner objectSpawner;
 
+    public PhotonView PV;
+
     private Vector2 min;
     private Vector2 max;
 
+    private MapProfile mapProfile;
+
     public void populateObstacles(MapProfile mapProfile)
     {
+        this.mapProfile = mapProfile;
         min = mapProfile.GeneratableBounds.min;
         max = mapProfile.GeneratableBounds.max;
         //Populate
@@ -30,6 +36,7 @@ public class ObstaclePopulator : MonoBehaviour
 
     void populate(ObstacleInfo obstacle)
     {
+        Debug.Log($"Calling RPC visual effects (0): obstacle: {obstacle}, visual effect: {obstacle.visualEffects}");
         for (int i = 0; i < obstacle.spawnCount; i++)
         {
             GameObject obst = objectSpawner.spawnObject(
@@ -37,6 +44,16 @@ public class ObstaclePopulator : MonoBehaviour
                 getRandomPosition(obstacle, mapPathGenerator.mapPath),
                 Vector2.up
                 );
+            if (obstacle.visualEffects)
+            {
+                Debug.Log("Calling RPC visual effects (1)");
+                PV.RPC(
+                    "RPC_AddVisualEffect",
+                    RpcTarget.All,
+                    PhotonView.Get(obst).ViewID,
+                    mapProfile.obstacleList.IndexOf(obstacle)
+                    );
+            }
             obst.transform.parent = folder;
             obst.GetComponentsInChildren<SpriteRenderer>().ToList()
                 .ForEach(sr => sr.updateSortingOrder());
@@ -80,5 +97,17 @@ public class ObstaclePopulator : MonoBehaviour
         }
         while (pathToAvoid.distanceFromPath(pos, obstacle.pathAvoidRadius) <= obstacle.pathAvoidRadius);
         return pos;
+    }
+
+    [PunRPC]
+    void RPC_AddVisualEffect(int viewId, int obstacleIndex)
+    {
+        Debug.Log("Running RPC visual effects (2)");
+        GameObject obstacle = PhotonView.Find(viewId).gameObject;
+        GameObject visualEffect = Instantiate(
+            mapProfile.obstacleList[obstacleIndex].visualEffects
+            );
+        visualEffect.transform.parent = obstacle.transform;
+        visualEffect.transform.localPosition = Vector2.zero;
     }
 }
