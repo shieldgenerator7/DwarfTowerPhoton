@@ -54,12 +54,15 @@ public abstract class PlayerController : MonoBehaviour
     protected Damager damager { get; private set; }
     public PlayerMovement playerMovement { get; private set; }
     protected StatKeeper statKeeper { get; private set; }
+    protected StatusKeeper statusKeeper { get; private set; }
     private ObjectSpawner objectSpawner;
+    private SpriteRenderer sr;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         playerMovement = gameObject.FindComponent<PlayerMovement>();
+        sr = gameObject.FindComponent<SpriteRenderer>();
         if (PV.IsMine)
         {
             //Damager
@@ -115,6 +118,18 @@ public abstract class PlayerController : MonoBehaviour
             };
             statKeeper.triggerEvents();
         }
+        //StatusKeeper
+        statusKeeper = gameObject.FindComponent<StatusKeeper>();
+        statusKeeper.onStatusChanged += (status) =>
+        {
+            //Stunned
+            //TODO: sync status effects through network
+            //so you can refactor Stunnable into StatusKeeper
+            //Stealthed
+            sr.color = sr.color.setAlpha((status.stealthed) ? 0.1f : 1);
+            //Rooted
+            playerMovement.forceMovement(Vector2.zero, status.rooted);
+        };
         //ObjectSpawner and Color
         objectSpawner = gameObject.FindComponent<ObjectSpawner>();
         objectSpawner.PlayerColor = playerColor;

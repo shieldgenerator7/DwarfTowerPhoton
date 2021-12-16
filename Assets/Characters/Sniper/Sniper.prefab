@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 307085991090335124}
   - component: {fileID: 9215063378857821938}
   - component: {fileID: 3854592228582004885}
+  - component: {fileID: -8313888148295365946}
   - component: {fileID: -6763877186653517758}
   - component: {fileID: -4544664358141030189}
   - component: {fileID: 628463848740268033}
@@ -184,6 +185,22 @@ MonoBehaviour:
       fireRate: -1
       damage: -1
       size: -1
+--- !u!114 &-8313888148295365946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532201618779257096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e8fe80fb78de4e4e965bf4e706586e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allowedStatus:
+    stunned: 1
+    stealthed: 1
+    rooted: 1
 --- !u!114 &-6763877186653517758
 MonoBehaviour:
   m_ObjectHideFlags: 0
