@@ -102,7 +102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d55dfdb29348df40a467dc038a16687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapProfile: {fileID: 11400000, guid: 1678a82ad2b0db44e88cac4778bf96c3, type: 2}
+  mapProfiles:
+  - {fileID: 11400000, guid: 1678a82ad2b0db44e88cac4778bf96c3, type: 2}
+  - {fileID: 11400000, guid: 94e4cde9444f157448ec3ff9fb4a039c, type: 2}
   playArea: {fileID: 8731464237892782650}
   caravanPathGenerator: {fileID: 8731464238423190251}
   obstaclePopulator: {fileID: 8731464238423190249}

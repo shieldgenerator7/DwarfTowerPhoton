@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-    public MapProfile mapProfile;
+    public MapProfile mapProfile { get; private set; }
+    public List<MapProfile> mapProfiles;
 
     public string mapName
     {
@@ -52,6 +53,7 @@ public class MapGenerator : MonoBehaviour
         int seed = mapName.GetHashCode();
         Random.InitState(seed);
         //Init MapProfile
+        mapProfile = mapProfiles[Random.Range(0, 100) % mapProfiles.Count];
         mapProfile.init();
         //Adjust Play Area
         playArea.ground.sprite = mapProfile.groundSprite;
