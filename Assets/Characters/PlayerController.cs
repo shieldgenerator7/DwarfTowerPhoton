@@ -115,6 +115,7 @@ public abstract class PlayerController : MonoBehaviour
             {
                 healthPool.MaxHealth = stats.maxHits;
                 playerMovement.MovementSpeed = stats.moveSpeed;
+                transform.localScale = Vector3.one * stats.size;
             };
             statKeeper.triggerEvents();
         }
