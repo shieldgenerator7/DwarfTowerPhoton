@@ -59,8 +59,8 @@ public struct LineEquation
             if (intersectionQ.HasValue)
             {
                 Vector2 intersection = intersectionQ.Value;
-                if (rectangle.ContainsInclusive(intersection)
-                    && checkRect.ContainsInclusive(intersection))
+                if (rectangle.ContainsInclusive(intersection, 0.01f)
+                    && checkRect.ContainsInclusive(intersection, 0.01f))
                 {
                     //Debug.Log($"Line x Rect: returning {intersection}. " +
                     //    $"line: {this}, rect: {rectangle}, " +
@@ -111,10 +111,10 @@ public static class RectExtentions
         return lines;
     }
 
-    public static bool ContainsInclusive(this Rect rect, Vector2 pos)
+    public static bool ContainsInclusive(this Rect rect, Vector2 pos, float buffer = 0)
     {
         return rect.Contains(pos)
-            || (pos.x >= rect.min.x && pos.x <= rect.max.x
-            && pos.y >= rect.min.y && pos.y <= rect.max.y);
+            || (pos.x >= rect.min.x - buffer && pos.x <= rect.max.x + buffer
+            && pos.y >= rect.min.y - buffer && pos.y <= rect.max.y + buffer);
     }
 }
