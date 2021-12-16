@@ -397,6 +397,7 @@ MonoBehaviour:
   hidesOtherInputs: 0
   abilityID: 2
   rainbowPathIndex: 2
+  aminaRegenRate: 5
 --- !u!1 &4027114820006220005
 GameObject:
   m_ObjectHideFlags: 0

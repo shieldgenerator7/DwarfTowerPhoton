@@ -141,7 +141,7 @@ MonoBehaviour:
     size: -1
   duration: 1
   fadeSpeed: 2
-  aminaRegenRate: 10
+  aminaRegenRate: 5
 --- !u!114 &571
 MonoBehaviour:
   m_ObjectHideFlags: 0
