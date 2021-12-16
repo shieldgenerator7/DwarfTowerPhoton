@@ -41,9 +41,9 @@ public class TurretController : GunController
             if (PV.IsMine)
             {
                 this.transform.up = turretFireTrigger.playerController.LookDirection;
-                turretBase.up = Vector2.up;
             }
         }
+        turretBase.up = Vector2.up;
     }
 
     private void fireInDirection(GameObject shot, Vector2 targetPos, Vector2 targetDir)
