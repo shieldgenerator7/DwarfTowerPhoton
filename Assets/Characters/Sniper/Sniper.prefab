@@ -115,6 +115,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aminaReloader: {fileID: 3369071877670158181}
   abilityContext: {fileID: 9215063378857821938}
+  tallGrassLauncher: {fileID: 8666854124826083951}
+  tallGrassMap:
+  - mapProfile: {fileID: 11400000, guid: 1678a82ad2b0db44e88cac4778bf96c3, type: 2}
+    objectSpawnIndex: 2
+  - mapProfile: {fileID: 11400000, guid: 94e4cde9444f157448ec3ff9fb4a039c, type: 2}
+    objectSpawnIndex: 3
 --- !u!114 &307085991090335124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,6 +324,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 22f4757fab66bcb42b55a060c6a8e3f2, type: 2}
   - {fileID: 11400000, guid: dadd55cf382070149be453676d395c29, type: 2}
   - {fileID: 11400000, guid: 9d4795a8ace1bfc499512b93904cce28, type: 2}
+  - {fileID: 11400000, guid: f5bac155b1f33f24b8d169ce2bf5b69d, type: 2}
 --- !u!114 &-3464993547012377175
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 [CreateAssetMenu(fileName = "MapProfile", menuName = "Map Generation/Map Profile", order = 1)]
 public class MapProfile : ScriptableObject
 {
