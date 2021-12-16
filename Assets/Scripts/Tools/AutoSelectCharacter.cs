@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AutoSelectCharacter : MonoBehaviour
 {
-    [Range(0, 3)]
+    [Range(0, 4)]
     public int characterIndex;
     [Range(0, 5)]
     public int colorIndex;
