@@ -4,44 +4,42 @@ using UnityEngine;
 
 public class SnowmanController : PlayerController
 {
-    [Tooltip("Size when it's at 1 hp")]
-    public float minSize = 0.5f;
-    [Tooltip("Speed when it has lots of hp")]
-    public float minSpeed = 1;
-    [Tooltip("Speed when it's at 1 hp")]
-    public float maxSpeed = 5;
+    public StatLayer minLayer;
+    public StatLayer maxLayer;
 
-    private StatLayer speedLayer;
+    [System.Serializable]
+    public struct KeyFrame
+    {
+        public float health;
+        public StatLayer stats;
+    }
+
+    private float percentage = 0;
+    private StatLayer curLayer;
 
     protected override void Start()
     {
         base.Start();
         if (PV.IsMine)
         {
+            //Register delegates
             healthPool.onChanged += (hp) =>
             {
-                UpdateSize(hp);
-                UpdateSpeed(hp);
+                float percent = hp / healthPool.MaxHealth;
+                if (percent != this.percentage)
+                {
+                    UpdateStats(percent);
+                }
             };
-            speedLayer = new StatLayer();
-            speedLayer.moveSpeed = minSpeed;
             //Init values
-            UpdateSize(healthPool.Health);
-            UpdateSpeed(healthPool.Health);
+            UpdateStats(healthPool.Health);
         }
     }
 
-    private void UpdateSize(float health)
+    private void UpdateStats(float percentage)
     {
-        //Increase size with health
-        float scale = Mathf.Max(minSize, health);
-        transform.localScale = Vector3.one * scale;
-    }
-    private void UpdateSpeed(float health)
-    {
-        //Decrease speed with health
-        float speed = Mathf.Max(minSpeed, maxSpeed - (health - 1));
-        speedLayer.moveSpeed = speed;
-        statKeeper.selfStats.addLayerAdd(PV.ViewID, speedLayer);
+        this.percentage = percentage;
+        curLayer = StatLayer.Lerp(minLayer, maxLayer, percentage);
+        statKeeper.selfStats.addLayerAdd(PV.ViewID, curLayer);
     }
 }

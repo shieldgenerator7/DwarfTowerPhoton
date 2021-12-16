@@ -41,7 +41,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6220889621231917683}
   - {fileID: 1913788795788701171}
@@ -115,9 +115,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aminaReloader: {fileID: 3369071877670158181}
   abilityContext: {fileID: 9215063378857821938}
-  minSize: 0.5
-  minSpeed: 1
-  maxSpeed: 5
+  minLayer:
+    moveSpeed: 0
+    maxHits: 0
+    fireRate: 0
+    damage: 0
+    size: 0
+  maxLayer:
+    moveSpeed: -4
+    maxHits: 4
+    fireRate: 0
+    damage: 0
+    size: 1.5
 --- !u!114 &307085991090335124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,8 +171,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selfStats:
     statBase:
-      moveSpeed: 1
-      maxHits: 3
+      moveSpeed: 5
+      maxHits: 1
       fireRate: -1
       damage: -1
       size: 0.5
@@ -209,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab49dea0eb78a7a43aafe9024717e71c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 5
   entityType: 2
 --- !u!114 &628463848740268033
 MonoBehaviour:
