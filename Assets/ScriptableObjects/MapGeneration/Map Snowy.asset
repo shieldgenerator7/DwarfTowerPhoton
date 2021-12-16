@@ -54,13 +54,18 @@ MonoBehaviour:
     visualEffects: {fileID: 0}
     avoidRadius: 5
     pathAvoidRadius: 2
-  - spawnCount: 1
-    spawnInfo: {fileID: 11400000, guid: d78905685d962e64e908503ce3bc89ad, type: 2}
-    visualEffects: {fileID: 0}
-    avoidRadius: 5
-    pathAvoidRadius: 5
   - spawnCount: 5
     spawnInfo: {fileID: 11400000, guid: c02b4d49a127ace4b9b27fa1836d72b4, type: 2}
     visualEffects: {fileID: 0}
     avoidRadius: 5
     pathAvoidRadius: 5
+  - spawnCount: 1
+    spawnInfo: {fileID: 11400000, guid: d78905685d962e64e908503ce3bc89ad, type: 2}
+    visualEffects: {fileID: 0}
+    avoidRadius: 5
+    pathAvoidRadius: 5
+  - spawnCount: 1
+    spawnInfo: {fileID: 11400000, guid: f53e348e31d900241ac579e1e0f8a750, type: 2}
+    visualEffects: {fileID: 0}
+    avoidRadius: 10
+    pathAvoidRadius: 10
