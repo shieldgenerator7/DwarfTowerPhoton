@@ -44,7 +44,7 @@ public class SnowmanController : PlayerController
 
     private void UpdateStats(float percentage)
     {
-        curLayer = StatLayer.Lerp(minLayer, maxLayer, percentage);
+        curLayer = StatLayer.LerpAdd(minLayer, maxLayer, percentage);
         statKeeper.selfStats.addLayerAdd(PV.ViewID, curLayer);
     }
 }

@@ -53,9 +53,9 @@ public struct StatLayer
 
     public StatLayer Add(float addend)
     {
-        if (addend < 0)
+        if (addend == 0)
         {
-            throw new ArgumentException($"addend is less than 0! {addend}");
+            throw new ArgumentException($"addend is 0! {addend}");
         }
         StatLayer layer = new StatLayer();
         layer.moveSpeed = AddStat(this.moveSpeed, addend);
@@ -94,6 +94,23 @@ public struct StatLayer
         layer.size = LerpStat(minLayer.size, maxLayer.size, percentage);
         return layer;
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="minLayer"></param>
+    /// <param name="maxLayer"></param>
+    /// <param name="percentage">A value between 0 and 1. 0: minLayer, 0.5: in between, 1: maxLayer</param>
+    /// <returns></returns>
+    public static StatLayer LerpAdd(StatLayer minLayer, StatLayer maxLayer, float percentage)
+    {
+        StatLayer layer = new StatLayer();
+        layer.moveSpeed = LerpStatAdd(minLayer.moveSpeed, maxLayer.moveSpeed, percentage);
+        layer.maxHits = LerpStatAdd(minLayer.maxHits, maxLayer.maxHits, percentage);
+        layer.fireRate = LerpStatAdd(minLayer.fireRate, maxLayer.fireRate, percentage);
+        layer.damage = LerpStatAdd(minLayer.damage, maxLayer.damage, percentage);
+        layer.size = LerpStatAdd(minLayer.size, maxLayer.size, percentage);
+        return layer;
+    }
 
     //TODO: Potentially remove this method and refactor the thing that uses it
     public StatLayer Charge(float multiplier, StatLayer percentage)
@@ -118,7 +135,7 @@ public struct StatLayer
     }
     private static float AddStat(float stat, float addend)
     {
-        if (stat >= 0 && addend != 0)
+        if (stat >= 0)
         {
             stat += addend;
             //addends can't subtract to below zero
@@ -145,6 +162,8 @@ public struct StatLayer
             return STAT_IGNORE;
         }
     }
+    private static float LerpStatAdd(float min, float max, float percentage)
+        => Mathf.Lerp(min, max, percentage);
 
     /// <summary>
     /// Returns the charged value of the given stat with the given multiplier and given percentage
