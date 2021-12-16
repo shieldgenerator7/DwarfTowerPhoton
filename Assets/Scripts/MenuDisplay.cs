@@ -29,6 +29,7 @@ public class MenuDisplay : MonoBehaviour
     {
         PlayerInfo playerInfo = PlayerInfo.instance;
         txtMapName.text = PlayerInfo.instance.mapName;
+        txtMapName.onValueChanged.AddListener((mapName) => playerInfo.mapName = mapName);
         playerInfo.onSelectedIndexChanged += updateCharacterImage;
         playerInfo.SelectedIndex = Random.Range(0, playerInfo.allCharacters.Count);
         updateCharacterImage(playerInfo.SelectedIndex);
