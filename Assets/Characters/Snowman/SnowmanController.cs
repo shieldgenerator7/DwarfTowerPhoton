@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class SnowmanController : PlayerController
 {
+    [Tooltip("How much roll he loses when damaged")]
+    public float hitRollLoss = 1;
+
     public StatLayer minLayer;
     public StatLayer maxLayer;
 
-    [System.Serializable]
-    public struct KeyFrame
-    {
-        public float health;
-        public StatLayer stats;
-    }
+    public RollAbility rollAbility;
 
-    private float percentage = 0;
     private StatLayer curLayer;
 
     protected override void Start()
@@ -23,22 +20,18 @@ public class SnowmanController : PlayerController
         if (PV.IsMine)
         {
             //Register delegates
-            healthPool.onChanged += (hp) =>
+            rollAbility.onRollChanged += UpdateStats;
+            healthPool.onDamaged += (hp) =>
             {
-                float percent = hp / healthPool.MaxHealth;
-                if (percent != this.percentage)
-                {
-                    UpdateStats(percent);
-                }
+                rollAbility.RollAmount -= hitRollLoss;
             };
             //Init values
-            UpdateStats(healthPool.Health);
+            UpdateStats(rollAbility.RollAmount);
         }
     }
 
     private void UpdateStats(float percentage)
     {
-        this.percentage = percentage;
         curLayer = StatLayer.Lerp(minLayer, maxLayer, percentage);
         statKeeper.selfStats.addLayerAdd(PV.ViewID, curLayer);
     }
