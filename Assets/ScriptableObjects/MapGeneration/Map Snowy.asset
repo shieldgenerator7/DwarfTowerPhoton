@@ -66,6 +66,7 @@ MonoBehaviour:
     pathAvoidRadius: 5
   - spawnCount: 1
     spawnInfo: {fileID: 11400000, guid: f53e348e31d900241ac579e1e0f8a750, type: 2}
-    visualEffects: {fileID: 0}
+    visualEffects: {fileID: 7269731009769640609, guid: 5618041a5e83b59479bb0cc014b5e1dd,
+      type: 3}
     avoidRadius: 10
     pathAvoidRadius: 10

@@ -9,8 +9,9 @@ public class ObstacleVisualEffect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<SpriteRenderer>().sortingOrder =
-            GetComponentInParent<SpriteRenderer>().sortingOrder + 1;
+        int sortingOrder = GetComponentInParent<SpriteRenderer>().sortingOrder + 1;
+        gameObject.FindComponents<SpriteRenderer>(true)
+            .ForEach(sr => sr.sortingOrder = sortingOrder);
         healthPool = gameObject.FindComponent<HealthPool>();
         healthPool.onDamaged += checkOnDamaged;
     }
