@@ -28,7 +28,8 @@ MonoBehaviour:
   obstacleList:
   - spawnCount: 700
     spawnInfo: {fileID: 11400000, guid: 3187eb11651f2be40a6d051c53eda6eb, type: 2}
-    visualEffects: {fileID: 0}
+    visualEffects: {fileID: 7269731009769640609, guid: 2ba1e78f5a7215441b492f471995201f,
+      type: 3}
     avoidRadius: 5
     pathAvoidRadius: 1
   - spawnCount: 200
@@ -39,6 +40,7 @@ MonoBehaviour:
     pathAvoidRadius: 1.5
   - spawnCount: 15
     spawnInfo: {fileID: 11400000, guid: 6eb4fbf3d530bdd45bd2f430826b51ea, type: 2}
-    visualEffects: {fileID: 0}
+    visualEffects: {fileID: 7269731009769640609, guid: 3b3444384f02f3d438c86d1872c81364,
+      type: 3}
     avoidRadius: 5
     pathAvoidRadius: 2
