@@ -51,6 +51,32 @@ public struct StatLayer
         return layer;
     }
 
+    public StatLayer Add(float addend)
+    {
+        if (addend < 0)
+        {
+            throw new ArgumentException($"addend is less than 0! {addend}");
+        }
+        StatLayer layer = new StatLayer();
+        layer.moveSpeed = AddStat(this.moveSpeed, addend);
+        layer.maxHits = AddStat(this.maxHits, addend);
+        layer.fireRate = AddStat(this.fireRate, addend);
+        layer.damage = AddStat(this.damage, addend);
+        layer.size = AddStat(this.size, addend);
+        return layer;
+    }
+
+    public StatLayer Add(StatLayer addend)
+    {
+        StatLayer layer = new StatLayer();
+        layer.moveSpeed = AddStat(this.moveSpeed, addend.moveSpeed);
+        layer.maxHits = AddStat(this.maxHits, addend.maxHits);
+        layer.fireRate = AddStat(this.fireRate, addend.fireRate);
+        layer.damage = AddStat(this.damage, addend.damage);
+        layer.size = AddStat(this.size, addend.size);
+        return layer;
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -87,6 +113,16 @@ public struct StatLayer
         if (stat >= 0 && multiplier >= 0)
         {
             stat *= multiplier;
+        }
+        return stat;
+    }
+    private static float AddStat(float stat, float addend)
+    {
+        if (stat >= 0 && addend != 0)
+        {
+            stat += addend;
+            //addends can't subtract to below zero
+            stat = Mathf.Max(0, stat);
         }
         return stat;
     }

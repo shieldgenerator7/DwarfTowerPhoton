@@ -29,6 +29,10 @@ public class StatMatrix
     /// The layers to multiply to the base to get the current
     /// </summary>
     private Dictionary<int, StatLayer> multipliers = new Dictionary<int, StatLayer>();
+    /// <summary>
+    /// The layers to add to the base to get the current
+    /// </summary>
+    private Dictionary<int, StatLayer> addends = new Dictionary<int, StatLayer>();
 
     public void init()
     {
@@ -47,13 +51,32 @@ public class StatMatrix
         updateStats();
     }
 
+    public void addLayerAdd(int id, StatLayer addend)
+    {
+        addends[id] = addend;
+        updateStats();
+    }
+
+    public void removeLayerAdd(int id)
+    {
+        addends.Remove(id);
+        updateStats();
+    }
+
     private void updateStats()
     {
         StatLayer composite = statBase;
+        //Multipliers
         foreach (StatLayer layer in multipliers.Values)
         {
             composite = composite.Multiply(layer);
         }
+        //Addends
+        foreach (StatLayer layer in addends.Values)
+        {
+            composite = composite.Add(layer);
+        }
+        //Update
         Stats = composite;
     }
 
