@@ -115,6 +115,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aminaReloader: {fileID: 3369071877670158181}
   abilityContext: {fileID: 9215063378857821938}
+  minSize: 0.5
+  minSpeed: 1
+  maxSpeed: 5
 --- !u!114 &307085991090335124
 MonoBehaviour:
   m_ObjectHideFlags: 0
