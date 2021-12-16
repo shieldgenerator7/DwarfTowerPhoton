@@ -52,9 +52,11 @@ public class MenuDisplay : MonoBehaviour
         {
             GameObject btnCharSel = Instantiate(characterSelectButtonPrefab);
             btnCharSel.transform.parent = characterSelectGroup.transform;
-            Image img = btnCharSel.GetComponent<Image>();
+            Image img = btnCharSel.FindComponent<Image>(false, true);
             img.sprite = charInfo.sprite;
             img.color = charInfo.defaultColor;
+            RectTransform rect = img.GetComponent<RectTransform>();
+            rect.sizeDelta = 100 * charInfo.sprite.rect.size / 16;
             TMP_Text txt = btnCharSel.GetComponentInChildren<TMP_Text>();
             txt.text = charInfo.characterName.ToUpper();
             Button btn = btnCharSel.GetComponent<Button>();
@@ -63,15 +65,9 @@ public class MenuDisplay : MonoBehaviour
                 PlayerInfo.instance.SelectedCharacter = charInfo;
             });
         }
-        //Resize grid layout
-        RectTransform rectCSG = characterSelectGroup.GetComponent<RectTransform>();
+        //Resize elements to widen
         int charCount = allCharacters.Count;
         int width = charCount * 100 + (charCount + 1) * 10;
-        rectCSG.sizeDelta = new Vector2(
-            width,
-            rectCSG.sizeDelta.y
-            );
-        //Resize elements to widen
         foreach (RectTransform rect in elementsToWiden)
         {
             rect.sizeDelta = new Vector2(
