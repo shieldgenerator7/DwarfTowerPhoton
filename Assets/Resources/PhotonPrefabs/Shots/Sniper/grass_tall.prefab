@@ -392,8 +392,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a78878a4bb72a804fb2597977dc9a347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hiddenAlpha: 0.1
-  hideableTypes: 0100000002000000
+  statusToGrant:
+    stunned: 0
+    stealthed: 1
+    rooted: 0
+  requirePositionInTrigger: 1
 --- !u!114 &1094904074933858873
 MonoBehaviour:
   m_ObjectHideFlags: 0

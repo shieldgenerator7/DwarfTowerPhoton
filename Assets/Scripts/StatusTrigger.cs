@@ -1,57 +1,54 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class StatusTrigger : MonoBehaviour
 {
-    [Range(0, 1)]
-    [Tooltip("The alpha value of player sprites when inside the tall grass")]
-    public float hiddenAlpha = 0.5f;
+    [Tooltip("The status to grant while an entity is in this trigger")]
+    public StatusLayer statusToGrant;
+    [Tooltip("Does the entity's position have to be in the collider to get the status?")]
+    public bool requirePositionInTrigger = true;
 
-    [Tooltip("The type of objects this tall grass can hide")]
-    public List<EntityType> hideableTypes;
-
+    private PhotonView PV;
     private Collider2D coll2d;
 
     private void Start()
     {
+        PV = gameObject.FindComponent<PhotonView>();
         coll2d = GetComponent<Collider2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        checkSetAlpha(collision.gameObject);
+        checkGrantStatus(collision.gameObject, true);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        checkSetAlpha(collision.gameObject);
+        checkGrantStatus(collision.gameObject, true);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        checkSetAlpha(collision.gameObject);
+        checkGrantStatus(collision.gameObject, false);
     }
 
-    void checkSetAlpha(GameObject go)
+    void checkGrantStatus(GameObject go, bool grant)
     {
-        HealthPool hp = go.GetComponent<HealthPool>();
-        if (hp && hideableTypes.Contains(hp.entityType))
+        StatusKeeper statusKeeper = go.FindComponent<StatusKeeper>();
+        if (statusKeeper)
         {
-            if (coll2d.OverlapPoint(go.transform.position))
+            bool posReq = !requirePositionInTrigger
+                || coll2d.OverlapPoint(go.transform.position);
+            if (grant && posReq)
             {
-                setAlpha(go, hiddenAlpha);
+                statusKeeper.addLayer(PV.ViewID, statusToGrant);
             }
             else
             {
-                setAlpha(go, 1);
+                statusKeeper.removeLayer(PV.ViewID);
             }
         }
-    }
-
-    void setAlpha(GameObject go, float alpha)
-    {
-        SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
-        sr.color = sr.color.setAlpha(alpha);
     }
 }
