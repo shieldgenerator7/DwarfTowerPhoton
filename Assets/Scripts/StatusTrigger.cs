@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TallGrass : MonoBehaviour
+public class StatusTrigger : MonoBehaviour
 {
     [Range(0, 1)]
     [Tooltip("The alpha value of player sprites when inside the tall grass")]
