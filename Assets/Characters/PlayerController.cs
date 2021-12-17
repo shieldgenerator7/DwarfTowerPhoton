@@ -42,7 +42,7 @@ public abstract class PlayerController : MonoBehaviour
     /// <summary>
     /// The center position for use in object spawn location calculations (use this instead of transform.position)
     /// </summary>
-    public Vector2 SpawnCenter => (Vector2)transform.position + (Vector2.up * 0.5f);
+    public Vector2 SpawnCenter => (Vector2)transform.position + (Vector2.up * (transform.localScale.y / 2));
     /// <summary>
     /// The looking direction of the player. Includes magnitude, NOT a unit vector
     /// </summary>
