@@ -14,6 +14,9 @@ public class SnowmanController : PlayerController
 
     [Header("Components")]
 
+    public Sprite standSprite;
+    public Sprite rollSprite;
+
     public RollAbility rollAbility;
 
     private StatLayer curLayer;
@@ -25,9 +28,9 @@ public class SnowmanController : PlayerController
         {
             //Register delegates
             rollAbility.onRollChanged += UpdateStats;
-            healthPool.onHealed += (hp) =>
+            rollAbility.onRollingChanged += (rolling) =>
             {
-                rollAbility.RollAmount += hpRollChange;
+                sr.sprite = (rolling) ? rollSprite : standSprite;
             };
             healthPool.onDamaged += (hp) =>
             {

@@ -56,7 +56,7 @@ public abstract class PlayerController : MonoBehaviour
     protected StatKeeper statKeeper { get; private set; }
     protected StatusKeeper statusKeeper { get; private set; }
     private ObjectSpawner objectSpawner;
-    private SpriteRenderer sr;
+    protected SpriteRenderer sr;
 
     // Start is called before the first frame update
     protected virtual void Start()
