@@ -127,7 +127,7 @@ MonoBehaviour:
     moveSpeed: 4
     maxHits: -1
     fireRate: -1
-    damage: -1
+    damage: 2
     size: -1
   standDamageTypes: 00000000
   rollingDamageTypes: 000000000100000002000000

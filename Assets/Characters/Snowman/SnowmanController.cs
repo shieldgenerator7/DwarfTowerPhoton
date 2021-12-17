@@ -43,11 +43,13 @@ public class SnowmanController : PlayerController
                 sr.sprite = (rolling) ? rollSprite : standSprite;
                 if (rolling)
                 {
+                    maxRollLayer.damage = maxRollLayer.maxHits;
                     statKeeper.selfStats.addLayer(rollAbility.abilityID, rollingLayer);
                     damager.damagableTypes = rollingDamageTypes;
                 }
                 else
                 {
+                    maxRollLayer.damage = -1;
                     statKeeper.selfStats.removeLayer(rollAbility.abilityID);
                     damager.damagableTypes = standDamageTypes;
                 }
