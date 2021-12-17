@@ -9,8 +9,8 @@ public class SnowmanController : PlayerController
     [Tooltip("How much roll he gains/loses when healed/damaged")]
     public float hpRollChange = 1;
 
-    public StatLayer minLayer;
-    public StatLayer maxLayer;
+    private StatLayer minRollLayer;
+    public StatLayer maxRollLayer;
 
     [Header("Components")]
 
@@ -26,6 +26,8 @@ public class SnowmanController : PlayerController
         base.Start();
         if (PV.IsMine)
         {
+            //Init layers
+            minRollLayer = new StatLayer(1);
             //Register delegates
             rollAbility.onRollChanged += UpdateStats;
             rollAbility.onRollingChanged += (rolling) =>
@@ -47,7 +49,7 @@ public class SnowmanController : PlayerController
 
     private void UpdateStats(float percentage)
     {
-        curLayer = StatLayer.LerpAdd(minLayer, maxLayer, percentage);
-        statKeeper.selfStats.addLayerAdd(PV.ViewID, curLayer);
+        curLayer = StatLayer.Lerp(minRollLayer, maxRollLayer, percentage);
+        statKeeper.selfStats.addLayer(PV.ViewID, curLayer);
     }
 }
