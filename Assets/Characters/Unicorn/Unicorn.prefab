@@ -164,7 +164,7 @@ MonoBehaviour:
       maxHits: 1
       fireRate: -1
       damage: -1
-      size: -1
+      size: 1
   shotStats:
     statBase:
       moveSpeed: -1
