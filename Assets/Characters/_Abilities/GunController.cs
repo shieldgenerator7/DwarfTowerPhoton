@@ -30,6 +30,12 @@ public class GunController : PlayerAbility
             {
                 Vector2 spawnPos = playerController.SpawnCenter;
                 lastFireTime = lastFireTime + fireDelay;
+                //prevent spam burst bug
+                if (Mathf.Abs(Time.time - lastFireTime) > Time.deltaTime)
+                {
+                    lastFireTime = Time.time;
+                }
+                //Launch shot
                 Vector2 dir = ((Vector2)Utility.MouseWorldPos - spawnPos).normalized;
                 ShotController shot = objectSpawner.spawnObject<ShotController>(
                     shotIndex,
