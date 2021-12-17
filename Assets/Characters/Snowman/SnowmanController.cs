@@ -12,6 +12,8 @@ public class SnowmanController : PlayerController
     private StatLayer minRollLayer;
     public StatLayer maxRollLayer;
 
+    public StatLayer rollingLayer;
+
     [Header("Components")]
 
     public Sprite standSprite;
@@ -33,6 +35,14 @@ public class SnowmanController : PlayerController
             rollAbility.onRollingChanged += (rolling) =>
             {
                 sr.sprite = (rolling) ? rollSprite : standSprite;
+                if (rolling)
+                {
+                    statKeeper.selfStats.addLayer(rollAbility.abilityID, rollingLayer);
+                }
+                else
+                {
+                    statKeeper.selfStats.removeLayer(rollAbility.abilityID);
+                }
             };
             healthPool.onDamaged += (hp) =>
             {
@@ -51,5 +61,11 @@ public class SnowmanController : PlayerController
     {
         curLayer = StatLayer.Lerp(minRollLayer, maxRollLayer, percentage);
         statKeeper.selfStats.addLayer(PV.ViewID, curLayer);
+    }
+
+    protected override void onAminaEmpty(float amina)
+    {
+        base.onAminaEmpty(amina);
+        rollAbility.OnButtonCanceled();
     }
 }

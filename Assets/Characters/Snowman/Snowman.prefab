@@ -117,11 +117,17 @@ MonoBehaviour:
   abilityContext: {fileID: 9215063378857821938}
   hpRollChange: 1
   maxRollLayer:
-    moveSpeed: 0.2
+    moveSpeed: 0.33
     maxHits: 5
     fireRate: -1
     damage: -1
     size: 3
+  rollingLayer:
+    moveSpeed: 3
+    maxHits: -1
+    fireRate: -1
+    damage: -1
+    size: -1
   standSprite: {fileID: 21300000, guid: e724291e33c2aa84eb6d1261f938f141, type: 3}
   rollSprite: {fileID: 21300000, guid: e73d7d1e21db7d646b602f0ecc99a872, type: 3}
   rollAbility: {fileID: 460486733587930298}
@@ -169,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selfStats:
     statBase:
-      moveSpeed: 5
+      moveSpeed: 3
       maxHits: 1
       fireRate: -1
       damage: -1
@@ -457,7 +463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityName: Roll
-  aminaCost: 5
+  aminaCost: 10
   abilitySlot: 2
   hidesOtherInputs: 1
   abilityID: 4
