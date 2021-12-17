@@ -129,6 +129,8 @@ MonoBehaviour:
     fireRate: -1
     damage: -1
     size: -1
+  standDamageTypes: 00000000
+  rollingDamageTypes: 000000000100000002000000
   standSprite: {fileID: 21300000, guid: e724291e33c2aa84eb6d1261f938f141, type: 3}
   rollSprite: {fileID: 21300000, guid: e73d7d1e21db7d646b602f0ecc99a872, type: 3}
   hugeShotAbility: {fileID: 2843069705813304809}

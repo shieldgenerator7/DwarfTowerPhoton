@@ -16,6 +16,9 @@ public class SnowmanController : PlayerController
 
     public StatLayer rollingLayer;
 
+    public List<EntityType> standDamageTypes;
+    public List<EntityType> rollingDamageTypes;
+
     [Header("Components")]
 
     public Sprite standSprite;
@@ -41,10 +44,12 @@ public class SnowmanController : PlayerController
                 if (rolling)
                 {
                     statKeeper.selfStats.addLayer(rollAbility.abilityID, rollingLayer);
+                    damager.damagableTypes = rollingDamageTypes;
                 }
                 else
                 {
                     statKeeper.selfStats.removeLayer(rollAbility.abilityID);
+                    damager.damagableTypes = standDamageTypes;
                 }
             };
             healthPool.onDamaged += OnDamage;
