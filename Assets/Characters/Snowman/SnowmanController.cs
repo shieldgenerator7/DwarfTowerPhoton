@@ -8,6 +8,8 @@ public class SnowmanController : PlayerController
 
     [Tooltip("How much roll he gains/loses when healed/damaged")]
     public float hpRollChange = 1;
+    [Tooltip("How much roll he discharges with huge shot")]
+    public float dischargeRollChange = 2;
 
     private StatLayer minRollLayer;
     public StatLayer maxRollLayer;
@@ -19,6 +21,7 @@ public class SnowmanController : PlayerController
     public Sprite standSprite;
     public Sprite rollSprite;
 
+    public GunController hugeShotAbility;
     public RollAbility rollAbility;
 
     private StatLayer curLayer;
@@ -51,6 +54,10 @@ public class SnowmanController : PlayerController
             healthPool.onDied += (hp) =>
             {
                 rollAbility.RollAmount = 0;
+            };
+            hugeShotAbility.onShotFired += (shot, targetPos, targetDir) =>
+            {
+                rollAbility.RollAmount -= dischargeRollChange;
             };
             //Init values
             UpdateStats(rollAbility.RollAmount);

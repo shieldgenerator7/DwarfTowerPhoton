@@ -116,6 +116,7 @@ MonoBehaviour:
   aminaReloader: {fileID: 3369071877670158181}
   abilityContext: {fileID: 9215063378857821938}
   hpRollChange: 1
+  dischargeRollChange: 1
   maxRollLayer:
     moveSpeed: 0.1
     maxHits: 5
@@ -130,6 +131,7 @@ MonoBehaviour:
     size: -1
   standSprite: {fileID: 21300000, guid: e724291e33c2aa84eb6d1261f938f141, type: 3}
   rollSprite: {fileID: 21300000, guid: e73d7d1e21db7d646b602f0ecc99a872, type: 3}
+  hugeShotAbility: {fileID: 2843069705813304809}
   rollAbility: {fileID: 460486733587930298}
 --- !u!114 &307085991090335124
 MonoBehaviour:
@@ -378,7 +380,7 @@ GameObject:
   - component: {fileID: 1913788795788701171}
   - component: {fileID: 2843069705813304809}
   m_Layer: 0
-  m_Name: Ability2
+  m_Name: Huge Shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
