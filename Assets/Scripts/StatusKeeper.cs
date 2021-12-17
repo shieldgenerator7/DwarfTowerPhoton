@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class StatusKeeper : MonoBehaviour
 {
+    [SerializeField]
     [Tooltip("Set these to true to allow them to be used as a status effect")]
-    public StatusLayer allowedStatus;
+    private StatusLayer allowedStatus;
+    public StatusLayer AllowedStatus
+    {
+        get => allowedStatus;
+        set
+        {
+            allowedStatus = value;
+            updateStatus();
+        }
+    }
 
     private Dictionary<int, StatusLayer> stacks = new Dictionary<int, StatusLayer>();
 
     public StatusLayer Status
     {
         get => currentStatus;
-        set
+        private set
         {
             currentStatus = value;
             onStatusChanged?.Invoke(currentStatus);
@@ -25,16 +35,16 @@ public class StatusKeeper : MonoBehaviour
     public void addLayer(int id, StatusLayer status)
     {
         stacks[id] = status;
-        updateStats();
+        updateStatus();
     }
 
     public void removeLayer(int id)
     {
         stacks.Remove(id);
-        updateStats();
+        updateStatus();
     }
 
-    private void updateStats()
+    private void updateStatus()
     {
         StatusLayer stackLayer = new StatusLayer();
         foreach (StatusLayer layer in stacks.Values)

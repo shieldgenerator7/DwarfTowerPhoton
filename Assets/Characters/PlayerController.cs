@@ -109,6 +109,18 @@ public abstract class PlayerController : MonoBehaviour
             {
                 this.inputState = inputState;
             };
+            //StatusKeeper
+            statusKeeper = gameObject.FindComponent<StatusKeeper>();
+            statusKeeper.onStatusChanged += (status) =>
+            {
+                //Stunned
+                //TODO: sync status effects through network
+                //so you can refactor Stunnable into StatusKeeper
+                //Stealthed
+                sr.color = sr.color.setAlpha((status.stealthed) ? 0.1f : 1);
+                //Rooted
+                playerMovement.forceMovement(Vector2.zero, status.rooted);
+            };
             //StatKeeper
             statKeeper = gameObject.FindComponent<StatKeeper>();
             statKeeper.selfStats.onStatChanged += (stats) =>
@@ -116,21 +128,13 @@ public abstract class PlayerController : MonoBehaviour
                 healthPool.MaxHealth = stats.maxHits;
                 playerMovement.MovementSpeed = stats.moveSpeed;
                 transform.localScale = Vector3.one * stats.size;
+                //Update status stealthed
+                StatusLayer status = statusKeeper.AllowedStatus;
+                status.stealthed = stats.size <= 1;
+                statusKeeper.AllowedStatus = status;
             };
             statKeeper.triggerEvents();
         }
-        //StatusKeeper
-        statusKeeper = gameObject.FindComponent<StatusKeeper>();
-        statusKeeper.onStatusChanged += (status) =>
-        {
-            //Stunned
-            //TODO: sync status effects through network
-            //so you can refactor Stunnable into StatusKeeper
-            //Stealthed
-            sr.color = sr.color.setAlpha((status.stealthed) ? 0.1f : 1);
-            //Rooted
-            playerMovement.forceMovement(Vector2.zero, status.rooted);
-        };
         //ObjectSpawner and Color
         objectSpawner = gameObject.FindComponent<ObjectSpawner>();
         objectSpawner.PlayerColor = playerColor;
