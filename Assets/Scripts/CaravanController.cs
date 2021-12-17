@@ -50,7 +50,7 @@ public class CaravanController : MonoBehaviour
         }
         //Marker
         MapMarkerManager.CreateMapMarker(
-            PhotonView.Get( gameObject),
+            PhotonView.Get(gameObject),
             transform,
             caravanMarkerInfo
             );
@@ -75,14 +75,14 @@ public class CaravanController : MonoBehaviour
             if (rchGO.CompareTag("Player"))
             {
                 TeamToken tt = TeamToken.getTeamToken(rchGO);
-                Stunnable stunnable = rchGO.GetComponentInChildren<Stunnable>();
-                if (!stunnable.Stunned)
+                HealthPool healthPool = rchGO.GetComponentInChildren<HealthPool>();
+                if (healthPool)
                 {
                     if (!teamCaptains.ContainsKey(tt.teamCaptain))
                     {
                         teamCaptains.Add(tt.teamCaptain, 0);
                     }
-                    float amount = 1;
+                    float amount = healthPool.Health;
                     //Add in distance to caravan
                     float distance = (rchGO.transform.position - transform.position).magnitude;
                     float distanceMultiplier = 1 + ((maxAllowedDistance - distance) / maxAllowedDistance);
