@@ -117,7 +117,7 @@ MonoBehaviour:
   abilityContext: {fileID: 9215063378857821938}
   hpRollChange: 1
   maxRollLayer:
-    moveSpeed: 0.33
+    moveSpeed: 0.1
     maxHits: 5
     fireRate: -1
     damage: -1
