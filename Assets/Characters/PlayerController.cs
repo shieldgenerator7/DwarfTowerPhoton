@@ -125,8 +125,9 @@ public abstract class PlayerController : MonoBehaviour
             statKeeper = gameObject.FindComponent<StatKeeper>();
             statKeeper.selfStats.onStatChanged += (stats) =>
             {
-                healthPool.MaxHealth = stats.maxHits;
                 playerMovement.MovementSpeed = stats.moveSpeed;
+                healthPool.MaxHealth = stats.maxHits;
+                damager.damage = stats.damage;
                 transform.localScale = Vector3.one * stats.size;
                 //Update status stealthed
                 StatusLayer status = statusKeeper.AllowedStatus;
