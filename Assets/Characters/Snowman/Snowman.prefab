@@ -118,13 +118,13 @@ MonoBehaviour:
   hpRollChange: 1
   dischargeRollChange: 1
   maxRollLayer:
-    moveSpeed: 0.1
+    moveSpeed: 0.5
     maxHits: 5
     fireRate: -1
     damage: -1
     size: 3
   rollingLayer:
-    moveSpeed: 3
+    moveSpeed: 4
     maxHits: -1
     fireRate: -1
     damage: -1
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selfStats:
     statBase:
-      moveSpeed: 3
+      moveSpeed: 1.5
       maxHits: 1
       fireRate: -1
       damage: -1
