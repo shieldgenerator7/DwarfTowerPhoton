@@ -47,10 +47,7 @@ public class SnowmanController : PlayerController
                     statKeeper.selfStats.removeLayer(rollAbility.abilityID);
                 }
             };
-            healthPool.onDamaged += (hp) =>
-            {
-                rollAbility.RollAmount -= hpRollChange;
-            };
+            healthPool.onDamaged += OnDamage;
             healthPool.onDied += (hp) =>
             {
                 rollAbility.RollAmount = 0;
@@ -64,10 +61,19 @@ public class SnowmanController : PlayerController
         }
     }
 
+    private void OnDamage(float health)
+    {
+        rollAbility.RollAmount -= hpRollChange;
+    }
+
     private void UpdateStats(float percentage)
     {
+        healthPool.onDamaged -= OnDamage;
+        //
         curLayer = StatLayer.Lerp(minRollLayer, maxRollLayer, percentage);
         statKeeper.selfStats.addLayer(PV.ViewID, curLayer);
+        //
+        healthPool.onDamaged += OnDamage;
     }
 
     protected override void onAminaEmpty(float amina)
