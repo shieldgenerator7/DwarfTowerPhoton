@@ -1,3 +1,4 @@
+using ExitGames.Client.Photon;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -192,6 +193,49 @@ public struct StatLayer
         float diff = (newStat - stat);
         float keptDiff = diff * percentage;
         return Mathf.Max(0, stat + keptDiff);
+    }
+    #endregion
+
+    #region Photon methods
+    //2021-12-17: copied from https://doc.photonengine.com/en-us/pun/current/reference/serialization-in-photon
+
+    public static void RegisterWithPhoton()
+    {
+        PhotonPeer.RegisterType(typeof(StatLayer), (byte) 'S', SerializeStatLayer, DeserializeStatLayer);
+    }
+
+    public static readonly byte[] memStatLayer = new byte[5 * 4];
+    private static short SerializeStatLayer(StreamBuffer outStream, object customobject)
+    {
+        StatLayer sl = (StatLayer)customobject;
+        lock (memStatLayer)
+        {
+            byte[] bytes = memStatLayer;
+            int index = 0;
+            Protocol.Serialize(sl.moveSpeed, bytes, ref index);
+            Protocol.Serialize(sl.maxHits, bytes, ref index);
+            Protocol.Serialize(sl.fireRate, bytes, ref index);
+            Protocol.Serialize(sl.damage, bytes, ref index);
+            Protocol.Serialize(sl.size, bytes, ref index);
+            outStream.Write(bytes, 0, 5 * 4);
+        }
+        return 5 * 4;
+    }
+
+    private static object DeserializeStatLayer(StreamBuffer inStream, short length)
+    {
+        StatLayer sl = new StatLayer();
+        lock (memStatLayer)
+        {
+            inStream.Read(memStatLayer, 0, length);// 5 * 4);
+            int index = 0;
+            Protocol.Deserialize(out sl.moveSpeed, memStatLayer, ref index);
+            Protocol.Deserialize(out sl.maxHits, memStatLayer, ref index);
+            Protocol.Deserialize(out sl.fireRate, memStatLayer, ref index);
+            Protocol.Deserialize(out sl.damage, memStatLayer, ref index);
+            Protocol.Deserialize(out sl.size, memStatLayer, ref index);
+        }
+        return sl;
     }
     #endregion
 }

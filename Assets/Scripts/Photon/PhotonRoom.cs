@@ -70,6 +70,8 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
                 $" but it needs to be {10000}!"
                 );
         }
+        //Register custom types
+        StatLayer.RegisterWithPhoton();
     }
 
     public override void OnEnable()
