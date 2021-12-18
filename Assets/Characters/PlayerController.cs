@@ -52,6 +52,7 @@ public abstract class PlayerController : MonoBehaviour
     protected AminaPool aminaPool { get; private set; }
     protected HealthPool healthPool { get; private set; }
     protected Damager damager { get; private set; }
+    private PlayerInput playerInput;
     public PlayerMovement playerMovement { get; private set; }
     protected StatKeeper statKeeper { get; private set; }
     protected StatusKeeper statusKeeper { get; private set; }
@@ -61,15 +62,15 @@ public abstract class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        playerMovement = gameObject.FindComponent<PlayerMovement>();
-        sr = gameObject.FindComponent<SpriteRenderer>();
+        //Initialize components
+        InitializeComponents();
         if (PV.IsMine)
         {
-            //Damager
-            damager = gameObject.FindComponent<Damager>();
+            //UI Hookup
+            //TODO: Move this out of here
+            FindObjectOfType<HitMarker>().Player = this;
+            FindObjectOfType<AminaMeterController>().FocusAminaPool = aminaPool;
             //Hook up Stunnable with HealthPool
-            stunnable = gameObject.FindComponent<Stunnable>();
-            healthPool = gameObject.FindComponent<HealthPool>();
             healthPool.Start();
             healthPool.onMaxHealthChanged += (hp) => { damager.damage = hp; };
             damager.damage = healthPool.MaxHealth;
@@ -93,11 +94,6 @@ public abstract class PlayerController : MonoBehaviour
                     damager.damageFriendlies = false;
                 }
             };
-            //Hit Marker
-            FindObjectOfType<HitMarker>().Player = this;
-            //Amina
-            aminaPool = gameObject.FindComponent<AminaPool>();
-            FindObjectOfType<AminaMeterController>().FocusAminaPool = aminaPool;
             //Auto-Reloading
             if (aminaReloader)
             {
@@ -106,13 +102,11 @@ public abstract class PlayerController : MonoBehaviour
             //PlayerMovement
             playerMovement.Start();
             //PlayerInput
-            PlayerInput playerInput = gameObject.FindComponent<PlayerInput>();
             playerInput.onInputChanged += (inputState) =>
             {
                 this.inputState = inputState;
             };
             //StatusKeeper
-            statusKeeper = gameObject.FindComponent<StatusKeeper>();
             statusKeeper.onStatusChanged += (status) =>
             {
                 //Stunned
@@ -124,7 +118,6 @@ public abstract class PlayerController : MonoBehaviour
                 playerMovement.forceMovement(Vector2.zero, status.rooted);
             };
             //StatKeeper
-            statKeeper = gameObject.FindComponent<StatKeeper>();
             statKeeper.selfStats.onStatChanged += (stats) =>
             {
                 playerMovement.MovementSpeed = stats.moveSpeed;
@@ -139,7 +132,6 @@ public abstract class PlayerController : MonoBehaviour
             statKeeper.triggerEvents();
         }
         //ObjectSpawner and Color
-        objectSpawner = gameObject.FindComponent<ObjectSpawner>();
         objectSpawner.PlayerColor = playerColor;
         gameObject.FindComponents<SpriteRenderer>()
             .ForEach(sr => sr.color = playerColor);
@@ -155,6 +147,19 @@ public abstract class PlayerController : MonoBehaviour
                 }
             };
         }
+    }
+    private void InitializeComponents()
+    {
+        playerInput = gameObject.FindComponent<PlayerInput>();
+        playerMovement = gameObject.FindComponent<PlayerMovement>();
+        sr = gameObject.FindComponent<SpriteRenderer>();
+        damager = gameObject.FindComponent<Damager>();
+        stunnable = gameObject.FindComponent<Stunnable>();
+        healthPool = gameObject.FindComponent<HealthPool>();
+        aminaPool = gameObject.FindComponent<AminaPool>();
+        statKeeper = gameObject.FindComponent<StatKeeper>();
+        statusKeeper = gameObject.FindComponent<StatusKeeper>();
+        objectSpawner = gameObject.FindComponent<ObjectSpawner>();
     }
 
     // Update is called once per frame
