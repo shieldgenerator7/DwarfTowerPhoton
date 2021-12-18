@@ -93,6 +93,8 @@ public abstract class PlayerController : MonoBehaviour
                     damager.damageFriendlies = false;
                 }
             };
+            //Hit Marker
+            FindObjectOfType<HitMarker>().Player = this;
             //Amina
             aminaPool = gameObject.FindComponent<AminaPool>();
             FindObjectOfType<AminaMeterController>().FocusAminaPool = aminaPool;
@@ -141,6 +143,18 @@ public abstract class PlayerController : MonoBehaviour
         objectSpawner.PlayerColor = playerColor;
         gameObject.FindComponents<SpriteRenderer>()
             .ForEach(sr => sr.color = playerColor);
+        //Register with spawned damagers
+        if (PV.IsMine)
+        {
+            objectSpawner.onObjectSpawned += (go, pos, dir) =>
+            {
+                Damager damager = go.FindComponent<Damager>();
+                if (damager)
+                {
+                    damager.onDealtDamage += PlayerDealtDamage;
+                }
+            };
+        }
     }
 
     // Update is called once per frame
@@ -196,6 +210,16 @@ public abstract class PlayerController : MonoBehaviour
             aminaReloader.reload();
         }
     }
+
+    public void PlayerDealtDamage(float damage, EntityType type)
+    {
+        if (type == EntityType.PLAYER)
+        {
+            onDamagedPlayer?.Invoke();
+        }
+    }
+    public delegate void OnDamagedPlayer();
+    public event OnDamagedPlayer onDamagedPlayer;
 
     public void processAbility(PlayerAbility ability, bool process = true)
     {
