@@ -60,7 +60,7 @@ public abstract class PlayerController : MonoBehaviour
     protected SpriteRenderer sr;
 
     // Start is called before the first frame update
-    protected virtual void Start()
+    private void Start()
     {
         //Initialize components
         InitializeComponents();
@@ -70,83 +70,15 @@ public abstract class PlayerController : MonoBehaviour
             //TODO: Move this out of here
             FindObjectOfType<HitMarker>().Player = this;
             FindObjectOfType<AminaMeterController>().FocusAminaPool = aminaPool;
-            //Hook up Stunnable with HealthPool
-            healthPool.Start();
-            healthPool.onMaxHealthChanged += (hp) => { damager.damage = hp; };
-            damager.damage = healthPool.MaxHealth;
-            healthPool.onDied += (hp) => { stunnable.triggerStun(); };
-            stunnable.onStunned += (stunned) =>
-            {
-                this.enabled = !stunned;
-                if (stunned)
-                {
-                    cancelAbilities();
-                    //Damage other players while stunned
-                    damager.damagableTypes.Add(EntityType.PLAYER);
-                    damager.damageFriendlies = true;
-                }
-                else
-                {
-                    //Restore health after unstunned
-                    healthPool.Health = healthPool.MaxHealth;
-                    //Stop damaging other players upon recovering
-                    damager.damagableTypes.Remove(EntityType.PLAYER);
-                    damager.damageFriendlies = false;
-                }
-            };
-            //Auto-Reloading
-            if (aminaReloader)
-            {
-                aminaPool.onAminaEmpty += onAminaEmpty;
-            }
-            //PlayerMovement
-            playerMovement.Start();
-            //PlayerInput
-            playerInput.onInputChanged += (inputState) =>
-            {
-                this.inputState = inputState;
-            };
-            //StatusKeeper
-            statusKeeper.onStatusChanged += (status) =>
-            {
-                //Stunned
-                //TODO: sync status effects through network
-                //so you can refactor Stunnable into StatusKeeper
-                //Stealthed
-                sr.color = sr.color.setAlpha((status.stealthed) ? 0.1f : 1);
-                //Rooted
-                playerMovement.forceMovement(Vector2.zero, status.rooted);
-            };
-            //StatKeeper
-            statKeeper.selfStats.onStatChanged += (stats) =>
-            {
-                playerMovement.MovementSpeed = stats.moveSpeed;
-                healthPool.MaxHealth = stats.maxHits;
-                damager.damage = stats.damage;
-                transform.localScale = Vector3.one * stats.size;
-                //Update status stealthed
-                StatusLayer status = statusKeeper.AllowedStatus;
-                status.stealthed = stats.size <= 1;
-                statusKeeper.AllowedStatus = status;
-            };
-            statKeeper.triggerEvents();
+            //Initialization
+            InitializeSettings();
+            RegisterDelegates();
+            InvokeDelegates();
         }
         //ObjectSpawner and Color
         objectSpawner.PlayerColor = playerColor;
         gameObject.FindComponents<SpriteRenderer>()
             .ForEach(sr => sr.color = playerColor);
-        //Register with spawned damagers
-        if (PV.IsMine)
-        {
-            objectSpawner.onObjectSpawned += (go, pos, dir) =>
-            {
-                Damager damager = go.FindComponent<Damager>();
-                if (damager)
-                {
-                    damager.onDealtDamage += PlayerDealtDamage;
-                }
-            };
-        }
     }
     private void InitializeComponents()
     {
@@ -160,6 +92,81 @@ public abstract class PlayerController : MonoBehaviour
         statKeeper = gameObject.FindComponent<StatKeeper>();
         statusKeeper = gameObject.FindComponent<StatusKeeper>();
         objectSpawner = gameObject.FindComponent<ObjectSpawner>();
+    }
+    protected virtual void InitializeSettings()
+    {
+        damager.damage = healthPool.MaxHealth;
+    }
+    protected virtual void RegisterDelegates()
+    {
+        //Hook up Stunnable with HealthPool
+        healthPool.onMaxHealthChanged += (hp) => { damager.damage = hp; };
+        healthPool.onDied += (hp) => { stunnable.triggerStun(); };
+        stunnable.onStunned += (stunned) =>
+        {
+            this.enabled = !stunned;
+            if (stunned)
+            {
+                cancelAbilities();
+                //Damage other players while stunned
+                damager.damagableTypes.Add(EntityType.PLAYER);
+                damager.damageFriendlies = true;
+            }
+            else
+            {
+                //Restore health after unstunned
+                healthPool.Health = healthPool.MaxHealth;
+                //Stop damaging other players upon recovering
+                damager.damagableTypes.Remove(EntityType.PLAYER);
+                damager.damageFriendlies = false;
+            }
+        };
+        //Auto-Reloading
+        if (aminaReloader)
+        {
+            aminaPool.onAminaEmpty += onAminaEmpty;
+        }
+        //PlayerInput
+        playerInput.onInputChanged += (inputState) =>
+        {
+            this.inputState = inputState;
+        };
+        //StatusKeeper
+        statusKeeper.onStatusChanged += (status) =>
+        {
+            //Stunned
+            //TODO: sync status effects through network
+            //so you can refactor Stunnable into StatusKeeper
+            //Stealthed
+            sr.color = sr.color.setAlpha((status.stealthed) ? 0.1f : 1);
+            //Rooted
+            playerMovement.forceMovement(Vector2.zero, status.rooted);
+        };
+        //StatKeeper
+        statKeeper.selfStats.onStatChanged += (stats) =>
+        {
+            playerMovement.MovementSpeed = stats.moveSpeed;
+            healthPool.MaxHealth = stats.maxHits;
+            damager.damage = stats.damage;
+            transform.localScale = Vector3.one * stats.size;
+            //Update status stealthed
+            StatusLayer status = statusKeeper.AllowedStatus;
+            status.stealthed = stats.size <= 1;
+            statusKeeper.AllowedStatus = status;
+        };
+        //Register with spawned damagers
+        objectSpawner.onObjectSpawned += (go, pos, dir) =>
+        {
+            Damager damager = go.FindComponent<Damager>();
+            if (damager)
+            {
+                damager.onDealtDamage += PlayerDealtDamage;
+            }
+        };
+    }
+    protected virtual void InvokeDelegates()
+    {
+        statKeeper.triggerEvents();
     }
 
     // Update is called once per frame

@@ -114,6 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aminaReloader: {fileID: 3369071877670158181}
   abilityContext: {fileID: 9215063378857821938}
+  laser: {fileID: 5940706724890032380}
   tallGrassLauncher: {fileID: 8666854124826083951}
   tallGrassMap:
   - mapProfile: {fileID: 11400000, guid: 1678a82ad2b0db44e88cac4778bf96c3, type: 2}

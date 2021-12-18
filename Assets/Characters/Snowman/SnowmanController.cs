@@ -29,43 +29,52 @@ public class SnowmanController : PlayerController
 
     private StatLayer curLayer;
 
-    protected override void Start()
+    protected override void InitializeSettings()
     {
-        base.Start();
-        if (PV.IsMine)
+        base.InitializeSettings();
+        //Init layers
+        minRollLayer = new StatLayer(1);
+    }
+
+    protected override void RegisterDelegates()
+    {
+        base.RegisterDelegates();
+        //Roll
+        rollAbility.onRollChanged += UpdateStats;
+        rollAbility.onRollingChanged += (rolling) =>
         {
-            //Init layers
-            minRollLayer = new StatLayer(1);
-            //Register delegates
-            rollAbility.onRollChanged += UpdateStats;
-            rollAbility.onRollingChanged += (rolling) =>
+            sr.sprite = (rolling) ? rollSprite : standSprite;
+            if (rolling)
             {
-                sr.sprite = (rolling) ? rollSprite : standSprite;
-                if (rolling)
-                {
-                    maxRollLayer.damage = maxRollLayer.maxHits;
-                    statKeeper.selfStats.addLayer(rollAbility.abilityID, rollingLayer);
-                    damager.damagableTypes = rollingDamageTypes;
-                }
-                else
-                {
-                    maxRollLayer.damage = -1;
-                    statKeeper.selfStats.removeLayer(rollAbility.abilityID);
-                    damager.damagableTypes = standDamageTypes;
-                }
-            };
-            healthPool.onDamaged += OnDamage;
-            healthPool.onDied += (hp) =>
+                maxRollLayer.damage = maxRollLayer.maxHits;
+                statKeeper.selfStats.addLayer(rollAbility.abilityID, rollingLayer);
+                damager.damagableTypes = rollingDamageTypes;
+            }
+            else
             {
-                rollAbility.RollAmount = 0;
-            };
-            hugeShotAbility.onShotFired += (shot, targetPos, targetDir) =>
-            {
-                rollAbility.RollAmount -= dischargeRollChange;
-            };
-            //Init values
-            UpdateStats(rollAbility.RollAmount);
-        }
+                maxRollLayer.damage = -1;
+                statKeeper.selfStats.removeLayer(rollAbility.abilityID);
+                damager.damagableTypes = standDamageTypes;
+            }
+        };
+        //Health
+        healthPool.onDamaged += OnDamage;
+        healthPool.onDied += (hp) =>
+        {
+            rollAbility.RollAmount = 0;
+        };
+        //Huge shot
+        hugeShotAbility.onShotFired += (shot, targetPos, targetDir) =>
+        {
+            rollAbility.RollAmount -= dischargeRollChange;
+        };
+    }
+
+    protected override void InvokeDelegates()
+    {
+        base.InvokeDelegates();
+        //Init values
+        UpdateStats(rollAbility.RollAmount);
     }
 
     private void OnDamage(float health)

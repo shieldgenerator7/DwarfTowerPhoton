@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class SniperController : PlayerController
 {
+    [SerializeField]
+    [Tooltip("The ability that shoots the laser")]
+    private LaserGunController laser;
+    [SerializeField]
     [Tooltip("The ability that launches tall grass")]
-    public GunController tallGrassLauncher;
+    private GunController tallGrassLauncher;
 
     [System.Serializable]
     public struct TallGrassMap
@@ -17,17 +21,14 @@ public class SniperController : PlayerController
     [Tooltip("This maps a MapProfile to the index in the object spawner that it should use")]
     public List<TallGrassMap> tallGrassMap;
 
-    private LaserGunController laser;
 
-    protected override void Start()
+    protected override void InitializeSettings()
     {
-        base.Start();
-
-        laser = gameObject.FindComponent<LaserGunController>();
+        base.InitializeSettings();
 
         //Tall Grass
         MapProfile mapProfile = FindObjectOfType<MapGenerator>().mapProfile;
-        TallGrassMap mapping  = tallGrassMap.Find(tgm => tgm.mapProfile == mapProfile);
+        TallGrassMap mapping = tallGrassMap.Find(tgm => tgm.mapProfile == mapProfile);
         tallGrassLauncher.shotIndex = mapping.objectSpawnIndex;
     }
 
