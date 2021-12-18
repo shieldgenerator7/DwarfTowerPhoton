@@ -204,7 +204,8 @@ public struct StatLayer
         PhotonPeer.RegisterType(typeof(StatLayer), (byte) 'S', SerializeStatLayer, DeserializeStatLayer);
     }
 
-    public static readonly byte[] memStatLayer = new byte[5 * 4];
+    public const int byteArraySize = 5 * 4;
+    public static readonly byte[] memStatLayer = new byte[byteArraySize];
     private static short SerializeStatLayer(StreamBuffer outStream, object customobject)
     {
         StatLayer sl = (StatLayer)customobject;
@@ -217,9 +218,9 @@ public struct StatLayer
             Protocol.Serialize(sl.fireRate, bytes, ref index);
             Protocol.Serialize(sl.damage, bytes, ref index);
             Protocol.Serialize(sl.size, bytes, ref index);
-            outStream.Write(bytes, 0, 5 * 4);
+            outStream.Write(bytes, 0, byteArraySize);
         }
-        return 5 * 4;
+        return byteArraySize;
     }
 
     private static object DeserializeStatLayer(StreamBuffer inStream, short length)
@@ -227,7 +228,7 @@ public struct StatLayer
         StatLayer sl = new StatLayer();
         lock (memStatLayer)
         {
-            inStream.Read(memStatLayer, 0, length);// 5 * 4);
+            inStream.Read(memStatLayer, 0, length);// byteArraySize);
             int index = 0;
             Protocol.Deserialize(out sl.moveSpeed, memStatLayer, ref index);
             Protocol.Deserialize(out sl.maxHits, memStatLayer, ref index);
