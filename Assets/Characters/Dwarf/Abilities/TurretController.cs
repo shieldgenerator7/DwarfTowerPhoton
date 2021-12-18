@@ -10,7 +10,7 @@ public class TurretController : GunController
     private GunController turretFireTrigger;//the gun controller that causes the turrets to fire
     public GunController Trigger
     {
-        get { return turretFireTrigger; }
+        get => turretFireTrigger;
         set
         {
             //Remove previous trigger (if exists)
@@ -48,11 +48,13 @@ public class TurretController : GunController
 
     private void fireInDirection(GameObject shot, Vector2 targetPos, Vector2 targetDir)
     {
-        objectSpawner.spawnObject(
+        GameObject newShot = objectSpawner.spawnObject(
             shotIndex,
             transform.position,
             targetDir
             );
+        newShot.FindComponent<Damager>().onDealtDamage
+            += turretFireTrigger.playerController.PlayerDealtDamage;
     }
 
     private void OnDestroy()
