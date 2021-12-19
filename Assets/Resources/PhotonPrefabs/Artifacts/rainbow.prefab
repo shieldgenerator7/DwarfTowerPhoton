@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2478690509286323385}
   - component: {fileID: -4160430732991234955}
   m_Layer: 0
-  m_Name: hat_snowman
+  m_Name: rainbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: -356971555
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 76653f2c56d286648b56c632a2fde15c, type: 3}
-  m_Color: {r: 0.14117648, g: 0.078431375, b: 0.09019608, a: 1}
+  m_Sprite: {fileID: 21300000, guid: b8db0ea12d65d614db022d4afec30bb1, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -148,8 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statLayer:
-    moveSpeed: -1
-    maxHits: 2
+    moveSpeed: 2
+    maxHits: -1
     fireRate: -1
     damage: -1
     size: -1
