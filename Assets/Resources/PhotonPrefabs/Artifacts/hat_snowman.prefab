@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 1066834149868401447}
   - component: {fileID: 3470866178012958282}
   - component: {fileID: 2478690509286323385}
-  - component: {fileID: -2559310418138164969}
   m_Layer: 0
   m_Name: hat_snowman
   m_TagString: Untagged
@@ -75,9 +74,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -356971555
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 76653f2c56d286648b56c632a2fde15c, type: 3}
   m_Color: {r: 0.14117648, g: 0.078431375, b: 0.09019608, a: 1}
   m_FlipX: 0
@@ -160,7 +159,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3, y: 1.3}
+  m_Size: {x: 1.7, y: 1.7}
   m_EdgeRadius: 0
 --- !u!114 &1066834149868401447
 MonoBehaviour:
@@ -215,16 +214,3 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-2559310418138164969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 421722330341077747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ee9253eaee8cde4081db31a9f23311f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  updateEveryFrame: 1

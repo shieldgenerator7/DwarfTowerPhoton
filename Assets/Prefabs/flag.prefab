@@ -739,6 +739,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pedestal (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7119148159079337039, guid: 6d5780e7bf644764287281614e68f5b8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d5780e7bf644764287281614e68f5b8, type: 3}
 --- !u!4 &5338754381130160366 stripped
@@ -888,6 +893,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pedestal (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119148159079337039, guid: 6d5780e7bf644764287281614e68f5b8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d5780e7bf644764287281614e68f5b8, type: 3}
