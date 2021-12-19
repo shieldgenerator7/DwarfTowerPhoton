@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Carryable : MonoBehaviour
@@ -55,6 +56,11 @@ public class Carryable : MonoBehaviour
     {
         if (carry)
         {
+            //Make carrier drop any other item
+            FindObjectsOfType<Carryable>().ToList()
+                .FindAll(item => item.carrier == carrier)
+                .ForEach(item => item.Drop(true));
+            //Get picked up
             this.carrier = carrier;
             //Hold direction
             holdDirection = TeamToken.getTeamToken(carrier.gameObject)
@@ -77,13 +83,13 @@ public class Carryable : MonoBehaviour
     {
         CheckPickup(collision.gameObject);
     }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (!carrier)
-        {
-            CheckPickup(collision.gameObject);
-        }
-    }
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    if (!carrier)
+    //    {
+    //        CheckPickup(collision.gameObject);
+    //    }
+    //}
     private void CheckPickup(GameObject go)
     {
         PlayerMovement playerMovement = go.FindComponent<PlayerMovement>();
