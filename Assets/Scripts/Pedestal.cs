@@ -41,7 +41,21 @@ public class Pedestal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Artifact artifact = collision.gameObject.FindComponent<Artifact>();
+        if (!Artifact)
+        {
+            AcceptArtifact(collision.gameObject);
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (!Artifact)
+        {
+            AcceptArtifact(collision.gameObject);
+        }
+    }
+    private void AcceptArtifact(GameObject go)
+    {
+        Artifact artifact = go.FindComponent<Artifact>();
         if (artifact)
         {
             Artifact = artifact;
