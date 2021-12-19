@@ -34,7 +34,10 @@ public class Carryable : MonoBehaviour
         {
             this.carrier = null;
         }
+        onPickup?.Invoke(carry);
     }
+    public delegate void OnPickup(bool pickup);
+    public event OnPickup onPickup;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
