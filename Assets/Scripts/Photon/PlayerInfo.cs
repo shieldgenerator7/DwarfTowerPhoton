@@ -153,4 +153,10 @@ public class PlayerInfo : MonoBehaviour
     {
         this.mapName = mapName;
     }
+
+    public void SelectRandomCharacter()
+    {
+        int index = Random.Range(0, unlockedCharacters.Count);
+        SelectedCharacter = unlockedCharacters[index];
+    }
 }

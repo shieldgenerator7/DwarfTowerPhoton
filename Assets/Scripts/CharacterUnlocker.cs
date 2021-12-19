@@ -50,7 +50,7 @@ public class CharacterUnlocker : MonoBehaviour
         PlayerController playerController = go.FindComponent<PlayerController>();
         if (playerController && playerController.PV.IsMine)
         {
-            if (!PlayerInfo.instance.allCharacters.Contains(character))
+            if (!PlayerInfo.instance.unlockedCharacters.Contains(character))
             {
                 Unlock();
             }
@@ -60,7 +60,7 @@ public class CharacterUnlocker : MonoBehaviour
     private void Unlock()
     {
         //Unlock
-        PlayerInfo.instance.allCharacters.Add(character);
+        PlayerInfo.instance.unlockedCharacters.Add(character);
         //Show notification
         GameObject notification = Instantiate(unlockNotificationPrefab);
         notification.FindComponent<TMP_Text>().text += character.characterName;
@@ -81,7 +81,7 @@ public class CharacterUnlocker : MonoBehaviour
             }
         }
         //Destroy if already unlocked
-        if (character && PlayerInfo.instance.allCharacters.Contains(character))
+        if (character && PlayerInfo.instance.unlockedCharacters.Contains(character))
         {
             Destroy(this);
         }
