@@ -111,6 +111,8 @@ public class MenuDisplay : MonoBehaviour
         CharacterInfo charInfo = playerInfo.allCharacters[index];
         characterImage.sprite = charInfo.sprite;
         characterImage.color = playerInfo.SelectedColor;
+        RectTransform rect = characterImage.GetComponent<RectTransform>();
+        rect.sizeDelta = 320 * charInfo.sprite.rect.size / 16;
         //Type
         characterTypeText.text = charInfo.typeString;
         //Difficulty
