@@ -36,6 +36,8 @@ public class FlagMapMarkerDisplay : MonoBehaviour
         else
         {
             slot.enabled = false;
+            slot.sprite = null;
+            slot.color = Color.white;
         }
     }
 }

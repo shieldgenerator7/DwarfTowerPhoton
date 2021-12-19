@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 697811217637079863}
   - component: {fileID: 2396105796296107084}
   m_Layer: 0
-  m_Name: artifact_snowman_hat
+  m_Name: artifact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,15 +71,15 @@ SpriteRenderer:
   m_SortingLayerID: -253382281
   m_SortingLayer: 2
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 76653f2c56d286648b56c632a2fde15c, type: 3}
-  m_Color: {r: 0.30980393, g: 0.17254902, b: 0.2, a: 1}
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &3194780744664640584
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 2518818527239527113}
   - component: {fileID: 1086848478705341076}
   m_Layer: 0
-  m_Name: artifact_rainbow
+  m_Name: artifact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,7 +153,7 @@ SpriteRenderer:
   m_SortingLayerID: -253382281
   m_SortingLayer: 2
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: b8db0ea12d65d614db022d4afec30bb1, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -161,7 +161,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &3331734845984143030
@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 8194946348555848774}
   - component: {fileID: 1582907871115041551}
   m_Layer: 0
-  m_Name: artifact_horseshoe_cracked
+  m_Name: artifact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,15 +318,15 @@ SpriteRenderer:
   m_SortingLayerID: -253382281
   m_SortingLayer: 2
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: c17096fc9ba54434886dbdcb226c29b5, type: 3}
-  m_Color: {r: 0.4627451, g: 0.45882353, b: 0.45882353, a: 1}
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &4500449456575662625
