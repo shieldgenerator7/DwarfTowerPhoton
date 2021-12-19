@@ -9,7 +9,23 @@ public class Carryable : MonoBehaviour
 
     private Vector2 holdDirection = Vector2.zero;
 
-    private PlayerMovement carrier;
+    private PlayerMovement _carrier;
+    private PlayerMovement carrier
+    {
+        get => _carrier;
+        set
+        {
+            if (_carrier)
+            {
+                _carrier.gameObject.FindComponent<Stunnable>().onStunned -= Drop;
+            }
+            _carrier = value;
+            if (_carrier)
+            {
+                _carrier.gameObject.FindComponent<Stunnable>().onStunned += Drop;
+            }
+        }
+    }
     private PhotonView PV;
     private CaravanController caravan;
 
@@ -28,6 +44,11 @@ public class Carryable : MonoBehaviour
             transform.position = (Vector2)carrier.transform.position
                 + (holdDirection * carryBuffer);
         }
+    }
+
+    private void Drop(bool drop)
+    {
+        Pickup(carrier, !drop);
     }
 
     public void Pickup(PlayerMovement carrier, bool carry)
@@ -51,20 +72,25 @@ public class Carryable : MonoBehaviour
     public delegate void OnPickup(bool pickup);
     public event OnPickup onPickup;
 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerMovement playerMovement = collision.gameObject.FindComponent<PlayerMovement>();
-        if (playerMovement)
-        {
-            Pickup(playerMovement, true);
-        }
+        CheckPickup(collision.gameObject);
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (!carrier)
         {
-            PlayerMovement playerMovement = collision.gameObject.FindComponent<PlayerMovement>();
-            if (playerMovement)
+            CheckPickup(collision.gameObject);
+        }
+    }
+    private void CheckPickup(GameObject go)
+    {
+        PlayerMovement playerMovement = go.FindComponent<PlayerMovement>();
+        if (playerMovement)
+        {
+            Stunnable stunnable = go.FindComponent<Stunnable>();
+            if (stunnable && !stunnable.Stunned)
             {
                 Pickup(playerMovement, true);
             }
