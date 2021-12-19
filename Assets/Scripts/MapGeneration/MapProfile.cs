@@ -13,6 +13,7 @@ public class MapProfile : ScriptableObject
     public float borderPadding = 2;
     public PathGenerationRequirements caravanPathReqs;
     public MapPathGeneratorAlgorithm caravanPathAlgorithm;
+    public int artifactCount = 4;
     public List<ObstacleInfo> obstacleList;
 
     public Bounds VisibleBounds { get; private set; }

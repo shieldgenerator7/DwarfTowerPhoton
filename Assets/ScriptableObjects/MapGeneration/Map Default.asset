@@ -25,6 +25,7 @@ MonoBehaviour:
     middle: {x: 0, y: 0}
   caravanPathAlgorithm: {fileID: 11400000, guid: ba6655d0b2d55924dbfc2a219a53e742,
     type: 2}
+  artifactCount: 4
   obstacleList:
   - spawnCount: 700
     spawnInfo: {fileID: 11400000, guid: 3187eb11651f2be40a6d051c53eda6eb, type: 2}

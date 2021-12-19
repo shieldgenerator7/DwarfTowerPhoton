@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
@@ -25,6 +26,7 @@ public class MapGenerator : MonoBehaviour
     public PlayArea playArea;
     public MapPathGenerator caravanPathGenerator;
     public ObstaclePopulator obstaclePopulator;
+    public List<Artifact> artifacts;
 
     private PhotonView PV;
 
@@ -67,6 +69,7 @@ public class MapGenerator : MonoBehaviour
         //Obstacles
         if (generateObstacles)
         {
+            PlaceArtifacts(mapProfile);
             obstaclePopulator.populateObstacles(mapProfile);
         }
         onMapGenerated?.Invoke(mapProfile);
@@ -78,5 +81,48 @@ public class MapGenerator : MonoBehaviour
     void RPC_GenerateMap(string mapName)
     {
         generateMap(mapName, true, false);
+    }
+
+    private void PlaceArtifacts(MapProfile mapProfile)
+    {
+        int countLeft = mapProfile.artifactCount;
+        for (int i = artifacts.Count - 1; i >= 0; i--)
+        {
+            int index = Random.Range(0, artifacts.Count);
+            Artifact artifact = artifacts[index];
+            if (countLeft > 0)
+            {
+                countLeft--;
+                artifact.transform.position = getRandomPosition(mapProfile.borderPadding);
+            }
+            else
+            {
+                PhotonNetwork.Destroy(artifact.gameObject);
+            }
+            artifacts.Remove(artifact);
+        }
+    }
+
+    Vector2 getRandomPosition(float avoidRadius)
+    {
+        Vector2 min = mapProfile.GeneratableBounds.min;
+        Vector2 max = mapProfile.GeneratableBounds.max;
+        int safetyEject = 100;
+        Vector2 pos = Vector2.zero;
+        do
+        {
+            pos.x = Random.Range(min.x, max.x);
+            pos.y = Random.Range(min.y, max.y);
+            safetyEject--;
+            if (safetyEject == 0)
+            {
+                Debug.Log($"Safety eject! avoidRadius: {avoidRadius}");
+                break;
+            }
+        }
+        while (obstaclePopulator.avoidPosList.Any(
+            t => Vector2.Distance(t.position, pos) <= avoidRadius
+            ));
+        return pos;
     }
 }
