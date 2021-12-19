@@ -142,7 +142,20 @@ public abstract class PlayerController : MonoBehaviour
             //Stealthed
             sr.color = sr.color.setAlpha((status.stealthed) ? 0.1f : 1);
             //Rooted
-            playerMovement.forceMovement(Vector2.zero, status.rooted);
+            if (playerMovement.ForcingMovement != status.rooted)
+            {
+                if (status.rooted)
+                {
+                    playerMovement.forceMovement(Vector2.zero, status.rooted);
+                }
+                else
+                {
+                    if (playerMovement.ForceMoveDirection == Vector2.zero)
+                    {
+                        playerMovement.forceMovement(false);
+                    }
+                }
+            }
         };
         //StatKeeper
         statKeeper.selfStats.onStatChanged += (stats) =>
