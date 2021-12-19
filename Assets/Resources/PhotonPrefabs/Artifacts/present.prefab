@@ -151,9 +151,10 @@ MonoBehaviour:
     moveSpeed: -1
     maxHits: -1
     fireRate: -1
-    damage: -1
+    damage: 0.5
     size: -1
   shotSprite: {fileID: 21300000, guid: e4ac68f4d8f151d44849f71e18a8aaa6, type: 3}
+  aminaToGive: 20
 --- !u!114 &3470866178012958282
 MonoBehaviour:
   m_ObjectHideFlags: 0

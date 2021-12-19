@@ -5,6 +5,7 @@ using UnityEngine;
 public class PresentArtifact : Artifact
 {
     public Sprite shotSprite;
+    public float aminaToGive = 10;
 
     public override void Activate(TeamTokenCaptain teamCaptain, bool activate = true)
     {
@@ -29,6 +30,8 @@ public class PresentArtifact : Artifact
         if (healthPool && healthPool.entityType == EntityType.SHOT)
         {
             shot.FindComponent<SpriteRenderer>().sprite = shotSprite;
+            OnHitGiveAmina ohga = shot.AddComponent<OnHitGiveAmina>();
+            ohga.aminaToGive = this.aminaToGive;
         }
         //Propagate spawning presents even further
         ObjectSpawner os = shot.FindComponent<ObjectSpawner>();
