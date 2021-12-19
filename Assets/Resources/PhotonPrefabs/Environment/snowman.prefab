@@ -271,3 +271,4 @@ MonoBehaviour:
   unlockNotificationPrefab: {fileID: 4347222384593887301, guid: 082ccb4ff4f372d49911d740776a2c5c,
     type: 3}
   cheatKeyString: snowman
+  unlockOnContact: 1

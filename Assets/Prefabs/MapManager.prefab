@@ -108,6 +108,7 @@ MonoBehaviour:
   playArea: {fileID: 8731464237892782650}
   caravanPathGenerator: {fileID: 8731464238423190251}
   obstaclePopulator: {fileID: 8731464238423190249}
+  artifacts: []
 --- !u!114 &8731464238423190251
 MonoBehaviour:
   m_ObjectHideFlags: 0
