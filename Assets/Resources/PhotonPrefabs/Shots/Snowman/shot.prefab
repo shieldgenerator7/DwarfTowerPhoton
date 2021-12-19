@@ -147,7 +147,7 @@ MonoBehaviour:
     moveSpeed: 4
     maxHits: 1
     fireRate: -1
-    damage: 1
+    damage: 0.5
     size: 1
   destroyOnIndestructible: 1
 --- !u!114 &-845759806725884248
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dbb34bdc9fc63f41a859d4e6c6ae4c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 0.5
   damagableTypes: 0100000002000000
   damageOnTrigger: 1
   damageOnCollide: 1
