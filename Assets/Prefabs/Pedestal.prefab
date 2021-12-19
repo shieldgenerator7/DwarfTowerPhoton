@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8723516463545944136}
   - component: {fileID: 7536415336563464006}
   - component: {fileID: 3185845893832517039}
-  - component: {fileID: -5757859431094440703}
   m_Layer: 0
   m_Name: Pedestal
   m_TagString: Untagged
@@ -71,9 +70,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1339478635
+  m_SortingLayer: -1
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 6db6710d2b88b4440ac5436410b51d2e, type: 3}
   m_Color: {r: 0.8584906, g: 0.849448, b: 0.5790762, a: 1}
   m_FlipX: 0
@@ -123,16 +122,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b3f46e9ee36c94ab838f057fa13146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-5757859431094440703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7119148159079337039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ee9253eaee8cde4081db31a9f23311f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  updateEveryFrame: 0

@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Pedestal : MonoBehaviour
 {
-    private Artifact _artifact;
+    private Artifact _artifact = null;
     public Artifact Artifact
     {
         get => _artifact;
         set
         {
-            this.carryable = null;
             if (_artifact)
             {
                 _artifact.Activate(teamCaptain, false);
                 this.carryable.onPickup -= EjectArtifact;
             }
+            this.carryable = null;
             _artifact = value;
             if (_artifact)
             {
@@ -40,14 +40,16 @@ public class Pedestal : MonoBehaviour
         Artifact artifact = collision.gameObject.FindComponent<Artifact>();
         if (artifact)
         {
-            Carryable carryable = artifact.GetComponent<Carryable>();
-            carryable.Pickup(null, false);
             Artifact = artifact;
+            this.carryable.Pickup(null, false);
             artifact.transform.position = transform.position;
         }
     }
     private void EjectArtifact(bool pickup)
     {
-        Artifact = null;
+        if (pickup)
+        {
+            Artifact = null;
+        }
     }
 }
