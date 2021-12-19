@@ -35,6 +35,9 @@ public class PlayerInfo : MonoBehaviour
     }
 
     public List<CharacterInfo> allCharacters;
+    public List<CharacterInfo> unlockedCharacters;
+    public List<CharacterInfo> unlockableAtStart;
+    public int unlockAtStartCount = 2;
 
     private int colorIndex = -1;
     public int ColorIndex
@@ -87,6 +90,16 @@ public class PlayerInfo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Populate unlocked characters
+        while (unlockedCharacters.Count < this.unlockAtStartCount)
+        {
+            int index = Random.Range(0, unlockableAtStart.Count);
+            CharacterInfo character = unlockableAtStart[index];
+            if (!unlockedCharacters.Contains(character))
+            {
+                unlockedCharacters.Add(character);
+            }
+        }
         //if (PlayerPrefs.HasKey("MyCharacter"))
         //{
         //    mySelectedCharacter = PlayerPrefs.GetInt("MyCharacter");

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class MenuDisplay : MonoBehaviour
 {
+    public float minWidth = 100;
     [Header("Character Display")]
     public Image characterImage;
     [Header("Character Info")]
@@ -46,9 +47,9 @@ public class MenuDisplay : MonoBehaviour
     }
     void populateCharacterSelect()
     {
-        List<CharacterInfo> allCharacters = PlayerInfo.instance.allCharacters;
+        List<CharacterInfo> unlockedCharacters = PlayerInfo.instance.unlockedCharacters;
         //Create character select buttons
-        foreach (CharacterInfo charInfo in allCharacters)
+        foreach (CharacterInfo charInfo in unlockedCharacters)
         {
             GameObject btnCharSel = Instantiate(characterSelectButtonPrefab);
             btnCharSel.transform.parent = characterSelectGroup.transform;
@@ -66,8 +67,9 @@ public class MenuDisplay : MonoBehaviour
             });
         }
         //Resize elements to widen
-        int charCount = allCharacters.Count;
-        int width = charCount * 100 + (charCount + 1) * 10;
+        int charCount = unlockedCharacters.Count;
+        float width = charCount * 100 + (charCount + 1) * 10;
+        width = Mathf.Max(width, minWidth);
         foreach (RectTransform rect in elementsToWiden)
         {
             rect.sizeDelta = new Vector2(
