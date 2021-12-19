@@ -183,6 +183,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8c16f44b148984794dce4178755e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterIndex: 4
+  characterIndex: 3
   colorIndex: 4
-  mapName: 
+  mapName: North Pole
