@@ -75,6 +75,7 @@ public class AvatarSetup : MonoBehaviour
         GetComponent<BlinkEffect>().Start();
     }
 
+    #region RPC Forwarding Methods
     //Moved here because the AvatarSetup is on the same object as the PhotonView,
     //but the Stunnable component is on a child of the object
     [PunRPC]
@@ -82,4 +83,11 @@ public class AvatarSetup : MonoBehaviour
     {
         GetComponentInChildren<Stunnable>().stun();
     }
+
+    [PunRPC]
+    void RPC_UpdateStats(StatLayer selfStats)
+    {
+        GetComponentInChildren<StatKeeper>().selfStats.Stats = selfStats;
+    }
+    #endregion
 }

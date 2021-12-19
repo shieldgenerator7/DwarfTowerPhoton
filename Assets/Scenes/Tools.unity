@@ -154,9 +154,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4b292fd5326ed141a23b5bda3cb3dcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clientCount: 4
+  clientCount: 1
   resetClients: 1
-  enterPlayMode: 0
+  enterPlayMode: 1
 --- !u!4 &583353027
 Transform:
   m_ObjectHideFlags: 0
@@ -183,6 +183,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8c16f44b148984794dce4178755e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterIndex: 1
-  colorIndex: 1
+  characterIndex: 4
+  colorIndex: 4
   mapName: Forge

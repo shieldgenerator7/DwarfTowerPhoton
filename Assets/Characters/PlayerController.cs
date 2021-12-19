@@ -70,11 +70,11 @@ public abstract class PlayerController : MonoBehaviour
             //TODO: Move this out of here
             FindObjectOfType<HitMarker>().Player = this;
             FindObjectOfType<AminaMeterController>().FocusAminaPool = aminaPool;
-            //Initialization
-            InitializeSettings();
-            RegisterDelegates();
-            InvokeDelegates();
         }
+        //Initialization
+        InitializeSettings();
+        RegisterDelegates();
+        InvokeDelegates();
         //ObjectSpawner and Color
         objectSpawner.PlayerColor = playerColor;
         gameObject.FindComponents<SpriteRenderer>()
@@ -84,6 +84,7 @@ public abstract class PlayerController : MonoBehaviour
     {
         playerInput = gameObject.FindComponent<PlayerInput>();
         playerMovement = gameObject.FindComponent<PlayerMovement>();
+        playerMovement.Start();
         sr = gameObject.FindComponent<SpriteRenderer>();
         damager = gameObject.FindComponent<Damager>();
         stunnable = gameObject.FindComponent<Stunnable>();
