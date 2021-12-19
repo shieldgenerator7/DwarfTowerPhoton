@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IPunObservable
 {//2019-03-15: made by following this tutorial: https://www.youtube.com/watch?v=JjfPaY57dDM
 
     [Tooltip("Should this movement conserve some previous momentum when changing directions?")]
@@ -100,6 +100,18 @@ public class PlayerMovement : MonoBehaviour
         if (direction.magnitude > 0)
         {
             LastMoveDirection = direction;
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(LastMoveDirection);
+        }
+        else
+        {
+            LastMoveDirection = (Vector2)stream.ReceiveNext();
         }
     }
 }
