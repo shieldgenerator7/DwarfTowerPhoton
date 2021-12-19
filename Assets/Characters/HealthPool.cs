@@ -50,7 +50,10 @@ public class HealthPool : MonoBehaviour
                 }
                 else if (health < prevHealth)
                 {
-                    onDamaged?.Invoke(health);
+                    if (health < maxHealth)
+                    {
+                        onDamaged?.Invoke(health);
+                    }
                     if (health <= 0)
                     {
                         onDied?.Invoke(health);
