@@ -115,5 +115,8 @@ public class MapMarker : MonoBehaviour
     {
         iconSR.enabled = show;
         markerSR.enabled = show;
+        onShow?.Invoke(show);
     }
+    public delegate void OnShow(bool show);
+    public event OnShow onShow;
 }

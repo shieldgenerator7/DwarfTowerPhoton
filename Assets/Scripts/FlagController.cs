@@ -8,6 +8,9 @@ using UnityEngine;
 public class FlagController : MonoBehaviour
 {
     public MapMarkerInfo flagMarkerInfo;
+    public GameObject flagMarkerBalloonPrefab;
+
+    public List<Pedestal> pedestalList;
 
     private HealthPool healthPool;
     private TeamTokenCaptain teamTokenCaptain;
@@ -30,11 +33,15 @@ public class FlagController : MonoBehaviour
         txtMapName.text = mapGenerator.mapName;
         mapGenerator.onMapNameChanged += (mapName) => txtMapName.text = mapName;
         //Marker
-        MapMarkerManager.CreateMapMarker(
+        MapMarker mapMarker = MapMarkerManager.CreateMapMarker(
             PhotonView.Get(gameObject),
             transform.position,
             flagMarkerInfo
             );
+        GameObject balloons = Instantiate(flagMarkerBalloonPrefab);
+        balloons.transform.parent = mapMarker.iconSR.transform;
+        balloons.transform.localPosition = Vector2.zero;
+        balloons.GetComponent<FlagMapMarkerDisplay>().Init(this);
     }
 
     void checkGameOver(float hp)

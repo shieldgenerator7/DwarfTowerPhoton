@@ -26,8 +26,11 @@ public class Pedestal : MonoBehaviour
                 this.carryable.onPickup += EjectArtifact;
             }
             glow.enabled = _artifact;
+            onArtifactChanged?.Invoke(_artifact);
         }
     }
+    public delegate void OnArtifactChanged(Artifact artifact);
+    public event OnArtifactChanged onArtifactChanged;
 
     private TeamTokenCaptain teamCaptain;
     private Carryable carryable;
