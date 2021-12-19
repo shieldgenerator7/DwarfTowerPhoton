@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SnowmanController : PlayerController
+public class SnowmanController : PlayerController, IPunObservable
 {
     [Header("Settings")]
 
@@ -43,7 +44,7 @@ public class SnowmanController : PlayerController
         rollAbility.onRollChanged += UpdateStats;
         rollAbility.onRollingChanged += (rolling) =>
         {
-            sr.sprite = (rolling) ? rollSprite : standSprite;
+            UpdateSprite(rolling);
             if (rolling)
             {
                 maxRollLayer.damage = maxRollLayer.maxHits;
@@ -68,6 +69,8 @@ public class SnowmanController : PlayerController
         {
             rollAbility.RollAmount -= dischargeRollChange;
         };
+        //PhotonView Observable
+        PV.ObservedComponents.Add(this);
     }
 
     protected override void InvokeDelegates()
@@ -92,9 +95,29 @@ public class SnowmanController : PlayerController
         healthPool.onDamaged += OnDamage;
     }
 
+    private void UpdateSprite(bool rolling)
+    {
+        sr.sprite = (rolling) ? rollSprite : standSprite;
+    }
+
     protected override void onAminaEmpty(float amina)
     {
         base.onAminaEmpty(amina);
         rollAbility.OnButtonCanceled();
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        //2021-12-18: copied from https://doc.photonengine.com/en-us/pun/current/demos-and-tutorials/pun-basics-tutorial/player-networking
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data
+            stream.SendNext(rollAbility.Rolling);
+        }
+        else
+        {
+            // Network player, receive data
+            UpdateSprite((bool)stream.ReceiveNext());
+        }
     }
 }
