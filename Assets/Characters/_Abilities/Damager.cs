@@ -57,11 +57,11 @@ public class Damager : MonoBehaviour
                 if (useInitialDamage)
                 {
                     hp.Health += -damage;
-                    onDealtDamage?.Invoke(damage, hp.entityType);
+                    onDealtDamage?.Invoke(damage, hp);
                 }
             }
         }
     }
-    public delegate void OnDealtDamage(float damage, EntityType type);
+    public delegate void OnDealtDamage(float damage, HealthPool healthPool);
     public event OnDealtDamage onDealtDamage;
 }

@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 162c3799e4740b244b75383f851182e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterInfo: {fileID: 11400000, guid: 9b40627ecf3b35a4a84117116e0e2f8d, type: 2}
   aminaReloader: {fileID: 3369071877670158181}
   abilityContext: {fileID: 9215063378857821938}
   hpRollChange: 1

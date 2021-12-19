@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d31db09efcf3654fb9cf338c0f2e8ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterInfo: {fileID: 11400000, guid: 097ad22ac8eab33429377ba711bc02c9, type: 2}
   aminaReloader: {fileID: 3369071877670158181}
   abilityContext: {fileID: 9215063378857821938}
 --- !u!114 &307085991090335124

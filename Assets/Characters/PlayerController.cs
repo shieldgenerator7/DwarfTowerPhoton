@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class PlayerController : MonoBehaviour
 {
+    public CharacterInfo characterInfo;
     public Color playerColor { get; set; } = Color.white;
     public AminaReloader aminaReloader;//ability called by default when the player runs out of amina
     [SerializeField]
@@ -224,10 +225,17 @@ public abstract class PlayerController : MonoBehaviour
         }
     }
 
-    public void PlayerDealtDamage(float damage, EntityType type)
+    public void PlayerDealtDamage(float damage, HealthPool healthPool)
     {
-        if (type == EntityType.PLAYER)
+        if (healthPool.entityType == EntityType.PLAYER)
         {
+            //Check unlock
+            if (PV.IsMine)
+            {
+                healthPool.gameObject.FindComponent<CharacterUnlocker>()
+                    .CheckUnlock(this.gameObject);
+            }
+            //Delegate
             onDamagedPlayer?.Invoke();
         }
     }

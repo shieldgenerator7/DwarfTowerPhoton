@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 605d7c70dc2f54c48ae6a630df361831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterInfo: {fileID: 11400000, guid: a91988f801f29bf418ddc93cfe96db07, type: 2}
   aminaReloader: {fileID: 3369071877670158181}
   abilityContext: {fileID: 9215063378857821938}
   laser: {fileID: 5940706724890032380}
