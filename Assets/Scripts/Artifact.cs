@@ -17,14 +17,13 @@ public class Artifact : MonoBehaviour
         PV = gameObject.FindComponent<PhotonView>();
     }
 
-    public void Activate(TeamTokenCaptain teamCaptain, bool activate = true)
+    public virtual void Activate(TeamTokenCaptain teamCaptain, bool activate = true)
     {
         if (!teamCaptain)
         {
             teamCaptain = this.teamCaptain;
         }
-        List<StatKeeper> statKeepers = FindObjectsOfType<StatKeeper>().ToList()
-            .FindAll(sk => TeamToken.getTeamToken(sk.gameObject).onSameTeam(teamCaptain));
+        List<StatKeeper> statKeepers = FindObjectsToEffect<StatKeeper>(teamCaptain);
         if (activate)
         {
             this.teamCaptain = teamCaptain;
@@ -35,5 +34,13 @@ public class Artifact : MonoBehaviour
             statKeepers.ForEach(sk => sk.selfStats.removeLayer(PV.ViewID));
             this.teamCaptain = null;
         }
+    }
+
+    protected List<T> FindObjectsToEffect<T>(TeamTokenCaptain teamCaptain) where T : Component
+    {
+        return FindObjectsOfType<T>().ToList()
+            .FindAll(t => t && 
+            (TeamToken.getTeamToken(t.gameObject)?.onSameTeam(teamCaptain) ?? false)
+            );
     }
 }
