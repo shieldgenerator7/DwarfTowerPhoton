@@ -14,6 +14,8 @@ public class AutoSelectCharacterEditor : Editor
 
         PlayerInfo playerInfo = FindObjectOfType<PlayerInfo>();
         AutoSelectCharacter asc = target as AutoSelectCharacter;
+        int prevCharIndex = asc.characterIndex;
+        int prevColorIndex = asc.colorIndex;
         asc.characterIndex = GUILayout.SelectionGrid(
             asc.characterIndex,
             playerInfo.allCharacters.ConvertAll(chr => chr.characterName).ToArray(),
@@ -26,5 +28,9 @@ public class AutoSelectCharacterEditor : Editor
                 ).ToArray(),
             6
             );
+        if (prevCharIndex != asc.characterIndex || prevColorIndex != asc.colorIndex)
+        {
+            EditorUtility.SetDirty(asc);
+        }
     }
 }
