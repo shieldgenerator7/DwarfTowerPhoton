@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Pedestal : MonoBehaviour
 {
+    public SpriteRenderer glow;
+
     private Artifact _artifact = null;
     public Artifact Artifact
     {
@@ -23,6 +25,7 @@ public class Pedestal : MonoBehaviour
                 this.carryable = _artifact.GetComponent<Carryable>();
                 this.carryable.onPickup += EjectArtifact;
             }
+            glow.enabled = _artifact;
         }
     }
 
@@ -33,6 +36,7 @@ public class Pedestal : MonoBehaviour
     void Start()
     {
         teamCaptain = gameObject.FindComponent<TeamTokenCaptain>();
+        Artifact = null;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
