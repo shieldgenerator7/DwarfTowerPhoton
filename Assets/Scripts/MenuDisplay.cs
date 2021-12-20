@@ -53,11 +53,12 @@ public class MenuDisplay : MonoBehaviour
         {
             GameObject btnCharSel = Instantiate(characterSelectButtonPrefab);
             btnCharSel.transform.parent = characterSelectGroup.transform;
+            btnCharSel.transform.localScale = Vector3.one;
             Image img = btnCharSel.FindComponent<Image>(false, true);
             img.sprite = charInfo.sprite;
             img.color = charInfo.defaultColor;
-            RectTransform rect = img.GetComponent<RectTransform>();
-            rect.sizeDelta = 100 * charInfo.sprite.rect.size / 16;
+            RectTransform rectImg = img.GetComponent<RectTransform>();
+            rectImg.sizeDelta = 100 * charInfo.sprite.rect.size / 16;
             TMP_Text txt = btnCharSel.GetComponentInChildren<TMP_Text>();
             txt.text = charInfo.characterName.ToUpper();
             Button btn = btnCharSel.GetComponent<Button>();
@@ -87,6 +88,7 @@ public class MenuDisplay : MonoBehaviour
         {
             GameObject btnColorSel = Instantiate(colorSelectButtonPrefab);
             btnColorSel.transform.parent = colorSelectGroup.transform;
+            btnColorSel.transform.localScale = Vector3.one;
             Image img = btnColorSel.GetComponent<Image>();
             img.color = color;
             Button btn = btnColorSel.GetComponent<Button>();
