@@ -55,10 +55,10 @@ public class MenuDisplay : MonoBehaviour
             btnCharSel.transform.parent = characterSelectGroup.transform;
             btnCharSel.transform.localScale = Vector3.one;
             Image img = btnCharSel.FindComponent<Image>(false, true);
-            img.sprite = charInfo.sprite;
+            img.sprite = charInfo.portrait;
             img.color = charInfo.defaultColor;
             RectTransform rectImg = img.GetComponent<RectTransform>();
-            rectImg.sizeDelta = 100 * charInfo.sprite.rect.size / 16;
+            rectImg.sizeDelta = 100 * charInfo.portrait.rect.size / 16;
             TMP_Text txt = btnCharSel.GetComponentInChildren<TMP_Text>();
             txt.text = charInfo.characterName.ToUpper();
             Button btn = btnCharSel.GetComponent<Button>();
@@ -111,10 +111,10 @@ public class MenuDisplay : MonoBehaviour
     {
         PlayerInfo playerInfo = PlayerInfo.instance;
         CharacterInfo charInfo = playerInfo.allCharacters[index];
-        characterImage.sprite = charInfo.sprite;
+        characterImage.sprite = charInfo.portrait;
         characterImage.color = playerInfo.SelectedColor;
         RectTransform rect = characterImage.GetComponent<RectTransform>();
-        rect.sizeDelta = 320 * charInfo.sprite.rect.size / 16;
+        rect.sizeDelta = 320 * charInfo.portrait.rect.size / 16;
         //Type
         characterTypeText.text = charInfo.typeString;
         //Difficulty

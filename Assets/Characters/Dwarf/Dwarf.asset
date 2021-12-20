@@ -15,6 +15,7 @@ MonoBehaviour:
   characterName: Dwarf
   sprite: {fileID: 21300000, guid: cc004020a081e484186724007bd0a077, type: 3}
   defaultColor: {r: 0.65882355, g: 0.3254902, b: 0.17254902, a: 1}
+  portrait: {fileID: 21300000, guid: cc004020a081e484186724007bd0a077, type: 3}
   prefab: {fileID: 532201618779257096, guid: 69f122fe10f37864bb52a35fc112ba76, type: 3}
   difficulty: 1
   typeList: 0000000005000000

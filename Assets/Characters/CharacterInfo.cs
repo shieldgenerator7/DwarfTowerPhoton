@@ -8,6 +8,7 @@ public class CharacterInfo : ScriptableObject
     public string characterName;
     public Sprite sprite;
     public Color defaultColor = Color.white;
+    public Sprite portrait;
     public GameObject prefab;
     [Range(1,3)]
     [Tooltip("How difficult this character is perceived to be")]
