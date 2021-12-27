@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1916908965083646283}
   - component: {fileID: -7350582565912498744}
   - component: {fileID: 5130418414652994702}
+  - component: {fileID: 6368753068641259655}
   - component: {fileID: 4410195784120660945}
   - component: {fileID: 9144531418077418824}
   - component: {fileID: 3158633092025413174}
@@ -112,9 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterInfo: {fileID: 11400000, guid: 2a669681d75b3a448bd48183355d7958, type: 2}
-  aminaReloader: {fileID: 0}
+  aminaReloader: {fileID: 6368753068641259655}
   abilityContext: {fileID: 3769535869663102263}
-  aminaDecayRate: 5
   rainbowPathAbility: {fileID: 2613285986018779774}
 --- !u!114 &307085991090335124
 MonoBehaviour:
@@ -233,6 +233,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAmina: 100
+--- !u!114 &6368753068641259655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532201618779257096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b3994f5d6328d4ea5a2534d14ad54b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityName: 
+  aminaCost: 0
+  abilitySlot: 0
+  hidesOtherInputs: 0
+  abilityID: 0
+  reloadDuration: 2
 --- !u!114 &4410195784120660945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,12 +408,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityName: Rainbow Path
-  aminaCost: 0
+  aminaCost: 1
   abilitySlot: 2
   hidesOtherInputs: 0
   abilityID: 2
   rainbowPathIndex: 2
-  aminaRegenRate: 5
 --- !u!1 &4027114820006220005
 GameObject:
   m_ObjectHideFlags: 0

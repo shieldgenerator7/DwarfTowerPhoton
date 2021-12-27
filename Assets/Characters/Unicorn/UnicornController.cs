@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class UnicornController : PlayerController
 {
-    [Tooltip("How much amina decays per second while Rainbow Path is not active")]
-    public float aminaDecayRate = 5;
-
     public RainbowPathAbility rainbowPathAbility;
 
     private GameObject lastBounceObject;
@@ -15,14 +12,6 @@ public class UnicornController : PlayerController
     protected override void Update()
     {
         base.Update();
-        if (rainbowPathAbility.active)
-        {
-        }
-        else
-        {
-            //Amina decay
-            aminaPool.drainAmina(aminaDecayRate * Time.deltaTime);
-        }
         lastBounceObject = null;
     }
 
@@ -58,5 +47,11 @@ public class UnicornController : PlayerController
             rainbowPathAbility.activate();
             playerMovement.forceMovement(newDir);
         }
+    }
+
+    protected override void onAminaEmpty(float amina)
+    {
+        base.onAminaEmpty(amina);
+        rainbowPathAbility.OnButtonCanceled();
     }
 }
