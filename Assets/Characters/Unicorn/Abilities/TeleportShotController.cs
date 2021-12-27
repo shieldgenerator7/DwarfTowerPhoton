@@ -30,6 +30,12 @@ public class TeleportShotController : ShotController
 
     protected override void processCollision(Collider2D collision, bool useInitialDamage)
     {
+        //If it's a flag, don't teleport it
+        Rigidbody2D rb2d = collision.gameObject.FindComponent<Rigidbody2D>();
+        if (rb2d && rb2d.gameObject.CompareTag("TeamFlag"))
+        {
+            return;
+        }
         //If it is destroyable,
         HealthPool hp = collision.gameObject.FindComponent<HealthPool>();
         if (hp)
