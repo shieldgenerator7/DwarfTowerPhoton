@@ -78,7 +78,8 @@ public class CarriedShotController : ShotController
                 //Swing percent
                 CarryPercent = CarryTime / maxTime;
                 //Position
-                Vector2 pointDir = owner.playerMovement.LastMoveDirection.Rotate(dataCurrent.positionAngle).normalized;
+                Vector2 pointDir = PointDirection;
+                pointDir = pointDir.Rotate(dataCurrent.positionAngle).normalized;
                 transform.position = PivotPoint + (pointDir * dataCurrent.holdBuffer);
                 //Rotation
                 Vector2 lookDir = pointDir * ((sr.flipY) ? -1 : 1);
@@ -92,8 +93,13 @@ public class CarriedShotController : ShotController
 
     public void release()
     {
-        rb2d.velocity = owner.playerMovement.LastMoveDirection;
+        rb2d.velocity = PointDirection.normalized * owner.playerMovement.rb2d.velocity.magnitude;
         destroyOnIndestructible = true;
         switchOwner(null);
     }
+
+    Vector2 PointDirection
+        => (owner.playerMovement.rb2d.isMoving())
+        ? owner.playerMovement.LastMoveDirection
+        : owner.LookDirection;
 }

@@ -17,12 +17,9 @@ public class CarriedGunController : PlayerAbility
 
         if (!carriedShot)
         {
-            if (rb2d.isMoving())
+            if (aminaPool.requestAminaPerSecond(aminaCost) > 0)
             {
-                if (aminaPool.requestAminaPerSecond(aminaCost) > 0)
-                {
-                    carryNewShot();
-                }
+                carryNewShot();
             }
         }
     }
@@ -31,28 +28,18 @@ public class CarriedGunController : PlayerAbility
     {
         base.OnButtonHeld();
 
-        if (carriedShot)
+        if (aminaPool.requestAminaPerSecond(aminaCost) > 0)
         {
-            if (aminaPool.requestAminaPerSecond(aminaCost) > 0)
+            if (!carriedShot)
             {
-            }
-            else
-            {
-                releaseShot();
-            }
-            if (!rb2d.isMoving())
-            {
-                releaseShot();
+                carryNewShot();
             }
         }
         else
         {
-            if (rb2d.isMoving())
+            if (carriedShot)
             {
-                if (aminaPool.requestAminaPerSecond(aminaCost) > 0)
-                {
-                    carryNewShot();
-                }
+                releaseShot();
             }
         }
     }
