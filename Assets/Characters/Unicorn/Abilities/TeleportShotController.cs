@@ -4,6 +4,30 @@ using UnityEngine;
 
 public class TeleportShotController : ShotController
 {
+    protected override PlayerController owner
+    {
+        get => base.owner;
+        set
+        {
+            base.owner = value;
+            updateSpeed();
+        }
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        updateSpeed();
+    }
+
+    private void updateSpeed()
+    {
+        if (owner)
+        {
+            rb2d.velocity = rb2d.velocity.normalized * owner.playerMovement.rb2d.velocity.magnitude;
+        }
+    }
+
     protected override void processCollision(Collider2D collision, bool useInitialDamage)
     {
         //If it is destroyable,

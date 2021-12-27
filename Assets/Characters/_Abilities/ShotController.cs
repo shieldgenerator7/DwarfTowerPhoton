@@ -89,6 +89,7 @@ public class ShotController : MonoBehaviour
         //Damage
         damager = gameObject.FindComponent<Damager>();
         //Delegates
+        onStatsChanged -= updateFromStats;
         onStatsChanged += updateFromStats;
         updateFromStats(stats);
     }
@@ -181,6 +182,7 @@ public class ShotController : MonoBehaviour
                 if (pc.PV.ViewID == ownerID)
                 {
                     owner = pc;
+                    return;
                 }
             }
         }
