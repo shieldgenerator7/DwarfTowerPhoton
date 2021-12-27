@@ -126,13 +126,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamMultiplier:
-    moveSpeed: 1.5
+    moveSpeed: 2
     maxHits: -1
     fireRate: -1
     damage: -1
     size: -1
   enemyMultiplier:
-    moveSpeed: -1
+    moveSpeed: 0.75
     maxHits: -1
     fireRate: -1
     damage: -1
