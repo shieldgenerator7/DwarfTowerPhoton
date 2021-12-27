@@ -72,6 +72,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks
         }
         //Register custom types
         StatLayer.RegisterWithPhoton();
+        StatusLayer.RegisterWithPhoton();
     }
 
     public override void OnEnable()
