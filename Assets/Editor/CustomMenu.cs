@@ -165,29 +165,21 @@ public class CustomMenu
             }
         }
         string gameProcName = PlayerSettings.productName;
-        List<Process> gameProcList = Process.GetProcesses().ToList().FindAll(
-            proc => !proc.HasExited && proc.ProcessName == gameProcName
-            );
-        Debug.Log($"Kill Processes: killing {gameProcList.Count} {gameProcName} processes");
-        foreach (Process proc in gameProcList)
-        {
-            if (!proc.HasExited)
+        //Find valid processes of this game
+        Process.GetProcesses().ToList().FindAll(
+            proc =>
             {
-                if (proc.ProcessName == gameProcName)
+                try
                 {
-                    proc.Kill();
+                    return !proc.HasExited && proc.ProcessName == gameProcName;
                 }
-                else
+                catch
                 {
-                    Debug.LogWarning($"Can't kill process {proc.ProcessName} ({proc.Id})" +
-                        $" because it is not a process of {gameProcName}");
+                    return false;
                 }
-            }
-            else
-            {
-                Debug.LogWarning($"Process ({proc.Id}) has already exited");
-            }
-        }
+            })
+            //And then kill them
+            .ForEach(proc => proc.Kill());
     }
 
     [MenuItem("SG7/Run/Run Windows %#w")]
