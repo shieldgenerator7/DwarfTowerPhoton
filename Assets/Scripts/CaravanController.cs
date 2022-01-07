@@ -49,6 +49,8 @@ public class CaravanController : MonoBehaviour
         {
             updatePositionOnPath(pathGenerator.mapPath);
         }
+        //Display for on the caravan
+        gameObject.FindComponent<CaravanMapMarkerDisplay>()?.Init(this);
         //Marker
         MapMarker mapMarker = MapMarkerManager.CreateMapMarker(
             PhotonView.Get(gameObject),
