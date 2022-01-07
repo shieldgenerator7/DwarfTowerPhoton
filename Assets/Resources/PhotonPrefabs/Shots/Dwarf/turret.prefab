@@ -198,6 +198,7 @@ MonoBehaviour:
   abilityID: 0
   fireDelay: 0.1
   shotIndex: 0
+  shouldSetOwner: 0
   turretBase: {fileID: 7052029397972579358}
 --- !u!114 &5266211150224624211
 MonoBehaviour:

@@ -19,6 +19,8 @@ public class ChargedGunController : PlayerAbility
     public int maxSpawnBufferExtension = 0;
     [Tooltip("The display-only prefab to spawn while charging the shot")]
     public GameObject previewPrefab;
+    [Tooltip("How far away the cursor can be and still allow a placed unit to be upgraded")]
+    public float upgradeRange = 0;//put in to nerf Dwarf by forcing his turrets to be spread further apart
 
     public ObjectSpawnInfo ChargedShotSpawnInfo
         => objectSpawner.objectSpawnInfoList[chargedShotIndex];
@@ -203,6 +205,49 @@ public class ChargedGunController : PlayerAbility
                     SpriteRenderer coSR = rchGO.FindComponent<SpriteRenderer>();
                     bool overlap = previewDisplayer.boundsIntersects(coSR.bounds);
                     if (overlap)
+                    {
+                        //it's conflicting
+                        conflictingObject = rchGO;
+                        coHasSC = rchGO.FindComponent<ShotController>();
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+            }
+        }
+        if (!conflictingObject && upgradeRange > 0)
+        {
+            RaycastHit2D[] rch2ds = Physics2D.CircleCastAll(
+                previewCollider.transform.position,
+                upgradeRange,
+                Vector2.zero
+                );
+            for (int i = 0; i < rch2ds.Length; i++)
+            {
+                RaycastHit2D rch2d = rch2ds[i];
+                Collider2D coll2d = rch2d.collider;
+                GameObject rchGO = coll2d.gameObject;
+                HealthPool hp = rchGO.FindComponent<HealthPool>();
+                //If the conflicting object is a regular moving shot,
+                if (hp && hp.entityType == EntityType.SHOT)
+                {
+                    //You can build here anyway
+                    continue;
+                }
+                //If the conflicting object is not solid,
+                else if (coll2d.isTrigger)
+                {
+                    //You can build here anyway
+                    continue;
+                }
+                //If the conflicting object is non-moving or is not a shot,
+                else
+                {
+                    //If the object is upgradable
+                    if (rchGO.name.Contains(ChargedShotSpawnInfo.objectName))
                     {
                         //it's conflicting
                         conflictingObject = rchGO;
