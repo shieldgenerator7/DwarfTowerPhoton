@@ -251,7 +251,7 @@ public class ChargedGunController : PlayerAbility
                     {
                         //it's conflicting
                         conflictingObject = rchGO;
-                        coHasSC = false;
+                        coHasSC = rchGO.FindComponent<ShotController>();
                         break;
                     }
                     else
