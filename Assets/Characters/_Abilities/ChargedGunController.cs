@@ -221,7 +221,7 @@ public class ChargedGunController : PlayerAbility
         if (!conflictingObject && upgradeRange > 0)
         {
             RaycastHit2D[] rch2ds = Physics2D.CircleCastAll(
-                previewCollider.transform.position,
+                position,
                 upgradeRange,
                 Vector2.zero
                 );
@@ -251,7 +251,7 @@ public class ChargedGunController : PlayerAbility
                     {
                         //it's conflicting
                         conflictingObject = rchGO;
-                        coHasSC = rchGO.FindComponent<ShotController>();
+                        coHasSC = false;
                         break;
                     }
                     else

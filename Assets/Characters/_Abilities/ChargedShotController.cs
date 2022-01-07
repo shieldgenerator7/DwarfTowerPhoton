@@ -41,9 +41,7 @@ public class ChargedShotController : ShotController
     /// <param name="newMulitplier"></param>
     public void upgradeStats(float newMulitplier)
     {
-        float totalMulitplier = newMulitplier + this.multiplier;
-        float converterMultiplier = newMulitplier / this.multiplier;
-        chargeStats(converterMultiplier);
-        this.multiplier = totalMulitplier;
+        this.multiplier += newMulitplier;
+        chargeStats(this.multiplier);
     }
 }
