@@ -7,13 +7,14 @@ public class CaravanController : MonoBehaviour
 {
     public float maxMoveSpeed = 3;
     private float moveSpeed;
-    private Vector2 direction;
+    public Vector2 direction { get; private set; }
     public float maxAllowedDistance = 3;//how far a player can be away but still push it (must still be in trigger)
 
     public Collider2D detectionColl;//the collider that detects which players are pushing
     private RaycastHit2D[] rch2ds = new RaycastHit2D[100];//used for detection
 
     public MapMarkerInfo caravanMarkerInfo;
+    public GameObject caravanMarkerBalloonPrefab;
 
     public SpriteRenderer contestEffect;
 
@@ -41,7 +42,7 @@ public class CaravanController : MonoBehaviour
         {
             teamCaptains.Add(ttc, 0);
         }
-        updateDirection();
+        updateDirection(PV.IsMine);
         contestEffect.enabled = false;
         pathGenerator.onMapPathGenerated += updatePositionOnPath;
         if (pathGenerator.mapPath != null)
@@ -49,22 +50,23 @@ public class CaravanController : MonoBehaviour
             updatePositionOnPath(pathGenerator.mapPath);
         }
         //Marker
-        MapMarkerManager.CreateMapMarker(
+        MapMarker mapMarker = MapMarkerManager.CreateMapMarker(
             PhotonView.Get(gameObject),
             transform,
             caravanMarkerInfo
             );
+        GameObject balloons = Instantiate(caravanMarkerBalloonPrefab);
+        balloons.transform.parent = mapMarker.iconSR.transform;
+        balloons.transform.localPosition = Vector2.zero;
+        balloons.GetComponent<CaravanMapMarkerDisplay>().Init(this);
     }
 
     private void Update()
     {
-        if (PV.IsMine)
-        {
-            updatePushingPlayers();
-        }
+        updatePushingPlayers(PV.IsMine);
     }
 
-    void updatePushingPlayers()
+    void updatePushingPlayers(bool pvMine)
     {
         teamCaptains.Clear();
         int count = detectionColl.Cast(Vector2.zero, rch2ds, 0, true);
@@ -91,25 +93,34 @@ public class CaravanController : MonoBehaviour
                 }
             }
         }
-        updateDirection();
+        updateDirection(pvMine);
     }
 
-    void updateDirection()
+    void updateDirection(bool move)
     {
+        //Update the direction variable
         direction = Vector2.zero;
         foreach (TeamTokenCaptain ttc in teamCaptains.Keys)
         {
-            direction += (Vector2)(transform.position - ttc.transform.position).normalized
-                * teamCaptains[ttc];
+            Vector2 v = (Vector2)(transform.position - ttc.transform.position);
+            v.x = 0;
+            v = v.normalized;
+            direction += v * teamCaptains[ttc];
         }
+        //Exit early if not my PV
+        if (!move)
+        {
+            return;
+        }
+        //Update rb2d velocity
         if (pathGenerator.mapPath != null)
         {
             float magnitude = direction.magnitude;
             magnitude = Mathf.Clamp(magnitude, 0, maxMoveSpeed);
             distanceFromStart += direction.normalized.y * magnitude * Time.deltaTime;
             Vector2 desiredPos = pathGenerator.mapPath.getPosition(distanceFromStart);
-            direction = (desiredPos - (Vector2)transform.position).normalized;
-            rb2d.velocity = direction * magnitude;
+            Vector2 movedir = (desiredPos - (Vector2)transform.position).normalized;
+            rb2d.velocity = movedir * magnitude;
         }
         else
         {

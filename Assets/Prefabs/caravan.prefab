@@ -327,6 +327,8 @@ MonoBehaviour:
   maxAllowedDistance: 5
   detectionColl: {fileID: 6696323203719167965}
   caravanMarkerInfo: {fileID: 11400000, guid: 8c9b17c543a867c49a5a9e07dc892828, type: 2}
+  caravanMarkerBalloonPrefab: {fileID: 4500449456575662625, guid: 34772a93e9992724b8ca94fef07cfb80,
+    type: 3}
   contestEffect: {fileID: 1099762645652554341}
   pathGenerator: {fileID: 0}
 --- !u!114 &5183398110805307343
