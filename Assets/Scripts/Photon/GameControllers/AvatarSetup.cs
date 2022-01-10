@@ -48,7 +48,7 @@ public class AvatarSetup : MonoBehaviour
             PlayerInfo.instance.colorGroups[teamToken.teamCaptain.colorGroupIndex]
             .SelectedItem;
         //RPC
-        if (PV.IsMine)
+        if (PV && PV.IsMine || this.isPhotonViewMine())
         {
             PV.RPC("RPC_SetTeamIndicator", RpcTarget.OthersBuffered);
         }

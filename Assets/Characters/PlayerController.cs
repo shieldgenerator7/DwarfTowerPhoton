@@ -6,7 +6,20 @@ using UnityEngine;
 public abstract class PlayerController : MonoBehaviour
 {
     public CharacterInfo characterInfo;
-    public Color playerColor { get; set; } = Color.white;
+
+    private Color _playerColor = Color.white;
+    public Color playerColor
+    {
+        get => _playerColor;
+        set
+        {
+            _playerColor = value;
+            //Update components
+            objectSpawner.PlayerColor = _playerColor;
+            gameObject.FindComponents<SpriteRenderer>()
+                .ForEach(sr => sr.color = _playerColor);
+        }
+    }
     public AminaReloader aminaReloader;//ability called by default when the player runs out of amina
     [SerializeField]
     private AbilityContext abilityContext;
@@ -76,10 +89,6 @@ public abstract class PlayerController : MonoBehaviour
         InitializeSettings();
         RegisterDelegates();
         InvokeDelegates();
-        //ObjectSpawner and Color
-        objectSpawner.PlayerColor = playerColor;
-        gameObject.FindComponents<SpriteRenderer>()
-            .ForEach(sr => sr.color = playerColor);
     }
     private void InitializeComponents()
     {
