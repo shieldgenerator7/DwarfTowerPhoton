@@ -972,6 +972,11 @@ PrefabInstance:
       propertyPath: teamColor.r
       value: 0.98039216
       objectReference: {fileID: 0}
+    - target: {fileID: 7351537156668849939, guid: 5817b41b881aa6a438dae4afac09a8fb,
+        type: 3}
+      propertyPath: colorGroupIndex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8677406063159426298, guid: 5817b41b881aa6a438dae4afac09a8fb,
         type: 3}
       propertyPath: m_RootOrder
@@ -2140,6 +2145,11 @@ PrefabInstance:
         type: 3}
       propertyPath: teamColor.r
       value: 0.13333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 7351537156668849939, guid: 5817b41b881aa6a438dae4afac09a8fb,
+        type: 3}
+      propertyPath: colorGroupIndex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8677406063159426298, guid: 5817b41b881aa6a438dae4afac09a8fb,
         type: 3}
