@@ -53,7 +53,7 @@ public class CaravanController : MonoBehaviour
         gameObject.FindComponent<CaravanMapMarkerDisplay>()?.Init(this);
         //Marker
         MapMarker mapMarker = MapMarkerManager.CreateMapMarker(
-            PhotonView.Get(gameObject),
+            PV,
             transform,
             caravanMarkerInfo
             );

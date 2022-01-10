@@ -15,12 +15,16 @@ public class CaravanMapMarkerDisplay : MonoBehaviour
         this.caravanController = caravanController;
         allSRs = gameObject.FindComponents<SpriteRenderer>(true);
         //Register delegate for showing/hiding
-        gameObject.FindComponent<MapMarker>().onShow +=
-            (show) =>
-            {
-                allSRs.ForEach(sr => sr.enabled = show);
-                this.enabled = show;
-            };
+        MapMarker mapMarker = gameObject.FindComponent<MapMarker>();
+        if (mapMarker)
+        {
+            mapMarker.onShow +=
+                (show) =>
+                {
+                    allSRs.ForEach(sr => sr.enabled = show);
+                    this.enabled = show;
+                };
+        }
     }
 
     private void Update()
