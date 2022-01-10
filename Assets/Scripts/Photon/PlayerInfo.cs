@@ -11,68 +11,16 @@ public class PlayerInfo : MonoBehaviour
     [Tooltip("The name of the map that the player wants to go to")]
     public string mapName;
 
-    [SerializeField]
-    private int mySelectedCharacter;
-    public int SelectedIndex
-    {
-        get => mySelectedCharacter;
-        set
-        {
-            mySelectedCharacter = Mathf.Clamp(value, 0, allCharacters.Count - 1);
-            onSelectedIndexChanged?.Invoke(mySelectedCharacter);
-        }
-    }
-    public delegate void OnSelectedIndexChanged(int index);
-    public event OnSelectedIndexChanged onSelectedIndexChanged;
+    public ItemSelection<CharacterInfo> characterSelection;
 
-    public CharacterInfo SelectedCharacter
-    {
-        get => allCharacters[mySelectedCharacter];
-        set
-        {
-            SelectedIndex = allCharacters.IndexOf(value);
-        }
-    }
-
-    public List<CharacterInfo> allCharacters;
     public List<CharacterInfo> unlockedCharacters;
     public List<CharacterInfo> unlockableAtStart;
     public int unlockAtStartCount = 2;
 
-    private int colorIndex = -1;
-    public int ColorIndex
-    {
-        get => (colorIndex >= 0)
-            ? colorIndex
-            : allColors.IndexOf(SelectedCharacter.defaultColor);
-        set
-        {
-            colorIndex = Mathf.Clamp(value, -1, allColors.Count);
-            if (colorIndex >= 0)
-            {
-                if (colorPreferences.Contains(colorIndex))
-                {
-                    colorPreferences.Remove(colorIndex);
-                }
-                colorPreferences.Insert(0, colorIndex);
-            }
-            onSelectedColorChanged?.Invoke(ColorIndex);
-        }
-    }
-    public event OnSelectedIndexChanged onSelectedColorChanged;
-    private List<int> colorPreferences = new List<int>();
+    public ItemSelection<Color> warmColorSelection;
+    public ItemSelection<Color> coolColorSelection;
 
-    public Color SelectedColor
-    {
-        get => (colorIndex >= 0)
-            ? allColors[colorIndex]
-            : SelectedCharacter.defaultColor;
-        set
-        {
-            ColorIndex = allColors.IndexOf(value);
-        }
-    }
-    public List<Color> allColors;
+    public List<ItemSelection<Color>> colorGroups;
 
     private void Awake()
     {
@@ -80,6 +28,7 @@ public class PlayerInfo : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(this.gameObject);
+            initColorGroups();
         }
         else
         {
@@ -111,40 +60,6 @@ public class PlayerInfo : MonoBehaviour
         //}
     }
 
-    public int getUniqueColorIndex()
-    {
-        //Get list of all other players
-        List<PlayerController> players = FindObjectsOfType<PlayerController>().ToList();
-        //Our player has not been made yet, so no need to remove it from the list
-        //players.RemoveAll(plyr => plyr.PV.IsMine);
-        //Get list of all untaken colors
-        List<int> untakenColors = new List<int>();
-        for (int i = 0; i < allColors.Count; i++)
-        {
-            untakenColors.Add(i);
-        }
-        players.ForEach(
-            plyr => untakenColors.Remove(allColors.IndexOf(plyr.playerColor))
-            );
-        //Select untaken color from SelectedColor
-        int selectedIndex = ColorIndex;
-        if (untakenColors.Contains(selectedIndex))
-        {
-            return selectedIndex;
-        }
-        //Select untaken color from preferences
-        foreach (int colorIndex in colorPreferences)
-        {
-            if (untakenColors.Contains(colorIndex))
-            {
-                return colorIndex;
-            }
-        }
-        //No preferences available, so choose random one
-        int randIndex = Random.Range(0, untakenColors.Count);
-        return untakenColors[randIndex];
-    }
-
     /// <summary>
     /// This is here so it works well with the TextMeshPro InputField
     /// </summary>
@@ -157,6 +72,61 @@ public class PlayerInfo : MonoBehaviour
     public void SelectRandomCharacter()
     {
         int index = Random.Range(0, unlockedCharacters.Count);
-        SelectedCharacter = unlockedCharacters[index];
+        characterSelection.SelectedItem = unlockedCharacters[index];
     }
+
+    #region Color Groups
+
+    private void initColorGroups()
+    {
+        //Color groups
+        colorGroups = new List<ItemSelection<Color>>()
+        {
+            warmColorSelection,
+            coolColorSelection
+        };
+        //Register Delegates
+        for (int i = 0; i < colorGroups.Count; i++)
+        {
+            colorGroups[i].onIndexChanged += (index) =>
+            {
+                onColorChanged?.Invoke(colorGroups[i][index]);
+            };
+        }
+    }
+    public delegate void OnColorChanged(Color color);
+    public event OnColorChanged onColorChanged;
+
+    public (int groupIndex, int colorIndex) getColorIndex(Color color)
+    {
+        for (int i = 0; i < colorGroups.Count; i++)
+        {
+            if (colorGroups[i].Contains(color))
+            {
+                return (i, colorGroups[i].IndexOf(color));
+            }
+        }
+        return (-1, -1);
+    }
+
+    public Color DefaultColor
+    {
+        get
+        {
+            foreach (ItemSelection<Color> colorGroup in colorGroups)
+            {
+                if (colorGroup.Index >= 0)
+                {
+                    return colorGroup.SelectedItem;
+                }
+                else
+                {
+
+                }
+            }
+            return characterSelection.SelectedItem.defaultColor;
+        }
+    }
+
+    #endregion
 }
