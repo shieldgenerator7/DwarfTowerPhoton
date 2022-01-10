@@ -386,6 +386,7 @@ MonoBehaviour:
   teamCaptain: {fileID: 7351537156668849939}
   owner: {fileID: 7351537156668849939}
   teamColor: {r: 1, g: 1, b: 1, a: 1}
+  colorGroupIndex: -1
   spawnPoints:
   - {fileID: 861237107}
   - {fileID: 1852675303}
