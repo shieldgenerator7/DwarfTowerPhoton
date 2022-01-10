@@ -20,7 +20,7 @@ public class PlayerInfo : MonoBehaviour
     public ItemSelection<Color> warmColorSelection;
     public ItemSelection<Color> coolColorSelection;
 
-    public List<ItemSelection<Color>> colorGroups;
+    public List<ItemSelection<Color>> colorGroups { get; private set; }
 
     private void Awake()
     {

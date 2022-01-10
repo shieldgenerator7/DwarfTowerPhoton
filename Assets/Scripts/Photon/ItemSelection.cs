@@ -5,7 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class ItemSelection<T>
 {
-    [SerializeField]
     private int index = -1;
     public int Index
     {

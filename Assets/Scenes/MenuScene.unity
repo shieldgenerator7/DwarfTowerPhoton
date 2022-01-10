@@ -1332,7 +1332,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1386,7 +1386,7 @@ MonoBehaviour:
   characterSelectGroup: {fileID: 339120245}
   characterSelectButtonPrefab: {fileID: 6508500772799313237, guid: 9a769df16eac86c42a06b1ae6bf41c1f,
     type: 3}
-  colorSelectGroup: {fileID: 203508877}
+  colorSelectGroupList: []
   colorSelectButtonPrefab: {fileID: 6508500772799313237, guid: c2a6a13e6f15279429e50551090d13fd,
     type: 3}
   txtMapName: {fileID: 817828518}
@@ -2234,13 +2234,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapName: 
-  mySelectedCharacter: 0
-  allCharacters:
-  - {fileID: 11400000, guid: 7fea9959ab8a51645a83774371fe55f9, type: 2}
-  - {fileID: 11400000, guid: ba874eaf7ebd1c442b578cafc6e0b469, type: 2}
-  - {fileID: 11400000, guid: a91988f801f29bf418ddc93cfe96db07, type: 2}
-  - {fileID: 11400000, guid: 9b40627ecf3b35a4a84117116e0e2f8d, type: 2}
-  - {fileID: 11400000, guid: 2a669681d75b3a448bd48183355d7958, type: 2}
+  characterSelection:
+    itemList:
+    - {fileID: 11400000, guid: 7fea9959ab8a51645a83774371fe55f9, type: 2}
+    - {fileID: 11400000, guid: ba874eaf7ebd1c442b578cafc6e0b469, type: 2}
+    - {fileID: 11400000, guid: a91988f801f29bf418ddc93cfe96db07, type: 2}
+    - {fileID: 11400000, guid: 9b40627ecf3b35a4a84117116e0e2f8d, type: 2}
+    - {fileID: 11400000, guid: 2a669681d75b3a448bd48183355d7958, type: 2}
   unlockedCharacters: []
   unlockableAtStart:
   - {fileID: 11400000, guid: 7fea9959ab8a51645a83774371fe55f9, type: 2}
@@ -2248,13 +2248,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a91988f801f29bf418ddc93cfe96db07, type: 2}
   - {fileID: 11400000, guid: 2a669681d75b3a448bd48183355d7958, type: 2}
   unlockAtStartCount: 2
-  allColors:
-  - {r: 0.8396226, g: 0.06992337, b: 0, a: 1}
-  - {r: 0.65882355, g: 0.3254902, b: 0.17254902, a: 1}
-  - {r: 1, g: 0.9647059, b: 0, a: 1}
-  - {r: 0.08959598, g: 0.5283019, b: 0.002491996, a: 1}
-  - {r: 0.16470589, g: 0.61960787, b: 1, a: 1}
-  - {r: 0.52156866, g: 0.023529412, b: 0.7254902, a: 1}
+  warmColorSelection:
+    itemList:
+    - {r: 0.8396226, g: 0.06992337, b: 0, a: 1}
+    - {r: 0.65882355, g: 0.3254902, b: 0.17254902, a: 1}
+    - {r: 1, g: 0.9647059, b: 0, a: 1}
+  coolColorSelection:
+    itemList:
+    - {r: 0.08959598, g: 0.5283019, b: 0.002491996, a: 1}
+    - {r: 0.16470589, g: 0.61960787, b: 1, a: 1}
+    - {r: 0.52156866, g: 0.023529412, b: 0.7254902, a: 1}
 --- !u!1 &1127810919
 GameObject:
   m_ObjectHideFlags: 0
