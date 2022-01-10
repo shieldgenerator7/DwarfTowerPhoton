@@ -18,7 +18,7 @@ public class MenuDisplay : MonoBehaviour
     public GridLayoutGroup characterSelectGroup;
     public GameObject characterSelectButtonPrefab;
     [Header("Color Select")]
-    public GridLayoutGroup colorSelectGroup;
+    public List<GridLayoutGroup> colorSelectGroupList;
     public GameObject colorSelectButtonPrefab;
     [Header("Map Name")]
     public TMP_InputField txtMapName;
@@ -31,19 +31,19 @@ public class MenuDisplay : MonoBehaviour
         PlayerInfo playerInfo = PlayerInfo.instance;
         txtMapName.text = PlayerInfo.instance.mapName;
         txtMapName.onValueChanged.AddListener((mapName) => playerInfo.mapName = mapName);
-        playerInfo.onSelectedIndexChanged += updateCharacterImage;
+        playerInfo.characterSelection.onIndexChanged += updateCharacterImage;
         playerInfo.SelectRandomCharacter();
-        updateCharacterImage(playerInfo.SelectedIndex);
-        playerInfo.onSelectedColorChanged += updateColorImage;
-        updateColorImage(playerInfo.ColorIndex);
+        updateCharacterImage(playerInfo.characterSelection.Index);
+        playerInfo.onColorChanged += updateColorImage;
+        updateColorImage(playerInfo.DefaultColor);
         populateCharacterSelect();
         populateColorSelect();
     }
     private void OnDestroy()
     {
         PlayerInfo playerInfo = PlayerInfo.instance;
-        playerInfo.onSelectedIndexChanged -= updateCharacterImage;
-        playerInfo.onSelectedColorChanged -= updateColorImage;
+        playerInfo.characterSelection.onIndexChanged -= updateCharacterImage;
+        playerInfo.onColorChanged -= updateColorImage;
     }
     void populateCharacterSelect()
     {
@@ -64,7 +64,7 @@ public class MenuDisplay : MonoBehaviour
             Button btn = btnCharSel.GetComponent<Button>();
             btn.onClick.AddListener(() =>
             {
-                PlayerInfo.instance.SelectedCharacter = charInfo;
+                PlayerInfo.instance.characterSelection.SelectedItem = charInfo;
             });
         }
         //Resize elements to widen
@@ -82,37 +82,33 @@ public class MenuDisplay : MonoBehaviour
 
     void populateColorSelect()
     {
-        List<Color> allColors = PlayerInfo.instance.allColors;
-        //Create character select buttons
-        foreach (Color color in allColors)
+        foreach (ItemSelection<Color> colorGroup in PlayerInfo.instance.colorGroups)
         {
-            GameObject btnColorSel = Instantiate(colorSelectButtonPrefab);
-            btnColorSel.transform.parent = colorSelectGroup.transform;
-            btnColorSel.transform.localScale = Vector3.one;
-            Image img = btnColorSel.GetComponent<Image>();
-            img.color = color;
-            Button btn = btnColorSel.GetComponent<Button>();
-            btn.onClick.AddListener(() =>
+            List<Color> allColors = colorGroup.itemList;
+            //Create character select buttons
+            for (int i = 0; i < allColors.Count; i++)
             {
-                PlayerInfo.instance.SelectedColor = color;
-            });
+                Color color = allColors[i];
+                GameObject btnColorSel = Instantiate(colorSelectButtonPrefab);
+                btnColorSel.transform.parent = colorSelectGroupList[i].transform;
+                btnColorSel.transform.localScale = Vector3.one;
+                Image img = btnColorSel.GetComponent<Image>();
+                img.color = color;
+                Button btn = btnColorSel.GetComponent<Button>();
+                btn.onClick.AddListener(() =>
+                {
+                    PlayerInfo.instance.colorGroups[i].SelectedItem = color;
+                });
+            }
         }
-        //Resize grid layout
-        //RectTransform rect = colorSelectGroup.GetComponent<RectTransform>();
-        //int colorCount = playerInfo.allColors.Count;
-        //int width = colorCount * 100 + (colorCount + 1) * 10;
-        //rect.sizeDelta = new Vector2(
-        //    width,
-        //    rect.sizeDelta.y
-        //    );
     }
 
     void updateCharacterImage(int index)
     {
         PlayerInfo playerInfo = PlayerInfo.instance;
-        CharacterInfo charInfo = playerInfo.allCharacters[index];
+        CharacterInfo charInfo = playerInfo.characterSelection[index];
         characterImage.sprite = charInfo.portrait;
-        characterImage.color = playerInfo.SelectedColor;
+        characterImage.color = playerInfo.DefaultColor;
         RectTransform rect = characterImage.GetComponent<RectTransform>();
         rect.sizeDelta = 320 * charInfo.portrait.rect.size / 16;
         //Type
@@ -126,8 +122,8 @@ public class MenuDisplay : MonoBehaviour
         }
     }
 
-    void updateColorImage(int index)
+    void updateColorImage(Color color)
     {
-        characterImage.color = PlayerInfo.instance.allColors[index];
+        characterImage.color = color;
     }
 }

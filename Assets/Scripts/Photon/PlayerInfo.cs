@@ -108,6 +108,17 @@ public class PlayerInfo : MonoBehaviour
         }
         return (-1, -1);
     }
+    public void setColor(Color color)
+    {
+        for (int i = 0; i < colorGroups.Count; i++)
+        {
+            if (colorGroups[i].Contains(color))
+            {
+                colorGroups[i].SelectedItem = color;
+                return;
+            }
+        }
+    }
 
     public Color DefaultColor
     {

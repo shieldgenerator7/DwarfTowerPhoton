@@ -5,6 +5,7 @@ using UnityEngine;
 public class TeamTokenCaptain : TeamToken
 {
     public Color teamColor = Color.white;
+    public int colorGroupIndex = -1;
 
     public List<Transform> spawnPoints;
 

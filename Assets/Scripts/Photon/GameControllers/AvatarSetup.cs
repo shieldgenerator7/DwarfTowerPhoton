@@ -22,8 +22,7 @@ public class AvatarSetup : MonoBehaviour
             PV.RPC(
                 "RPC_AddCharacter",
                 RpcTarget.AllBuffered,
-                PlayerInfo.instance.SelectedIndex,
-                PlayerInfo.instance.getUniqueColorIndex()
+                PlayerInfo.instance.characterSelection.Index
                 );
             Camera.main.GetComponent<CameraController>().FocusObject = gameObject;
         }
@@ -40,9 +39,15 @@ public class AvatarSetup : MonoBehaviour
         {
             teamToken = TeamToken.getTeamToken(gameObject);
         }
+        //Team Color
         shadowSR.color = shadowSR.color.setRGB(
             teamToken.teamCaptain.teamColor
             );
+        //Player Color
+        myCharacter.FindComponent<PlayerController>().playerColor =
+            PlayerInfo.instance.colorGroups[teamToken.teamCaptain.colorGroupIndex]
+            .SelectedItem;
+        //RPC
         if (PV.IsMine)
         {
             PV.RPC("RPC_SetTeamIndicator", RpcTarget.OthersBuffered);
@@ -56,19 +61,16 @@ public class AvatarSetup : MonoBehaviour
     }
 
     [PunRPC]
-    void RPC_AddCharacter(int characterIndex, int colorIndex)
+    void RPC_AddCharacter(int characterIndex)
     {
         characterValue = characterIndex;
         //Character
         myCharacter = Instantiate(
-            PlayerInfo.instance.allCharacters[characterIndex].prefab,
+            PlayerInfo.instance.characterSelection[characterIndex].prefab,
             transform.position,
             transform.rotation,
             transform
             );
-        //Color
-        myCharacter.FindComponent<PlayerController>().playerColor =
-            PlayerInfo.instance.allColors[colorIndex];
         //Stunned Delegate
         myCharacter.GetComponent<Stunnable>().onStunned +=
             (stunned) => GetComponent<BlinkEffect>().Blinking = stunned;
