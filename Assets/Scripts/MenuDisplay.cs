@@ -82,22 +82,22 @@ public class MenuDisplay : MonoBehaviour
 
     void populateColorSelect()
     {
-        foreach (ItemSelection<Color> colorGroup in PlayerInfo.instance.colorGroups)
+        for (int i = 0; i < PlayerInfo.instance.colorGroups.Count; i++)
         {
-            List<Color> allColors = colorGroup.itemList;
+            ItemSelection<Color> colorGroup = PlayerInfo.instance.colorGroups[i];
+            GridLayoutGroup colorSelectGroup = colorSelectGroupList[i];
             //Create character select buttons
-            for (int i = 0; i < allColors.Count; i++)
+            foreach (Color color in colorGroup.itemList)
             {
-                Color color = allColors[i];
                 GameObject btnColorSel = Instantiate(colorSelectButtonPrefab);
-                btnColorSel.transform.parent = colorSelectGroupList[i].transform;
+                btnColorSel.transform.parent = colorSelectGroup.transform;
                 btnColorSel.transform.localScale = Vector3.one;
                 Image img = btnColorSel.GetComponent<Image>();
                 img.color = color;
                 Button btn = btnColorSel.GetComponent<Button>();
                 btn.onClick.AddListener(() =>
                 {
-                    PlayerInfo.instance.colorGroups[i].SelectedItem = color;
+                    colorGroup.SelectedItem = color;
                 });
             }
         }

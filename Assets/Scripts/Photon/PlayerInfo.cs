@@ -86,11 +86,11 @@ public class PlayerInfo : MonoBehaviour
             coolColorSelection
         };
         //Register Delegates
-        for (int i = 0; i < colorGroups.Count; i++)
+        foreach (ItemSelection<Color> colorGroup in colorGroups)
         {
-            colorGroups[i].onIndexChanged += (index) =>
+            colorGroup.onIndexChanged += (index) =>
             {
-                onColorChanged?.Invoke(colorGroups[i][index]);
+                onColorChanged?.Invoke(colorGroup[index]);
             };
         }
     }
