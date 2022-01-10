@@ -15,20 +15,31 @@ public class AutoSelectCharacterEditor : Editor
         PlayerInfo playerInfo = FindObjectOfType<PlayerInfo>();
         AutoSelectCharacter asc = target as AutoSelectCharacter;
         int prevCharIndex = asc.characterIndex;
-        int prevColorIndex = asc.colorIndex;
+        int prevWarmColorIndex = asc.warmColorIndex;
+        int prevCoolColorIndex = asc.coolColorIndex;
         asc.characterIndex = GUILayout.SelectionGrid(
             asc.characterIndex,
-            playerInfo.allCharacters.ConvertAll(chr => chr.characterName).ToArray(),
+            playerInfo.characterSelection.itemList.ConvertAll(chr => chr.characterName).ToArray(),
             5
             );
-        asc.colorIndex = GUILayout.SelectionGrid(
-            asc.colorIndex,
-            playerInfo.allColors.ConvertAll(
+        asc.warmColorIndex = GUILayout.SelectionGrid(
+            asc.warmColorIndex,
+            playerInfo.warmColorSelection.itemList.ConvertAll(
                 color => ColorUtility.ToHtmlStringRGB(color)
                 ).ToArray(),
             6
             );
-        if (prevCharIndex != asc.characterIndex || prevColorIndex != asc.colorIndex)
+        asc.coolColorIndex = GUILayout.SelectionGrid(
+            asc.coolColorIndex,
+            playerInfo.coolColorSelection.itemList.ConvertAll(
+                color => ColorUtility.ToHtmlStringRGB(color)
+                ).ToArray(),
+            6
+            );
+        if (prevCharIndex != asc.characterIndex
+            || prevWarmColorIndex != asc.warmColorIndex
+            || prevCoolColorIndex != asc.coolColorIndex
+            )
         {
             EditorUtility.SetDirty(asc);
         }

@@ -21,14 +21,16 @@ public class PlayerInfoEditor : Editor
     void checkPlayerInfo(PlayerInfo info)
     {
         //Sort character list
-        info.allCharacters = info.allCharacters
+        info.characterSelection.itemList = info.characterSelection.itemList
             .OrderBy(charInfo => charInfo.characterName).ToList();
         //Ensure color list has all character default colors
-        foreach (CharacterInfo charInfo in info.allCharacters)
+        foreach (CharacterInfo charInfo in info.characterSelection.itemList)
         {
-            if (!info.allColors.Contains(charInfo.defaultColor))
+            if (!info.warmColorSelection.Contains(charInfo.defaultColor)
+                && !info.coolColorSelection.Contains(charInfo.defaultColor)
+                )
             {
-                info.allColors.Add(charInfo.defaultColor);
+                info.warmColorSelection.itemList.Add(charInfo.defaultColor);
                 Debug.LogWarning(
                     "defaultColor not in the list! adding color: "
                     + ColorUtility.ToHtmlStringRGB(charInfo.defaultColor)
@@ -36,7 +38,14 @@ public class PlayerInfoEditor : Editor
             }
         }
         //Sort color list
-        info.allColors = info.allColors
+        info.warmColorSelection.itemList = info.warmColorSelection.itemList
+            .OrderBy(color =>
+            {
+                float H, S, V;
+                Color.RGBToHSV(color, out H, out S, out V);
+                return H;
+            }).ToList();
+        info.coolColorSelection.itemList = info.coolColorSelection.itemList
             .OrderBy(color =>
             {
                 float H, S, V;

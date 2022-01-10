@@ -6,8 +6,10 @@ public class AutoSelectCharacter : MonoBehaviour
 {
     [Range(0, 4)]
     public int characterIndex;
-    [Range(0, 5)]
-    public int colorIndex;
+    [Range(0, 3)]
+    public int warmColorIndex;
+    [Range(0, 3)]
+    public int coolColorIndex;
     public string mapName;
 
     // Start is called before the first frame update
@@ -24,8 +26,9 @@ public class AutoSelectCharacter : MonoBehaviour
     private void AutoSelect()
     {
         PlayerInfo info = FindObjectOfType<PlayerInfo>();
-        info.SelectedIndex = characterIndex;
-        info.ColorIndex = colorIndex;
+        info.characterSelection.Index = characterIndex;
+        info.warmColorSelection.Index = warmColorIndex;
+        info.coolColorSelection.Index = coolColorIndex;
         info.mapName = mapName;
     }
 }
