@@ -10,7 +10,7 @@ public class MenuController : MonoBehaviour
         Debug.Log($"Character Picked: {characterIndex}");
         if (PlayerInfo.instance != null)
         {
-            PlayerInfo.instance.SelectedIndex = characterIndex;
+            PlayerInfo.instance.characterSelection.Index = characterIndex;
             //PlayerPrefs.SetInt("MyCharacter", characterIndex);
         }
     }

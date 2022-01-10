@@ -7,17 +7,19 @@ public class ColorInitializer : MonoBehaviour
 {
     public void setColor(Color color)
     {
+        var colorIndex = PlayerInfo.instance.getColorIndex(color);
         gameObject.FindComponent<PhotonView>().RPC(
             "RPC_SetColor",
             RpcTarget.All,
-            (int)PlayerInfo.instance.allColors.IndexOf(color)
+            colorIndex.groupIndex,
+            colorIndex.colorIndex
             );
     }
 
     [PunRPC]
-    void RPC_SetColor(int index)
+    void RPC_SetColor(int groupIndex, int colorIndex)
     {
-        Color color = PlayerInfo.instance.allColors[index];
+        Color color = PlayerInfo.instance.colorGroups[groupIndex][colorIndex];
         gameObject.FindComponents<SpriteRenderer>()
             .ForEach(sr => sr.color = color);
         gameObject.FindComponents<ObjectSpawner>()
