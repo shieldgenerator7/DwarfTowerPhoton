@@ -18,12 +18,14 @@ public class Carryable : MonoBehaviour
         {
             if (_carrier)
             {
-                _carrier.gameObject.FindComponent<Stunnable>().onStunned -= Drop;
+                _carrier.gameObject.FindComponent<StatusKeeper>()
+                    .onStatusChanged -= CheckDrop;
             }
             _carrier = value;
             if (_carrier)
             {
-                _carrier.gameObject.FindComponent<Stunnable>().onStunned += Drop;
+                _carrier.gameObject.FindComponent<StatusKeeper>()
+                    .onStatusChanged += CheckDrop;
             }
         }
     }
@@ -45,6 +47,11 @@ public class Carryable : MonoBehaviour
             transform.position = (Vector2)carrier.transform.position
                 + (holdDirection * carryBuffer);
         }
+    }
+
+    private void CheckDrop(StatusLayer status)
+    {
+        Drop(status.stunned);
     }
 
     private void Drop(bool drop)
@@ -95,8 +102,8 @@ public class Carryable : MonoBehaviour
         PlayerMovement playerMovement = go.FindComponent<PlayerMovement>();
         if (playerMovement)
         {
-            Stunnable stunnable = go.FindComponent<Stunnable>();
-            if (stunnable && !stunnable.Stunned)
+            StatusKeeper statusKeeper = go.FindComponent<StatusKeeper>();
+            if (statusKeeper && !statusKeeper.Status.stunned)
             {
                 Pickup(playerMovement, true);
             }

@@ -72,19 +72,12 @@ public class AvatarSetup : MonoBehaviour
             transform
             );
         //Stunned Delegate
-        myCharacter.GetComponent<Stunnable>().onStunned +=
-            (stunned) => GetComponent<BlinkEffect>().Blinking = stunned;
+        myCharacter.GetComponent<StatusKeeper>().onStatusChanged +=
+            (status) => GetComponent<BlinkEffect>().Blinking = status.stunned;
         GetComponent<BlinkEffect>().Start();
     }
 
     #region RPC Forwarding Methods
-    //Moved here because the AvatarSetup is on the same object as the PhotonView,
-    //but the Stunnable component is on a child of the object
-    [PunRPC]
-    void RPC_Stun()
-    {
-        GetComponentInChildren<Stunnable>().stun();
-    }
 
     [PunRPC]
     void RPC_UpdateStats(StatLayer selfStats)

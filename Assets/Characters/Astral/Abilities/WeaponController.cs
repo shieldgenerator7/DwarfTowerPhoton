@@ -53,13 +53,13 @@ public class WeaponController : ChargedShotController
         {
             if (owner)
             {
-                owner.stunnable.onStunned -= releaseFromOwner;
+                owner.statusKeeper.onStatusChanged -= checkReleaseFromOwner;
             }
             base.owner = value;
             if (owner)
             {
-                owner.stunnable.onStunned -= releaseFromOwner;
-                owner.stunnable.onStunned += releaseFromOwner;
+                owner.statusKeeper.onStatusChanged -= checkReleaseFromOwner;
+                owner.statusKeeper.onStatusChanged += checkReleaseFromOwner;
             }
         }
     }
@@ -121,7 +121,7 @@ public class WeaponController : ChargedShotController
                 if (targetIsPlayer)
                 {
                     PlayerController pc = collision.gameObject.GetComponent<PlayerController>();
-                    if (!pc.stunnable.Stunned)
+                    if (!pc.statusKeeper.Status.stunned)
                     {
                         owner = pc;
                         rb2d.velocity = Vector2.zero;
@@ -141,9 +141,9 @@ public class WeaponController : ChargedShotController
         }
     }
 
-    void releaseFromOwner(bool release)
+    void checkReleaseFromOwner(StatusLayer status)
     {
-        if (release)
+        if (status.stunned)
         {
             switchOwner(null);
         }

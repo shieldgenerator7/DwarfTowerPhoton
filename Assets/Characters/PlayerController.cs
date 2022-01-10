@@ -62,14 +62,13 @@ public abstract class PlayerController : MonoBehaviour
     /// </summary>
     public Vector2 LookDirection => (Vector2)Utility.MouseWorldPos - SpawnCenter;
 
-    public Stunnable stunnable { get; private set; }
     protected AminaPool aminaPool { get; private set; }
     protected HealthPool healthPool { get; private set; }
     protected Damager damager { get; private set; }
     private PlayerInput playerInput;
     public PlayerMovement playerMovement { get; private set; }
     protected StatKeeper statKeeper { get; private set; }
-    protected StatusKeeper statusKeeper { get; private set; }
+    public StatusKeeper statusKeeper { get; private set; }
     private ObjectSpawner objectSpawner;
     protected SpriteRenderer sr;
 
@@ -97,7 +96,6 @@ public abstract class PlayerController : MonoBehaviour
         playerMovement.Start();
         sr = gameObject.FindComponent<SpriteRenderer>();
         damager = gameObject.FindComponent<Damager>();
-        stunnable = gameObject.FindComponent<Stunnable>();
         healthPool = gameObject.FindComponent<HealthPool>();
         aminaPool = gameObject.FindComponent<AminaPool>();
         statKeeper = gameObject.FindComponent<StatKeeper>();
@@ -112,9 +110,25 @@ public abstract class PlayerController : MonoBehaviour
     {
         //Hook up Stunnable with HealthPool
         healthPool.onMaxHealthChanged += (hp) => { damager.damage = hp; };
-        healthPool.onDied += (hp) => { stunnable.triggerStun(); };
-        stunnable.onStunned += (stunned) =>
+        healthPool.onDied += (hp) =>
         {
+            statusKeeper.addLayer(PV.ViewID, new StatusLayer(stun: true));
+        };
+        //Auto-Reloading
+        if (aminaReloader)
+        {
+            aminaPool.onAminaEmpty += onAminaEmpty;
+        }
+        //PlayerInput
+        playerInput.onInputChanged += (inputState) =>
+        {
+            this.inputState = inputState;
+        };
+        //StatusKeeper
+        statusKeeper.onStatusChanged += (status) =>
+        {
+            //Stunned
+            bool stunned = status.stunned;
             this.enabled = !stunned;
             if (stunned)
             {
@@ -131,23 +145,6 @@ public abstract class PlayerController : MonoBehaviour
                 damager.damagableTypes.Remove(EntityType.PLAYER);
                 damager.damageFriendlies = false;
             }
-        };
-        //Auto-Reloading
-        if (aminaReloader)
-        {
-            aminaPool.onAminaEmpty += onAminaEmpty;
-        }
-        //PlayerInput
-        playerInput.onInputChanged += (inputState) =>
-        {
-            this.inputState = inputState;
-        };
-        //StatusKeeper
-        statusKeeper.onStatusChanged += (status) =>
-        {
-            //Stunned
-            //TODO: sync status effects through network
-            //so you can refactor Stunnable into StatusKeeper
             //Stealthed
             sr.color = sr.color.setAlpha((status.stealthed) ? 0.1f : 1);
             //Rooted

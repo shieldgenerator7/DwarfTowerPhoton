@@ -11,6 +11,13 @@ public struct StatusLayer
     public bool stealthed;
     public bool rooted;
 
+    public StatusLayer(bool stun = false, bool stealth = false, bool root = false)
+    {
+        this.stunned = stun;
+        this.stealthed = stealth;
+        this.rooted = root;
+    }
+
     public StatusLayer stackOr(StatusLayer status)
     {
         StatusLayer layer = new StatusLayer();
@@ -40,7 +47,7 @@ public struct StatusLayer
 
     public bool[] BoolList
     {
-        get=> new bool[] {
+        get => new bool[] {
                 stunned,
                 stealthed,
                 rooted,
