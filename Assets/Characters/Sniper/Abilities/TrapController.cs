@@ -11,50 +11,11 @@ public class TrapController : ShotController
     public List<EntityType> trapTypes;
     public MapMarkerInfo trapMarkerInfo;
 
-    private float trapStartTime = -1;
-    private PlayerMovement trappedPlayer;
-
-    // Start is called before the first frame update
-    protected override void Start()
-    {
-        base.Start();
-    }
-
-    private void Update()
-    {
-        if (trapStartTime >= 0)
-        {
-            if (Time.time >= trapStartTime + trapDuration)
-            {
-                //untrap player
-                trappedPlayer.forceMovement(false);
-                //unset startTime
-                trapStartTime = -2;
-                //destroy trap
-                if (PV.IsMine)
-                {
-                    health.Health = 0;
-                }
-                //Make it disappear even if it doesn't actually get destroyed
-                gameObject.FindComponent<SpriteRenderer>().enabled = false;
-                gameObject.FindComponent<Collider2D>().enabled = false;
-                this.enabled = false;
-                //Destroy marker
-                MapMarkerManager.DestroyMapMarker(
-                    PV
-                    );
-            }
-        }
-    }
+    private PlayerController trappedPlayer;
 
     protected override void processCollision(Collider2D collision, bool useInitialDamage)
     {
         base.processCollision(collision, useInitialDamage);
-        if (trapStartTime != -1)
-        {
-            //don't trap twice
-            return;
-        }
         if (TeamToken.onSameTeam(gameObject, collision.gameObject))
         {
             //don't trap teammates
@@ -73,17 +34,33 @@ public class TrapController : ShotController
 
     void trapPlayer(PlayerController playerController)
     {
-        playerController.cancelAbilities();
-        trappedPlayer = playerController.playerMovement;
-        trappedPlayer.rb2d.velocity = Vector2.zero;
-        trappedPlayer.forceMovement(Vector2.zero);
-        trappedPlayer.rb2d.transform.position = transform.position;
-        trapStartTime = Time.time;
+        playerController.statusKeeper.addLayer(
+            PV.ViewID,
+            new StatusLayer(root: true)
+            );
+        trappedPlayer = playerController;
+        trappedPlayer.playerMovement.rb2d.transform.position = transform.position;
         //Map marker
         MapMarkerManager.CreateMapMarker(
             PV,
             (Vector2)transform.position + (Vector2.up * 0.5f),
             trapMarkerInfo
             );
+        TimerManager.StartTimer(trapDuration, () =>
+        {
+            //untrap player
+            trappedPlayer.statusKeeper.removeLayer(PV.ViewID);
+            //destroy trap
+            if (PV.IsMine)
+            {
+                health.Health = 0;
+            }
+            //Make it disappear even if it doesn't actually get destroyed
+            gameObject.FindComponent<SpriteRenderer>().enabled = false;
+            gameObject.FindComponent<Collider2D>().enabled = false;
+            this.enabled = false;
+            //Destroy marker
+            MapMarkerManager.DestroyMapMarker(PV);
+        });
     }
 }

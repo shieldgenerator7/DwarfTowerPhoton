@@ -169,11 +169,14 @@ public abstract class PlayerController : MonoBehaviour
             //Stealthed
             sr.color = sr.color.setAlpha((status.stealthed) ? 0.1f : 1);
             //Rooted
-            if (playerMovement.ForcingMovement != status.rooted)
+            if (playerMovement.ForcingMovement != status.rooted
+            || status.rooted && playerMovement.ForceMoveDirection.magnitude > 0)
             {
                 if (status.rooted)
                 {
                     playerMovement.forceMovement(Vector2.zero, status.rooted);
+                    cancelAbilities();
+                    playerMovement.rb2d.velocity = Vector2.zero;
                 }
                 else
                 {
