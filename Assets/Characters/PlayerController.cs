@@ -7,6 +7,9 @@ public abstract class PlayerController : MonoBehaviour
 {
     public CharacterInfo characterInfo;
 
+    public float stunDuration = 2;
+    public float knockbackSpeed = 5;
+
     private Color _playerColor = Color.white;
     public Color playerColor
     {
@@ -136,6 +139,20 @@ public abstract class PlayerController : MonoBehaviour
                 //Damage other players while stunned
                 damager.damagableTypes.Add(EntityType.PLAYER);
                 damager.damageFriendlies = true;
+                //Move while stunned
+                Vector2 stunVelocity =
+                    (SpawnCenter - (Vector2)CaravanController.Caravan.transform.position).normalized
+                    * knockbackSpeed;
+                playerMovement.forceMovement(stunVelocity, true);
+                //Start timer to unstun
+                TimerManager.StartTimer(
+                    stunDuration,
+                    () =>
+                    {
+                        statusKeeper.removeLayer(PV.ViewID);
+                        playerMovement.forceMovement(false);
+                    }
+                    );
             }
             else
             {
