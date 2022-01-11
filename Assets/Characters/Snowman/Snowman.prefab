@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 2758911933372664923}
   - component: {fileID: -6763877186653517758}
   - component: {fileID: 628463848740268033}
-  - component: {fileID: 4410195784120660945}
   - component: {fileID: 9144531418077418824}
   - component: {fileID: 3158633092025413174}
   - component: {fileID: 3369071877670158181}
@@ -112,6 +111,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterInfo: {fileID: 11400000, guid: 9b40627ecf3b35a4a84117116e0e2f8d, type: 2}
+  stunDuration: 2
+  knockbackSpeed: 5
   aminaReloader: {fileID: 3369071877670158181}
   abilityContext: {fileID: 9215063378857821938}
   hpRollChange: 1
@@ -240,20 +241,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAmina: 100
---- !u!114 &4410195784120660945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532201618779257096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f058152a2edad5a4c91a5fd6bd76ad4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stunDuration: 2
-  knockbackDistance: 5
 --- !u!61 &9144531418077418824
 BoxCollider2D:
   m_ObjectHideFlags: 0
