@@ -144,6 +144,7 @@ public abstract class PlayerController : MonoBehaviour
                     (SpawnCenter - (Vector2)CaravanController.Caravan.transform.position).normalized
                     * knockbackSpeed;
                 playerMovement.forceMovement(stunVelocity, true);
+                playerMovement.rb2d.velocity = stunVelocity;
                 //Start timer to unstun
                 TimerManager.StartTimer(
                     stunDuration,
@@ -151,6 +152,9 @@ public abstract class PlayerController : MonoBehaviour
                     {
                         statusKeeper.removeLayer(PV.ViewID);
                         playerMovement.forceMovement(false);
+                        //Restore player color
+                        gameObject.FindComponents<SpriteRenderer>()
+                            .ForEach(sr => sr.color = _playerColor);
                     }
                     );
             }
