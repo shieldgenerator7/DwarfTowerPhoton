@@ -121,7 +121,11 @@ MonoBehaviour:
   tallGrassMap:
   - mapProfile: {fileID: 11400000, guid: 1678a82ad2b0db44e88cac4778bf96c3, type: 2}
     objectSpawnIndex: 2
+  - mapProfile: {fileID: 11400000, guid: 51f7ca95c3550864a906f8a33ddc715c, type: 2}
+    objectSpawnIndex: 2
   - mapProfile: {fileID: 11400000, guid: 94e4cde9444f157448ec3ff9fb4a039c, type: 2}
+    objectSpawnIndex: 3
+  - mapProfile: {fileID: 11400000, guid: 4eee0014c76b4e542be8195e92fa32b8, type: 2}
     objectSpawnIndex: 3
 --- !u!114 &307085991090335124
 MonoBehaviour:

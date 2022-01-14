@@ -27,9 +27,21 @@ public class SniperController : PlayerController
         base.InitializeSettings();
 
         //Tall Grass
-        MapProfile mapProfile = FindObjectOfType<MapGenerator>().mapProfile;
+        MapGenerator mapGenerator = FindObjectOfType<MapGenerator>();
+        mapGenerator.onMapGenerated += UpdateTallGrassIndex;
+        if (mapGenerator.mapProfile)
+        {
+            UpdateTallGrassIndex(mapGenerator.mapProfile);
+        }
+    }
+
+    private void UpdateTallGrassIndex(MapProfile mapProfile)
+    {
         TallGrassMap mapping = tallGrassMap.Find(tgm => tgm.mapProfile == mapProfile);
-        tallGrassLauncher.shotIndex = mapping.objectSpawnIndex;
+        if (mapping.mapProfile)
+        {
+            tallGrassLauncher.shotIndex = mapping.objectSpawnIndex;
+        }
     }
 
     protected override void onAminaEmpty(float amina)
