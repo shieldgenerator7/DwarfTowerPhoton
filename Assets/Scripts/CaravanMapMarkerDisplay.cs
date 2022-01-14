@@ -5,7 +5,9 @@ using UnityEngine;
 public class CaravanMapMarkerDisplay : MonoBehaviour
 {
     public SpriteRenderer positiveArrow;
+    public SpriteRenderer positiveArrowOutline;
     public SpriteRenderer negativeArrow;
+    public SpriteRenderer negativeArrowOutline;
     private List<SpriteRenderer> allSRs;
 
     private CaravanController caravanController;
@@ -33,5 +35,13 @@ public class CaravanMapMarkerDisplay : MonoBehaviour
         //Debug.Log($"Caravan Dir: {caravanController.direction}");
         positiveArrow.enabled = dir > 0;
         negativeArrow.enabled = dir < 0;
+        positiveArrowOutline.enabled = dir > 0;
+        negativeArrowOutline.enabled = dir < 0;
+        //Update color
+        if (caravanController.winningTeamCaptain)
+        {
+            positiveArrow.color = caravanController.winningTeamCaptain.teamColor;
+            negativeArrow.color = caravanController.winningTeamCaptain.teamColor;
+        }
     }
 }

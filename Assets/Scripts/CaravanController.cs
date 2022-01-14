@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CaravanController : MonoBehaviour
@@ -8,6 +9,7 @@ public class CaravanController : MonoBehaviour
     public float maxMoveSpeed = 3;
     private float moveSpeed;
     public Vector2 direction { get; private set; }
+    public TeamTokenCaptain winningTeamCaptain { get; private set; }
     public float maxAllowedDistance = 3;//how far a player can be away but still push it (must still be in trigger)
 
     public Collider2D detectionColl;//the collider that detects which players are pushing
@@ -108,6 +110,16 @@ public class CaravanController : MonoBehaviour
             v.x = 0;
             v = v.normalized;
             direction += v * teamCaptains[ttc];
+        }
+        if (teamCaptains.Count > 0)
+        {
+            winningTeamCaptain = teamCaptains.Aggregate(
+                (kvp1, kvp2) => (kvp1.Value > kvp2.Value) ? kvp1 : kvp2
+                ).Key ?? null;
+        }
+        else
+        {
+            winningTeamCaptain = null;
         }
         //Exit early if not my PV
         if (!move)
