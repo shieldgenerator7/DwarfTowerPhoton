@@ -18,6 +18,7 @@ public abstract class PlayerController : MonoBehaviour
         {
             _playerColor = value;
             //Update components
+            if (!objectSpawner) { objectSpawner = gameObject.FindComponent<ObjectSpawner>(); }
             objectSpawner.PlayerColor = _playerColor;
             gameObject.FindComponents<SpriteRenderer>()
                 .ForEach(sr => sr.color = _playerColor);

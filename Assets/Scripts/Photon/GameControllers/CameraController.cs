@@ -31,9 +31,12 @@ public class CameraController : MonoBehaviour
             FocusObject = focusObject;
         }
         MapGenerator mapGenerator = FindObjectOfType<MapGenerator>();
-        playAreaBounds = mapGenerator.mapProfile.VisibleBounds;
         mapGenerator.onMapGenerated +=
             (mapProfile) => playAreaBounds = mapProfile.VisibleBounds;
+        if (mapGenerator.mapProfile)
+        {
+            playAreaBounds = mapGenerator.mapProfile.VisibleBounds;
+        }
     }
 
     // Update is called once per frame
