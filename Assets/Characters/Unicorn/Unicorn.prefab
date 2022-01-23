@@ -147,6 +147,7 @@ MonoBehaviour:
   - {fileID: 6400624810076416732}
   - {fileID: 448938204000306885}
   - {fileID: 2613285986018779774}
+  - {fileID: 6368753068641259655}
 --- !u!114 &4380998440617942234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,11 +248,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b3994f5d6328d4ea5a2534d14ad54b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityName: 
+  abilityName: Amina Reloader
   aminaCost: 0
-  abilitySlot: 0
-  hidesOtherInputs: 0
-  abilityID: 0
+  abilitySlot: 3
+  hidesOtherInputs: 1
+  abilityID: 1
   reloadDuration: 2
 --- !u!61 &9144531418077418824
 BoxCollider2D:
@@ -399,7 +400,7 @@ MonoBehaviour:
   aminaCost: 1
   abilitySlot: 2
   hidesOtherInputs: 0
-  abilityID: 2
+  abilityID: 4
   rainbowPathIndex: 2
 --- !u!1 &4027114820006220005
 GameObject:
@@ -448,7 +449,7 @@ MonoBehaviour:
   aminaCost: 10
   abilitySlot: 1
   hidesOtherInputs: 0
-  abilityID: 1
+  abilityID: 3
   fireDelay: 1
   angle: 0
   shotIndex: 1
@@ -500,5 +501,5 @@ MonoBehaviour:
   aminaCost: 5
   abilitySlot: 0
   hidesOtherInputs: 0
-  abilityID: 0
+  abilityID: 2
   carriedShotIndex: 0
