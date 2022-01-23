@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floaty: 1
+  lerpSpeed: 2
 --- !u!114 &3769535869663102263
 MonoBehaviour:
   m_ObjectHideFlags: 0

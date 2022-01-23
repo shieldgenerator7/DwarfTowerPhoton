@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour, IPunObservable
 
     [Tooltip("Should this movement conserve some previous momentum when changing directions?")]
     public bool floaty = false;
+    [Tooltip("If floaty, how fast it should lerp movement")]
+    public float lerpSpeed = 1;
 
     public float MovementSpeed { get; set; } = 4;
 
@@ -60,16 +62,11 @@ public class PlayerMovement : MonoBehaviour, IPunObservable
         }
         if (floaty)
         {
-            //If velocity hasn't changed since last frame,
-            if (prevVelocity == rb2d.velocity)
+            //Lerp velocity
+            rb2d.velocity = Vector2.Lerp(rb2d.velocity, desiredVelocity, lerpSpeed * Time.deltaTime);
+            if (Vector2.Distance(rb2d.velocity, desiredVelocity) < 0.01f)
             {
-                //Give exactly desired velocity
                 rb2d.velocity = desiredVelocity;
-            }
-            else
-            {
-                //Else add desired to current velocity
-                rb2d.velocity += desiredVelocity;
             }
         }
         else
