@@ -37,8 +37,8 @@ public class PlayerInput : MonoBehaviour
     {
         InputState newInput = new InputState();
         newInput.movement = new Vector2(
-            Input.GetAxis("Horizontal"),
-            Input.GetAxis("Vertical")
+            Input.GetAxisRaw("Horizontal"),
+            Input.GetAxisRaw("Vertical")
             );
         newInput.ability1 = getButtonState("Ability1");
         newInput.ability2 = getButtonState("Ability2");
