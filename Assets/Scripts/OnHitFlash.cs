@@ -14,11 +14,11 @@ public class OnHitFlash : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.FindComponent<HealthPool>().onDamaged += startFlash;
         srs = gameObject.FindComponents<SpriteRenderer>();
         origColors = srs.ConvertAll(sr => sr.color);
         this.flashDuration = EffectManager.instance.flashDuration;
         this.flashColor = EffectManager.instance.flashColor;
+        gameObject.FindComponent<HealthPool>().onDamaged += startFlash;
     }
 
     // Update is called once per frame
