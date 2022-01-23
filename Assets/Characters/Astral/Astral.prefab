@@ -519,9 +519,9 @@ MonoBehaviour:
   abilitySlot: 2
   hidesOtherInputs: 1
   abilityID: 8
-  aminaReservedPerSecond: 5
+  aminaReservedPerSecond: 10
   expectedAnimaReserved: 5
-  minAminaReserved: 0.1
+  minAminaReserved: 5
   chargedShotIndex: 5
   maxSpawnBufferExtension: 0
   previewPrefab: {fileID: 4883769523225080588, guid: ca7cd4e6505fb744f9d155be37a70961,
