@@ -9,6 +9,8 @@ public class GunController : PlayerAbility
     //Settings
     [Tooltip("Seconds between shots")]
     public float fireDelay = 0.1f;//seconds between shots
+    [Tooltip("Angle from the cursor")]
+    public float angle = 0;//angle from the cursor
     [Tooltip("The index of the shot in the object spawner")]
     public int shotIndex;
     [Tooltip("Should the shot be made aware of who its owner is?")]
@@ -37,8 +39,14 @@ public class GunController : PlayerAbility
                 {
                     lastFireTime = Time.time;
                 }
+                //Determine direction
+                Vector2 dir = ((Vector2)Utility.MouseWorldPos - spawnPos);
+                if (angle != 0)
+                {
+                    dir = Quaternion.Euler(0, 0, angle) * dir;
+                }
+                dir.Normalize();
                 //Launch shot
-                Vector2 dir = ((Vector2)Utility.MouseWorldPos - spawnPos).normalized;
                 ShotController shot = objectSpawner.spawnObject<ShotController>(
                     shotIndex,
                     spawnPos,

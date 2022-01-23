@@ -197,6 +197,7 @@ MonoBehaviour:
   hidesOtherInputs: 0
   abilityID: 0
   fireDelay: 0.1
+  angle: 0
   shotIndex: 0
   shouldSetOwner: 0
   turretBase: {fileID: 7052029397972579358}

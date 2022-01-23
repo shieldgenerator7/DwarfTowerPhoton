@@ -26,11 +26,18 @@ public class TimerManager : MonoBehaviour
         }
     }
 
-    public static void StartTimer(float duration, Timer.OnTimerCompleted completedDelegate)
+    public static Timer StartTimer(float duration)
     {
         Timer timer = new Timer(duration, Time.time);
-        timer.onTimerCompleted += completedDelegate;
         instance.timers.Add(timer);
+        return timer;
+    }
+
+    public static Timer StartTimer(float duration, Timer.OnTimerCompleted completedDelegate)
+    {
+        Timer timer = StartTimer(duration);
+        timer.onTimerCompleted += completedDelegate;
+        return timer;
     }
 
 }

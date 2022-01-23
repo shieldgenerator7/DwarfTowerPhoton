@@ -514,5 +514,6 @@ MonoBehaviour:
   hidesOtherInputs: 0
   abilityID: 2
   fireDelay: 0.5
+  angle: 0
   shotIndex: 0
   shouldSetOwner: 0

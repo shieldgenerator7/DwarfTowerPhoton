@@ -413,6 +413,7 @@ MonoBehaviour:
   hidesOtherInputs: 0
   abilityID: 3
   fireDelay: 0.5
+  angle: 0
   shotIndex: 1
   shouldSetOwner: 0
 --- !u!1 &3107006109710722385
@@ -464,6 +465,7 @@ MonoBehaviour:
   hidesOtherInputs: 0
   abilityID: 4
   fireDelay: 1
+  angle: 0
   shotIndex: 2
   shouldSetOwner: 0
 --- !u!1 &7577088886736187312

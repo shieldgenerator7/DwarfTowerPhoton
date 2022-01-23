@@ -407,6 +407,7 @@ MonoBehaviour:
   hidesOtherInputs: 0
   abilityID: 3
   fireDelay: 1
+  angle: 0
   shotIndex: 1
   shouldSetOwner: 0
 --- !u!1 &3107006109710722385
@@ -469,6 +470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6220889621231917683}
   - component: {fileID: 5500888993561376432}
+  - component: {fileID: 6824909926848915924}
   m_Layer: 0
   m_Name: Rapid Shot
   m_TagString: Untagged
@@ -508,5 +510,21 @@ MonoBehaviour:
   hidesOtherInputs: 0
   abilityID: 2
   fireDelay: 0.15
+  angle: 0
   shotIndex: 0
   shouldSetOwner: 0
+--- !u!114 &6824909926848915924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7577088886736187312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 888484d03277b6e4ea9beb1ea7bcf7b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  angleDelta: 22.5
+  resetWaitDuration: 2
+  gunController: {fileID: 5500888993561376432}
