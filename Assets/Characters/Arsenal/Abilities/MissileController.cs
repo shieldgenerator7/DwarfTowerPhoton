@@ -18,7 +18,11 @@ public class MissileController : ShotController
     public Vector2? Target
     {
         get => targetPos ?? targetObj?.ClosestPoint(transform.position);
-        private set => targetPos = value;
+        private set
+        {
+            targetPos = value;
+            targetObj = null;
+        }
     }
 
     private void Update()
