@@ -2352,6 +2352,7 @@ MonoBehaviour:
   mapName: 
   characterSelection:
     itemList:
+    - {fileID: 11400000, guid: ac72904e4a3b45f4787eda499468ee71, type: 2}
     - {fileID: 11400000, guid: 7fea9959ab8a51645a83774371fe55f9, type: 2}
     - {fileID: 11400000, guid: ba874eaf7ebd1c442b578cafc6e0b469, type: 2}
     - {fileID: 11400000, guid: a91988f801f29bf418ddc93cfe96db07, type: 2}
@@ -2366,7 +2367,7 @@ MonoBehaviour:
   unlockAtStartCount: 2
   warmColorSelection:
     itemList:
-    - {r: 0.8396226, g: 0.06992337, b: 0, a: 1}
+    - {r: 0.8392157, g: 0.07058824, b: 0, a: 1}
     - {r: 0.65882355, g: 0.3254902, b: 0.17254902, a: 1}
     - {r: 1, g: 0.9647059, b: 0, a: 1}
   coolColorSelection:
