@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daf34fadc6362aa4e82e683a827b45e1, type: 3}
+  m_Name: Arsenal
+  m_EditorClassIdentifier: 
+  characterName: Arsenal
+  sprite: {fileID: 21300000, guid: cb4ca2cdbe14fc44491c480510d9c572, type: 3}
+  defaultColor: {r: 0.8392157, g: 0.07058824, b: 0, a: 1}
+  portrait: {fileID: 21300000, guid: cb4ca2cdbe14fc44491c480510d9c572, type: 3}
+  prefab: {fileID: 532201618779257096, guid: c76b665cebcf4bd478d15cf833d20f33, type: 3}
+  difficulty: 1
+  typeList: 0000000001000000
