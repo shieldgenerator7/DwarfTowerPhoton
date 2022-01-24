@@ -11,20 +11,18 @@ GameObject:
   - component: {fileID: 385}
   - component: {fileID: 521}
   - component: {fileID: 498}
-  - component: {fileID: 505}
-  - component: {fileID: 566}
+  - component: {fileID: 1720445580077732220}
+  - component: {fileID: 8086545652496287568}
   - component: {fileID: -845759806725884248}
   - component: {fileID: 4216965958637861825}
   - component: {fileID: -5159110027954863870}
   - component: {fileID: 571}
   - component: {fileID: 8902093542985066328}
   - component: {fileID: 508065936224665636}
-  - component: {fileID: -1605777544747620558}
   - component: {fileID: 1514994493904205255}
   - component: {fileID: 7406342495784987469}
-  - component: {fileID: 5707579658751896384}
   m_Layer: 0
-  m_Name: shot
+  m_Name: missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +82,7 @@ SpriteRenderer:
   m_SortingLayerID: -356971555
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 66fc0cbc132755a49b6fc8bd017365c2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f7f48f1cce7cb7f4a9ac4ce9ce4452e3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -116,8 +114,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!58 &505
-CircleCollider2D:
+--- !u!61 &1720445580077732220
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -126,13 +124,23 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.5
---- !u!114 &566
+  m_Size: {x: 0.37, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &8086545652496287568
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,11 +149,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 245}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95401923689b5e04ba705f1bf93961a0, type: 3}
+  m_Script: {fileID: 11500000, guid: ef4359f7797cc6a479098adad64e469c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   statBase:
-    moveSpeed: 3
+    moveSpeed: 2
     maxHits: 1
     fireRate: -1
     damage: 1
@@ -184,7 +192,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 245}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf1d5e3f79e1da94884919a30c2202e8, type: 3}
   m_Name: 
@@ -242,19 +250,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamCaptain: {fileID: 0}
   owner: {fileID: 0}
---- !u!114 &-1605777544747620558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ee9253eaee8cde4081db31a9f23311f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  updateEveryFrame: 1
 --- !u!114 &1514994493904205255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,16 +279,3 @@ MonoBehaviour:
   damageOnTrigger: 1
   damageOnCollide: 1
   damageFriendlies: 0
---- !u!114 &5707579658751896384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc26de173796eba4aa05800f34839497, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  decayPerSecond: 0.5

@@ -463,7 +463,7 @@ GameObject:
   - component: {fileID: 6220889621231917683}
   - component: {fileID: 5500888993561376432}
   m_Layer: 0
-  m_Name: Ability1
+  m_Name: MIssile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -495,7 +495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83413c13fefadf64bab9596e5332f75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityName: Ability 1
+  abilityName: Missile
   aminaCost: 5
   abilitySlot: 0
   hidesOtherInputs: 0
@@ -503,4 +503,4 @@ MonoBehaviour:
   fireDelay: 0.5
   angle: 0
   shotIndex: 0
-  shouldSetOwner: 0
+  shouldSetOwner: 1
