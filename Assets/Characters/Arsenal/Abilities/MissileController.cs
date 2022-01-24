@@ -13,11 +13,11 @@ public class MissileController : ShotController
     public List<EntityType> targetableEntityTypes;
 
     private Vector2? targetPos = null;
-    private Transform targetObj = null;
+    private Rigidbody2D targetObj = null;
 
     public Vector2? Target
     {
-        get => targetPos ?? targetObj?.position;
+        get => targetPos ?? targetObj?.ClosestPoint(transform.position);
         private set => targetPos = value;
     }
 
@@ -27,7 +27,7 @@ public class MissileController : ShotController
         //Find a target
         if (Target == null)
         {
-            List<Transform> closeTransforms = new List<Transform>();
+            List<Rigidbody2D> closeTransforms = new List<Rigidbody2D>();
             RaycastHit2D[] rch2ds = new RaycastHit2D[50];
             int count = Physics2D.CircleCastNonAlloc(transform.position, maxTargetRange, Vector2.zero, rch2ds);
             for (int i = 0; i < count; i++)
@@ -44,7 +44,7 @@ public class MissileController : ShotController
                 {
                     if (targetableEntityTypes.Contains(hp.entityType))
                     {
-                        closeTransforms.Add(hp.gameObject.FindComponent<Rigidbody2D>().transform);
+                        closeTransforms.Add(hp.gameObject.FindComponent<Rigidbody2D>());
                     }
                 }
             }
@@ -52,8 +52,8 @@ public class MissileController : ShotController
             {
                 //Target the closest object in range
                 targetObj = closeTransforms
-                    .OrderBy(t =>
-                        Vector2.Distance(t.position, transform.position)
+                    .OrderBy(rb2d =>
+                        Vector2.Distance(rb2d.ClosestPoint(transform.position), transform.position)
                     )
                     .First();
             }
