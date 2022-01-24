@@ -33,6 +33,12 @@ public class MissileController : ShotController
             for (int i = 0; i < count; i++)
             {
                 RaycastHit2D rch2d = rch2ds[i];
+                //Don't lock onto teammate
+                if (TeamToken.onSameTeam(gameObject, rch2d.collider.gameObject))
+                {
+                    continue;
+                }
+                //Test this entity to see if it can be locked onto
                 HealthPool hp = rch2d.collider.gameObject.FindComponent<HealthPool>();
                 if (hp)
                 {
