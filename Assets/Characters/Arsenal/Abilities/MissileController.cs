@@ -24,6 +24,10 @@ public class MissileController : ShotController
         private set
         {
             targetPos = value;
+            if (targetObj)
+            {
+                targetObj.gameObject.FindComponent<HealthPool>().onDied -= DeselectTarget;
+            }
             targetObj = null;
         }
     }
@@ -47,7 +51,7 @@ public class MissileController : ShotController
                 }
                 //Test this entity to see if it can be locked onto
                 HealthPool hp = rch2d.collider.gameObject.FindComponent<HealthPool>();
-                if (hp)
+                if (hp && hp.Health > 0)
                 {
                     if (targetableEntityTypes.Contains(hp.entityType))
                     {
@@ -67,6 +71,9 @@ public class MissileController : ShotController
                         Vector2.Distance(rb2d.ClosestPoint(transform.position), transform.position)
                     )
                     .First();
+                HealthPool hp = targetObj.gameObject.FindComponent<HealthPool>();
+                hp.onDied -= DeselectTarget;
+                hp.onDied += DeselectTarget;
             }
         }
         //Move towards the target
@@ -100,5 +107,10 @@ public class MissileController : ShotController
         }
 
 
+    }
+
+    void DeselectTarget(float hp)
+    {
+        Target = null;
     }
 }
