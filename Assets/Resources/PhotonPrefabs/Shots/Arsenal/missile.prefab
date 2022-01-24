@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 508065936224665636}
   - component: {fileID: 1514994493904205255}
   - component: {fileID: 7406342495784987469}
+  - component: {fileID: 4573552368356425989}
   m_Layer: 0
   m_Name: missile
   m_TagString: Untagged
@@ -159,6 +160,10 @@ MonoBehaviour:
     damage: 1
     size: 1
   destroyOnIndestructible: 1
+  maxTurnAnglePerSecond: 2
+  maxTargetRange: 7
+  targetableEntityTypes: 0200000001000000
+  targetFindColl: {fileID: 4573552368356425989}
 --- !u!114 &-845759806725884248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,3 +284,19 @@ MonoBehaviour:
   damageOnTrigger: 1
   damageOnCollide: 1
   damageFriendlies: 0
+--- !u!58 &4573552368356425989
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 7
