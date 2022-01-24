@@ -11,8 +11,6 @@ public class MissileController : ShotController
     public float maxTargetRange = 7;
     [Tooltip("The types of entity this missile can lock onto")]
     public List<EntityType> targetableEntityTypes;
-    [Tooltip("The collider used to detect entities it can lock onto")]
-    public Collider2D targetFindColl;
 
     private Vector2? targetPos = null;
     private Transform targetObj = null;
@@ -31,7 +29,7 @@ public class MissileController : ShotController
         {
             List<Transform> closeTransforms = new List<Transform>();
             RaycastHit2D[] rch2ds = new RaycastHit2D[50];
-            int count = targetFindColl.Cast(Vector2.zero, rch2ds);
+            int count = Physics2D.CircleCastNonAlloc(transform.position, maxTargetRange, Vector2.zero, rch2ds);
             for (int i = 0; i < count; i++)
             {
                 RaycastHit2D rch2d = rch2ds[i];
