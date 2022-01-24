@@ -9,6 +9,9 @@ public class MissileController : ShotController
     public float maxTurnAnglePerSecond = 2;
     [Tooltip("If the target is outside this range, the missile stops tracking toward it")]
     public float maxTargetRange = 7;
+    [Range(0, 180)]
+    [Tooltip("A target must be within this angle in front of the missile in order to be locked onto")]
+    public float maxLockOnAngle = 90;
     [Tooltip("The types of entity this missile can lock onto")]
     public List<EntityType> targetableEntityTypes;
 
@@ -56,6 +59,10 @@ public class MissileController : ShotController
             {
                 //Target the closest object in range
                 targetObj = closeTransforms
+                    .FindAll(rb2d =>
+                        Vector2.Angle(rb2d.ClosestPoint(transform.position), transform.position)
+                        <= maxLockOnAngle
+                        )
                     .OrderBy(rb2d =>
                         Vector2.Distance(rb2d.ClosestPoint(transform.position), transform.position)
                     )

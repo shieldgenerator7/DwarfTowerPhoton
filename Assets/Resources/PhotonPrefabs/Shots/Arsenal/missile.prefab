@@ -159,8 +159,9 @@ MonoBehaviour:
     damage: 1
     size: 1
   destroyOnIndestructible: 1
-  maxTurnAnglePerSecond: 90
-  maxTargetRange: 7
+  maxTurnAnglePerSecond: 45
+  maxTargetRange: 3
+  maxLockOnAngle: 90
   targetableEntityTypes: 0200000001000000
 --- !u!114 &-845759806725884248
 MonoBehaviour:
