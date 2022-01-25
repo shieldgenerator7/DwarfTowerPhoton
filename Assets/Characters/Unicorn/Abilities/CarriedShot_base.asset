@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be2ba0794f9e19b47b05a6cd15ff1d6d, type: 3}
   m_Name: CarriedShot_base
   m_EditorClassIdentifier: 
-  positionAngle: 0
-  rotationAngle: 0
-  holdBuffer: 0.75
-  size: 0.1
+  holdShotData:
+    holdBuffer: 0.75
+    holdAngle: 0
+    rotationAngle: 0
+    size: 0.1

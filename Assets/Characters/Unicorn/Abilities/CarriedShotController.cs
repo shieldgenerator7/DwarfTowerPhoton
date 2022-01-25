@@ -11,10 +11,10 @@ public class CarriedShotController : ShotController
     [Tooltip("Max time until the carried shot reaches max level")]
     public float maxTime = 5;
     [Tooltip("The initial position data")]
-    public CarriedShotControllerData dataBase;
+    public ShotControllerData dataBase;
     [Tooltip("The final position data")]
-    public CarriedShotControllerData dataFinal;
-    private CarriedShotControllerData dataCurrent;
+    public ShotControllerData dataFinal;
+    private HoldShotData dataCurrent;
 
     private float carryPercent = -1;//how much has been swung
     public float CarryPercent
@@ -26,10 +26,10 @@ public class CarriedShotController : ShotController
             if (carryPercent != newValue)
             {
                 carryPercent = newValue;
-                dataCurrent.positionAngle = Mathf.Lerp(dataBase.positionAngle, dataFinal.positionAngle, carryPercent);
-                dataCurrent.rotationAngle = Mathf.Lerp(dataBase.rotationAngle, dataFinal.rotationAngle, carryPercent);
-                dataCurrent.holdBuffer = Mathf.Lerp(dataBase.holdBuffer, dataFinal.holdBuffer, carryPercent);
-                dataCurrent.size = Mathf.Lerp(dataBase.size, dataFinal.size, carryPercent);
+                dataCurrent.holdAngle = Mathf.Lerp(dataBase.holdShotData.holdAngle, dataFinal.holdShotData.holdAngle, carryPercent);
+                dataCurrent.rotationAngle = Mathf.Lerp(dataBase.holdShotData.rotationAngle, dataFinal.holdShotData.rotationAngle, carryPercent);
+                dataCurrent.holdBuffer = Mathf.Lerp(dataBase.holdShotData.holdBuffer, dataFinal.holdShotData.holdBuffer, carryPercent);
+                dataCurrent.size = Mathf.Lerp(dataBase.holdShotData.size, dataFinal.holdShotData.size, carryPercent);
                 stats = StatLayer.Lerp(statBase, statMax, carryPercent);
             }
         }
@@ -58,7 +58,7 @@ public class CarriedShotController : ShotController
     {
         base.Start();
         sr = GetComponent<SpriteRenderer>();
-        dataCurrent = new CarriedShotControllerData();
+        dataCurrent = new HoldShotData();
         CarryPercent = 0;
         origScale = transform.localScale;
         carryStartTime = Time.time;
@@ -79,7 +79,7 @@ public class CarriedShotController : ShotController
                 CarryPercent = CarryTime / maxTime;
                 //Position
                 Vector2 pointDir = PointDirection;
-                pointDir = pointDir.Rotate(dataCurrent.positionAngle).normalized;
+                pointDir = pointDir.Rotate(dataCurrent.holdAngle).normalized;
                 transform.position = PivotPoint + (pointDir * dataCurrent.holdBuffer);
                 //Rotation
                 Vector2 lookDir = pointDir * ((sr.flipY) ? -1 : 1);
