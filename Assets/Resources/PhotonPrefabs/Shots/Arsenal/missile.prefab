@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 508065936224665636}
   - component: {fileID: 1514994493904205255}
   - component: {fileID: 7406342495784987469}
+  - component: {fileID: 6902079376021401312}
   m_Layer: 0
   m_Name: missile
   m_TagString: Untagged
@@ -283,3 +284,20 @@ MonoBehaviour:
   damageOnTrigger: 1
   damageOnCollide: 1
   damageFriendlies: 0
+--- !u!114 &6902079376021401312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26a97abfc8af5c041ba50eae51bdb694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holdShotData:
+    holdBuffer: 1.5
+    holdAngle: 0
+    rotationAngle: 0
+    size: 1

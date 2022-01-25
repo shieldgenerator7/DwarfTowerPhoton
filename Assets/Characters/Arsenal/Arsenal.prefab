@@ -142,9 +142,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilities:
-  - {fileID: 7133168848261502530}
-  - {fileID: 4034267826870480475}
   - {fileID: 5500888993561376432}
+  - {fileID: 3871455386416105071}
+  - {fileID: 3713530830849661248}
   - {fileID: 3369071877670158181}
 --- !u!114 &3854592228582004885
 MonoBehaviour:
@@ -307,8 +307,6 @@ MonoBehaviour:
   folderName: Shots/Arsenal
   objectSpawnInfoList:
   - {fileID: 11400000, guid: 8c56b84ac31bb734997d396f2a88d0e1, type: 2}
-  - {fileID: 11400000, guid: d682e5faad624fa4482ee30a419b27a4, type: 2}
-  - {fileID: 11400000, guid: 4a1d62476983408419a5ad453f1e2a63, type: 2}
 --- !u!114 &-3464993547012377175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,9 +346,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1913788795788701171}
-  - component: {fileID: 7133168848261502530}
+  - component: {fileID: 3871455386416105071}
   m_Layer: 0
-  m_Name: Ability2
+  m_Name: Barrage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -370,7 +368,7 @@ Transform:
   m_Father: {fileID: 1073061482865175048}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7133168848261502530
+--- !u!114 &3871455386416105071
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -379,23 +377,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 2299017120802892305}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 410d7b1fe69fd9248838e7e67f6ada50, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a1e38f13531182499dd0effacb7f359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityName: Ability 2
-  aminaCost: 0
+  abilityName: Barrage
+  aminaCost: 5
   abilitySlot: 1
-  hidesOtherInputs: 1
+  hidesOtherInputs: 0
   abilityID: 3
-  aminaReservedPerSecond: 5
-  expectedAnimaReserved: 10
-  minAminaReserved: 5.1
-  chargedShotIndex: 1
-  maxSpawnBufferExtension: 0
-  previewPrefab: {fileID: 3363737750353282456, guid: c61aa5d8c6dad3f43806362e06c103e5,
-    type: 3}
-  upgradeRange: 0
-  turretFireTrigger: {fileID: 5500888993561376432}
+  carryNewShotDelay: 0.5
+  carryShotAngleBuffer: 11
+  maxCarriedShots: 10
+  carriedShotIndex: 0
 --- !u!1 &3107006109710722385
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,9 +398,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8736292213951035431}
-  - component: {fileID: 4034267826870480475}
+  - component: {fileID: 3713530830849661248}
   m_Layer: 0
-  m_Name: Ability3
+  m_Name: Mine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -427,7 +420,7 @@ Transform:
   m_Father: {fileID: 1073061482865175048}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4034267826870480475
+--- !u!114 &3713530830849661248
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -436,22 +429,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 3107006109710722385}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1146f130182c8b468babded8c5cb840, type: 3}
+  m_Script: {fileID: 11500000, guid: 83413c13fefadf64bab9596e5332f75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityName: Ability 3
-  aminaCost: 0
+  abilityName: Mine
+  aminaCost: 5
   abilitySlot: 2
-  hidesOtherInputs: 1
+  hidesOtherInputs: 0
   abilityID: 4
-  aminaReservedPerSecond: 10
-  expectedAnimaReserved: 10
-  minAminaReserved: 0.1
-  chargedShotIndex: 2
-  maxSpawnBufferExtension: 0
-  previewPrefab: {fileID: 4883769523225080588, guid: b262c7e4978b83d4da6bd142ea06f830,
-    type: 3}
-  upgradeRange: 0
+  fireDelay: 0.5
+  angle: 0
+  shotIndex: 0
+  shouldSetOwner: 0
 --- !u!1 &7577088886736187312
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,4 +492,4 @@ MonoBehaviour:
   fireDelay: 0.5
   angle: 0
   shotIndex: 0
-  shouldSetOwner: 1
+  shouldSetOwner: 0

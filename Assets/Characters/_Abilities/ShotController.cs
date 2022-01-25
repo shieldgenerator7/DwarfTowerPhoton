@@ -75,10 +75,7 @@ public class ShotController : MonoBehaviour
     protected virtual void Start()
     {
         stats = statBase;
-        if (rb2d)
-        {
-            rb2d.velocity = transform.up * _stats.moveSpeed;
-        }
+        Launch();
         //HealthPool
         health = GetComponent<HealthPool>();
         if (health)
@@ -92,6 +89,14 @@ public class ShotController : MonoBehaviour
         onStatsChanged -= updateFromStats;
         onStatsChanged += updateFromStats;
         updateFromStats(stats);
+    }
+
+    public void Launch()
+    {
+        if (rb2d)
+        {
+            rb2d.velocity = transform.up * _stats.moveSpeed;
+        }
     }
 
     protected virtual void updateFromStats(StatLayer statLayer)

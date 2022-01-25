@@ -185,5 +185,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterIndex: 0
   warmColorIndex: 0
-  coolColorIndex: 0
+  coolColorIndex: 1
   mapName: 
