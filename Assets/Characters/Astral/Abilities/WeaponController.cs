@@ -47,9 +47,9 @@ public class WeaponController : ChargedShotController
         }
     }
 
-    protected override PlayerController owner
+    public override PlayerController owner
     {
-        set
+        protected set
         {
             if (owner)
             {

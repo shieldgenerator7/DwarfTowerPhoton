@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class TeleportShotController : ShotController
 {
-    protected override PlayerController owner
+    public override PlayerController owner
     {
         get => base.owner;
-        set
+        protected set
         {
             base.owner = value;
             updateSpeed();

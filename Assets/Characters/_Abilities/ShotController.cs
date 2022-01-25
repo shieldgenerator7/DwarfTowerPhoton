@@ -63,10 +63,10 @@ public class ShotController : MonoBehaviour
     }
 
     private PlayerController _owner;
-    protected virtual PlayerController owner
+    public virtual PlayerController owner
     {
         get => _owner;
-        set => _owner = value;
+        protected set => _owner = value;
     }
 
     protected Damager damager { get; private set; }
