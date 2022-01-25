@@ -23,7 +23,6 @@ public class MultipleCarriedGunController : PlayerAbility
     {
         base.OnButtonDown();
 
-        lastCarryNewShotTime = -1;
         OnButtonHeld();
     }
 
@@ -93,6 +92,9 @@ public class MultipleCarriedGunController : PlayerAbility
     private void releaseShots()
     {
         carriedShotList.ForEach(shot => shot.release());
+        onReleaseShots?.Invoke(carriedShotList);
         carriedShotList.Clear();
     }
+    public delegate void OnReleaseShots(List<CarryableShot> shots);
+    public event OnReleaseShots onReleaseShots;
 }

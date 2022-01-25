@@ -115,6 +115,7 @@ MonoBehaviour:
   knockbackSpeed: 5
   aminaReloader: {fileID: 3369071877670158181}
   abilityContext: {fileID: 9215063378857821938}
+  barrageAbility: {fileID: 3871455386416105071}
 --- !u!114 &307085991090335124
 MonoBehaviour:
   m_ObjectHideFlags: 0

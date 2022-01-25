@@ -21,7 +21,7 @@ public class MissileController : ShotController
     public Vector2? Target
     {
         get => targetPos ?? targetObj?.ClosestPoint(transform.position);
-        private set
+        set
         {
             targetPos = value;
             if (targetObj)
@@ -80,29 +80,29 @@ public class MissileController : ShotController
         if (Target != null)
         {
             Vector2 targetDir = (Vector2)Target - (Vector2)transform.position;
-            //If target is still in range
-            if (targetDir.magnitude <= maxTargetRange)
+            //Turn toward the target
+            Vector2 moveDir = transform.up.normalized;
+            targetDir.Normalize();
+            if (moveDir != targetDir)
             {
-                //Turn toward it
-                Vector2 moveDir = transform.up.normalized;
-                targetDir.Normalize();
-                if (moveDir != targetDir)
-                {
-                    float angleDir = Mathf.Sign(Vector2.SignedAngle(moveDir, targetDir));
-                    moveDir = Quaternion.Euler(
-                        0,
-                        0,
-                        maxTurnAnglePerSecond * angleDir * Time.deltaTime
-                        ) * moveDir;
-                    //Change direction
-                    transform.up = moveDir;
-                    rb2d.velocity = moveDir * rb2d.velocity.magnitude;
-                }
+                float angleDir = Mathf.Sign(Vector2.SignedAngle(moveDir, targetDir));
+                moveDir = Quaternion.Euler(
+                    0,
+                    0,
+                    maxTurnAnglePerSecond * angleDir * Time.deltaTime
+                    ) * moveDir;
+                //Change direction
+                transform.up = moveDir;
+                rb2d.velocity = moveDir * rb2d.velocity.magnitude;
             }
-            else
+            //If target is out of in range
+            if (targetDir.magnitude > maxTargetRange)
             {
-                //Target out of range, stop tracking it
-                Target = null;
+                //Target object out of range, stop tracking it
+                if (targetObj != null)
+                {
+                    Target = null;
+                }
             }
         }
 
