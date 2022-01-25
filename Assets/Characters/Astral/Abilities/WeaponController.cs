@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class WeaponController : ChargedShotController
 {
-    public WeaponControllerData dataBase;
-    public WeaponControllerData dataFinal;
-    private WeaponControllerData dataCurrent;
+    public ShotControllerData dataBase;
+    public ShotControllerData dataFinal;
+    private HoldShotData dataCurrent;
     public float swingSpeed = 1;
     public float throwSpeed = 3;
 
@@ -24,9 +24,9 @@ public class WeaponController : ChargedShotController
             if (swingPercent != newValue)
             {
                 swingPercent = newValue;
-                dataCurrent.positionAngle = Mathf.Lerp(dataBase.positionAngle, dataFinal.positionAngle, swingPercent);
-                dataCurrent.rotationAngle = Mathf.Lerp(dataBase.rotationAngle, dataFinal.rotationAngle, swingPercent);
-                dataCurrent.holdBuffer = Mathf.Lerp(dataBase.holdBuffer, dataFinal.holdBuffer, swingPercent);
+                dataCurrent.holdAngle = Mathf.Lerp(dataBase.holdShotData.holdAngle, dataFinal.holdShotData.holdAngle, swingPercent);
+                dataCurrent.rotationAngle = Mathf.Lerp(dataBase.holdShotData.rotationAngle, dataFinal.holdShotData.rotationAngle, swingPercent);
+                dataCurrent.holdBuffer = Mathf.Lerp(dataBase.holdShotData.holdBuffer, dataFinal.holdShotData.holdBuffer, swingPercent);
             }
         }
     }
@@ -70,7 +70,7 @@ public class WeaponController : ChargedShotController
     {
         base.Start();
         sr = GetComponent<SpriteRenderer>();
-        dataCurrent = new WeaponControllerData();
+        dataCurrent = new HoldShotData();
         SwingPercent = 0;
     }
 
@@ -93,7 +93,7 @@ public class WeaponController : ChargedShotController
                     SwingPercent -= swingSpeed * Time.deltaTime;
                 }
                 Vector2 mouseDir = (Vector2)Utility.MouseWorldPos - PivotPoint;
-                Vector2 pointDir = mouseDir.Rotate(dataCurrent.positionAngle).normalized;
+                Vector2 pointDir = mouseDir.Rotate(dataCurrent.holdAngle).normalized;
                 transform.position = PivotPoint + (pointDir * dataCurrent.holdBuffer);
                 Vector2 lookDir = pointDir * ((sr.flipY) ? -1 : 1);
                 lookDir = lookDir.Rotate(dataCurrent.rotationAngle).normalized;

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ecb50b97b98c5b458d30a546d606ebb, type: 3}
   m_Name: scythe_arm_right_base
   m_EditorClassIdentifier: 
-  positionAngle: -90
-  rotationAngle: 0
-  holdBuffer: 0.5
+  holdShotData:
+    holdBuffer: 0.5
+    holdAngle: -90
+    rotationAngle: 0
+    size: 1
