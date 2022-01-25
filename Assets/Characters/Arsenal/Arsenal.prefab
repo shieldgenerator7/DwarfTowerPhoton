@@ -308,6 +308,7 @@ MonoBehaviour:
   folderName: Shots/Arsenal
   objectSpawnInfoList:
   - {fileID: 11400000, guid: 8c56b84ac31bb734997d396f2a88d0e1, type: 2}
+  - {fileID: 11400000, guid: b9ca440815e061e4d8848fd57c25dbac, type: 2}
 --- !u!114 &-3464993547012377175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,9 +388,9 @@ MonoBehaviour:
   hidesOtherInputs: 0
   abilityID: 3
   carryNewShotDelay: 0.5
-  carryShotAngleBuffer: 11
-  maxCarriedShots: 10
-  carriedShotIndex: 0
+  carryShotAngleBuffer: 33
+  maxCarriedShots: 11
+  carriedShotIndex: 1
 --- !u!1 &3107006109710722385
 GameObject:
   m_ObjectHideFlags: 0

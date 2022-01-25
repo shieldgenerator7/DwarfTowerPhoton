@@ -297,7 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdShotData:
-    holdBuffer: 1.5
+    holdBuffer: 0.75
     holdAngle: 0
     rotationAngle: 0
     size: 1
