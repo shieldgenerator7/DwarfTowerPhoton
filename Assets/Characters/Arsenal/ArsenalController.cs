@@ -18,4 +18,13 @@ public class ArsenalController : PlayerController
             });
         };
     }
+
+    protected override void onAminaEmpty(float amina)
+    {
+        base.onAminaEmpty(amina);
+        if (barrageAbility.HoldingShots)
+        {
+            barrageAbility.OnButtonCanceled();
+        }
+    }
 }

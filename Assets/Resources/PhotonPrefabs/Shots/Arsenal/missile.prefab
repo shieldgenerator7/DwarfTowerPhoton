@@ -163,6 +163,7 @@ MonoBehaviour:
   maxTurnAnglePerSecond: 45
   maxTargetRange: 3
   maxLockOnAngle: 90
+  locationTargetGoalDistance: 0.5
   targetableEntityTypes: 0200000001000000
 --- !u!114 &-845759806725884248
 MonoBehaviour:

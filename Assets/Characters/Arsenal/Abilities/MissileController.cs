@@ -12,6 +12,8 @@ public class MissileController : ShotController
     [Range(0, 180)]
     [Tooltip("A target must be within this angle in front of the missile in order to be locked onto")]
     public float maxLockOnAngle = 90;
+    [Tooltip("Proximity to location target that unlocks autotargeting")]
+    public float locationTargetGoalDistance = 0.5f;
     [Tooltip("The types of entity this missile can lock onto")]
     public List<EntityType> targetableEntityTypes;
 
@@ -95,12 +97,23 @@ public class MissileController : ShotController
                 transform.up = moveDir;
                 rb2d.velocity = moveDir * rb2d.velocity.magnitude;
             }
-            //If target is out of in range
-            if (targetDir.magnitude > maxTargetRange)
+            //Auto-stop targeting object
+            if (targetObj != null)
             {
-                //Target object out of range, stop tracking it
-                if (targetObj != null)
+                //If target is out of range
+                if (targetDir.magnitude > maxTargetRange)
                 {
+                    //Stop tracking it
+                    Target = null;
+                }
+            }
+            //Auto-stop targeting location
+            else
+            {
+                //If at the target position,
+                if (Vector2.Distance(rb2d.ClosestPoint((Vector2)Target), (Vector2)Target) < locationTargetGoalDistance)
+                {
+                    //Stop tracking it
                     Target = null;
                 }
             }

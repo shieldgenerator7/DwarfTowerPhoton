@@ -19,6 +19,8 @@ public class MultipleCarriedGunController : PlayerAbility
 
     private float lastCarryNewShotTime = -1;
 
+    public bool HoldingShots => carriedShotList.Count > 0;
+
     public override void OnButtonDown()
     {
         base.OnButtonDown();
@@ -31,17 +33,19 @@ public class MultipleCarriedGunController : PlayerAbility
         base.OnButtonHeld();
 
         //Carry new shot
-        if (lastCarryNewShotTime < 1 ||
-            Time.time >= lastCarryNewShotTime + carryNewShotDelay)
+        if (CanCarryNewShot)
         {
-            lastCarryNewShotTime = Time.time;
-            if (CanCarryNewShot)
+            if (Time.time >= lastCarryNewShotTime + carryNewShotDelay)
             {
-                carryNewShot();
+                lastCarryNewShotTime = Time.time;
+                if (aminaPool.requestAmina(aminaCost) > 0)
+                {
+                    carryNewShot();
+                }
             }
         }
         //Organize carried shots
-        if (carriedShotList.Count > 0)
+        if (HoldingShots)
         {
             OrganizeShots();
         }
@@ -62,8 +66,8 @@ public class MultipleCarriedGunController : PlayerAbility
     }
 
     private bool CanCarryNewShot
-        => aminaPool.requestAmina(aminaCost) > 0
         && carriedShotList.Count < maxCarriedShots;
+        => aminaPool.hasAmina(aminaCost, true)
 
     private void carryNewShot()
     {
@@ -76,6 +80,7 @@ public class MultipleCarriedGunController : PlayerAbility
             );
         carriedShot.Start();
         carriedShot.shotController.switchOwner(playerController);
+        registerHealthPoolDelegates(carriedShot, true);
         carriedShotList.Add(carriedShot);
     }
 
@@ -89,11 +94,42 @@ public class MultipleCarriedGunController : PlayerAbility
         }
     }
 
+    void refreshHealthPoolDelegates(float hp)
+    {
+        //Remove shots whose hp is 0
+        carriedShotList.RemoveAll(
+            shot => shot.gameObject.FindComponent<HealthPool>().Health == 0
+            );
+        //Refresh delegates
+        carriedShotList.ForEach(
+            shot => registerHealthPoolDelegates(shot, true)
+            );
+    }
+    void registerHealthPoolDelegates(CarryableShot shot, bool register)
+    {
+        HealthPool hp = shot.gameObject.FindComponent<HealthPool>();
+        if (hp)
+        {
+            hp.onDied -= refreshHealthPoolDelegates;
+            if (register)
+            {
+                hp.onDied += refreshHealthPoolDelegates;
+            }
+        }
+    }
+
     private void releaseShots()
     {
-        carriedShotList.ForEach(shot => shot.release());
-        onReleaseShots?.Invoke(carriedShotList);
-        carriedShotList.Clear();
+        if (HoldingShots)
+        {
+            carriedShotList.ForEach(shot =>
+            {
+                shot.release();
+                registerHealthPoolDelegates(shot, false);
+            });
+            onReleaseShots?.Invoke(carriedShotList);
+            carriedShotList.Clear();
+        }
     }
     public delegate void OnReleaseShots(List<CarryableShot> shots);
     public event OnReleaseShots onReleaseShots;

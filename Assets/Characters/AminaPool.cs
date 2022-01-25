@@ -12,7 +12,7 @@ public class AminaPool : MonoBehaviour
     /// </summary>
     public float Amina
     {
-        get { return amina; }
+        get => amina;
         private set
         {
             float prevAmina = amina;

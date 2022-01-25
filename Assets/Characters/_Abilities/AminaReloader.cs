@@ -9,10 +9,7 @@ public class AminaReloader : PlayerAbility
 
     private float reloadStartTime = 0;
 
-    public bool Reloading
-    {
-        get { return reloadStartTime > 0; }
-    }
+    public bool Reloading => reloadStartTime > 0;
 
     public void reload()
     {
