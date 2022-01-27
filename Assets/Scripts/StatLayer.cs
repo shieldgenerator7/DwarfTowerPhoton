@@ -196,12 +196,23 @@ public struct StatLayer
     }
     #endregion
 
+    public override string ToString()
+    {
+        return "{"
+            + $"moveSpeed: {moveSpeed}"
+            + $", maxHits: {maxHits}"
+            + $", fireRate: {fireRate}"
+            + $", damage: {damage}"
+            + $", size: {size}"
+            + "}";
+    }
+
     #region Photon methods
     //2021-12-17: copied from https://doc.photonengine.com/en-us/pun/current/reference/serialization-in-photon
 
     public static void RegisterWithPhoton()
     {
-        PhotonPeer.RegisterType(typeof(StatLayer), (byte) 'S', SerializeStatLayer, DeserializeStatLayer);
+        PhotonPeer.RegisterType(typeof(StatLayer), (byte)'S', SerializeStatLayer, DeserializeStatLayer);
     }
 
     public const int byteArraySize = 5 * 4;

@@ -21,10 +21,22 @@ public class OnDieExplode : MonoBehaviour
 
     void explode()
     {
+        List<Rigidbody2D> rb2ds = new List<Rigidbody2D>();
         RaycastHit2D[] rch2ds = Physics2D.CircleCastAll(transform.position, explodeRange, Vector2.zero);
         for (int i = 0; i < rch2ds.Length; i++)
         {
             Rigidbody2D rb2d = rch2ds[i].rigidbody;
+            if (!rb2d)
+            {
+                continue;
+            }
+            if (!rb2ds.Contains(rb2d))
+            {
+                rb2ds.Add(rb2d);
+            }
+        }
+        foreach (Rigidbody2D rb2d in rb2ds)
+        {
             HealthPool hp = rb2d.gameObject.FindComponent<HealthPool>();
             if (hp && entityTypes.Contains(hp.entityType))
             {
@@ -39,7 +51,7 @@ public class OnDieExplode : MonoBehaviour
                     float speed = explodePower / playerMovement.MovementSpeed;
                     playerMovement.forceMovement(explodeVector, true);
                     int viewID = gameObject.FindComponent<PhotonView>().ViewID;
-                    StatLayer statLayer = new StatLayer()
+                    StatLayer statLayer = new StatLayer(StatLayer.STAT_IGNORE)
                     {
                         moveSpeed = speed
                     };
