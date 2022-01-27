@@ -6,14 +6,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Rule", menuName = "Characters/Rule", order = 0)]
 public class Rule : ScriptableObject
 {
-    public List<RuleTrigger> triggers;
+    public RuleTrigger trigger;
     public List<RuleCondition> conditions;
     public List<RuleAction> actions;
-    public RuleTrigger otestdsf;
 
     public void Init()
     {
-        triggers.ForEach(trigger => trigger.RegisterDelegate(Process));
+        //triggers.ForEach(trigger => trigger.RegisterDelegate(Process));
     }
 
     public void Process()

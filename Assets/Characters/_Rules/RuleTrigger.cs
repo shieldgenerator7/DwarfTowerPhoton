@@ -1,10 +1,18 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-[System.Serializable]
-public class RuleTrigger
+
+
+
+public enum RuleTrigger
 {
-    public virtual void RegisterDelegate(Action delegateAction) { }
+    OnHealthFull,
+    OnHealed,
+    OnDamaged,
+    OnDied,
+    OnHit,
+    OnDealtHeal,
+    OnDealtDamage,
+    OnAminaFull,
+    OnAminaRecharged,
+    OnAminaUsed,
+    OnAminaEmpty,
 }
