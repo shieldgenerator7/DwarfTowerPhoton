@@ -27,6 +27,8 @@ public class ObstaclePopulator : MonoBehaviour
         this.mapProfile = mapProfile;
         min = mapProfile.GeneratableBounds.min;
         max = mapProfile.GeneratableBounds.max;
+        //ObjectSpawner
+        objectSpawner.SpawnMaster = true;
         //Populate
         foreach (ObstacleInfo obstacle in mapProfile.obstacleList)
         {
