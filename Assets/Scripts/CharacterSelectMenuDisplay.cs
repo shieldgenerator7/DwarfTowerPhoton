@@ -20,8 +20,6 @@ public class CharacterSelectMenuDisplay : MenuDisplay
     [Header("Color Select")]
     public List<GridLayoutGroup> colorSelectGroupList;
     public GameObject colorSelectButtonPrefab;
-    [Header("Map Name")]
-    public TMP_InputField txtMapName;
     [Header("Other")]
     public List<RectTransform> elementsToWiden;
 
@@ -29,8 +27,6 @@ public class CharacterSelectMenuDisplay : MenuDisplay
     void Start()
     {
         PlayerInfo playerInfo = PlayerInfo.instance;
-        txtMapName.text = PlayerInfo.instance.mapName;
-        txtMapName.onValueChanged.AddListener((mapName) => playerInfo.mapName = mapName);
         playerInfo.characterSelection.onIndexChanged += updateCharacterImage;
         playerInfo.SelectRandomCharacter();
         updateCharacterImage(playerInfo.characterSelection.Index);

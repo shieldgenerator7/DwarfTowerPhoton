@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class MainMenuSwitcher : MonoBehaviour
 {
+    [Tooltip("The list of menu objects. The first one in the list will be shown first")]
     public List<MenuDisplay> menuList;
+
+    private void Awake()
+    {
+        switchMenu(menuList[0]);
+    }
 
     public void switchMenu(MenuDisplay menu)
     {
