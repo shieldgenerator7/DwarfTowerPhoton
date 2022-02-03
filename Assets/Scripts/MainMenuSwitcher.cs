@@ -4,39 +4,19 @@ using UnityEngine;
 
 public class MainMenuSwitcher : MonoBehaviour
 {
-    public GameObject mnuMain;
-    public GameObject mnuCharacterSelect;
+    public List<GameObject> menuList;    
 
-    private List<GameObject> menuList = new List<GameObject>();
-
-    private void Awake()
-    {
-        menuList.Add(mnuMain);
-        menuList.Add(mnuCharacterSelect);
-    }
-
-    public enum MainMenuOptions
-    {
-        MAIN,
-        CHARACTER_SELECT,
-    }
-    
-
-    public void switchMenu(MainMenuOptions mmo)
+    public void switchMenu(MonoBehaviour menu)
     {
         //Deactivate all menus
         menuList.ForEach(menu => menu.SetActive(false));
         //Activate selected menu
-        switch (mmo)
+        menu.gameObject.SetActive(true);
+        if (!menuList.Contains(menu.gameObject))
         {
-            case MainMenuOptions.MAIN:
-                mnuMain.SetActive(true);
-                break;
-            case MainMenuOptions.CHARACTER_SELECT:
-                mnuCharacterSelect.SetActive(true);
-                break;
-            default:
-                throw new System.ArgumentException($"Options not recognized: {mmo}");
+            throw new System.ArgumentException(
+                $"Menu not in the list! menu: {menu.gameObject.name}"
+                );
         }
     }
 }
