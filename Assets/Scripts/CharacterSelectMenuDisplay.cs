@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterSelectMenuDisplay : MonoBehaviour
+public class CharacterSelectMenuDisplay : MenuDisplay
 {
     public float minWidth = 100;
     [Header("Character Display")]
