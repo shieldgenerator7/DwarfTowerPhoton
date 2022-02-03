@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6508500772799313238}
   - component: {fileID: 6508500772799313239}
   m_Layer: 5
-  m_Name: ColorSelectButton
+  m_Name: btnColorSelect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
