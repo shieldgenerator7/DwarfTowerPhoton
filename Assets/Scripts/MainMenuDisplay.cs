@@ -6,18 +6,11 @@ using UnityEngine.UI;
 
 public class MainMenuDisplay : MenuDisplay
 {
-    public float minWidth = 100;
     [Header("Character Display")]
     public Image characterImage;
-    [Header("Character Info")]
-    public TMP_Text characterTypeText;
-    public List<Image> difficultyStars;
-    public Sprite starFull;
-    public Sprite starEmpty;
+    public TMP_Text txtCharacterName;
     [Header("Map Name")]
     public TMP_InputField txtMapName;
-    [Header("Other")]
-    public List<RectTransform> elementsToWiden;
 
     // Start is called before the first frame update
     void Start()
@@ -47,14 +40,7 @@ public class MainMenuDisplay : MenuDisplay
         RectTransform rect = characterImage.GetComponent<RectTransform>();
         rect.sizeDelta = 320 * charInfo.portrait.rect.size / 16;
         //Type
-        characterTypeText.text = charInfo.typeString;
-        //Difficulty
-        for (int i = 0; i < difficultyStars.Count; i++)
-        {
-            difficultyStars[i].sprite = (i < charInfo.difficulty)
-                ? starFull
-                : starEmpty;
-        }
+        txtCharacterName.text = charInfo.characterName.ToUpper();
     }
 
     void updateColorImage(Color color)
