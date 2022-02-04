@@ -57,7 +57,6 @@ MonoBehaviour:
   activateKeyCode: 9
   redColorGroupIndex: 0
   blueColorGroupIndex: 1
-  maxItemsInList: 11
 --- !u!1 &2012048309877825087
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +111,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}

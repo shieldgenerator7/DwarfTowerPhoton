@@ -11,20 +11,14 @@ public class TabScreenDisplay : MenuDisplay
     public KeyCode activateKeyCode;
     public int redColorGroupIndex = 0;
     public int blueColorGroupIndex = 1;
-    [Range(10,20)]
-    public int maxItemsInList = 11;
 
     private List<GameObject> playerIcons = new List<GameObject>();
 
-    private RectTransform rect;
-    private RectTransform rectParent;
     private GridLayoutGroup glg;
 
     // Start is called before the first frame update
     void Start()
     {
-        rect = gameObject.GetComponent<RectTransform>();
-        rectParent = rect.parent.GetComponent<RectTransform>();
         glg = gameObject.FindComponent<GridLayoutGroup>();
     }
 
