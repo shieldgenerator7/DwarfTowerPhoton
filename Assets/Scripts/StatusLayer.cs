@@ -36,6 +36,19 @@ public struct StatusLayer
         return layer;
     }
 
+    public static bool operator ==(StatusLayer a, StatusLayer b)
+    {
+        return a.stunned == b.stunned
+            && a.stealthed == b.stealthed
+            && a.rooted == b.rooted;
+    }
+    public static bool operator !=(StatusLayer a, StatusLayer b)
+    {
+        return a.stunned != b.stunned
+            || a.stealthed != b.stealthed
+            || a.rooted != b.rooted;
+    }
+
     #region Photon methods
     //2021-12-19: copied from StatLayer
     //2021-12-17: copied from https://doc.photonengine.com/en-us/pun/current/reference/serialization-in-photon

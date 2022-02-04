@@ -12,8 +12,12 @@ public class StatusKeeper : MonoBehaviour
         get => allowedStatus;
         set
         {
+            StatusLayer prevAllowed = allowedStatus;
             allowedStatus = value;
-            updateStatus();
+            if (prevAllowed != allowedStatus)
+            {
+                updateStatus();
+            }
         }
     }
 
