@@ -13,15 +13,15 @@ public struct StatusLayer
 
     public StatusLayer(params StatusEffect[] statusList)
     {
-        this.statusList = statusList.ToHashSet().ToList();
+        this.statusList = statusList?.ToHashSet().ToList() ?? new List<StatusEffect>();
     }
     public StatusLayer(List<StatusEffect> statusList)
     {
-        this.statusList = statusList;
+        this.statusList = statusList ?? new List<StatusEffect>();
     }
     public StatusLayer(HashSet<StatusEffect> statusList)
     {
-        this.statusList = statusList.ToList();
+        this.statusList = statusList?.ToList() ?? new List<StatusEffect>();
     }
 
     public bool Has(StatusEffect effect)
@@ -46,12 +46,26 @@ public struct StatusLayer
 
     public List<StatusEffect> StatusEffects => statusList.ToList();
 
+    public void validate()
+    {
+        if (this.statusList == null)
+        {
+            this.statusList = new List<StatusEffect>();
+        }
+    }
     public void checkValid()
     {
-        if (statusList == null)
+        if (this.statusList == null)
         {
-            throw new ArgumentException($"statusList cannot be null! statusList: {statusList}");
+            Debug.LogError($"statusList cannot be null! statusList: {this.statusList}");
+            validate();
         }
+    }
+    public StatusLayer Copy()
+    {
+        StatusLayer layer = new StatusLayer();
+        layer.statusList = new List<StatusEffect>(this.statusList);
+        return layer;
     }
 
     public StatusLayer stackOr(StatusLayer status)

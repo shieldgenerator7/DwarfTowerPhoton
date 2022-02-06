@@ -43,7 +43,7 @@ public class StatusTrigger : MonoBehaviour
                 || coll2d.OverlapPoint(go.transform.position);
             if (grant && posReq)
             {
-                statusKeeper.addLayer(PV.ViewID, statusToGrant);
+                statusKeeper.addLayer(PV.ViewID, statusToGrant.Copy());
             }
             else
             {

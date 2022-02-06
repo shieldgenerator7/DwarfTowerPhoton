@@ -55,6 +55,7 @@ public class StatusKeeper : MonoBehaviour
     private void updateStatus()
     {
         StatusLayer stackLayer = new StatusLayer();
+        stackLayer.validate();
         foreach (StatusLayer layer in stacks.Values)
         {
             stackLayer = stackLayer.stackOr(layer);
