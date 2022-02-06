@@ -393,9 +393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusToGrant:
-    stunned: 0
-    stealthed: 1
-    rooted: 0
+    statusList: 01000000
   requirePositionInTrigger: 1
 --- !u!114 &7118402431197862615
 MonoBehaviour:
