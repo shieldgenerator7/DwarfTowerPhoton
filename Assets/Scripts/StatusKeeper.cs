@@ -7,7 +7,7 @@ public class StatusKeeper : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Set these to true to allow them to be used as a status effect")]
-    private StatusLayer allowedStatus = new StatusLayer();
+    private StatusLayer allowedStatus;
     public StatusLayer AllowedStatus
     {
         get => allowedStatus;
@@ -15,10 +15,12 @@ public class StatusKeeper : MonoBehaviour
         {
             StatusLayer prevAllowed = allowedStatus;
             allowedStatus = value;
+#if !UNITY_EDITOR
             if (prevAllowed != allowedStatus)
             {
                 updateStatus();
             }
+#endif
         }
     }
 

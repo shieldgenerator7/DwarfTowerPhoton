@@ -197,9 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowedStatus:
-    stunned: 1
-    stealthed: 1
-    rooted: 1
+    statusList: 000000000100000002000000
 --- !u!114 &1916908965083646283
 MonoBehaviour:
   m_ObjectHideFlags: 0
