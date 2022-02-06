@@ -2,51 +2,56 @@ using ExitGames.Client.Photon;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
 public struct StatusLayer
 {
-    public bool stunned;
-    public bool stealthed;
-    public bool rooted;
+    public HashSet<StatusEffect> statusList;
 
-    public StatusLayer(bool stun = false, bool stealth = false, bool root = false)
+    public StatusLayer(params StatusEffect[] statusList)
     {
-        this.stunned = stun;
-        this.stealthed = stealth;
-        this.rooted = root;
+        this.statusList = statusList.ToHashSet();
+    }
+    public StatusLayer(HashSet<StatusEffect> statusList)
+    {
+        this.statusList = statusList;
     }
 
     public StatusLayer stackOr(StatusLayer status)
     {
-        StatusLayer layer = new StatusLayer();
-        layer.stunned = this.stunned || status.stunned;
-        layer.stealthed = this.stealthed || status.stealthed;
-        layer.rooted = this.rooted || status.rooted;
+        HashSet<StatusEffect> effects = new HashSet<StatusEffect>(this.statusList);
+        effects.UnionWith(status.statusList);
+        StatusLayer layer = new StatusLayer(effects);
         return layer;
     }
 
     public StatusLayer stackAnd(StatusLayer status)
     {
-        StatusLayer layer = new StatusLayer();
-        layer.stunned = this.stunned && status.stunned;
-        layer.stealthed = this.stealthed && status.stealthed;
-        layer.rooted = this.rooted && status.rooted;
+        HashSet<StatusEffect> effects = new HashSet<StatusEffect>(this.statusList);
+        effects.IntersectWith(status.statusList);
+        StatusLayer layer = new StatusLayer(effects);
         return layer;
     }
 
     public static bool operator ==(StatusLayer a, StatusLayer b)
     {
-        return a.stunned == b.stunned
-            && a.stealthed == b.stealthed
-            && a.rooted == b.rooted;
+        return a.statusList.Equals(b.statusList);
     }
     public static bool operator !=(StatusLayer a, StatusLayer b)
     {
-        return a.stunned != b.stunned
-            || a.stealthed != b.stealthed
-            || a.rooted != b.rooted;
+        return !a.statusList.Equals(b.statusList);
+    }
+    public override bool Equals(object obj)
+    {
+        return obj != null
+            && obj is StatusLayer
+            && this.statusList.Equals(((StatusLayer)obj).statusList);
+    }
+    public override int GetHashCode()
+    {
+        return this.statusList.GetHashCode();
     }
 
     #region Photon methods
@@ -58,18 +63,20 @@ public struct StatusLayer
     }
 
 
+    //TODO: Maybe refactor the Photon network serialization to only serialize the effects that are active
     public bool[] BoolList
     {
         get => new bool[] {
-                stunned,
-                stealthed,
-                rooted,
+                statusList.Contains(StatusEffect.STUNNED),
+                statusList.Contains(StatusEffect.STEALTHED),
+                statusList.Contains(StatusEffect.ROOTED),
             };
         set
         {
-            stunned = value[0];
-            stealthed = value[1];
-            rooted = value[2];
+            statusList.Clear();
+            if (value[0]) { statusList.Add(StatusEffect.STUNNED); }
+            if (value[1]) { statusList.Add(StatusEffect.STEALTHED); }
+            if (value[2]) { statusList.Add(StatusEffect.ROOTED); }
         }
     }
 

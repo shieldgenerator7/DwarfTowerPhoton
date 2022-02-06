@@ -36,7 +36,7 @@ public class TrapController : ShotController
     {
         playerController.statusKeeper.addLayer(
             PV.ViewID,
-            new StatusLayer(root: true)
+            new StatusLayer(StatusEffect.ROOTED)
             );
         trappedPlayer = playerController;
         trappedPlayer.playerMovement.rb2d.transform.position = transform.position;

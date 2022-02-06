@@ -118,7 +118,7 @@ public abstract class PlayerController : MonoBehaviour
         healthPool.onMaxHealthChanged += (hp) => { damager.damage = hp; };
         healthPool.onDied += (hp) =>
         {
-            statusKeeper.addLayer(PV.ViewID, new StatusLayer(stun: true));
+            statusKeeper.addLayer(PV.ViewID, new StatusLayer(StatusEffect.STUNNED));
         };
         //Auto-Reloading
         if (aminaReloader)
