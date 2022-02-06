@@ -111,6 +111,7 @@ public abstract class PlayerController : MonoBehaviour
         statusKeeper = gameObject.FindComponent<StatusKeeper>();
         objectSpawner = gameObject.FindComponent<ObjectSpawner>();
         statusAutoEnder = gameObject.FindComponent<StatusAutoEnder>();
+        statusAutoEnder.Init(statusKeeper);
     }
     protected virtual void InitializeSettings()
     {

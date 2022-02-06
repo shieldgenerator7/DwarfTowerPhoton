@@ -12,7 +12,7 @@ using UnityEngine;
 public class StatusAutoEnder : MonoBehaviour
 {
     public float defaultMaxDuration = 10;
-    
+
     [System.Serializable]
     public struct StatusTimeData
     {
@@ -24,6 +24,11 @@ public class StatusAutoEnder : MonoBehaviour
     private Dictionary<StatusEffect, Timer> statusTimers = new Dictionary<StatusEffect, Timer>();
 
     private StatusKeeper statusKeeper;
+
+    public void Init(StatusKeeper statusKeeper)
+    {
+        this.statusKeeper = statusKeeper;
+    }
 
     public void CheckStatusTimers(StatusLayer status)
     {
@@ -47,6 +52,7 @@ public class StatusAutoEnder : MonoBehaviour
             Timer timer = TimerManager.StartTimer(maxDuration);
             timer.onTimerCompleted += () =>
             {
+                statusKeeper.BackupUnset(status);
                 statusTimers.Remove(status);
             };
             statusTimers.Add(status, timer);
