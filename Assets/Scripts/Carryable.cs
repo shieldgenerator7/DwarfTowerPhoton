@@ -51,7 +51,7 @@ public class Carryable : MonoBehaviour
 
     private void CheckDrop(StatusLayer status)
     {
-        Drop(status.stunned);
+        Drop(status.Has(StatusEffect.STUNNED));
     }
 
     private void Drop(bool drop)
@@ -103,7 +103,7 @@ public class Carryable : MonoBehaviour
         if (playerMovement)
         {
             StatusKeeper statusKeeper = go.FindComponent<StatusKeeper>();
-            if (statusKeeper && !statusKeeper.Status.stunned)
+            if (statusKeeper && !statusKeeper.Status.Has(StatusEffect.STUNNED))
             {
                 Pickup(playerMovement, true);
             }

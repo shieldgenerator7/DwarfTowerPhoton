@@ -27,31 +27,29 @@ public class StatusAutoEnder : MonoBehaviour
 
     public void CheckStatusTimers(StatusLayer status)
     {
-        CheckStatusTimer(StatusEffect.STUNNED, status.stunned);
-        CheckStatusTimer(StatusEffect.ROOTED, status.rooted);
-        CheckStatusTimer(StatusEffect.STEALTHED, status.stealthed);
+        foreach(StatusEffect effect in status.StatusEffects)
+        {
+            CheckStatusTimer(effect);
+        }
     }
 
-    private void CheckStatusTimer(StatusEffect status, bool statusOn)
+    private void CheckStatusTimer(StatusEffect status)
     {
-        if (statusOn)
+        if (!statusTimers.ContainsKey(status))
         {
-            if (!statusTimers.ContainsKey(status))
+            float maxDuration = defaultMaxDuration;
+            if (statusDurations.Any(sd => sd.statusEffect == status))
             {
-                float maxDuration = defaultMaxDuration;
-                if (statusDurations.Any(sd => sd.statusEffect == status))
-                {
-                    maxDuration = statusDurations.First(
-                        sd => sd.statusEffect == status
-                    ).maxDuration;
-                }
-                Timer timer = TimerManager.StartTimer(maxDuration);
-                timer.onTimerCompleted += () =>
-                {
-                    statusTimers.Remove(status);
-                };
-                statusTimers.Add(status, timer);
+                maxDuration = statusDurations.First(
+                    sd => sd.statusEffect == status
+                ).maxDuration;
             }
+            Timer timer = TimerManager.StartTimer(maxDuration);
+            timer.onTimerCompleted += () =>
+            {
+                statusTimers.Remove(status);
+            };
+            statusTimers.Add(status, timer);
         }
     }
 }

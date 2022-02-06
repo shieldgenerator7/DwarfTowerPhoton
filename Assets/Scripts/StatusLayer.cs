@@ -8,7 +8,7 @@ using UnityEngine;
 [System.Serializable]
 public struct StatusLayer
 {
-    public HashSet<StatusEffect> statusList;
+    private HashSet<StatusEffect> statusList;
 
     public StatusLayer(params StatusEffect[] statusList)
     {
@@ -18,6 +18,25 @@ public struct StatusLayer
     {
         this.statusList = statusList;
     }
+
+    public bool Has(StatusEffect effect)
+    {
+        return statusList.Contains(effect);
+    }
+
+    public void Set(StatusEffect effect, bool setOn = true)
+    {
+        if (setOn)
+        {
+            statusList.Add(effect);
+        }
+        else
+        {
+            statusList.Remove(effect);
+        }
+    }
+
+    public List<StatusEffect> StatusEffects => statusList.ToList();
 
     public StatusLayer stackOr(StatusLayer status)
     {

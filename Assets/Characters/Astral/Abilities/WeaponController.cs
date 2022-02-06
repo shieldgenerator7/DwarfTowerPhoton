@@ -121,7 +121,7 @@ public class WeaponController : ChargedShotController
                 if (targetIsPlayer)
                 {
                     PlayerController pc = collision.gameObject.GetComponent<PlayerController>();
-                    if (!pc.statusKeeper.Status.stunned)
+                    if (!pc.Stunned)
                     {
                         owner = pc;
                         rb2d.velocity = Vector2.zero;
@@ -143,7 +143,7 @@ public class WeaponController : ChargedShotController
 
     void checkReleaseFromOwner(StatusLayer status)
     {
-        if (status.stunned)
+        if (status.Has(StatusEffect.STUNNED))
         {
             switchOwner(null);
         }
