@@ -75,6 +75,7 @@ public abstract class PlayerController : MonoBehaviour
     public StatusKeeper statusKeeper { get; private set; }
     private ObjectSpawner objectSpawner;
     protected SpriteRenderer sr;
+    private StatusAutoEnder statusAutoEnder;
 
     // Start is called before the first frame update
     private void Start()
@@ -105,6 +106,7 @@ public abstract class PlayerController : MonoBehaviour
         statKeeper = gameObject.FindComponent<StatKeeper>();
         statusKeeper = gameObject.FindComponent<StatusKeeper>();
         objectSpawner = gameObject.FindComponent<ObjectSpawner>();
+        statusAutoEnder = gameObject.FindComponent<StatusAutoEnder>();
     }
     protected virtual void InitializeSettings()
     {
@@ -131,6 +133,8 @@ public abstract class PlayerController : MonoBehaviour
         //StatusKeeper
         statusKeeper.onStatusChanged += (status) =>
         {
+            //Status Auto Ender
+            statusAutoEnder.CheckStatusTimers(status);
             //Stunned
             bool stunned = status.stunned;
             this.enabled = !stunned;
