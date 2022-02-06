@@ -12,12 +12,7 @@ using UnityEngine;
 public class StatusAutoEnder : MonoBehaviour
 {
     public float defaultMaxDuration = 10;
-    public enum StatusEffect
-    {
-        STUNNED,
-        ROOTED,
-        STEALTHED,
-    };
+    
     [System.Serializable]
     public struct StatusTimeData
     {
