@@ -8,15 +8,20 @@ using UnityEngine;
 [System.Serializable]
 public struct StatusLayer
 {
-    private HashSet<StatusEffect> statusList;
+    [SerializeField]
+    private List<StatusEffect> statusList;
 
     public StatusLayer(params StatusEffect[] statusList)
     {
-        this.statusList = statusList.ToHashSet();
+        this.statusList = statusList.ToHashSet().ToList();
+    }
+    public StatusLayer(List<StatusEffect> statusList)
+    {
+        this.statusList = statusList;
     }
     public StatusLayer(HashSet<StatusEffect> statusList)
     {
-        this.statusList = statusList;
+        this.statusList = statusList.ToList();
     }
 
     public bool Has(StatusEffect effect)
@@ -28,7 +33,10 @@ public struct StatusLayer
     {
         if (setOn)
         {
-            statusList.Add(effect);
+            if (!statusList.Contains(effect))
+            {
+                statusList.Add(effect);
+            }
         }
         else
         {
@@ -38,9 +46,17 @@ public struct StatusLayer
 
     public List<StatusEffect> StatusEffects => statusList.ToList();
 
+    public void checkValid()
+    {
+        if (statusList == null)
+        {
+            throw new ArgumentException($"statusList cannot be null! statusList: {statusList}");
+        }
+    }
+
     public StatusLayer stackOr(StatusLayer status)
     {
-        HashSet<StatusEffect> effects = new HashSet<StatusEffect>(this.statusList);
+        HashSet<StatusEffect> effects = this.statusList.ToHashSet();
         effects.UnionWith(status.statusList);
         StatusLayer layer = new StatusLayer(effects);
         return layer;

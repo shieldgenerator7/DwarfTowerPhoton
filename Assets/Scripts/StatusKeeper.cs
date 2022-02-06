@@ -7,7 +7,7 @@ public class StatusKeeper : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Set these to true to allow them to be used as a status effect")]
-    private StatusLayer allowedStatus;
+    private StatusLayer allowedStatus = new StatusLayer();
     public StatusLayer AllowedStatus
     {
         get => allowedStatus;
@@ -39,6 +39,7 @@ public class StatusKeeper : MonoBehaviour
 
     public void addLayer(int id, StatusLayer status)
     {
+        status.checkValid();
         stacks[id] = status;
         updateStatus();
     }
