@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -70,10 +71,15 @@ public class TabScreenDisplay : MenuDisplay
 
     private GameObject CreatePlayerIcon(PlayerController playerController)
     {
+        CharacterInfo charInfo = playerController.characterInfo;
         GameObject playerIcon = Instantiate(playerIconPrefab);
+        //Image
         Image image = playerIcon.FindComponent<Image>();
         image.color = playerController.playerColor;
-        image.sprite = playerController.characterInfo.sprite;
+        image.sprite = charInfo.sprite;
+        //Char Name
+        TMP_Text txtCharName = playerIcon.FindComponent<TMP_Text>();
+        txtCharName.text = charInfo.characterName;
         return playerIcon;
     }
 }
