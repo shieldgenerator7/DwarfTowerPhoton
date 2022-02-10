@@ -72,14 +72,17 @@ public class TabScreenDisplay : MenuDisplay
     private GameObject CreatePlayerIcon(PlayerController playerController)
     {
         CharacterInfo charInfo = playerController.characterInfo;
-        GameObject playerIcon = Instantiate(playerIconPrefab);
+        PlayerIcon playerIcon = Instantiate(playerIconPrefab).FindComponent<PlayerIcon>();
         //Image
-        Image image = playerIcon.FindComponent<Image>();
+        Image image = playerIcon.imgCharacterIcon;
         image.color = playerController.playerColor;
         image.sprite = charInfo.sprite;
         //Char Name
-        TMP_Text txtCharName = playerIcon.FindComponent<TMP_Text>();
+        TMP_Text txtCharName = playerIcon.txtCharacterName;
         txtCharName.text = charInfo.characterName;
-        return playerIcon;
+        //Player Name
+        TMP_Text txtPlayerName = playerIcon.txtPlayerName;
+        txtPlayerName.text = $"({PlayerInfo.instance.playerName})";
+        return playerIcon.gameObject;
     }
 }
