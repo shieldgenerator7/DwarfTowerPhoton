@@ -176,7 +176,7 @@ public class CaravanController : MonoBehaviour
         PlayerController pc = gameObject.FindComponent<PlayerController>();
         if (pc && pc.PV.IsMine)
         {
-            contestEffect.enabled = shouldShow && !pc.statusKeeper.Status.stunned;
+            contestEffect.enabled = shouldShow && !pc.Stunned;
         }
     }
 }
