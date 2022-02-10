@@ -81,8 +81,16 @@ public class TabScreenDisplay : MenuDisplay
         TMP_Text txtCharName = playerIcon.txtCharacterName;
         txtCharName.text = charInfo.characterName;
         //Player Name
+        string playerName = PlayerInfo.instance.playerName;
         TMP_Text txtPlayerName = playerIcon.txtPlayerName;
-        txtPlayerName.text = $"({PlayerInfo.instance.playerName})";
+        if (!string.IsNullOrWhiteSpace(playerName))
+        {
+            txtPlayerName.text = $"({playerName})";
+        }
+        else
+        {
+            txtPlayerName.text = $"";
+        }
         return playerIcon.gameObject;
     }
 }
