@@ -9,8 +9,12 @@ using UnityEngine;
 /// </summary>
 public class TeamToken : MonoBehaviour
 {
+    [Tooltip("This determines which team it is on")]
     public TeamTokenCaptain teamCaptain;
+    [Tooltip("This is the player that owns it (created it)")]
     public TeamToken owner;
+    [Tooltip("This is the player that currently controls it (decides what it does)")]
+    public TeamToken controller;
 
     private PhotonView photonView;
     public PhotonView PV
@@ -32,6 +36,12 @@ public class TeamToken : MonoBehaviour
         {
             //it owns itself
             owner = this;
+        }
+        //If there's no controller,
+        if (!controller)
+        {
+            //it controls itself
+            controller = this;
         }
     }
 
@@ -59,6 +69,7 @@ public class TeamToken : MonoBehaviour
     {
         recruit(tt);
         tt.owner = this;
+        tt.controller = this;
     }
 
     public static void seeRecruiter(GameObject go, TeamToken recruiter, bool ownedObject = false)
@@ -158,6 +169,39 @@ public class TeamToken : MonoBehaviour
         {
             //one's not owned at all,
             //therefore not owned by same player
+            return false;
+        }
+    }
+
+    public bool controlledBySamePlayer(TeamToken other)
+    {
+        return this.controller == other.controller;
+    }
+
+    public static bool controlledBySamePlayer(GameObject go1, GameObject go2)
+    {//2022-02-10: copied from ownedBySamePlayer()
+
+        //Get go1's team token
+        TeamToken tt1 = go1.FindComponent<TeamToken>();
+        //Get go2's team token
+        TeamToken tt2 = go2.FindComponent<TeamToken>();
+        //If both have a team token
+        if (tt1 && tt2)
+        {
+            //easy, just compare their controllers
+            return tt1.controlledBySamePlayer(tt2);
+        }
+        //If neither has a team token
+        else if (!tt1 && !tt2)
+        {
+            //not controlled at all
+            return false;
+        }
+        //If one or either has a team token, but not both
+        else
+        {
+            //one's not controlled at all,
+            //therefore not controlled by same player
             return false;
         }
     }
