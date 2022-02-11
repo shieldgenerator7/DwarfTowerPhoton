@@ -62,14 +62,8 @@ public class ShotController : MonoBehaviour
         }
     }
 
-    private PlayerController _owner;
-    public virtual PlayerController owner
-    {
-        get => _owner;
-        protected set => _owner = value;
-    }
-
     protected Damager damager { get; private set; }
+    protected TeamToken teamToken { get; private set; }
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -85,6 +79,8 @@ public class ShotController : MonoBehaviour
         }
         //Damage
         damager = gameObject.FindComponent<Damager>();
+        //TeamToken
+        teamToken = gameObject.FindComponent<TeamToken>();
         //Delegates
         onStatsChanged -= updateFromStats;
         onStatsChanged += updateFromStats;
@@ -163,33 +159,5 @@ public class ShotController : MonoBehaviour
     protected void RPC_SelfDestruct()
     {
         health.Health = 0;
-    }
-
-    public void switchOwner(PlayerController pc)
-    {
-        int ownerID = -1;
-        if (pc)
-        {
-            PV.TransferOwnership(pc.PV.Owner);
-            ownerID = pc.PV.ViewID;
-        }
-        PV.RPC("RPC_SwitchOwner", RpcTarget.AllBuffered, ownerID);
-    }
-
-    [PunRPC]
-    protected void RPC_SwitchOwner(int ownerID)
-    {
-        owner = null;
-        if (ownerID >= 0)
-        {
-            foreach (PlayerController pc in FindObjectsOfType<PlayerController>())
-            {
-                if (pc.PV.ViewID == ownerID)
-                {
-                    owner = pc;
-                    return;
-                }
-            }
-        }
     }
 }

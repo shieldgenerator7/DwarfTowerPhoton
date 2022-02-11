@@ -105,7 +105,15 @@ public class TeamToken : MonoBehaviour
     }
     public void switchController(TeamToken controller)
     {
-        int controllerID = controller.PV.ViewID;
+        int controllerID = controller?.PV.ViewID ?? this.owner.PV.ViewID;
+        if (controller)
+        {
+            PV.TransferOwnership(controller.PV.Owner);
+        }
+        else
+        {
+            PV.TransferOwnership(this.owner.PV.Owner);
+        }
         PV.RPC("RPC_SwitchController", RpcTarget.AllBuffered, controllerID);
     }
     [PunRPC]
@@ -113,7 +121,10 @@ public class TeamToken : MonoBehaviour
     {
         TeamToken tt = TeamToken.FindTeamToken(controllerID);
         this.controller = tt ?? this;
+        onControllerChanged?.Invoke(this.controller);
     }
+    public delegate void OnControllerChanged(TeamToken controller);
+    public event OnControllerChanged onControllerChanged;
 
     public bool onSameTeam(TeamToken other)
     {
