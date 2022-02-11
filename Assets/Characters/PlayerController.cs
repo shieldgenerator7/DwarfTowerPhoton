@@ -80,6 +80,7 @@ public abstract class PlayerController : MonoBehaviour
     private ObjectSpawner objectSpawner;
     protected SpriteRenderer sr;
     private StatusAutoEnder statusAutoEnder;
+    public TeamToken teamToken { get; private set; }
 
     // Start is called before the first frame update
     private void Start()
@@ -112,6 +113,7 @@ public abstract class PlayerController : MonoBehaviour
         objectSpawner = gameObject.FindComponent<ObjectSpawner>();
         statusAutoEnder = gameObject.FindComponent<StatusAutoEnder>();
         statusAutoEnder.Init(statusKeeper);
+        teamToken = gameObject.FindComponent<TeamToken>();
     }
     protected virtual void InitializeSettings()
     {

@@ -62,6 +62,8 @@ public class ShotController : MonoBehaviour
         }
     }
 
+    public PlayerController Controller { get; private set; }
+
     protected Damager damager { get; private set; }
     public TeamToken teamToken { get; private set; }
 
@@ -81,6 +83,10 @@ public class ShotController : MonoBehaviour
         damager = gameObject.FindComponent<Damager>();
         //TeamToken
         teamToken = gameObject.FindComponent<TeamToken>();
+        teamToken.onControllerGainedControl += (controller) =>
+        {
+            this.Controller = controller.gameObject.FindComponent<PlayerController>();
+        };
         //Delegates
         onStatsChanged -= updateFromStats;
         onStatsChanged += updateFromStats;

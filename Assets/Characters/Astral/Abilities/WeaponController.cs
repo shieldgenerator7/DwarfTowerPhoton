@@ -47,8 +47,6 @@ public class WeaponController : ChargedShotController
         }
     }
 
-    private PlayerController wielder;
-
     private SpriteRenderer sr;
 
     protected override void Start()
@@ -59,31 +57,21 @@ public class WeaponController : ChargedShotController
         SwingPercent = 0;
         teamToken.onControllerLostControl +=
             (controller) => registerDelegates(controller, false);
-        teamToken.onControllerGainedControl += (controller) =>
-        {
-            registerDelegates(controller, true);
-            if (teamToken.HasController)
-            {
-                wielder = controller.gameObject.FindComponent<PlayerController>();
-            }
-            else
-            {
-                wielder = null;
-            }
-        };
+        teamToken.onControllerGainedControl +=
+            (controller) => registerDelegates(controller, true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (wielder)
+        if (Controller)
         {
-            if (wielder.PV.IsMine)
+            if (Controller.PV.IsMine)
             {
                 //
                 // Swing
                 //
-                if (wielder.inputState.Button(swingAbilitySlot).Bool())
+                if (Controller.inputState.Button(swingAbilitySlot).Bool())
                 {
                     SwingPercent += swingSpeed * Time.deltaTime;
                 }
@@ -100,7 +88,7 @@ public class WeaponController : ChargedShotController
                 //
                 // Throw
                 //
-                if (wielder.inputState.Button(throwAbilitySlot) == ButtonState.DOWN)
+                if (Controller.inputState.Button(throwAbilitySlot) == ButtonState.DOWN)
                 {
                     teamToken.switchController(null);
                     rb2d.velocity = pointDir * throwSpeed;
@@ -114,7 +102,7 @@ public class WeaponController : ChargedShotController
         bool onSameTeam = TeamToken.onSameTeam(gameObject, collision.gameObject);
         if (onSameTeam)
         {
-            if (wielder == null)
+            if (Controller == null)
             {
                 bool targetIsPlayer = collision.gameObject.CompareTag("Player");
                 if (targetIsPlayer)
@@ -122,12 +110,11 @@ public class WeaponController : ChargedShotController
                     PlayerController pc = collision.gameObject.GetComponent<PlayerController>();
                     if (!pc.Stunned)
                     {
-                        wielder = pc;
                         rb2d.velocity = Vector2.zero;
                         //Photon Take Over
                         if (PV.IsMine)
                         {
-                            teamToken.switchController(TeamToken.getTeamToken(pc.gameObject));
+                            teamToken.switchController(pc.teamToken);
                         }
                     }
                 }
