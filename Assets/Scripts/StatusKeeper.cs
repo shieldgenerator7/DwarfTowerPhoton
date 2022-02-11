@@ -64,6 +64,12 @@ public class StatusKeeper : MonoBehaviour
         Status = stackLayer;
     }
 
+    private void Start()
+    {
+        allowedStatus.validate();
+        updateStatus();
+    }
+
     /// <summary>
     /// Used to unset a status effect if the message to unset it didn't get received
     /// </summary>
