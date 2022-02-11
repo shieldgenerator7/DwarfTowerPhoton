@@ -102,6 +102,22 @@ public class TeamToken : MonoBehaviour
                 break;
             }
         }
+
+    public static void switchController(GameObject go, TeamToken controller)
+    {
+        TeamToken tt = getTeamToken(go, true);
+        tt.switchController(controller);
+    }
+    public void switchController(TeamToken controller)
+    {
+        int controllerID = controller.PV.ViewID;
+        PV.RPC("RPC_SwitchController", RpcTarget.AllBuffered, controllerID);
+    }
+    [PunRPC]
+    void RPC_SwitchController(int controllerID)
+    {
+        TeamToken tt = TeamToken.getTeamToken(PhotonView.Find(controllerID).gameObject);
+        this.controller = tt;
     }
 
     public bool onSameTeam(TeamToken other)
