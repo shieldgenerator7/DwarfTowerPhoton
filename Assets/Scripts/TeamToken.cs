@@ -87,21 +87,16 @@ public class TeamToken : MonoBehaviour
     [PunRPC]
     void RPC_SeeRecruiter(int recruiterID, bool ownedObject)
     {
-        foreach (TeamToken tt in FindObjectsOfType<TeamToken>())
+        TeamToken tt = TeamToken.FindTeamToken(recruiterID);
+        if (ownedObject)
         {
-            if (tt.PV.ViewID == recruiterID)
-            {
-                if (ownedObject)
-                {
-                    tt.recruitOwnedObject(this);
-                }
-                else
-                {
-                    tt.recruit(this);
-                }
-                break;
-            }
+            tt?.recruitOwnedObject(this);
         }
+        else
+        {
+            tt?.recruit(this);
+        }
+    }
 
     public static void switchController(GameObject go, TeamToken controller)
     {
@@ -116,8 +111,8 @@ public class TeamToken : MonoBehaviour
     [PunRPC]
     void RPC_SwitchController(int controllerID)
     {
-        TeamToken tt = TeamToken.getTeamToken(PhotonView.Find(controllerID).gameObject);
-        this.controller = tt;
+        TeamToken tt = TeamToken.FindTeamToken(controllerID);
+        this.controller = tt ?? this;
     }
 
     public bool onSameTeam(TeamToken other)
@@ -232,6 +227,9 @@ public class TeamToken : MonoBehaviour
         return tt;
     }
 
+    public static TeamToken FindTeamToken(int viewID)
+        => TeamToken.getTeamToken(PhotonView.Find(viewID).gameObject);
+
     public void assignTeam()
     {
         PV.RPC("RPC_Server_AssignTeam", RpcTarget.MasterClient);
@@ -247,14 +245,8 @@ public class TeamToken : MonoBehaviour
     [PunRPC]
     void RPC_AssignTeam(int captainID)
     {
-        foreach (TeamTokenCaptain ttc in FindObjectsOfType<TeamTokenCaptain>())
-        {
-            if (ttc.PV.ViewID == captainID)
-            {
-                ttc.recruit(this);
-                break;
-            }
-        }
+        TeamToken ttc = TeamToken.FindTeamToken(captainID);
+        ttc?.recruit(this);
     }
 
     public static TeamTokenCaptain getTeamWithFewestPlayers()
@@ -281,9 +273,9 @@ public class TeamToken : MonoBehaviour
         TeamTokenCaptain minTeamCaptain = null;
         foreach (TeamTokenCaptain ttc in teamCaptains.Keys)
         {
-            if ((int)teamCaptains[ttc] < minTeamMembers)
+            if (teamCaptains[ttc] < minTeamMembers)
             {
-                minTeamMembers = (int)teamCaptains[ttc];
+                minTeamMembers = teamCaptains[ttc];
                 minTeamCaptain = ttc;
             }
         }
