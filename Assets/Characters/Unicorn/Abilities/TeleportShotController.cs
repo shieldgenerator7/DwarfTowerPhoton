@@ -8,13 +8,13 @@ public class TeleportShotController : ShotController
     protected override void Start()
     {
         base.Start();
-        teamToken.onControllerChanged += (controller) => updateSpeed();
+        teamToken.onControllerGainedControl += (controller) => updateSpeed();
         updateSpeed();
     }
 
     private void updateSpeed()
     {
-        if (teamToken.controller != teamToken)
+        if (teamToken.HasController)
         {
             rb2d.velocity = rb2d.velocity.normalized
                 * teamToken.controller.gameObject.FindComponent<Rigidbody2D>()

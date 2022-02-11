@@ -63,7 +63,7 @@ public class ShotController : MonoBehaviour
     }
 
     protected Damager damager { get; private set; }
-    protected TeamToken teamToken { get; private set; }
+    public TeamToken teamToken { get; private set; }
 
     // Start is called before the first frame update
     protected virtual void Start()

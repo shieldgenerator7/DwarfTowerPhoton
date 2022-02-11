@@ -35,9 +35,9 @@ public class WeaponController : ChargedShotController
     {
         get
         {
-            if (owner)
+            if (teamToken.controller != teamToken)
             {
-                Vector2 wielderCenter = (Vector2)owner.transform.position + (Vector2.up * 0.5f);
+                Vector2 wielderCenter = (Vector2)teamToken.controller.transform.position + (Vector2.up * 0.5f);
                 return wielderCenter;
             }
             else
@@ -47,22 +47,7 @@ public class WeaponController : ChargedShotController
         }
     }
 
-    public override PlayerController owner
-    {
-        protected set
-        {
-            if (owner)
-            {
-                owner.statusKeeper.onStatusChanged -= checkReleaseFromOwner;
-            }
-            base.owner = value;
-            if (owner)
-            {
-                owner.statusKeeper.onStatusChanged -= checkReleaseFromOwner;
-                owner.statusKeeper.onStatusChanged += checkReleaseFromOwner;
-            }
-        }
-    }
+    private PlayerController wielder;
 
     private SpriteRenderer sr;
 
@@ -72,19 +57,33 @@ public class WeaponController : ChargedShotController
         sr = GetComponent<SpriteRenderer>();
         dataCurrent = new HoldShotData();
         SwingPercent = 0;
+        teamToken.onControllerLostControl +=
+            (controller) => registerDelegates(controller, false);
+        teamToken.onControllerGainedControl += (controller) =>
+        {
+            registerDelegates(controller, true);
+            if (teamToken.HasController)
+            {
+                wielder = controller.gameObject.FindComponent<PlayerController>();
+            }
+            else
+            {
+                wielder = null;
+            }
+        };
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (owner)
+        if (wielder)
         {
-            if (owner.PV.IsMine)
+            if (wielder.PV.IsMine)
             {
                 //
                 // Swing
                 //
-                if (owner.inputState.Button(swingAbilitySlot).Bool())
+                if (wielder.inputState.Button(swingAbilitySlot).Bool())
                 {
                     SwingPercent += swingSpeed * Time.deltaTime;
                 }
@@ -101,9 +100,9 @@ public class WeaponController : ChargedShotController
                 //
                 // Throw
                 //
-                if (owner.inputState.Button(throwAbilitySlot) == ButtonState.DOWN)
+                if (wielder.inputState.Button(throwAbilitySlot) == ButtonState.DOWN)
                 {
-                    switchOwner(null);
+                    teamToken.switchController(null);
                     rb2d.velocity = pointDir * throwSpeed;
                 }
             }
@@ -115,7 +114,7 @@ public class WeaponController : ChargedShotController
         bool onSameTeam = TeamToken.onSameTeam(gameObject, collision.gameObject);
         if (onSameTeam)
         {
-            if (owner == null)
+            if (wielder == null)
             {
                 bool targetIsPlayer = collision.gameObject.CompareTag("Player");
                 if (targetIsPlayer)
@@ -123,12 +122,12 @@ public class WeaponController : ChargedShotController
                     PlayerController pc = collision.gameObject.GetComponent<PlayerController>();
                     if (!pc.Stunned)
                     {
-                        owner = pc;
+                        wielder = pc;
                         rb2d.velocity = Vector2.zero;
                         //Photon Take Over
                         if (PV.IsMine)
                         {
-                            switchOwner(owner);
+                            teamToken.switchController(TeamToken.getTeamToken(pc.gameObject));
                         }
                     }
                 }
@@ -141,11 +140,24 @@ public class WeaponController : ChargedShotController
         }
     }
 
+    void registerDelegates(TeamToken controller, bool register)
+    {
+        StatusKeeper statusKeeper = controller.gameObject.FindComponent<StatusKeeper>();
+        if (statusKeeper)
+        {
+            statusKeeper.onStatusChanged -= checkReleaseFromOwner;
+            if (register)
+            {
+                statusKeeper.onStatusChanged += checkReleaseFromOwner;
+            }
+        }
+    }
+
     void checkReleaseFromOwner(StatusLayer status)
     {
         if (status.Has(StatusEffect.STUNNED))
         {
-            switchOwner(null);
+            teamToken.switchController(null);
         }
     }
 }

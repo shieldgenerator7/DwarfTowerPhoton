@@ -16,6 +16,8 @@ public class TeamToken : MonoBehaviour
     [Tooltip("This is the player that currently controls it (decides what it does)")]
     public TeamToken controller;
 
+    public bool HasController => controller && controller != this;
+
     private PhotonView photonView;
     public PhotonView PV
     {
@@ -42,6 +44,7 @@ public class TeamToken : MonoBehaviour
         {
             //it controls itself
             controller = this;
+            onControllerGainedControl?.Invoke(this);
         }
     }
 
@@ -70,6 +73,7 @@ public class TeamToken : MonoBehaviour
         recruit(tt);
         tt.owner = this;
         tt.controller = this;
+        tt.onControllerGainedControl?.Invoke(this);
     }
 
     public static void seeRecruiter(GameObject go, TeamToken recruiter, bool ownedObject = false)
@@ -119,12 +123,24 @@ public class TeamToken : MonoBehaviour
     [PunRPC]
     void RPC_SwitchController(int controllerID)
     {
-        TeamToken tt = TeamToken.FindTeamToken(controllerID);
-        this.controller = tt ?? this;
-        onControllerChanged?.Invoke(this.controller);
+        //Old TT is the current controller
+        TeamToken oldTT = this.controller;
+        //New TT is the given controller,or if it's null,
+        //New TT is this teamToken (it controls itself)
+        TeamToken newTT = TeamToken.FindTeamToken(controllerID)
+            ?? this;
+        //If the controller has changed
+        if (oldTT != newTT)
+        {
+            //Switch the controller
+            onControllerLostControl?.Invoke(oldTT);
+            this.controller = newTT;
+            onControllerGainedControl?.Invoke(newTT);
+        }
     }
     public delegate void OnControllerChanged(TeamToken controller);
-    public event OnControllerChanged onControllerChanged;
+    public event OnControllerChanged onControllerGainedControl;
+    public event OnControllerChanged onControllerLostControl;
 
     public bool onSameTeam(TeamToken other)
     {
