@@ -16,6 +16,8 @@ public class CarriedShotController : ShotController
     public ShotControllerData dataFinal;
     private HoldShotData dataCurrent;
 
+    private bool released = false;
+
     private float carryPercent = -1;//how much has been swung
     public float CarryPercent
     {
@@ -71,7 +73,7 @@ public class CarriedShotController : ShotController
     // Update is called once per frame
     void Update()
     {
-        if (Controller)
+        if (!released)
         {
             if (Controller.PV.IsMine)
             {
@@ -95,7 +97,7 @@ public class CarriedShotController : ShotController
     {
         rb2d.velocity = PointDirection.normalized * Controller.playerMovement.rb2d.velocity.magnitude;
         destroyOnIndestructible = true;
-        Controller = null;
+        released = true;
     }
 
     Vector2 PointDirection
