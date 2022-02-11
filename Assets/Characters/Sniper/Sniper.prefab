@@ -416,7 +416,6 @@ MonoBehaviour:
   fireDelay: 0.5
   angle: 0
   shotIndex: 1
-  shouldSetOwner: 0
 --- !u!1 &3107006109710722385
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,7 +468,6 @@ MonoBehaviour:
   fireDelay: 1
   angle: 0
   shotIndex: 2
-  shouldSetOwner: 0
 --- !u!1 &7577088886736187312
 GameObject:
   m_ObjectHideFlags: 0

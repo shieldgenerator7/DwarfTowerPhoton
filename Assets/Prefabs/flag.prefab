@@ -391,6 +391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamCaptain: {fileID: 7351537156668849939}
   owner: {fileID: 7351537156668849939}
+  controller: {fileID: 0}
   teamColor: {r: 1, g: 1, b: 1, a: 1}
   colorGroupIndex: -1
   spawnPoints:

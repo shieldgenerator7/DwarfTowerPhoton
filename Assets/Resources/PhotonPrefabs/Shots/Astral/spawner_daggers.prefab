@@ -168,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamCaptain: {fileID: 0}
   owner: {fileID: 0}
+  controller: {fileID: 0}
 --- !u!114 &-4472858588240258430
 MonoBehaviour:
   m_ObjectHideFlags: 0

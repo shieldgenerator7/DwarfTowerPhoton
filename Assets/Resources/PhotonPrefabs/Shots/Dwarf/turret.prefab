@@ -203,7 +203,6 @@ MonoBehaviour:
   fireDelay: 0.1
   angle: 0
   shotIndex: 0
-  shouldSetOwner: 0
   turretBase: {fileID: 7052029397972579358}
 --- !u!114 &5266211150224624211
 MonoBehaviour:
@@ -367,6 +366,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamCaptain: {fileID: 0}
   owner: {fileID: 0}
+  controller: {fileID: 0}
 --- !u!114 &5458094202363891010
 MonoBehaviour:
   m_ObjectHideFlags: 0

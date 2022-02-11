@@ -506,4 +506,3 @@ MonoBehaviour:
   fireDelay: 0.5
   angle: 0
   shotIndex: 0
-  shouldSetOwner: 0
