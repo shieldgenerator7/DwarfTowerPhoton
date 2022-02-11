@@ -79,7 +79,7 @@ public class MultipleCarriedGunController : PlayerAbility
             dir
             );
         carriedShot.Start();
-        carriedShot.shotController.teamToken.switchController(playerController.teamToken);
+        carriedShot.shotController.Controller = playerController;
         registerHealthPoolDelegates(carriedShot, true);
         carriedShotList.Add(carriedShot);
     }

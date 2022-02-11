@@ -14,11 +14,10 @@ public class TeleportShotController : ShotController
 
     private void updateSpeed()
     {
-        if (teamToken.HasController)
+        if (Controller)
         {
             rb2d.velocity = rb2d.velocity.normalized
-                * teamToken.controller.gameObject.FindComponent<Rigidbody2D>()
-                .velocity.magnitude;
+                * Controller.playerMovement.rb2d.velocity.magnitude;
         }
     }
 
@@ -49,7 +48,7 @@ public class TeleportShotController : ShotController
             if (weapon)
             {
                 //Make it unowned
-                weapon.teamToken.switchController(null);
+                weapon.Controller = null;
             }
             //and then destroy this shot
             health.Health = 0;

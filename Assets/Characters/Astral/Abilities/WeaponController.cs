@@ -35,9 +35,9 @@ public class WeaponController : ChargedShotController
     {
         get
         {
-            if (teamToken.controller != teamToken)
+            if (Controller)
             {
-                Vector2 wielderCenter = (Vector2)teamToken.controller.transform.position + (Vector2.up * 0.5f);
+                Vector2 wielderCenter = (Vector2)Controller.transform.position + (Vector2.up * 0.5f);
                 return wielderCenter;
             }
             else
@@ -90,7 +90,7 @@ public class WeaponController : ChargedShotController
                 //
                 if (Controller.inputState.Button(throwAbilitySlot) == ButtonState.DOWN)
                 {
-                    teamToken.switchController(null);
+                    Controller = null;
                     rb2d.velocity = pointDir * throwSpeed;
                 }
             }
@@ -114,7 +114,7 @@ public class WeaponController : ChargedShotController
                         //Photon Take Over
                         if (PV.IsMine)
                         {
-                            teamToken.switchController(pc.teamToken);
+                            Controller = pc;
                         }
                     }
                 }
@@ -144,7 +144,7 @@ public class WeaponController : ChargedShotController
     {
         if (status.Has(StatusEffect.STUNNED))
         {
-            teamToken.switchController(null);
+            Controller = null;
         }
     }
 }

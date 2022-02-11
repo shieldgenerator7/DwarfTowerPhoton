@@ -62,10 +62,15 @@ public class ShotController : MonoBehaviour
         }
     }
 
-    public PlayerController Controller { get; private set; }
+    private PlayerController _controller;
+    public PlayerController Controller
+    {
+        get => _controller;
+        set => teamToken.switchController(value?.teamToken);
+    }
 
     protected Damager damager { get; private set; }
-    public TeamToken teamToken { get; private set; }
+    protected TeamToken teamToken { get; private set; }
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -85,7 +90,7 @@ public class ShotController : MonoBehaviour
         teamToken = gameObject.FindComponent<TeamToken>();
         teamToken.onControllerGainedControl += (controller) =>
         {
-            this.Controller = controller.gameObject.FindComponent<PlayerController>();
+            this._controller = controller.gameObject.FindComponent<PlayerController>();
         };
         //Delegates
         onStatsChanged -= updateFromStats;

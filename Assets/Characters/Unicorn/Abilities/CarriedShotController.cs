@@ -95,7 +95,7 @@ public class CarriedShotController : ShotController
     {
         rb2d.velocity = PointDirection.normalized * Controller.playerMovement.rb2d.velocity.magnitude;
         destroyOnIndestructible = true;
-        teamToken.switchController(null);
+        Controller = null;
     }
 
     Vector2 PointDirection

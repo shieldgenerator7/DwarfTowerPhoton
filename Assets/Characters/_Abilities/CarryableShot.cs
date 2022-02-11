@@ -46,6 +46,6 @@ public class CarryableShot : MonoBehaviour
     {
         shotController.destroyOnIndestructible = true;
         shotController.Launch();
-        shotController.teamToken.switchController(null);
+        shotController.Controller = null;
     }
 }

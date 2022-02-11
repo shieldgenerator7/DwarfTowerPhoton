@@ -59,7 +59,7 @@ public class GunController : PlayerAbility
                     );
                 if (shouldSetOwner)
                 {
-                    shot.teamToken.switchController(playerController.teamToken);
+                    shot.Controller = playerController;
                 }
             }
         }

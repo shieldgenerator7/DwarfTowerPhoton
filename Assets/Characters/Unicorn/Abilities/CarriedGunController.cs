@@ -67,7 +67,7 @@ public class CarriedGunController : PlayerAbility
             spawnPos,
             dir
             );
-        carriedShot.teamToken.switchController(playerController.teamToken);
+        carriedShot.Controller = playerController;
     }
 
     private void releaseShot()
