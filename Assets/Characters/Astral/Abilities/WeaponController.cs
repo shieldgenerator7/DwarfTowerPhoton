@@ -59,6 +59,7 @@ public class WeaponController : ChargedShotController
             (controller) => registerDelegates(controller, false);
         teamToken.onControllerGainedControl +=
             (controller) => registerDelegates(controller, true);
+        registerDelegates(teamToken.controller, true);
     }
 
     // Update is called once per frame

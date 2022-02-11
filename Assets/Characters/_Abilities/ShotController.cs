@@ -88,10 +88,8 @@ public class ShotController : MonoBehaviour
         damager = gameObject.FindComponent<Damager>();
         //TeamToken
         teamToken = gameObject.FindComponent<TeamToken>();
-        teamToken.onControllerGainedControl += (controller) =>
-        {
-            this._controller = controller.gameObject.FindComponent<PlayerController>();
-        };
+        teamToken.onControllerGainedControl += updateController;
+        updateController(teamToken.controller);
         //Delegates
         onStatsChanged -= updateFromStats;
         onStatsChanged += updateFromStats;
@@ -104,6 +102,11 @@ public class ShotController : MonoBehaviour
         {
             rb2d.velocity = transform.up * _stats.moveSpeed;
         }
+    }
+
+    private void updateController(TeamToken controller)
+    {
+        this._controller = controller.gameObject.FindComponent<PlayerController>();
     }
 
     protected virtual void updateFromStats(StatLayer statLayer)
