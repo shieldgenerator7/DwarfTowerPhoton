@@ -124,8 +124,18 @@ public class RuleProcessor : MonoBehaviour
                 rb2d.velocity = (context.targetPos - (Vector2)gameObject.transform.position).normalized * stats.moveSpeed;
                 break;
             case RuleAction.DAMAGE:
-                HealthPool hp = context.target.FindComponent<HealthPool>();
-                hp.Health += -stats.damage;
+                {
+                    HealthPool hp = context.target.FindComponent<HealthPool>();
+                    hp.Health += -stats.damage;
+                }
+                break;
+            case RuleAction.DAMAGE_SELF:
+                {
+                    //TODO: make damage over time amount a variable
+                    //TODO: put deltaTime in RuleContext
+                    HealthPool hp = gameObject.FindComponent<HealthPool>();
+                    hp.Health += -1 * Time.deltaTime;
+                }
                 break;
             default:
                 throw new System.ArgumentException($"Unknown action: {action}");

@@ -14,6 +14,7 @@ public enum RuleTrigger
     OnDied,
     //Collision
     OnHit,
+    OnReachTargetPos,
     //Action
     OnDealtHeal,
     OnDealtDamage,

@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 8902093542985066328}
   - component: {fileID: 508065936224665636}
   - component: {fileID: 1514994493904205255}
-  - component: {fileID: 5707579658751896384}
   - component: {fileID: 2367240979010034062}
   - component: {fileID: 3923795499765203264}
   m_Layer: 0
@@ -237,19 +236,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24076d868ace5cb44bd253f181ccc375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5707579658751896384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc26de173796eba4aa05800f34839497, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  decayPerSecond: 0.5
 --- !u!114 &2367240979010034062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,7 +251,7 @@ MonoBehaviour:
   selfStats:
     statBase:
       moveSpeed: 3
-      maxHits: -1
+      maxHits: 2
       fireRate: -1
       damage: 1
       size: 1
@@ -297,4 +283,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rules:
   - {fileID: 11400000, guid: 23c7f10f711bc3a4fa9f32858638e072, type: 2}
+  - {fileID: 11400000, guid: 3e16a8950c7e3eb4690700df97efb408, type: 2}
   - {fileID: 11400000, guid: e062e1793e665bc45b264aae56aaaa80, type: 2}
