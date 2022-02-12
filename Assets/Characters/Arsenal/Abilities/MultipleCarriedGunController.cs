@@ -66,8 +66,9 @@ public class MultipleCarriedGunController : PlayerAbility
     }
 
     private bool CanCarryNewShot
-        && carriedShotList.Count < maxCarriedShots;
         => aminaPool.hasAmina(aminaCost, true)
+        && carriedShotList.Count < maxCarriedShots;
+        
 
     private void carryNewShot()
     {
