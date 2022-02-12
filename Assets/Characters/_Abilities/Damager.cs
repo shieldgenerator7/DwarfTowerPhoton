@@ -56,11 +56,16 @@ public class Damager : MonoBehaviour
             {
                 if (useInitialDamage)
                 {
-                    hp.Health += -damage;
-                    onDealtDamage?.Invoke(damage, hp);
+                    DealDamage(hp);
                 }
             }
         }
+    }
+
+    public void DealDamage(HealthPool hp)
+    {
+        hp.Health += -damage;
+        onDealtDamage?.Invoke(damage, hp);
     }
     public delegate void OnDealtDamage(float damage, HealthPool healthPool);
     public event OnDealtDamage onDealtDamage;
