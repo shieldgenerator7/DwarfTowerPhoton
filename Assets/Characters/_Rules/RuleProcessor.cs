@@ -82,7 +82,8 @@ public class RuleProcessor : MonoBehaviour
 
     private void ProcessRule(Rule rule, RuleContext context)
     {
-        bool canProcess = rule.conditions.Any(cond => CheckCondition(cond, context));
+        bool canProcess = rule.conditions.Count == 0
+            || rule.conditions.Any(cond => CheckCondition(cond, context));
         if (canProcess)
         {
             rule.actions.ForEach(action => TakeAction(action, context));
@@ -112,17 +113,19 @@ public class RuleProcessor : MonoBehaviour
     private void TakeAction(RuleAction action, RuleContext context)
     {
         Rigidbody2D rb2d = gameObject.FindComponent<Rigidbody2D>();
-        Damager damager = gameObject.FindComponent<Damager>();
+        StatKeeper statKeeper = gameObject.FindComponent<StatKeeper>();
+        StatLayer stats = statKeeper.selfStats.Stats;
         switch (action)
         {
             case RuleAction.MOVE_IN_TARGET_DIR:
-                rb2d.velocity = context.targetDir.normalized * rb2d.velocity.magnitude;
+                rb2d.velocity = context.targetDir.normalized * stats.moveSpeed;
                 break;
             case RuleAction.MOVE_TOWARDS_TARGET_POS:
-                rb2d.velocity = (context.targetPos - (Vector2)gameObject.transform.position).normalized * rb2d.velocity.magnitude;
+                rb2d.velocity = (context.targetPos - (Vector2)gameObject.transform.position).normalized * stats.moveSpeed;
                 break;
             case RuleAction.DAMAGE:
-                damager.DealDamage(context.target.FindComponent<HealthPool>());
+                HealthPool hp = context.target.FindComponent<HealthPool>();
+                hp.Health += -stats.damage;
                 break;
             default:
                 throw new System.ArgumentException($"Unknown action: {action}");

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 103c9701c2e720d40975a17d87d69018, type: 3}
   m_Name: shot_hit_rule
   m_EditorClassIdentifier: 
-  trigger: 0
-  conditions: []
-  actions:
-  - {fileID: 11400000, guid: d8c92d371cb669a4a94288349e3b3d43, type: 2}
+  trigger: 6
+  conditions:
+  - {fileID: 11400000, guid: 86433349a1115384088135e72c20cf0d, type: 2}
+  actions: 02000000

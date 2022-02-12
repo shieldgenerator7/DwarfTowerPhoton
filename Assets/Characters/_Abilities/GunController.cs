@@ -38,20 +38,26 @@ public class GunController : PlayerAbility
                     lastFireTime = Time.time;
                 }
                 //Determine direction
-                Vector2 dir = ((Vector2)Utility.MouseWorldPos - spawnPos);
+                Vector2 targetPos = Utility.MouseWorldPos;
+                Vector2 dir = (targetPos - spawnPos);
                 if (angle != 0)
                 {
                     dir = Quaternion.Euler(0, 0, angle) * dir;
                 }
                 dir.Normalize();
                 //Launch shot
-                ShotController shot = objectSpawner.spawnObject<ShotController>(
+                GameObject shot = objectSpawner.spawnObject(
                     shotIndex,
                     spawnPos,
                     dir
                     );
+                RuleProcessor rp = shot.FindComponent<RuleProcessor>();
+                if (rp)
+                {
+                    rp.Init(dir, targetPos);
+                }
                 onShotFired?.Invoke(
-                    shot.gameObject,
+                    shot,
                     shot.transform.position,
                     dir
                     );

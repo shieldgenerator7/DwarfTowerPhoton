@@ -12,3 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4c84b65377c1b46b4a722928936651, type: 3}
   m_Name: shot_hit_condition
   m_EditorClassIdentifier: 
+  entityTypes: 0200000001000000
+  onAlly: 0
+  onEnemy: 1
+  onTrigger: 1
+  onCollision: 1
