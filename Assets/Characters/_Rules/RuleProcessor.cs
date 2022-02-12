@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RuleProcessor : MonoBehaviour
 {
-    public List<Rule> rules;
+    public List<RuleSet> ruleSets;
 
     private struct RuleContext
     {
@@ -76,8 +76,12 @@ public class RuleProcessor : MonoBehaviour
     #region Rule Processing
     private void ProcessRules(RuleTrigger trigger, RuleContext context)
     {
-        rules.FindAll(rule => rule.trigger == trigger)
-            .ForEach(rule => ProcessRule(rule, context));
+        ruleSets.ForEach(ruleSet =>
+        {
+            ruleSet.rules
+                .FindAll(rule => rule.trigger == trigger)
+                .ForEach(rule => ProcessRule(rule, context));
+        });
     }
 
     private void ProcessRule(Rule rule, RuleContext context)

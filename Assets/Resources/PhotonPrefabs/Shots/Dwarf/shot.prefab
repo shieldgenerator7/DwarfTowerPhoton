@@ -281,7 +281,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5425ba304f6ea54f89ea7c2e72b7d54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rules:
-  - {fileID: 11400000, guid: 23c7f10f711bc3a4fa9f32858638e072, type: 2}
-  - {fileID: 11400000, guid: 3e16a8950c7e3eb4690700df97efb408, type: 2}
-  - {fileID: 11400000, guid: e062e1793e665bc45b264aae56aaaa80, type: 2}
+  ruleSets:
+  - {fileID: 11400000, guid: 5f958aae93c467d4c9ecff1da7232188, type: 2}
