@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 045d8cb26bfa18d4da24cfafe6d3aa77, type: 3}
   m_Name: shot_ruleset
   m_EditorClassIdentifier: 
-  rules: []
+  rules:
+  - {fileID: 11400000, guid: 23c7f10f711bc3a4fa9f32858638e072, type: 2}
+  - {fileID: 11400000, guid: 3e16a8950c7e3eb4690700df97efb408, type: 2}
+  - {fileID: 11400000, guid: e062e1793e665bc45b264aae56aaaa80, type: 2}

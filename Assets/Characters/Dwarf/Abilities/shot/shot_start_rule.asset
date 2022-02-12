@@ -14,5 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trigger: 0
   conditions: []
-  actions:
-  - {fileID: 11400000, guid: d8c92d371cb669a4a94288349e3b3d43, type: 2}
+  actions: 00000000
