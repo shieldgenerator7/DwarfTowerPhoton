@@ -9,6 +9,5 @@ public class RuleCondition: ScriptableObject
     public bool onAlly = true;
     public bool onEnemy = true;
     public bool onTrigger = true;
-    public bool onCollision = true;
-
+    public bool onCollision = true; 
 }
