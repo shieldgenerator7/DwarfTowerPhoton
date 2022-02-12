@@ -129,6 +129,7 @@ public class RuleProcessor : MonoBehaviour
                 break;
             case RuleAction.DAMAGE:
                 {
+                    //TODO: make delegate: onDamageDealt
                     HealthPool hp = context.target.FindComponent<HealthPool>();
                     hp.Health += -stats.damage;
                 }

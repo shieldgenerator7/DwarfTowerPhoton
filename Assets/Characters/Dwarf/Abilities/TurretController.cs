@@ -53,8 +53,14 @@ public class TurretController : GunController
             transform.position,
             targetDir
             );
-        newShot.FindComponent<Damager>().onDealtDamage
-            += turretFireTrigger.playerController.PlayerDealtDamage;
+        RuleProcessor rp = newShot.FindComponent<RuleProcessor>();
+        if (rp)
+        {
+            rp.Init(targetDir, targetPos);
+        }
+        //TODO: Register with RuleProcessor.onDealtDamage
+        //newShot.FindComponent<Damager>().onDealtDamage
+        //    += turretFireTrigger.playerController.PlayerDealtDamage;
     }
 
     private void OnDestroy()
