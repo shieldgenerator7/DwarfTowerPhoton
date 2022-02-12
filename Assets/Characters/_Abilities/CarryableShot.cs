@@ -23,15 +23,15 @@ public class CarryableShot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerController owner = shotController.owner;
-        if (owner)
+        PlayerController Controller = shotController.Controller;
+        if (Controller)
         {
-            if (owner.PV.IsMine)
+            if (Controller.PV.IsMine)
             {
                 //Position
-                Vector2 pointDir = owner.LookDirection;
+                Vector2 pointDir = Controller.LookDirection;
                 pointDir = pointDir.Rotate(holdShotData.holdAngle).normalized;
-                transform.position = owner.SpawnCenter + (pointDir * holdShotData.holdBuffer);
+                transform.position = Controller.SpawnCenter + (pointDir * holdShotData.holdBuffer);
                 //Rotation
                 Vector2 lookDir = pointDir * ((sr.flipY) ? -1 : 1);
                 lookDir = lookDir.Rotate(holdShotData.rotationAngle).normalized;
@@ -46,6 +46,6 @@ public class CarryableShot : MonoBehaviour
     {
         shotController.destroyOnIndestructible = true;
         shotController.Launch();
-        shotController.switchOwner(null);
+        shotController.Controller = null;
     }
 }

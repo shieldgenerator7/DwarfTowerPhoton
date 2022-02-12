@@ -8,6 +8,9 @@ public class PlayerInfo : MonoBehaviour
 
     public static PlayerInfo instance;
 
+    [Tooltip("The name of the player")]
+    public string playerName;
+
     [Tooltip("The name of the map that the player wants to go to")]
     public string mapName;
 

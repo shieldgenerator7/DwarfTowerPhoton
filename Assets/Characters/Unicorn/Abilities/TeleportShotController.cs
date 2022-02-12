@@ -4,27 +4,20 @@ using UnityEngine;
 
 public class TeleportShotController : ShotController
 {
-    public override PlayerController owner
-    {
-        get => base.owner;
-        protected set
-        {
-            base.owner = value;
-            updateSpeed();
-        }
-    }
 
     protected override void Start()
     {
         base.Start();
+        teamToken.onControllerGainedControl += (controller) => updateSpeed();
         updateSpeed();
     }
 
     private void updateSpeed()
     {
-        if (owner)
+        if (Controller)
         {
-            rb2d.velocity = rb2d.velocity.normalized * owner.playerMovement.rb2d.velocity.magnitude;
+            rb2d.velocity = rb2d.velocity.normalized
+                * Controller.playerMovement.rb2d.velocity.magnitude;
         }
     }
 
@@ -55,7 +48,7 @@ public class TeleportShotController : ShotController
             if (weapon)
             {
                 //Make it unowned
-                weapon.switchOwner(null);
+                weapon.Controller = null;
             }
             //and then destroy this shot
             health.Health = 0;

@@ -65,6 +65,10 @@ public abstract class PlayerController : MonoBehaviour
     /// The looking direction of the player. Includes magnitude, NOT a unit vector
     /// </summary>
     public Vector2 LookDirection => (Vector2)Utility.MouseWorldPos - SpawnCenter;
+    /// <summary>
+    /// Returns true if the player is stunned
+    /// </summary>
+    public bool Stunned => statusKeeper.Status.Has(StatusEffect.STUNNED);
 
     protected AminaPool aminaPool { get; private set; }
     protected HealthPool healthPool { get; private set; }
@@ -75,6 +79,8 @@ public abstract class PlayerController : MonoBehaviour
     public StatusKeeper statusKeeper { get; private set; }
     private ObjectSpawner objectSpawner;
     protected SpriteRenderer sr;
+    private StatusAutoEnder statusAutoEnder;
+    public TeamToken teamToken { get; private set; }
 
     // Start is called before the first frame update
     private void Start()
@@ -105,6 +111,9 @@ public abstract class PlayerController : MonoBehaviour
         statKeeper = gameObject.FindComponent<StatKeeper>();
         statusKeeper = gameObject.FindComponent<StatusKeeper>();
         objectSpawner = gameObject.FindComponent<ObjectSpawner>();
+        statusAutoEnder = gameObject.FindComponent<StatusAutoEnder>();
+        statusAutoEnder.Init(statusKeeper);
+        teamToken = gameObject.FindComponent<TeamToken>();
     }
     protected virtual void InitializeSettings()
     {
@@ -116,7 +125,7 @@ public abstract class PlayerController : MonoBehaviour
         healthPool.onMaxHealthChanged += (hp) => { damager.damage = hp; };
         healthPool.onDied += (hp) =>
         {
-            statusKeeper.addLayer(PV.ViewID, new StatusLayer(stun: true));
+            statusKeeper.addLayer(PV.ViewID, new StatusLayer(StatusEffect.STUNNED));
         };
         //Auto-Reloading
         if (aminaReloader)
@@ -131,8 +140,10 @@ public abstract class PlayerController : MonoBehaviour
         //StatusKeeper
         statusKeeper.onStatusChanged += (status) =>
         {
+            //Status Auto Ender
+            statusAutoEnder.CheckStatusTimers(status);
             //Stunned
-            bool stunned = status.stunned;
+            bool stunned = status.Has(StatusEffect.STUNNED);
             this.enabled = !stunned;
             if (stunned)
             {
@@ -168,14 +179,16 @@ public abstract class PlayerController : MonoBehaviour
                 damager.damageFriendlies = false;
             }
             //Stealthed
-            sr.color = sr.color.setAlpha((status.stealthed) ? 0.1f : 1);
+            bool stealthed = status.Has(StatusEffect.STEALTHED);
+            sr.color = sr.color.setAlpha((stealthed) ? 0.1f : 1);
             //Rooted
-            if (playerMovement.ForcingMovement != status.rooted
-            || status.rooted && playerMovement.ForceMoveDirection.magnitude > 0)
+            bool rooted = status.Has(StatusEffect.ROOTED);
+            if (playerMovement.ForcingMovement != rooted
+            || rooted && playerMovement.ForceMoveDirection.magnitude > 0)
             {
-                if (status.rooted)
+                if (rooted)
                 {
-                    playerMovement.forceMovement(Vector2.zero, status.rooted);
+                    playerMovement.forceMovement(Vector2.zero, rooted);
                     cancelAbilities();
                     playerMovement.rb2d.velocity = Vector2.zero;
                 }
@@ -197,7 +210,7 @@ public abstract class PlayerController : MonoBehaviour
             transform.localScale = Vector3.one * stats.size;
             //Update status stealthed
             StatusLayer status = statusKeeper.AllowedStatus;
-            status.stealthed = stats.size <= 1;
+            status.Set(StatusEffect.STEALTHED, stats.size <= 1);
             statusKeeper.AllowedStatus = status;
         };
         //Register with spawned damagers

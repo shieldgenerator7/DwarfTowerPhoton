@@ -2,38 +2,105 @@ using ExitGames.Client.Photon;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
 public struct StatusLayer
 {
-    public bool stunned;
-    public bool stealthed;
-    public bool rooted;
+    [SerializeField]
+    private List<StatusEffect> statusList;
 
-    public StatusLayer(bool stun = false, bool stealth = false, bool root = false)
+    public StatusLayer(params StatusEffect[] statusList)
     {
-        this.stunned = stun;
-        this.stealthed = stealth;
-        this.rooted = root;
+        this.statusList = statusList?.ToHashSet().ToList() ?? new List<StatusEffect>();
+    }
+    public StatusLayer(List<StatusEffect> statusList)
+    {
+        this.statusList = statusList ?? new List<StatusEffect>();
+    }
+    public StatusLayer(HashSet<StatusEffect> statusList)
+    {
+        this.statusList = statusList?.ToList() ?? new List<StatusEffect>();
+    }
+
+    public bool Has(StatusEffect effect)
+    {
+        return statusList.Contains(effect);
+    }
+
+    public void Set(StatusEffect effect, bool setOn = true)
+    {
+        if (setOn)
+        {
+            if (!statusList.Contains(effect))
+            {
+                statusList.Add(effect);
+            }
+        }
+        else
+        {
+            statusList.Remove(effect);
+        }
+    }
+
+    public List<StatusEffect> StatusEffects => statusList.ToList();
+
+    public void validate()
+    {
+        if (this.statusList == null)
+        {
+            this.statusList = new List<StatusEffect>();
+        }
+    }
+    public void checkValid()
+    {
+        if (this.statusList == null)
+        {
+            Debug.LogError($"statusList cannot be null! statusList: {this.statusList}");
+            validate();
+        }
+    }
+    public StatusLayer Copy()
+    {
+        StatusLayer layer = new StatusLayer();
+        layer.statusList = new List<StatusEffect>(this.statusList);
+        return layer;
     }
 
     public StatusLayer stackOr(StatusLayer status)
     {
-        StatusLayer layer = new StatusLayer();
-        layer.stunned = this.stunned || status.stunned;
-        layer.stealthed = this.stealthed || status.stealthed;
-        layer.rooted = this.rooted || status.rooted;
+        HashSet<StatusEffect> effects = this.statusList.ToHashSet();
+        effects.UnionWith(status.statusList);
+        StatusLayer layer = new StatusLayer(effects);
         return layer;
     }
 
     public StatusLayer stackAnd(StatusLayer status)
     {
-        StatusLayer layer = new StatusLayer();
-        layer.stunned = this.stunned && status.stunned;
-        layer.stealthed = this.stealthed && status.stealthed;
-        layer.rooted = this.rooted && status.rooted;
+        HashSet<StatusEffect> effects = new HashSet<StatusEffect>(this.statusList);
+        effects.IntersectWith(status.statusList);
+        StatusLayer layer = new StatusLayer(effects);
         return layer;
+    }
+
+    public static bool operator ==(StatusLayer a, StatusLayer b)
+    {
+        return a.statusList.Equals(b.statusList);
+    }
+    public static bool operator !=(StatusLayer a, StatusLayer b)
+    {
+        return !a.statusList.Equals(b.statusList);
+    }
+    public override bool Equals(object obj)
+    {
+        return obj != null
+            && obj is StatusLayer
+            && this.statusList.Equals(((StatusLayer)obj).statusList);
+    }
+    public override int GetHashCode()
+    {
+        return this.statusList.GetHashCode();
     }
 
     #region Photon methods
@@ -45,18 +112,20 @@ public struct StatusLayer
     }
 
 
+    //TODO: Maybe refactor the Photon network serialization to only serialize the effects that are active
     public bool[] BoolList
     {
         get => new bool[] {
-                stunned,
-                stealthed,
-                rooted,
+                statusList.Contains(StatusEffect.STUNNED),
+                statusList.Contains(StatusEffect.STEALTHED),
+                statusList.Contains(StatusEffect.ROOTED),
             };
         set
         {
-            stunned = value[0];
-            stealthed = value[1];
-            rooted = value[2];
+            statusList.Clear();
+            if (value[0]) { statusList.Add(StatusEffect.STUNNED); }
+            if (value[1]) { statusList.Add(StatusEffect.STEALTHED); }
+            if (value[2]) { statusList.Add(StatusEffect.ROOTED); }
         }
     }
 

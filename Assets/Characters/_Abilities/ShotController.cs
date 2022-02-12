@@ -62,14 +62,15 @@ public class ShotController : MonoBehaviour
         }
     }
 
-    private PlayerController _owner;
-    public virtual PlayerController owner
+    private PlayerController _controller;
+    public PlayerController Controller
     {
-        get => _owner;
-        protected set => _owner = value;
+        get => _controller;
+        set => teamToken.switchController(value?.teamToken);
     }
 
     protected Damager damager { get; private set; }
+    protected TeamToken teamToken { get; private set; }
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -85,6 +86,10 @@ public class ShotController : MonoBehaviour
         }
         //Damage
         damager = gameObject.FindComponent<Damager>();
+        //TeamToken
+        teamToken = gameObject.FindComponent<TeamToken>();
+        teamToken.onControllerGainedControl += updateController;
+        updateController(teamToken.controller);
         //Delegates
         onStatsChanged -= updateFromStats;
         onStatsChanged += updateFromStats;
@@ -97,6 +102,11 @@ public class ShotController : MonoBehaviour
         {
             rb2d.velocity = transform.up * _stats.moveSpeed;
         }
+    }
+
+    private void updateController(TeamToken controller)
+    {
+        this._controller = controller.gameObject.FindComponent<PlayerController>();
     }
 
     protected virtual void updateFromStats(StatLayer statLayer)
@@ -163,33 +173,5 @@ public class ShotController : MonoBehaviour
     protected void RPC_SelfDestruct()
     {
         health.Health = 0;
-    }
-
-    public void switchOwner(PlayerController pc)
-    {
-        int ownerID = -1;
-        if (pc)
-        {
-            PV.TransferOwnership(pc.PV.Owner);
-            ownerID = pc.PV.ViewID;
-        }
-        PV.RPC("RPC_SwitchOwner", RpcTarget.AllBuffered, ownerID);
-    }
-
-    [PunRPC]
-    protected void RPC_SwitchOwner(int ownerID)
-    {
-        owner = null;
-        if (ownerID >= 0)
-        {
-            foreach (PlayerController pc in FindObjectsOfType<PlayerController>())
-            {
-                if (pc.PV.ViewID == ownerID)
-                {
-                    owner = pc;
-                    return;
-                }
-            }
-        }
     }
 }

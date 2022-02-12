@@ -26,6 +26,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 218483051883367596}
   m_RootOrder: 0
@@ -56,6 +57,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 218483051883367596}
   m_RootOrder: 1
@@ -86,6 +88,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2257776281823348936}
   - {fileID: 7245718594423349409}
@@ -123,6 +126,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 68440883872790521}
   m_RootOrder: 0
@@ -264,6 +268,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 218483051883367596}
   - {fileID: 2786384882001015361}
@@ -282,6 +287,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -385,6 +391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamCaptain: {fileID: 7351537156668849939}
   owner: {fileID: 7351537156668849939}
+  controller: {fileID: 0}
   teamColor: {r: 1, g: 1, b: 1, a: 1}
   colorGroupIndex: -1
   spawnPoints:
@@ -500,6 +507,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.022083785, y: 0.022083785, z: 0.022083785}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6024786978427789595}
   m_Father: {fileID: 8677406063159426298}
@@ -580,6 +588,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 218483051883367596}
   m_RootOrder: 4
@@ -610,6 +619,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 861237107}
   - {fileID: 1852675303}
@@ -645,6 +655,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 218483051883367596}
   m_RootOrder: 3
@@ -675,6 +686,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 218483051883367596}
   m_RootOrder: 2
@@ -828,12 +840,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d5780e7bf644764287281614e68f5b8, type: 3}
---- !u!4 &8162296847634317858 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6676477719515564740, guid: 6d5780e7bf644764287281614e68f5b8,
-    type: 3}
-  m_PrefabInstance: {fileID: 3306152989160491238}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &132774096999542089 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3185845893832517039, guid: 6d5780e7bf644764287281614e68f5b8,
@@ -846,6 +852,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b3f46e9ee36c94ab838f057fa13146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &8162296847634317858 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6676477719515564740, guid: 6d5780e7bf644764287281614e68f5b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 3306152989160491238}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4047165622386354789
 PrefabInstance:
   m_ObjectHideFlags: 0

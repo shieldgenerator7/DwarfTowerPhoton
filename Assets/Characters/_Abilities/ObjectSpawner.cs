@@ -14,6 +14,8 @@ public class ObjectSpawner : MonoBehaviour
     [Tooltip("Info for what objects can be spawned")]
     public List<ObjectSpawnInfo> objectSpawnInfoList;
 
+    public bool SpawnMaster { get; set; } = false;
+
     public Color PlayerColor { get; set; } = Color.white;
 
     private TeamToken teamToken;
@@ -65,7 +67,12 @@ public class ObjectSpawner : MonoBehaviour
                 ? Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.up, dir))
                 : Quaternion.Euler(0, 0, 0);
             //Instantiate
-            GameObject go = PhotonNetwork.Instantiate(pathName, position, rotation);
+            GameObject go = (SpawnMaster)
+                //Spawn as scene object (doesn't disappear when player disconnects)
+                ? PhotonNetwork.InstantiateRoomObject(pathName, position, rotation)
+                //Spawn as player object (disappears when player disconnects)
+                : PhotonNetwork.Instantiate(pathName, position, rotation)
+                ;            
             //Team Token
             if (osi.inheritTeamToken)
             {

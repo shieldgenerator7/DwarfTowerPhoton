@@ -13,8 +13,6 @@ public class GunController : PlayerAbility
     public float angle = 0;//angle from the cursor
     [Tooltip("The index of the shot in the object spawner")]
     public int shotIndex;
-    [Tooltip("Should the shot be made aware of who its owner is?")]
-    public bool shouldSetOwner = false;
 
     //Runtime Vars
     private float lastFireTime = 0;
@@ -57,10 +55,6 @@ public class GunController : PlayerAbility
                     shot.transform.position,
                     dir
                     );
-                if (shouldSetOwner)
-                {
-                    shot.switchOwner(playerController);
-                }
             }
         }
     }

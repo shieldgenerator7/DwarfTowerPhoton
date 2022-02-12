@@ -67,7 +67,6 @@ public class CarriedGunController : PlayerAbility
             spawnPos,
             dir
             );
-        carriedShot.switchOwner(playerController);
     }
 
     private void releaseShot()

@@ -73,7 +73,7 @@ public class AvatarSetup : MonoBehaviour
             );
         //Stunned Delegate
         myCharacter.GetComponent<StatusKeeper>().onStatusChanged +=
-            (status) => GetComponent<BlinkEffect>().Blinking = status.stunned;
+            (status) => GetComponent<BlinkEffect>().Blinking = status.Has(StatusEffect.STUNNED);
         GetComponent<BlinkEffect>().Start();
     }
 

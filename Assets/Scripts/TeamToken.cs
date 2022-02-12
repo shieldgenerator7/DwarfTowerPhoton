@@ -9,8 +9,14 @@ using UnityEngine;
 /// </summary>
 public class TeamToken : MonoBehaviour
 {
+    [Tooltip("This determines which team it is on")]
     public TeamTokenCaptain teamCaptain;
+    [Tooltip("This is the player that owns it (created it)")]
     public TeamToken owner;
+    [Tooltip("This is the player that currently controls it (decides what it does)")]
+    public TeamToken controller;
+
+    public bool HasController => controller && controller != this;
 
     private PhotonView photonView;
     public PhotonView PV
@@ -32,6 +38,13 @@ public class TeamToken : MonoBehaviour
         {
             //it owns itself
             owner = this;
+        }
+        //If there's no controller,
+        if (!controller)
+        {
+            //it controls itself
+            controller = this;
+            onControllerGainedControl?.Invoke(this);
         }
     }
 
@@ -59,6 +72,8 @@ public class TeamToken : MonoBehaviour
     {
         recruit(tt);
         tt.owner = this;
+        tt.controller = this;
+        tt.onControllerGainedControl?.Invoke(this);
     }
 
     public static void seeRecruiter(GameObject go, TeamToken recruiter, bool ownedObject = false)
@@ -76,22 +91,56 @@ public class TeamToken : MonoBehaviour
     [PunRPC]
     void RPC_SeeRecruiter(int recruiterID, bool ownedObject)
     {
-        foreach (TeamToken tt in FindObjectsOfType<TeamToken>())
+        TeamToken tt = TeamToken.FindTeamToken(recruiterID);
+        if (ownedObject)
         {
-            if (tt.PV.ViewID == recruiterID)
-            {
-                if (ownedObject)
-                {
-                    tt.recruitOwnedObject(this);
-                }
-                else
-                {
-                    tt.recruit(this);
-                }
-                break;
-            }
+            tt?.recruitOwnedObject(this);
+        }
+        else
+        {
+            tt?.recruit(this);
         }
     }
+
+    public static void switchController(GameObject go, TeamToken controller)
+    {
+        TeamToken tt = getTeamToken(go, true);
+        tt.switchController(controller);
+    }
+    public void switchController(TeamToken controller)
+    {
+        int controllerID = controller?.PV.ViewID ?? this.owner.PV.ViewID;
+        if (controller)
+        {
+            PV.TransferOwnership(controller.PV.Owner);
+        }
+        else
+        {
+            PV.TransferOwnership(this.owner.PV.Owner);
+        }
+        PV.RPC("RPC_SwitchController", RpcTarget.AllBuffered, controllerID);
+    }
+    [PunRPC]
+    void RPC_SwitchController(int controllerID)
+    {
+        //Old TT is the current controller
+        TeamToken oldTT = this.controller;
+        //New TT is the given controller,or if it's null,
+        //New TT is this teamToken (it controls itself)
+        TeamToken newTT = TeamToken.FindTeamToken(controllerID)
+            ?? this;
+        //If the controller has changed
+        if (oldTT != newTT)
+        {
+            //Switch the controller
+            onControllerLostControl?.Invoke(oldTT);
+            this.controller = newTT;
+            onControllerGainedControl?.Invoke(newTT);
+        }
+    }
+    public delegate void OnControllerChanged(TeamToken controller);
+    public event OnControllerChanged onControllerGainedControl;
+    public event OnControllerChanged onControllerLostControl;
 
     public bool onSameTeam(TeamToken other)
     {
@@ -162,6 +211,39 @@ public class TeamToken : MonoBehaviour
         }
     }
 
+    public bool controlledBySamePlayer(TeamToken other)
+    {
+        return this.controller == other.controller;
+    }
+
+    public static bool controlledBySamePlayer(GameObject go1, GameObject go2)
+    {//2022-02-10: copied from ownedBySamePlayer()
+
+        //Get go1's team token
+        TeamToken tt1 = go1.FindComponent<TeamToken>();
+        //Get go2's team token
+        TeamToken tt2 = go2.FindComponent<TeamToken>();
+        //If both have a team token
+        if (tt1 && tt2)
+        {
+            //easy, just compare their controllers
+            return tt1.controlledBySamePlayer(tt2);
+        }
+        //If neither has a team token
+        else if (!tt1 && !tt2)
+        {
+            //not controlled at all
+            return false;
+        }
+        //If one or either has a team token, but not both
+        else
+        {
+            //one's not controlled at all,
+            //therefore not controlled by same player
+            return false;
+        }
+    }
+
     public static TeamToken getTeamToken(GameObject go, bool addIfNone = false)
     {
         TeamToken tt = go.FindComponent<TeamToken>();
@@ -171,6 +253,9 @@ public class TeamToken : MonoBehaviour
         }
         return tt;
     }
+
+    public static TeamToken FindTeamToken(int viewID)
+        => TeamToken.getTeamToken(PhotonView.Find(viewID).gameObject);
 
     public void assignTeam()
     {
@@ -187,14 +272,8 @@ public class TeamToken : MonoBehaviour
     [PunRPC]
     void RPC_AssignTeam(int captainID)
     {
-        foreach (TeamTokenCaptain ttc in FindObjectsOfType<TeamTokenCaptain>())
-        {
-            if (ttc.PV.ViewID == captainID)
-            {
-                ttc.recruit(this);
-                break;
-            }
-        }
+        TeamToken ttc = TeamToken.FindTeamToken(captainID);
+        ttc?.recruit(this);
     }
 
     public static TeamTokenCaptain getTeamWithFewestPlayers()
@@ -221,9 +300,9 @@ public class TeamToken : MonoBehaviour
         TeamTokenCaptain minTeamCaptain = null;
         foreach (TeamTokenCaptain ttc in teamCaptains.Keys)
         {
-            if ((int)teamCaptains[ttc] < minTeamMembers)
+            if (teamCaptains[ttc] < minTeamMembers)
             {
-                minTeamMembers = (int)teamCaptains[ttc];
+                minTeamMembers = teamCaptains[ttc];
                 minTeamCaptain = ttc;
             }
         }

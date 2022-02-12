@@ -8,12 +8,15 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
 {//2019-03-14: made by following steps from: https://www.youtube.com/watch?v=fbk_SIhbjDc
 
     public static PhotonLobby lobby;
+    public GameObject connectingScreen;
+    public GameObject menu;
     public GameObject btnBattle;
     public GameObject btnCancel;
 
     private void Awake()
     {
         lobby = this;
+        UpdateMenuFromConnectedState(false);
     }
 
     // Start is called before the first frame update
@@ -26,7 +29,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
     {
         Debug.Log("Player has connected to the Photon master server");
         PhotonNetwork.AutomaticallySyncScene = true;
-        btnBattle.SetActive(true);
+        UpdateMenuFromConnectedState(true);
     }
 
     public void OnBattleButtonClicked()
@@ -59,5 +62,11 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
         btnCancel.SetActive(false);
         btnBattle.SetActive(true);
         PhotonNetwork.LeaveRoom();
+    }
+
+    private void UpdateMenuFromConnectedState(bool connected)
+    {
+        connectingScreen.SetActive(!connected);
+        menu.SetActive(connected);
     }
 }

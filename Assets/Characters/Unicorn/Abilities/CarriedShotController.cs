@@ -16,6 +16,8 @@ public class CarriedShotController : ShotController
     public ShotControllerData dataFinal;
     private HoldShotData dataCurrent;
 
+    private bool released = false;
+
     private float carryPercent = -1;//how much has been swung
     public float CarryPercent
     {
@@ -48,7 +50,7 @@ public class CarriedShotController : ShotController
     }
     private float carryStartTime = -1;
 
-    public Vector2 PivotPoint => owner.SpawnCenter;
+    public Vector2 PivotPoint => Controller.SpawnCenter;
 
     private Vector3 origScale;
 
@@ -62,7 +64,7 @@ public class CarriedShotController : ShotController
         CarryPercent = 0;
         origScale = transform.localScale;
         carryStartTime = Time.time;
-        if (owner)
+        if (Controller)
         {
             destroyOnIndestructible = false;
         }
@@ -71,9 +73,9 @@ public class CarriedShotController : ShotController
     // Update is called once per frame
     void Update()
     {
-        if (owner)
+        if (!released)
         {
-            if (owner.PV.IsMine)
+            if (Controller.PV.IsMine)
             {
                 //Swing percent
                 CarryPercent = CarryTime / maxTime;
@@ -93,13 +95,13 @@ public class CarriedShotController : ShotController
 
     public void release()
     {
-        rb2d.velocity = PointDirection.normalized * owner.playerMovement.rb2d.velocity.magnitude;
+        rb2d.velocity = PointDirection.normalized * Controller.playerMovement.rb2d.velocity.magnitude;
         destroyOnIndestructible = true;
-        switchOwner(null);
+        released = true;
     }
 
     Vector2 PointDirection
-        => (owner.playerMovement.rb2d.isMoving())
-        ? owner.playerMovement.LastMoveDirection
-        : owner.LookDirection;
+        => (Controller.playerMovement.rb2d.isMoving())
+        ? Controller.playerMovement.LastMoveDirection
+        : Controller.LookDirection;
 }
