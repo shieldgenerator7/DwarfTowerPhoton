@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: shot_update_rule
   m_EditorClassIdentifier: 
   settings:
-    settings:
-    - setting: 0
-      value: 0
+    settings: []
   trigger: 1
   condition: {fileID: 0}
   actions: 03000000

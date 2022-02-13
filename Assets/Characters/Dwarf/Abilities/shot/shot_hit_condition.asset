@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f4c84b65377c1b46b4a722928936651, type: 3}
+  m_Script: {fileID: 11500000, guid: 6fb941b79e5b732459d3ba1beec518a2, type: 3}
   m_Name: shot_hit_condition
   m_EditorClassIdentifier: 
   entityTypes: 0200000001000000

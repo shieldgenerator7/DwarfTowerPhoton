@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 103c9701c2e720d40975a17d87d69018, type: 3}
   m_Name: ExplodeRule
   m_EditorClassIdentifier: 
+  settings:
+    settings: []
   trigger: 0
-  conditions: []
+  condition: {fileID: 0}
   actions: 
