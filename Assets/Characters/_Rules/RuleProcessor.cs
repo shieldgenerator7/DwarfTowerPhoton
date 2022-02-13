@@ -8,7 +8,6 @@ public class RuleProcessor : MonoBehaviour
     public List<RuleSet> ruleSets;
 
     public int spawnIndex;
-    public float aminaCost;
 
     public RuleContext initialContext;
 
