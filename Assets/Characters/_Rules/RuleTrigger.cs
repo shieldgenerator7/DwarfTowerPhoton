@@ -23,4 +23,6 @@ public enum RuleTrigger
     OnAminaRecharged,
     OnAminaUsed,
     OnAminaEmpty,
+    //Temp
+    OnButtonDownLMB,
 }

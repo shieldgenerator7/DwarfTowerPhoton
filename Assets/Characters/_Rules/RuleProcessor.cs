@@ -7,13 +7,15 @@ public class RuleProcessor : MonoBehaviour
 {
     public List<RuleSet> ruleSets;
 
+    public int spawnIndex;
+
     private RuleContext initialContext;
 
     public void Init(Vector2 dir, Vector2 pos)
     {
         initialContext = new RuleContext()
         {
-            targetDir = dir,
+            targetDir = dir.normalized,
             targetPos = pos,
             deltaTime = 1,
         };
@@ -23,6 +25,16 @@ public class RuleProcessor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Initialize context
+        initialContext.deltaTime = 1;
+        //Register delegates
+        PlayerInput playerInput = gameObject.FindComponent<PlayerInput>();
+        if (playerInput)
+        {
+            playerInput.onInputChanged -= OnInputChanged;
+            playerInput.onInputChanged += OnInputChanged;
+        }
+        //Process rules
         ProcessRules(RuleTrigger.OnStart, initialContext);
     }
 
@@ -34,6 +46,17 @@ public class RuleProcessor : MonoBehaviour
             deltaTime = Time.deltaTime,
         };
         ProcessRules(RuleTrigger.OnUpdate, context);
+    }
+
+    private void OnInputChanged(InputState input)
+    {
+        if (input.ability1 == ButtonState.DOWN)
+        {
+            RuleContext context = new RuleContext(initialContext)
+            {
+            };
+            ProcessRules(RuleTrigger.OnButtonDownLMB, context);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -106,7 +129,7 @@ public class RuleProcessor : MonoBehaviour
         switch (action)
         {
             case RuleAction.MOVE_IN_TARGET_DIR:
-                rb2d.velocity = context.targetDir.normalized * stats.moveSpeed;
+                rb2d.velocity = context.targetDir * stats.moveSpeed;
                 break;
             case RuleAction.MOVE_TOWARDS_TARGET_POS:
                 rb2d.velocity = (context.targetPos - (Vector2)gameObject.transform.position).normalized * stats.moveSpeed;
@@ -124,6 +147,18 @@ public class RuleProcessor : MonoBehaviour
                     HealthPool hp = gameObject.FindComponent<HealthPool>();
                     hp.Health += -1 * context.deltaTime;
                 }
+                break;
+            case RuleAction.CREATE_OBJECT:
+                Vector2 spawnCenter = gameObject.FindComponent<PlayerController>().SpawnCenter;
+                Vector2 targetPos = Utility.MouseWorldPos;
+                Vector2 targetDir = (targetPos - spawnCenter).normalized;
+                RuleProcessor newObj = gameObject.FindComponent<ObjectSpawner>()
+                    .spawnObject<RuleProcessor>(
+                    spawnIndex,
+                    spawnCenter,
+                    targetDir
+                    );
+                newObj.Init(targetDir, targetPos);
                 break;
             default:
                 throw new System.ArgumentException($"Unknown action: {action}");

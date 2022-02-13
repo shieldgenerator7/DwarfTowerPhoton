@@ -9,4 +9,5 @@ public enum RuleAction
     MOVE_TOWARDS_TARGET_POS,
     DAMAGE,
     DAMAGE_SELF,
+    CREATE_OBJECT,
 }

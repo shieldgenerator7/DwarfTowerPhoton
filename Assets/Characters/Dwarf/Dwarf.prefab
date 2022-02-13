@@ -147,7 +147,6 @@ MonoBehaviour:
   abilities:
   - {fileID: 7133168848261502530}
   - {fileID: 4034267826870480475}
-  - {fileID: 5500888993561376432}
   - {fileID: 3369071877670158181}
 --- !u!114 &3854592228582004885
 MonoBehaviour:
@@ -477,6 +476,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6220889621231917683}
   - component: {fileID: 5500888993561376432}
+  - component: {fileID: 7674509513038936758}
   m_Layer: 0
   m_Name: Iron Shot
   m_TagString: Untagged
@@ -506,7 +506,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7577088886736187312}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83413c13fefadf64bab9596e5332f75f, type: 3}
   m_Name: 
@@ -519,3 +519,18 @@ MonoBehaviour:
   fireDelay: 0.5
   angle: 0
   shotIndex: 0
+--- !u!114 &7674509513038936758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7577088886736187312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5425ba304f6ea54f89ea7c2e72b7d54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ruleSets:
+  - {fileID: 11400000, guid: b0fc559a2a008fd4383ad70136f1388c, type: 2}
+  spawnIndex: 0
