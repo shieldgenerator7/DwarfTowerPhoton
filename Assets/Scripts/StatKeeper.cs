@@ -7,17 +7,11 @@ public class StatKeeper : MonoBehaviour
 {
     public StatMatrix selfStats;
 
-    public StatMatrix shotStats;
-
-    public StatMatrix constructStats;
-
     private PhotonView PV;
 
     private void Start()
     {
         selfStats.init();
-        shotStats.init();
-        constructStats.init();
         //Register RPC events
         PV = gameObject.FindComponent<PhotonView>();
         if (PV.IsMine)
@@ -30,7 +24,5 @@ public class StatKeeper : MonoBehaviour
     public void triggerEvents()
     {
         selfStats.triggerEvent();
-        shotStats.triggerEvent();
-        constructStats.triggerEvent();
     }
 }
