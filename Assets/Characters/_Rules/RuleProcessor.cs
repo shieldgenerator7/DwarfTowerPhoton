@@ -8,8 +8,9 @@ public class RuleProcessor : MonoBehaviour
     public List<RuleSet> ruleSets;
 
     public int spawnIndex;
+    public float aminaCost;
 
-    private RuleContext initialContext;
+    public RuleContext initialContext;
 
     public void Init(Vector2 dir, Vector2 pos)
     {
@@ -17,16 +18,22 @@ public class RuleProcessor : MonoBehaviour
         {
             targetDir = dir.normalized,
             targetPos = pos,
-            deltaTime = 1,
         };
+        InitializeContext();
+    }
+
+    private void InitializeContext()
+    {
+        //Initialize context
+        initialContext.deltaTime = 1;
+        initialContext.self = gameObject;
     }
 
     #region Rule Triggers
     // Start is called before the first frame update
     void Start()
     {
-        //Initialize context
-        initialContext.deltaTime = 1;
+        InitializeContext();
         //Register delegates
         PlayerInput playerInput = gameObject.FindComponent<PlayerInput>();
         if (playerInput)
@@ -94,32 +101,12 @@ public class RuleProcessor : MonoBehaviour
     private void ProcessRule(Rule rule, RuleContext context)
     {
         bool canProcess = rule.conditions.Count == 0
-            || rule.conditions.Any(cond => CheckCondition(cond, context));
+            || rule.conditions.Any(cond => cond.Check(context));
         if (canProcess)
         {
             rule.actions.ForEach(action => TakeAction(action, context));
         }
-    }
-
-    private bool CheckCondition(RuleCondition condition, RuleContext context)
-    {
-        bool onSameTeam = TeamToken.onSameTeam(gameObject, context.target);
-        if (condition.onAlly && onSameTeam || condition.onEnemy && !onSameTeam)
-        {
-            if (condition.onTrigger && context.isTrigger || condition.onCollision && context.isCollision)
-            {
-                HealthPool hp = context.target.FindComponent<HealthPool>();
-                if (hp)
-                {
-                    if (condition.entityTypes.Contains(hp.entityType))
-                    {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
+    }    
 
     private void TakeAction(RuleAction action, RuleContext context)
     {

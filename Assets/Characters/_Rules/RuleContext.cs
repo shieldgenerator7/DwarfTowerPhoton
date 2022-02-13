@@ -4,6 +4,8 @@ using UnityEngine;
 
 public struct RuleContext
 {
+    //Self
+    public GameObject self;
     //Movement
     public Vector2 targetDir;
     public Vector2 targetPos;
@@ -16,6 +18,8 @@ public struct RuleContext
 
     public RuleContext(RuleContext template)
     {
+        //Self
+        this.self = template.self;
         //Movement
         this.targetDir = template.targetDir;
         this.targetPos = template.targetPos;

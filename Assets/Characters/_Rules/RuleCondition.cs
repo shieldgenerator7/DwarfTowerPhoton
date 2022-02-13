@@ -10,4 +10,5 @@ public class RuleCondition: ScriptableObject
     public bool onEnemy = true;
     public bool onTrigger = true;
     public bool onCollision = true; 
+    public abstract bool Check(RuleContext context);
 }
