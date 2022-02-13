@@ -11,7 +11,7 @@ public class AminaCondition : RuleCondition
     {
         AminaPool aminaPool = context.self.FindComponent<AminaPool>();
         float amina = aminaPool.requestAmina(
-            settings.aminaCost * context.deltaTime,
+            settings.Get(RuleSetting.Option.AMINA_COST) * context.deltaTime,
             acceptPartialAmount
             );
         return amina > 0;

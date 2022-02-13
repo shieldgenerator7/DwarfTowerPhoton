@@ -15,8 +15,10 @@ public class TimerCondition : RuleCondition
         }
         else
         {
-            timer = TimerManager.StartTimer(settings.activateDelay);
-            timer.onTimerCompleted += () => timer = null;
+            timer = TimerManager.StartTimer(
+                settings.Get(RuleSetting.Option.ACTIVATE_DELAY),
+                () => timer = null
+                );
             return true;
         }
     }

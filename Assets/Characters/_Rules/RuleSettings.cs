@@ -5,8 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public struct RuleSettings
 {
-    //Amina
-    public float aminaCost;
-    //Activation delay
-    public float activateDelay;
+    public List<RuleSetting> settings;
+
+    public float Get(RuleSetting.Option setting)
+        => settings.Find(s => s.setting == setting).value;
 }

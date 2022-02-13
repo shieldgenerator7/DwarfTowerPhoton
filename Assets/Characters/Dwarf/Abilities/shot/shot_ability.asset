@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: shot_ability
   m_EditorClassIdentifier: 
   settings:
-    aminaCost: 5
-    activateDelay: 0.5
+    settings:
+    - setting: 0
+      value: 5
+    - setting: 1
+      value: 0.5
   trigger: 14
   condition: {fileID: 11400000, guid: 054dbc8b91ee05d4a9a7d1f18b7d5834, type: 2}
   actions: 04000000
