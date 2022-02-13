@@ -12,6 +12,8 @@ public struct RuleSetting
         ACCEPT_PARTIAL_AMOUNT,
         //Activation delay
         ACTIVATE_DELAY,
+        //Spawn Index
+        SPAWN_INDEX,
     }
     public Option setting;
     public float value;

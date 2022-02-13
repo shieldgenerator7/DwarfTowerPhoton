@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   combineOption: 0
   conditions: []
-  conditions: 
+  simpleConditions: 0100000000000000

@@ -7,8 +7,6 @@ public class RuleProcessor : MonoBehaviour
 {
     public List<RuleSet> ruleSets;
 
-    public int spawnIndex;
-
     public RuleContext initialContext;
 
     public void Init(Vector2 dir, Vector2 pos)
@@ -93,20 +91,20 @@ public class RuleProcessor : MonoBehaviour
         {
             ruleSet.rules
                 .FindAll(rule => rule.trigger == trigger)
-                .ForEach(rule => ProcessRule(rule, context));
+                .ForEach(rule => ProcessRule(rule, rule.settings, context));
         });
     }
 
-    private void ProcessRule(Rule rule, RuleContext context)
+    private void ProcessRule(Rule rule, RuleSettings settings, RuleContext context)
     {
         bool canProcess = rule.condition?.Check(rule.settings, context) ?? true;
         if (canProcess)
         {
-            rule.actions.ForEach(action => TakeAction(action, context));
+            rule.actions.ForEach(action => TakeAction(action, settings, context));
         }
     }
 
-    private void TakeAction(RuleAction action, RuleContext context)
+    private void TakeAction(RuleAction action, RuleSettings settings, RuleContext context)
     {
         Rigidbody2D rb2d = gameObject.FindComponent<Rigidbody2D>();
         StatKeeper statKeeper = gameObject.FindComponent<StatKeeper>();
@@ -139,7 +137,7 @@ public class RuleProcessor : MonoBehaviour
                 Vector2 targetDir = (targetPos - spawnCenter).normalized;
                 RuleProcessor newObj = gameObject.FindComponent<ObjectSpawner>()
                     .spawnObject<RuleProcessor>(
-                    spawnIndex,
+                    settings.Get(RuleSetting.Option.SPAWN_INDEX),
                     spawnCenter,
                     targetDir
                     );

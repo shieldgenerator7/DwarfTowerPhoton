@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 103c9701c2e720d40975a17d87d69018, type: 3}
   m_Name: shot_update_rule
   m_EditorClassIdentifier: 
+  settings:
+    settings:
+    - setting: 0
+      value: 0
   trigger: 1
-  conditions: []
+  condition: {fileID: 0}
   actions: 03000000
