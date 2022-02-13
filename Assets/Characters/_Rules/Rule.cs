@@ -7,6 +7,6 @@ using UnityEngine;
 public class Rule : ScriptableObject
 {
     public RuleTrigger trigger;
-    public List<RuleCondition> conditions;
+    public RuleCondition condition;
     public List<RuleAction> actions;
 }

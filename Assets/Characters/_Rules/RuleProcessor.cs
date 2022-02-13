@@ -99,13 +99,12 @@ public class RuleProcessor : MonoBehaviour
 
     private void ProcessRule(Rule rule, RuleContext context)
     {
-        bool canProcess = rule.conditions.Count == 0
-            || rule.conditions.Any(cond => cond.Check(context));
+        bool canProcess = rule.condition?.Check(context) ?? true;
         if (canProcess)
         {
             rule.actions.ForEach(action => TakeAction(action, context));
         }
-    }    
+    }
 
     private void TakeAction(RuleAction action, RuleContext context)
     {

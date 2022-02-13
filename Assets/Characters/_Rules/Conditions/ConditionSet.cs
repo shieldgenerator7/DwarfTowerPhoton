@@ -12,7 +12,7 @@ public class ConditionSet : RuleCondition
         OR,
     }
     public CombineOption combineOption;
-    public List<ConditionSet> conditions;
+    public List<RuleCondition> conditions;
 
     public override bool Check(RuleContext context)
     {
