@@ -15,6 +15,7 @@ public class RuleProcessor : MonoBehaviour
         {
             targetDir = dir,
             targetPos = pos,
+            deltaTime = 1,
         };
     }
 
@@ -28,7 +29,11 @@ public class RuleProcessor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ProcessRules(RuleTrigger.OnUpdate, initialContext);
+        RuleContext context = new RuleContext(initialContext)
+        {
+            deltaTime = Time.deltaTime,
+        };
+        ProcessRules(RuleTrigger.OnUpdate, context);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -110,15 +115,14 @@ public class RuleProcessor : MonoBehaviour
                 {
                     //TODO: make delegate: onDamageDealt
                     HealthPool hp = context.target.FindComponent<HealthPool>();
-                    hp.Health += -stats.damage;
+                    hp.Health += -stats.damage * context.deltaTime;
                 }
                 break;
             case RuleAction.DAMAGE_SELF:
                 {
                     //TODO: make damage over time amount a variable
-                    //TODO: put deltaTime in RuleContext
                     HealthPool hp = gameObject.FindComponent<HealthPool>();
-                    hp.Health += -1 * Time.deltaTime;
+                    hp.Health += -1 * context.deltaTime;
                 }
                 break;
             default:

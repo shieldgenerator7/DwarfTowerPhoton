@@ -11,6 +11,8 @@ public struct RuleContext
     public GameObject target;
     public bool isTrigger;
     public bool isCollision;
+    //Update
+    public float deltaTime;
 
     public RuleContext(RuleContext template)
     {
@@ -21,5 +23,7 @@ public struct RuleContext
         this.target = template.target;
         this.isTrigger = template.isTrigger;
         this.isCollision = template.isCollision;
+        //Update
+        this.deltaTime = template.deltaTime;
     }
 }
