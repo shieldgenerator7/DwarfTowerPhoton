@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 103c9701c2e720d40975a17d87d69018, type: 3}
-  m_Name: shot_ability
+  m_Script: {fileID: 11500000, guid: 15508f76fda8d19409020e3f3224de46, type: 3}
+  m_Name: shot_ability_timer_condition
   m_EditorClassIdentifier: 
-  trigger: 14
-  condition: {fileID: 11400000, guid: 054dbc8b91ee05d4a9a7d1f18b7d5834, type: 2}
-  actions: 04000000
+  trueDelay: 0.5
