@@ -7,6 +7,6 @@ public struct RuleSettings
 {
     public List<RuleSetting> settings;
 
-    public float Get(RuleSetting.Option setting)
-        => settings.Find(s => s.setting == setting).value;
+    public RuleSetting Get(RuleSetting.Option setting)
+        => settings.Find(s => s.setting == setting);
 }
