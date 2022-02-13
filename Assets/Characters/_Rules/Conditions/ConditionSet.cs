@@ -14,14 +14,14 @@ public class ConditionSet : RuleCondition
     public CombineOption combineOption;
     public List<RuleCondition> conditions;
 
-    public override bool Check(RuleContext context)
+    public override bool Check(RuleSettings settings, RuleContext context)
     {
         switch (combineOption)
         {
             case ConditionSet.CombineOption.AND:
-                return conditions.All(cond => cond.Check(context));
+                return conditions.All(cond => cond.Check(settings, context));
             case ConditionSet.CombineOption.OR:
-                return conditions.Any(cond => cond.Check(context));
+                return conditions.Any(cond => cond.Check(settings, context));
             default:
                 throw new System.ArgumentException(
                     $"Unknown combine option: {combineOption}"

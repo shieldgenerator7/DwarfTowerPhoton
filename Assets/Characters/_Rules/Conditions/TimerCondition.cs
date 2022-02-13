@@ -5,11 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TimerCondition", menuName = "Characters/Rule/TimerCondition", order = 0)]
 public class TimerCondition : RuleCondition
 {
-    public float trueDelay = 5;
-
     private Timer timer;
 
-    public override bool Check(RuleContext context)
+    public override bool Check(RuleSettings settings, RuleContext context)
     {
         if (timer != null)
         {
@@ -17,7 +15,7 @@ public class TimerCondition : RuleCondition
         }
         else
         {
-            timer = TimerManager.StartTimer(trueDelay);
+            timer = TimerManager.StartTimer(settings.activateDelay);
             timer.onTimerCompleted += () => timer = null;
             return true;
         }

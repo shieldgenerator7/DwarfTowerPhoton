@@ -99,7 +99,7 @@ public class RuleProcessor : MonoBehaviour
 
     private void ProcessRule(Rule rule, RuleContext context)
     {
-        bool canProcess = rule.condition?.Check(context) ?? true;
+        bool canProcess = rule.condition?.Check(rule.settings, context) ?? true;
         if (canProcess)
         {
             rule.actions.ForEach(action => TakeAction(action, context));

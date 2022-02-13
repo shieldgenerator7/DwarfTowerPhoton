@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Rule", menuName = "Characters/Rule/Rule", order = 0)]
 public class Rule : ScriptableObject
 {
+    public RuleSettings settings;
     public RuleTrigger trigger;
     public RuleCondition condition;
     public List<RuleAction> actions;

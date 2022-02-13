@@ -5,14 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "AminaCondition", menuName = "Characters/Rule/AminaCondition", order = 0)]
 public class AminaCondition : RuleCondition
 {
-    public float aminaRequirement;
     public bool acceptPartialAmount = true;
 
-    public override bool Check(RuleContext context)
+    public override bool Check(RuleSettings settings, RuleContext context)
     {
         AminaPool aminaPool = context.self.FindComponent<AminaPool>();
         float amina = aminaPool.requestAmina(
-            aminaRequirement * context.deltaTime,
+            settings.aminaCost * context.deltaTime,
             acceptPartialAmount
             );
         return amina > 0;
