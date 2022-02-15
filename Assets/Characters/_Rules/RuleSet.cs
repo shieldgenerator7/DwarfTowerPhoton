@@ -6,5 +6,6 @@ using UnityEngine;
 
 public class RuleSet : ScriptableObject
 {
+    public bool activeAtStart = true;
     public List<Rule> rules;
 }

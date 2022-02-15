@@ -9,6 +9,8 @@ public class RuleProcessor : MonoBehaviour
 
     public RuleContext initialContext;
 
+    private HashSet<RuleSet> activeRuleSets = new HashSet<RuleSet>();
+
     public void Init(Vector2 dir, Vector2 pos)
     {
         initialContext = new RuleContext()
@@ -49,6 +51,8 @@ public class RuleProcessor : MonoBehaviour
     {
         InitializeContext();
         RegisterDelegates();
+        ruleSets.FindAll(rs => rs.activeAtStart)
+            .ForEach(rs => activeRuleSets.Add(rs));
         //Process rules
         ProcessRules(RuleTrigger.OnStart, initialContext);
     }
@@ -106,11 +110,17 @@ public class RuleProcessor : MonoBehaviour
     #region Rule Processing
     private void ProcessRules(RuleTrigger trigger, RuleContext context)
     {
-        ruleSets.ForEach(ruleSet =>
+        ruleSets
+            .FindAll(ruleSet => activeRuleSets.Contains(ruleSet))
+            .ForEach(ruleSet =>
         {
+            RuleContext currentContext = new RuleContext(context)
+            {
+                currentRuleSet = ruleSet,
+            };
             ruleSet.rules
                 .FindAll(rule => rule.trigger == trigger)
-                .ForEach(rule => ProcessRule(rule, rule.settings, context));
+                .ForEach(rule => ProcessRule(rule, rule.settings, currentContext));
         });
     }
 
@@ -161,6 +171,10 @@ public class RuleProcessor : MonoBehaviour
                     targetDir
                     );
                 newObj.Init(targetDir, targetPos);
+                break;
+            case RuleAction.SWITCH_RULESET:
+                activeRuleSets.Remove(context.currentRuleSet);
+                activeRuleSets.Add(settings.targetRuleSet);
                 break;
             default:
                 throw new System.ArgumentException($"Unknown action: {action}");

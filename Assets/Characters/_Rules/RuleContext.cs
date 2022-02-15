@@ -6,6 +6,7 @@ public struct RuleContext
 {
     //Self
     public GameObject self;
+    public RuleSet currentRuleSet;
     //Movement
     public Vector2 targetDir;
     public Vector2 targetPos;
@@ -20,6 +21,7 @@ public struct RuleContext
     {
         //Self
         this.self = template.self;
+        this.currentRuleSet = template.currentRuleSet;
         //Movement
         this.targetDir = template.targetDir;
         this.targetPos = template.targetPos;

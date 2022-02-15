@@ -8,6 +8,8 @@ public struct RuleSettings
 {
     public List<RuleSetting> settings;
 
+    public RuleSet targetRuleSet;
+
     public RuleSetting Get(RuleSetting.Option setting)
         => settings.Find(s => s.setting == setting);
 

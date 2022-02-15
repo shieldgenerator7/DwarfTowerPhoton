@@ -10,4 +10,5 @@ public enum RuleAction
     DAMAGE,
     DAMAGE_SELF,
     CREATE_OBJECT,
+    SWITCH_RULESET,//switch out the current ruleset with the target ruleset
 }
