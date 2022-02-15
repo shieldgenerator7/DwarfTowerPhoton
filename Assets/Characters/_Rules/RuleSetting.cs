@@ -9,6 +9,7 @@ public struct RuleSetting
     {
         //Amina
         AMINA_COST,
+        AMINA_COST_PER_SECOND,
         ACCEPT_PARTIAL_AMOUNT,
         //Activation delay
         ACTIVATE_DELAY,

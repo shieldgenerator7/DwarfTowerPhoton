@@ -193,7 +193,19 @@ public class RuleProcessor : MonoBehaviour
                         .Try(RuleSetting.Option.ACCEPT_PARTIAL_AMOUNT)
                         ?? true;
                     float amina = aminaPool.requestAmina(
-                        settings.Get(RuleSetting.Option.AMINA_COST) * context.deltaTime,
+                        settings.Get(RuleSetting.Option.AMINA_COST),
+                        acceptPartialAmount
+                        );
+                }
+                break;
+            case RuleAction.USE_AMINA_PER_SECOND:
+                {
+                    AminaPool aminaPool = context.self.FindComponent<AminaPool>();
+                    bool acceptPartialAmount = settings
+                        .Try(RuleSetting.Option.ACCEPT_PARTIAL_AMOUNT)
+                        ?? true;
+                    float amina = aminaPool.requestAmina(
+                        settings.Get(RuleSetting.Option.AMINA_COST_PER_SECOND) * context.deltaTime,
                         acceptPartialAmount
                         );
                 }
@@ -202,7 +214,15 @@ public class RuleProcessor : MonoBehaviour
                 {
                     AminaPool aminaPool = context.self.FindComponent<AminaPool>();
                     aminaPool.rechargeAmina(
-                        settings.Get(RuleSetting.Option.AMINA_COST) * context.deltaTime
+                        settings.Get(RuleSetting.Option.AMINA_COST)
+                        );
+                }
+                break;
+            case RuleAction.RECHARGE_AMINA_PER_SECOND:
+                {
+                    AminaPool aminaPool = context.self.FindComponent<AminaPool>();
+                    aminaPool.rechargeAmina(
+                        settings.Get(RuleSetting.Option.AMINA_COST_PER_SECOND) * context.deltaTime
                         );
                 }
                 break;
