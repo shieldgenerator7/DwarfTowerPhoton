@@ -19,6 +19,7 @@ public class RuleProcessor : MonoBehaviour
         InitializeContext();
     }
 
+    #region Initialization
     private void InitializeContext()
     {
         //Initialize context
@@ -26,18 +27,28 @@ public class RuleProcessor : MonoBehaviour
         initialContext.self = gameObject;
     }
 
-    #region Rule Triggers
-    // Start is called before the first frame update
-    void Start()
+    private void RegisterDelegates()
     {
-        InitializeContext();
-        //Register delegates
         PlayerInput playerInput = gameObject.FindComponent<PlayerInput>();
         if (playerInput)
         {
             playerInput.onInputChanged -= OnInputChanged;
             playerInput.onInputChanged += OnInputChanged;
         }
+        AminaPool aminaPool = gameObject.FindComponent<AminaPool>();
+        if (aminaPool)
+        {
+            aminaPool.onAminaEmpty += OnAminaEmpty;
+        }
+    }
+    #endregion
+
+    #region Rule Triggers
+    // Start is called before the first frame update
+    void Start()
+    {
+        InitializeContext();
+        RegisterDelegates();
         //Process rules
         ProcessRules(RuleTrigger.OnStart, initialContext);
     }
@@ -81,6 +92,14 @@ public class RuleProcessor : MonoBehaviour
             isTrigger = true,
         };
         ProcessRules(RuleTrigger.OnHit, context);
+    }
+
+    private void OnAminaEmpty(float amina)
+    {
+        RuleContext context = new RuleContext(initialContext)
+        {
+        };
+        ProcessRules(RuleTrigger.OnAminaEmpty, context);
     }
     #endregion
 
