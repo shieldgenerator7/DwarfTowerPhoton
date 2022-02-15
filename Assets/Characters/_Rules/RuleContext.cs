@@ -16,6 +16,8 @@ public struct RuleContext
     public bool isCollision;
     //Update
     public float deltaTime;
+    //Input
+    public InputState inputState;
 
     public RuleContext(RuleContext template)
     {
@@ -31,5 +33,7 @@ public struct RuleContext
         this.isCollision = template.isCollision;
         //Update
         this.deltaTime = template.deltaTime;
+        //Input
+        this.inputState = template.inputState;
     }
 }

@@ -40,7 +40,9 @@ public class RuleProcessor : MonoBehaviour
         AminaPool aminaPool = gameObject.FindComponent<AminaPool>();
         if (aminaPool)
         {
+            aminaPool.onAminaEmpty -= OnAminaEmpty;
             aminaPool.onAminaEmpty += OnAminaEmpty;
+            aminaPool.onAminaFull -= OnAminaFull;
             aminaPool.onAminaFull += OnAminaFull;
         }
     }
@@ -70,13 +72,11 @@ public class RuleProcessor : MonoBehaviour
 
     private void OnInputChanged(InputState input)
     {
-        if (input.ability1 == ButtonState.DOWN)
+        initialContext.inputState = input;
+        RuleContext context = new RuleContext(initialContext)
         {
-            RuleContext context = new RuleContext(initialContext)
-            {
-            };
-            ProcessRules(RuleTrigger.OnButtonDownLMB, context);
-        }
+        };
+        ProcessRules(RuleTrigger.OnInputChanged, context);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
