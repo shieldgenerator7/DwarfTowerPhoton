@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b96b25e5e59379e45b0df3fb4232ee23, type: 3}
-  m_Name: shot_ability_LMB
+  m_Name: Ability1_Held
   m_EditorClassIdentifier: 
   inputButton: 0
   buttonState: 2

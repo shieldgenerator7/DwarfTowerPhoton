@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1073061482865175048}
   - component: {fileID: 3256913579671747826}
   - component: {fileID: 6643005841248314942}
+  - component: {fileID: 8326234248601270164}
   - component: {fileID: 307085991090335124}
   - component: {fileID: 9215063378857821938}
   - component: {fileID: 3854592228582004885}
@@ -42,7 +43,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6220889621231917683}
   - {fileID: 1913788795788701171}
   - {fileID: 8736292213951035431}
   m_Father: {fileID: 0}
@@ -117,6 +117,21 @@ MonoBehaviour:
   knockbackSpeed: 5
   aminaReloader: {fileID: 0}
   abilityContext: {fileID: 9215063378857821938}
+--- !u!114 &8326234248601270164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532201618779257096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5425ba304f6ea54f89ea7c2e72b7d54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ruleSets:
+  - {fileID: 11400000, guid: b0fc559a2a008fd4383ad70136f1388c, type: 2}
+  - {fileID: 11400000, guid: 61bd4fd6b45a9b74ca343e444d74d595, type: 2}
 --- !u!114 &307085991090335124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,7 +362,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1073061482865175048}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7133168848261502530
 MonoBehaviour:
@@ -374,7 +389,7 @@ MonoBehaviour:
   previewPrefab: {fileID: 3363737750353282456, guid: c61aa5d8c6dad3f43806362e06c103e5,
     type: 3}
   upgradeRange: 2
-  turretFireTrigger: {fileID: 5500888993561376432}
+  turretFireTrigger: {fileID: 0}
 --- !u!1 &3107006109710722385
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +420,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1073061482865175048}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4034267826870480475
 MonoBehaviour:
@@ -432,71 +447,3 @@ MonoBehaviour:
   previewPrefab: {fileID: 4883769523225080588, guid: b262c7e4978b83d4da6bd142ea06f830,
     type: 3}
   upgradeRange: 0
---- !u!1 &7577088886736187312
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6220889621231917683}
-  - component: {fileID: 5500888993561376432}
-  - component: {fileID: 7674509513038936758}
-  m_Layer: 0
-  m_Name: Iron Shot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6220889621231917683
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7577088886736187312}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1073061482865175048}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5500888993561376432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7577088886736187312}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83413c13fefadf64bab9596e5332f75f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityName: Iron Shot
-  aminaCost: 5
-  abilitySlot: 0
-  hidesOtherInputs: 0
-  abilityID: 2
-  fireDelay: 0.5
-  angle: 0
-  shotIndex: 0
---- !u!114 &7674509513038936758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7577088886736187312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5425ba304f6ea54f89ea7c2e72b7d54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ruleSets:
-  - {fileID: 11400000, guid: b0fc559a2a008fd4383ad70136f1388c, type: 2}
-  - {fileID: 11400000, guid: 61bd4fd6b45a9b74ca343e444d74d595, type: 2}
