@@ -184,6 +184,26 @@ public class RuleProcessor : MonoBehaviour
                 activeRuleSets.Remove(context.currentRuleSet);
                 activeRuleSets.Add(settings.targetRuleSet);
                 break;
+            case RuleAction.USE_AMINA:
+                {
+                    AminaPool aminaPool = context.self.FindComponent<AminaPool>();
+                    bool acceptPartialAmount = settings
+                        .Try(RuleSetting.Option.ACCEPT_PARTIAL_AMOUNT)
+                        ?? true;
+                    float amina = aminaPool.requestAmina(
+                        settings.Get(RuleSetting.Option.AMINA_COST) * context.deltaTime,
+                        acceptPartialAmount
+                        );
+                }
+                break;
+            case RuleAction.RECHARGE_AMINA:
+                {
+                    AminaPool aminaPool = context.self.FindComponent<AminaPool>();
+                    aminaPool.rechargeAmina(
+                        settings.Get(RuleSetting.Option.AMINA_COST) * context.deltaTime
+                        );
+                }
+                break;
             default:
                 throw new System.ArgumentException($"Unknown action: {action}");
         }

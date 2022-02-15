@@ -30,11 +30,10 @@ public class SimpleConditionSet : ConditionSet
                     bool acceptPartialAmount = settings
                         .Try(RuleSetting.Option.ACCEPT_PARTIAL_AMOUNT)
                         ?? true;
-                    float amina = aminaPool.requestAmina(
+                    return aminaPool.hasAmina(
                         settings.Get(RuleSetting.Option.AMINA_COST) * context.deltaTime,
                         acceptPartialAmount
                         );
-                    return amina > 0;
                 case Option.TIMER:
                     if (timer == null)
                     {
