@@ -15,11 +15,11 @@ public class SimpleConditionSet : ConditionSet
 
     private Timer timer;
 
-    public override bool Check(RuleSettings settings, RuleContext context)
+    public override bool? CheckAdditional(RuleSettings settings, RuleContext context)
     {
         if (simpleConditions.Count == 0)
         {
-            return true;
+            return null;
         }
         foreach (Option condition in simpleConditions)
         {
@@ -48,6 +48,9 @@ public class SimpleConditionSet : ConditionSet
                     throw new System.ArgumentException($"Condition not recognized: {condition}");
             }
         }
-        return false;
+        throw new System.ArgumentException(
+            $"SimpleConditionSet.CheckAdditional(): " +
+            $"this statement should not be reachable! " +
+            $"simpleConditions.Count: {simpleConditions.Count}");
     }
 }
