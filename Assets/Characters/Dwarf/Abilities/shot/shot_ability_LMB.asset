@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1859e47cb5d6b345b8fdd6e5f4f820b, type: 3}
-  m_Name: shot_ability_condition
+  m_Script: {fileID: 11500000, guid: b96b25e5e59379e45b0df3fb4232ee23, type: 3}
+  m_Name: shot_ability_LMB
   m_EditorClassIdentifier: 
-  combineOption: 0
-  conditions:
-  - {fileID: 11400000, guid: 564ffed36e776204fa6843e88c21caab, type: 2}
-  simpleConditions: 0100000000000000
+  inputButton: 0
+  buttonState: 2
