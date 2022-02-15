@@ -40,17 +40,16 @@ public class PlayerInput : MonoBehaviour
             Input.GetAxisRaw("Horizontal"),
             Input.GetAxisRaw("Vertical")
             );
-        newInput.ability1 = getButtonState(InputButton.Ability1);
-        newInput.ability2 = getButtonState(InputButton.Ability2);
-        newInput.ability3 = getButtonState(InputButton.Ability3);
-        newInput.reload = getButtonState(InputButton.Reload);
-        newInput.moveTowardsCursor = getButtonState(InputButton.MoveTowardsCursor);
+        newInput.ability1 = getButtonState("Ability1");
+        newInput.ability2 = getButtonState("Ability2");
+        newInput.ability3 = getButtonState("Ability3");
+        newInput.reload = getButtonState("Reload");
+        newInput.moveTowardsCursor = getButtonState("MoveTowardsCursor");
         InputState = newInput;
     }
 
-    ButtonState getButtonState(InputButton button)
+    ButtonState getButtonState(string buttonName)
     {
-        string buttonName = button.ToString();
         if (Input.GetButtonUp(buttonName))
         {
             return ButtonState.UP;
