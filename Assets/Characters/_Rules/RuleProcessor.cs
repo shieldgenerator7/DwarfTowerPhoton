@@ -41,6 +41,7 @@ public class RuleProcessor : MonoBehaviour
         if (aminaPool)
         {
             aminaPool.onAminaEmpty += OnAminaEmpty;
+            aminaPool.onAminaFull += OnAminaFull;
         }
     }
     #endregion
@@ -104,6 +105,13 @@ public class RuleProcessor : MonoBehaviour
         {
         };
         ProcessRules(RuleTrigger.OnAminaEmpty, context);
+    }
+    private void OnAminaFull(float amina)
+    {
+        RuleContext context = new RuleContext(initialContext)
+        {
+        };
+        ProcessRules(RuleTrigger.OnAminaFull, context);
     }
     #endregion
 
