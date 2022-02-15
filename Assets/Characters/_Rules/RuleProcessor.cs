@@ -181,6 +181,8 @@ public class RuleProcessor : MonoBehaviour
                 newObj.Init(targetDir, targetPos);
                 break;
             case RuleAction.SWITCH_RULESET:
+                ValidateRuleSet(context.currentRuleSet);
+                ValidateRuleSet(settings.targetRuleSet);
                 activeRuleSets.Remove(context.currentRuleSet);
                 activeRuleSets.Add(settings.targetRuleSet);
                 break;
@@ -206,6 +208,17 @@ public class RuleProcessor : MonoBehaviour
                 break;
             default:
                 throw new System.ArgumentException($"Unknown action: {action}");
+        }
+    }
+    #endregion
+
+    #region Validation
+    private void ValidateRuleSet(RuleSet ruleSet)
+    {
+        //Check to make sure the ruleset is registered
+        if (!ruleSets.Contains(ruleSet))
+        {
+            Debug.LogError($"RuleSet not registered: {ruleSet}");
         }
     }
     #endregion
