@@ -10,20 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 103c9701c2e720d40975a17d87d69018, type: 3}
-  m_Name: shot_ability
+  m_Name: reload_done
   m_EditorClassIdentifier: 
   settings:
-    settings:
-    - setting: 0
-      value: 5
-    - setting: 1
-      value: 1
-    - setting: 2
-      value: 0.5
-    - setting: 3
-      value: 0
-    targetRuleSet: {fileID: 0}
+    settings: []
+    targetRuleSet: {fileID: 11400000, guid: b0fc559a2a008fd4383ad70136f1388c, type: 2}
     objectsToSpawn: []
-  trigger: 14
-  condition: {fileID: 11400000, guid: ee22213f125118d4b9cdaca41c137f83, type: 2}
-  actions: 0400000008000000
+  trigger: 10
+  condition: {fileID: 0}
+  actions: 05000000

@@ -20,7 +20,6 @@ GameObject:
   - component: {fileID: 628463848740268033}
   - component: {fileID: 3158633092025413174}
   - component: {fileID: 9144531418077418824}
-  - component: {fileID: 3369071877670158181}
   - component: {fileID: 1242758000075440754}
   - component: {fileID: -3464993547012377175}
   - component: {fileID: 8323170343674787915}
@@ -116,7 +115,7 @@ MonoBehaviour:
   characterInfo: {fileID: 11400000, guid: ba874eaf7ebd1c442b578cafc6e0b469, type: 2}
   stunDuration: 2
   knockbackSpeed: 5
-  aminaReloader: {fileID: 3369071877670158181}
+  aminaReloader: {fileID: 0}
   abilityContext: {fileID: 9215063378857821938}
 --- !u!114 &307085991090335124
 MonoBehaviour:
@@ -147,7 +146,6 @@ MonoBehaviour:
   abilities:
   - {fileID: 7133168848261502530}
   - {fileID: 4034267826870480475}
-  - {fileID: 3369071877670158181}
 --- !u!114 &3854592228582004885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,24 +270,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.18}
   m_EdgeRadius: 0
---- !u!114 &3369071877670158181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532201618779257096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00b3994f5d6328d4ea5a2534d14ad54b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityName: Amina Reloader
-  aminaCost: 0
-  abilitySlot: 3
-  hidesOtherInputs: 1
-  abilityID: 1
-  reloadDuration: 2
 --- !u!114 &1242758000075440754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,3 +499,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ruleSets:
   - {fileID: 11400000, guid: b0fc559a2a008fd4383ad70136f1388c, type: 2}
+  - {fileID: 11400000, guid: 61bd4fd6b45a9b74ca343e444d74d595, type: 2}

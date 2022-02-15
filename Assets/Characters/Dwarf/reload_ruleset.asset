@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 045d8cb26bfa18d4da24cfafe6d3aa77, type: 3}
-  m_Name: shot_ability_ruleset
+  m_Name: reload_ruleset
   m_EditorClassIdentifier: 
-  activeAtStart: 1
+  activeAtStart: 0
   rules:
-  - {fileID: 11400000, guid: daf0ace145b7111438b53c616024476f, type: 2}
-  - {fileID: 11400000, guid: 4c0e700519c05a943ac280258677a508, type: 2}
+  - {fileID: 11400000, guid: 0d4068655889588468d43bdffc4c8266, type: 2}
+  - {fileID: 11400000, guid: 543ba196c2701cc4fab5ee94a424ae4d, type: 2}
