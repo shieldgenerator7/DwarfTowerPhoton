@@ -234,6 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   findComponent: {fileID: 0}
   addComponent: {fileID: 0}
-  removeComponent: 
+  removeComponent: {fileID: 0}
   foundComponents: []
   addedComponents: []
+  removedComponentsGameObjects: []

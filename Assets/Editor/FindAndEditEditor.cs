@@ -18,5 +18,9 @@ public class FindAndEditEditor : Editor
         {
             (target as FindAndEdit).AddComponent();
         }
+        if (GUILayout.Button("Remove"))
+        {
+            (target as FindAndEdit).RemoveComponent();
+        }
     }
 }

@@ -10,10 +10,11 @@ public class FindAndEdit : MonoBehaviour
     [Header("Search Settings")]
     public MonoBehaviour findComponent;
     public MonoBehaviour addComponent;
-    public string removeComponent;
+    public MonoBehaviour removeComponent;
     [Header("Search Results")]
     public List<MonoBehaviour> foundComponents;
     public List<MonoBehaviour> addedComponents;
+    public List<GameObject> removedComponentsGameObjects;
 
     public List<MonoBehaviour> FindMonoBehaviours()
     {
@@ -30,6 +31,16 @@ public class FindAndEdit : MonoBehaviour
         addedComponents = foundComponents
             .FindAll(mb => !mb.gameObject.GetComponent(type))
             .ConvertAll(mb => (MonoBehaviour)mb.gameObject.AddComponent(type));
+    }
+
+    public void RemoveComponent()
+    {
+        Type type = removeComponent.GetType();
+        removedComponentsGameObjects = foundComponents
+            .FindAll(mb => mb.gameObject.GetComponent(type))
+            .ConvertAll(mb => mb.gameObject);
+        removedComponentsGameObjects
+            .ForEach(go => DestroyImmediate(go.GetComponent(type), true));
     }
 }
 #endif
