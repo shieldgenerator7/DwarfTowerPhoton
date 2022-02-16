@@ -30,14 +30,14 @@ public class ComponentContext : MonoBehaviour
     {
         InitializeComponents();
     }
-    private void InitializeComponents()
+    public void InitializeComponents()
     {
         PV = gameObject.FindComponent<PhotonView>();
         rb2d = gameObject.FindComponent<Rigidbody2D>();
         playerInput = gameObject.FindComponent<PlayerInput>();
         playerController = gameObject.FindComponent<PlayerController>();
         playerMovement = gameObject.FindComponent<PlayerMovement>();
-        playerMovement.Start();
+        playerMovement?.Start();
         sr = gameObject.FindComponent<SpriteRenderer>();
         damager = gameObject.FindComponent<Damager>();
         healthPool = gameObject.FindComponent<HealthPool>();

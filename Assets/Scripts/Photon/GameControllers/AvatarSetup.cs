@@ -71,6 +71,7 @@ public class AvatarSetup : MonoBehaviour
             transform.rotation,
             transform
             );
+        myCharacter.FindComponent<ComponentContext>().InitializeComponents();
         //Stunned Delegate
         myCharacter.GetComponent<StatusKeeper>().onStatusChanged +=
             (status) => GetComponent<BlinkEffect>().Blinking = status.Has(StatusEffect.STUNNED);
