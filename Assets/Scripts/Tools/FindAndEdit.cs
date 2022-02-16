@@ -7,8 +7,13 @@ using UnityEngine;
 
 public class FindAndEdit : MonoBehaviour
 {
+    [Header("Search Settings")]
     public MonoBehaviour findComponent;
+    public MonoBehaviour addComponent;
+    public string removeComponent;
+    [Header("Search Results")]
     public List<MonoBehaviour> foundComponents;
+    public List<MonoBehaviour> addedComponents;
 
     public List<MonoBehaviour> FindMonoBehaviours()
     {
@@ -19,5 +24,12 @@ public class FindAndEdit : MonoBehaviour
         return foundComponents;
     }
 
+    public void AddComponent()
+    {
+        Type type = addComponent.GetType();
+        addedComponents = foundComponents
+            .FindAll(mb => !mb.gameObject.GetComponent(type))
+            .ConvertAll(mb => (MonoBehaviour)mb.gameObject.AddComponent(type));
+    }
 }
 #endif

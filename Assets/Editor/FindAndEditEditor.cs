@@ -14,5 +14,9 @@ public class FindAndEditEditor : Editor
         {
             (target as FindAndEdit).FindMonoBehaviours();
         }
+        if (GUILayout.Button("Add"))
+        {
+            (target as FindAndEdit).AddComponent();
+        }
     }
 }

@@ -233,4 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   findComponent: {fileID: 0}
+  addComponent: {fileID: 0}
+  removeComponent: 
   foundComponents: []
+  addedComponents: []
