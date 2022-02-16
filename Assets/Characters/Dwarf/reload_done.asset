@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
     settings: []
-    targetRuleSet: {fileID: 11400000, guid: b0fc559a2a008fd4383ad70136f1388c, type: 2}
-    objectsToSpawn: []
+    targetRuleSet: {fileID: 0}
   trigger: 10
   condition: {fileID: 0}
   actions: 05000000

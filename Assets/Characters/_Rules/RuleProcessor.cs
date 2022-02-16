@@ -10,6 +10,7 @@ public class RuleProcessor : MonoBehaviour
     public RuleContext initialContext;
 
     private HashSet<RuleSet> activeRuleSets = new HashSet<RuleSet>();
+    private RuleSet lastDeactivatedRuleSet;
 
     public void Init(Vector2 dir, Vector2 pos)
     {
@@ -181,10 +182,14 @@ public class RuleProcessor : MonoBehaviour
                 newObj.Init(targetDir, targetPos);
                 break;
             case RuleAction.SWITCH_RULESET:
-                ValidateRuleSet(context.currentRuleSet);
-                ValidateRuleSet(settings.targetRuleSet);
-                activeRuleSets.Remove(context.currentRuleSet);
-                activeRuleSets.Add(settings.targetRuleSet);
+                RuleSet currentRuleSet = context.currentRuleSet;
+                RuleSet targetRuleSet = settings.targetRuleSet
+                    ?? lastDeactivatedRuleSet;
+                ValidateRuleSet(currentRuleSet);
+                ValidateRuleSet(targetRuleSet);
+                activeRuleSets.Remove(currentRuleSet);
+                activeRuleSets.Add(targetRuleSet);
+                lastDeactivatedRuleSet = currentRuleSet;
                 break;
             case RuleAction.USE_AMINA:
                 {
@@ -235,6 +240,11 @@ public class RuleProcessor : MonoBehaviour
     #region Validation
     private void ValidateRuleSet(RuleSet ruleSet)
     {
+        //Check to make sure the ruleset is not null
+        if (!ruleSet)
+        {
+            Debug.LogError($"RuleSet null: {ruleSet}");
+        }
         //Check to make sure the ruleset is registered
         if (!ruleSets.Contains(ruleSet))
         {
