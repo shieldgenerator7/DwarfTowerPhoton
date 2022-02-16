@@ -5,9 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TargetCondition", menuName = "Rule/Condition/TargetCondition", order = 0)]
 public class TargetCondition : RuleCondition
 {
+    [Header("Allowed Entity Types")]
     public List<EntityType> entityTypes;
+    [Header("Allowed Team Alignments")]
     public bool onAlly = true;
     public bool onEnemy = true;
+    [Header("Allowed Overlap Types")]
     public bool onTrigger = true;
     public bool onCollision = true;
 
