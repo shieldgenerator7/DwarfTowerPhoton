@@ -10,25 +10,36 @@ public class FindAndEditEditor : Editor
     {
         DrawDefaultInspector();
 
+        FindAndEdit findAndEdit = (target as FindAndEdit);
+
+        GUI.enabled = findAndEdit.findComponent;
         if (GUILayout.Button("Find"))
         {
-            (target as FindAndEdit).FindMonoBehaviours();
+            findAndEdit.FindMonoBehaviours();
         }
+
+        GUI.enabled = findAndEdit.foundComponents.Count > 0;
         if (GUILayout.Button("Select"))
         {
-            (target as FindAndEdit).SelectGameObjects();
+            findAndEdit.SelectGameObjects();
         }
+
+        GUI.enabled = findAndEdit.addComponent;
         if (GUILayout.Button("Add"))
         {
-            (target as FindAndEdit).AddComponent();
+            findAndEdit.AddComponent();
         }
+
+        GUI.enabled = findAndEdit.removeComponent;
         if (GUILayout.Button("Remove"))
         {
-            (target as FindAndEdit).RemoveComponent();
+            findAndEdit.RemoveComponent();
         }
+
+        GUI.enabled = findAndEdit.findComponent;
         if (GUILayout.Button("Clear Settings"))
         {
-            (target as FindAndEdit).ClearSettings();
+            findAndEdit.ClearSettings();
         }
     }
 }
