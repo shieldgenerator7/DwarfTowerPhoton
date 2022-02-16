@@ -14,19 +14,22 @@ public class ComponentContextEditor : Editor
         //Auto setup
         if (GUILayout.Button("Auto setup (Editor only)"))
         {
-            foreach(object target in targets)
+            foreach (object target in targets)
             {
                 AutoSetup(target as ComponentContext);
             }
         }
     }
 
-    private void AutoSetup(ComponentContext context)
+    public static void AutoSetup(ComponentContext context)
     {
         PlayerController pc = context.gameObject.FindComponent<PlayerController>();
-        pc.context = context;
-        EditorUtility.SetDirty(context);
-        EditorUtility.SetDirty(pc);
-        EditorUtility.SetDirty(context.gameObject);
+        if (pc)
+        {
+            pc.context = context;
+            EditorUtility.SetDirty(context);
+            EditorUtility.SetDirty(pc);
+            EditorUtility.SetDirty(context.gameObject);
+        }
     }
 }
