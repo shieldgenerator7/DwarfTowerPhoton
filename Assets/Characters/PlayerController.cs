@@ -76,7 +76,10 @@ public abstract class PlayerController : MonoBehaviour
 
     protected virtual void InitializeSettings()
     {
-        context.damager.damage = context.healthPool.MaxHealth;
+        if (context.damager)
+        {
+            context.damager.damage = context.healthPool.MaxHealth;
+        }
     }
     protected virtual void RegisterDelegates()
     {

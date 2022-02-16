@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 9144531418077418824}
   - component: {fileID: 1242758000075440754}
   - component: {fileID: -3464993547012377175}
-  - component: {fileID: 8323170343674787915}
   - component: {fileID: 1241004919996168816}
   m_Layer: 0
   m_Name: Dwarf
@@ -133,6 +132,7 @@ MonoBehaviour:
   ruleSets:
   - {fileID: 11400000, guid: b0fc559a2a008fd4383ad70136f1388c, type: 2}
   - {fileID: 11400000, guid: 61bd4fd6b45a9b74ca343e444d74d595, type: 2}
+  - {fileID: 11400000, guid: 1e4c3f521228ae64487113fe474a9d73, type: 2}
 --- !u!114 &307085991090335124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,23 +304,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateEveryFrame: 1
---- !u!114 &8323170343674787915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532201618779257096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbb34bdc9fc63f41a859d4e6c6ae4c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
-  damagableTypes: 00000000
-  damageOnTrigger: 1
-  damageOnCollide: 1
-  damageFriendlies: 0
 --- !u!114 &1241004919996168816
 MonoBehaviour:
   m_ObjectHideFlags: 0
