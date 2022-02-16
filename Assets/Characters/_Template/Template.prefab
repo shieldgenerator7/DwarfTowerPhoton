@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1073061482865175048}
   - component: {fileID: 3256913579671747826}
   - component: {fileID: 4727776110552288352}
+  - component: {fileID: 3489473770951568585}
   - component: {fileID: 307085991090335124}
   - component: {fileID: 9215063378857821938}
   - component: {fileID: 3854592228582004885}
@@ -24,7 +25,6 @@ GameObject:
   - component: {fileID: -3464993547012377175}
   - component: {fileID: 2055934592331103579}
   - component: {fileID: 6856880451898062845}
-  - component: {fileID: 144358649325517123}
   m_Layer: 0
   m_Name: Template
   m_TagString: Player
@@ -119,6 +119,21 @@ MonoBehaviour:
   knockbackSpeed: 5
   abilityContext: {fileID: 9215063378857821938}
   context: {fileID: 6856880451898062845}
+--- !u!114 &3489473770951568585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532201618779257096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5425ba304f6ea54f89ea7c2e72b7d54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ruleSets:
+  - {fileID: 11400000, guid: edb795e8b31046f4698dda4618fa38ef, type: 2}
+  - {fileID: 11400000, guid: 61bd4fd6b45a9b74ca343e444d74d595, type: 2}
 --- !u!114 &307085991090335124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,18 +343,6 @@ MonoBehaviour:
   damageOnCollide: 1
   damageFriendlies: 0
 --- !u!114 &6856880451898062845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532201618779257096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5be985794bfe9a54abe79c147869abd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &144358649325517123
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
