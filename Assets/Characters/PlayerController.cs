@@ -18,13 +18,12 @@ public abstract class PlayerController : MonoBehaviour
         {
             _playerColor = value;
             //Update components
-            if (!objectSpawner) { objectSpawner = gameObject.FindComponent<ObjectSpawner>(); }
-            objectSpawner.PlayerColor = _playerColor;
+            context.objectSpawner.PlayerColor = _playerColor;
             gameObject.FindComponents<SpriteRenderer>()
                 .ForEach(sr => sr.color = _playerColor);
         }
     }
-    public AminaReloader aminaReloader;//ability called by default when the player runs out of amina
+    
     [SerializeField]
     private AbilityContext abilityContext;
     public AbilityContext AbilityContext
@@ -43,20 +42,6 @@ public abstract class PlayerController : MonoBehaviour
 
     public InputState inputState { get; private set; }
 
-    private PhotonView photonView;
-    public PhotonView PV
-    {
-        get
-        {
-            if (photonView == null)
-            {
-                photonView = GetComponentInParent<PhotonView>();
-            }
-            return photonView;
-        }
-        private set { photonView = value; }
-    }
-
     /// <summary>
     /// The center position for use in object spawn location calculations (use this instead of transform.position)
     /// </summary>
@@ -68,59 +53,46 @@ public abstract class PlayerController : MonoBehaviour
     /// <summary>
     /// Returns true if the player is stunned
     /// </summary>
-    public bool Stunned => statusKeeper.Status.Has(StatusEffect.STUNNED);
+    public bool Stunned => context.statusKeeper.Status.Has(StatusEffect.STUNNED);
 
-    protected AminaPool aminaPool { get; private set; }
-    protected HealthPool healthPool { get; private set; }
-    protected Damager damager { get; private set; }
-    private PlayerInput playerInput;
-    public PlayerMovement playerMovement { get; private set; }
-    protected StatKeeper statKeeper { get; private set; }
-    public StatusKeeper statusKeeper { get; private set; }
-    private ObjectSpawner objectSpawner;
-    protected SpriteRenderer sr;
-    private StatusAutoEnder statusAutoEnder;
-    public TeamToken teamToken { get; private set; }
+    public ComponentContext context;
 
     // Start is called before the first frame update
     private void Start()
     {
         //Initialize components
-        InitializeComponents();
-        if (PV.IsMine)
+        if (context.PV.IsMine)
         {
             //UI Hookup
             //TODO: Move this out of here
             FindObjectOfType<HitMarker>().Player = this;
-            FindObjectOfType<AminaMeterController>().FocusAminaPool = aminaPool;
+            FindObjectOfType<AminaMeterController>().FocusAminaPool = context.aminaPool;
         }
         //Initialization
         InitializeSettings();
         RegisterDelegates();
         InvokeDelegates();
     }
-    private void InitializeComponents()
-    {
-        playerInput = gameObject.FindComponent<PlayerInput>();
-        playerMovement = gameObject.FindComponent<PlayerMovement>();
-        playerMovement.Start();
-        sr = gameObject.FindComponent<SpriteRenderer>();
-        damager = gameObject.FindComponent<Damager>();
-        healthPool = gameObject.FindComponent<HealthPool>();
-        aminaPool = gameObject.FindComponent<AminaPool>();
-        statKeeper = gameObject.FindComponent<StatKeeper>();
-        statusKeeper = gameObject.FindComponent<StatusKeeper>();
-        objectSpawner = gameObject.FindComponent<ObjectSpawner>();
-        statusAutoEnder = gameObject.FindComponent<StatusAutoEnder>();
-        statusAutoEnder.Init(statusKeeper);
-        teamToken = gameObject.FindComponent<TeamToken>();
-    }
+    
     protected virtual void InitializeSettings()
     {
-        damager.damage = healthPool.MaxHealth;
+        context.damager.damage = context.healthPool.MaxHealth;
     }
     protected virtual void RegisterDelegates()
     {
+        //Set local variables
+        HealthPool healthPool = context.healthPool;
+        Damager damager = context.damager;
+        StatusKeeper statusKeeper = context.statusKeeper;
+        PhotonView PV = context.PV;
+        AminaReloader aminaReloader = context.aminaReloader;
+        AminaPool aminaPool = context.aminaPool;
+        PlayerInput playerInput = context.playerInput;
+        StatusAutoEnder statusAutoEnder = context.statusAutoEnder;
+        PlayerMovement playerMovement = context.playerMovement;
+        SpriteRenderer sr = context.sr;
+        StatKeeper statKeeper = context.statKeeper;
+        ObjectSpawner objectSpawner = context.objectSpawner;
         //Hook up Stunnable with HealthPool
         healthPool.onMaxHealthChanged += (hp) => { damager.damage = hp; };
         healthPool.onDied += (hp) =>
@@ -225,12 +197,15 @@ public abstract class PlayerController : MonoBehaviour
     }
     protected virtual void InvokeDelegates()
     {
+        StatKeeper statKeeper = context.statKeeper;
         statKeeper.triggerEvents();
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
+        PhotonView PV = context.PV;
+        PlayerMovement playerMovement = context.playerMovement;
         if (!PV.IsMine)
         {
             return;
@@ -276,6 +251,8 @@ public abstract class PlayerController : MonoBehaviour
 
     protected virtual void onAminaEmpty(float amina)
     {
+        AminaPool aminaPool = context.aminaPool;
+        AminaReloader aminaReloader = context.aminaReloader;
         if (amina == 0 && aminaPool.ReservedAmina == 0 && !aminaReloader.Reloading)
         {
             aminaReloader.reload();
@@ -284,6 +261,7 @@ public abstract class PlayerController : MonoBehaviour
 
     public void PlayerDealtDamage(float damage, HealthPool healthPool)
     {
+        PhotonView PV = context.PV;
         if (healthPool.entityType == EntityType.PLAYER)
         {
             //Check unlock
