@@ -198,6 +198,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1644664247}
   - component: {fileID: 1644664249}
+  - component: {fileID: 1644664251}
+  - component: {fileID: 1644664250}
   m_Layer: 0
   m_Name: Find & Edit
   m_TagString: Untagged
@@ -232,9 +234,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7fadf2a77a121240ac5a2de54dc015b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  findComponent: {fileID: 0}
+  findComponent: {fileID: 1644664250}
   addComponent: {fileID: 0}
-  removeComponent: {fileID: 0}
-  foundComponents: []
+  removeComponent: {fileID: 1644664251}
+  foundComponents:
+  - {fileID: -1396033754690449619, guid: 95c79e13db999da4a83e76b9e2b273aa, type: 3}
+  - {fileID: -8169114541977365031, guid: f6c0a9bc28ba2c04eb583c6a79c6208a, type: 3}
+  - {fileID: -8743946757396827575, guid: 721211b1c02b1134d8b5e86f1a7f7238, type: 3}
+  - {fileID: -4591474055911891504, guid: 601bc1c138cf37d4e924aeee6aa70020, type: 3}
+  - {fileID: 8818434471937033433, guid: c76b665cebcf4bd478d15cf833d20f33, type: 3}
+  - {fileID: 8326234248601270164, guid: 69f122fe10f37864bb52a35fc112ba76, type: 3}
+  - {fileID: 3923795499765203264, guid: 2c3842e275b476340aa621850c321712, type: 3}
   addedComponents: []
-  removedComponentsGameObjects: []
+  removedComponentsGameObjects:
+  - {fileID: 532201618779257096, guid: 95c79e13db999da4a83e76b9e2b273aa, type: 3}
+  - {fileID: 532201618779257096, guid: f6c0a9bc28ba2c04eb583c6a79c6208a, type: 3}
+  - {fileID: 532201618779257096, guid: 721211b1c02b1134d8b5e86f1a7f7238, type: 3}
+  - {fileID: 532201618779257096, guid: 601bc1c138cf37d4e924aeee6aa70020, type: 3}
+  - {fileID: 532201618779257096, guid: c76b665cebcf4bd478d15cf833d20f33, type: 3}
+--- !u!114 &1644664250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644664246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5425ba304f6ea54f89ea7c2e72b7d54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ruleSets: []
+--- !u!114 &1644664251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644664246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b3994f5d6328d4ea5a2534d14ad54b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityName: 
+  aminaCost: 0
+  abilitySlot: 0
+  hidesOtherInputs: 0
+  abilityID: 0
+  reloadDuration: 2

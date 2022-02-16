@@ -18,7 +18,6 @@ GameObject:
   - component: {fileID: 1916908965083646283}
   - component: {fileID: -7350582565912498744}
   - component: {fileID: 5130418414652994702}
-  - component: {fileID: 6368753068641259655}
   - component: {fileID: 9144531418077418824}
   - component: {fileID: 3158633092025413174}
   - component: {fileID: 8232621178371220598}
@@ -152,7 +151,7 @@ MonoBehaviour:
   - {fileID: 6400624810076416732}
   - {fileID: 448938204000306885}
   - {fileID: 2613285986018779774}
-  - {fileID: 6368753068641259655}
+  - {fileID: 0}
 --- !u!114 &4380998440617942234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,24 +224,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAmina: 100
---- !u!114 &6368753068641259655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532201618779257096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00b3994f5d6328d4ea5a2534d14ad54b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityName: Amina Reloader
-  aminaCost: 0
-  abilitySlot: 3
-  hidesOtherInputs: 1
-  abilityID: 1
-  reloadDuration: 2
 --- !u!61 &9144531418077418824
 BoxCollider2D:
   m_ObjectHideFlags: 0
