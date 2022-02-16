@@ -9,7 +9,6 @@ using UnityEngine;
 /// </summary>
 public class ComponentContext : MonoBehaviour
 {
-    public AminaReloader aminaReloader { get; private set; }
     public PhotonView PV { get; private set; }
     public AminaPool aminaPool { get; private set; }
     public HealthPool healthPool { get; private set; }

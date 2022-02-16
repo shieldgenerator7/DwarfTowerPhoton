@@ -23,7 +23,7 @@ public abstract class PlayerController : MonoBehaviour
                 .ForEach(sr => sr.color = _playerColor);
         }
     }
-    
+
     [SerializeField]
     private AbilityContext abilityContext;
     public AbilityContext AbilityContext
@@ -73,7 +73,7 @@ public abstract class PlayerController : MonoBehaviour
         RegisterDelegates();
         InvokeDelegates();
     }
-    
+
     protected virtual void InitializeSettings()
     {
         context.damager.damage = context.healthPool.MaxHealth;
@@ -85,7 +85,6 @@ public abstract class PlayerController : MonoBehaviour
         Damager damager = context.damager;
         StatusKeeper statusKeeper = context.statusKeeper;
         PhotonView PV = context.PV;
-        AminaReloader aminaReloader = context.aminaReloader;
         AminaPool aminaPool = context.aminaPool;
         PlayerInput playerInput = context.playerInput;
         StatusAutoEnder statusAutoEnder = context.statusAutoEnder;
@@ -100,7 +99,7 @@ public abstract class PlayerController : MonoBehaviour
             statusKeeper.addLayer(PV.ViewID, new StatusLayer(StatusEffect.STUNNED));
         };
         //Auto-Reloading
-        if (aminaReloader)
+        if (aminaPool)
         {
             aminaPool.onAminaEmpty += onAminaEmpty;
         }
@@ -249,15 +248,7 @@ public abstract class PlayerController : MonoBehaviour
         }
     }
 
-    protected virtual void onAminaEmpty(float amina)
-    {
-        AminaPool aminaPool = context.aminaPool;
-        AminaReloader aminaReloader = context.aminaReloader;
-        if (amina == 0 && aminaPool.ReservedAmina == 0 && !aminaReloader.Reloading)
-        {
-            aminaReloader.reload();
-        }
-    }
+    protected virtual void onAminaEmpty(float amina) { }
 
     public void PlayerDealtDamage(float damage, HealthPool healthPool)
     {
