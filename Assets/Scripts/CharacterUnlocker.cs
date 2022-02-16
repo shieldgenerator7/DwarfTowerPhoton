@@ -48,7 +48,7 @@ public class CharacterUnlocker : MonoBehaviour
     public void CheckUnlock(GameObject go)
     {
         PlayerController playerController = go.FindComponent<PlayerController>();
-        if (playerController && playerController.PV.IsMine)
+        if (playerController && playerController.context.PV.IsMine)
         {
             if (!PlayerInfo.instance.unlockedCharacters.Contains(character))
             {

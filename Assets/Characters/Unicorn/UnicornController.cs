@@ -21,6 +21,7 @@ public class UnicornController : PlayerController
         {
             if (collision.gameObject != lastBounceObject)
             {
+                PlayerMovement playerMovement = context.playerMovement;
                 lastBounceObject = collision.gameObject;
                 Vector2 forceDir = playerMovement.ForceMoveDirection;
                 Vector2 normal = collision.contacts[0].normal;
@@ -32,6 +33,7 @@ public class UnicornController : PlayerController
 
     public void redirectPath(Vector2 newPos)
     {
+        PlayerMovement playerMovement = context.playerMovement;
         redirectPath(newPos, playerMovement.ForceMoveDirection);
     }
 
@@ -39,6 +41,7 @@ public class UnicornController : PlayerController
     {
         if (rainbowPathAbility.active)
         {
+            PlayerMovement playerMovement = context.playerMovement;
             rainbowPathAbility.deactivate();
             if (newPos != (Vector2)transform.position)
             {

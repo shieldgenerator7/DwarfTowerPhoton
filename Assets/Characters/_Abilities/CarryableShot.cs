@@ -26,7 +26,7 @@ public class CarryableShot : MonoBehaviour
         PlayerController Controller = shotController.Controller;
         if (Controller)
         {
-            if (Controller.PV.IsMine)
+            if (Controller.context.PV.IsMine)
             {
                 //Position
                 Vector2 pointDir = Controller.LookDirection;

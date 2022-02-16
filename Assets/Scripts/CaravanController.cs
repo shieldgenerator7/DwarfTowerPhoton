@@ -174,7 +174,7 @@ public class CaravanController : MonoBehaviour
     {
         //Show contest effect only for the contesting player
         PlayerController pc = gameObject.FindComponent<PlayerController>();
-        if (pc && pc.PV.IsMine)
+        if (pc && pc.context.PV.IsMine)
         {
             contestEffect.enabled = shouldShow && !pc.Stunned;
         }

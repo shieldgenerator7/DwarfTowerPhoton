@@ -40,6 +40,10 @@ public class SnowmanController : PlayerController, IPunObservable
     protected override void RegisterDelegates()
     {
         base.RegisterDelegates();
+        HealthPool healthPool = context.healthPool;
+        Damager damager = context.damager;
+        StatKeeper statKeeper = context.statKeeper;
+        PhotonView PV = context.PV;
         //Roll
         rollAbility.onRollChanged += UpdateStats;
         rollAbility.onRollingChanged += (rolling) =>
@@ -87,6 +91,9 @@ public class SnowmanController : PlayerController, IPunObservable
 
     private void UpdateStats(float percentage)
     {
+        HealthPool healthPool = context.healthPool;
+        StatKeeper statKeeper = context.statKeeper;
+        PhotonView PV = context.PV;
         healthPool.onDamaged -= OnDamage;
         //
         curLayer = StatLayer.Lerp(minRollLayer, maxRollLayer, percentage);
@@ -97,6 +104,7 @@ public class SnowmanController : PlayerController, IPunObservable
 
     private void UpdateSprite(bool rolling)
     {
+        SpriteRenderer sr = context.sr;
         sr.sprite = (rolling) ? rollSprite : standSprite;
     }
 

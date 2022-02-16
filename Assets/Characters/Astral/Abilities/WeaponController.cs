@@ -67,7 +67,7 @@ public class WeaponController : ChargedShotController
     {
         if (Controller)
         {
-            if (Controller.PV.IsMine)
+            if (Controller.context.PV.IsMine)
             {
                 //
                 // Swing

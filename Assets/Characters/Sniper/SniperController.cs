@@ -60,6 +60,6 @@ public class SniperController : PlayerController
     void reload()
     {
         onProcessingFinished -= reload;
-        base.onAminaEmpty(aminaPool.Amina);
+        base.onAminaEmpty(context.aminaPool.Amina);
     }
 }

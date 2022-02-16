@@ -11,7 +11,7 @@ public class TrapController : ShotController
     public List<EntityType> trapTypes;
     public MapMarkerInfo trapMarkerInfo;
 
-    private PlayerController trappedPlayer;
+    private ComponentContext trappedPlayer;
 
     protected override void processCollision(Collider2D collision, bool useInitialDamage)
     {
@@ -27,18 +27,18 @@ public class TrapController : ShotController
             if (trapTypes.Contains(hp.entityType))
             {
                 //TODO: enable trapping other types
-                trapPlayer(hp.gameObject.FindComponent<PlayerController>());
+                trapPlayer(hp.gameObject.FindComponent<ComponentContext>());
             }
         }
     }
 
-    void trapPlayer(PlayerController playerController)
+    void trapPlayer(ComponentContext componentContext)
     {
-        playerController.statusKeeper.addLayer(
+        componentContext.statusKeeper.addLayer(
             PV.ViewID,
             new StatusLayer(StatusEffect.ROOTED)
             );
-        trappedPlayer = playerController;
+        trappedPlayer = componentContext;
         trappedPlayer.playerMovement.rb2d.transform.position = transform.position;
         //Map marker
         MapMarkerManager.CreateMapMarker(

@@ -66,7 +66,7 @@ public class ShotController : MonoBehaviour
     public PlayerController Controller
     {
         get => _controller;
-        set => teamToken.switchController(value?.teamToken);
+        set => teamToken.switchController(value?.context.teamToken);
     }
 
     protected Damager damager { get; private set; }
