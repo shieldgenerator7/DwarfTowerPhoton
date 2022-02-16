@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 103c9701c2e720d40975a17d87d69018, type: 3}
-  m_Name: reload_update
+  m_Name: reloading_update
   m_EditorClassIdentifier: 
   settings:
     settings:
     - setting: 1
       value: 50
-    targetRuleSet: {fileID: 11400000, guid: 61bd4fd6b45a9b74ca343e444d74d595, type: 2}
-    objectsToSpawn: []
+    targetRuleSet: {fileID: 0}
   trigger: 1
   condition: {fileID: 0}
   actions: 0b000000
