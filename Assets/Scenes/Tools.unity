@@ -198,6 +198,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1644664247}
   - component: {fileID: 1644664249}
+  - component: {fileID: 1644664251}
   - component: {fileID: 1644664250}
   m_Layer: 0
   m_Name: Find & Edit
@@ -235,15 +236,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   findComponent: {fileID: 1644664250}
   addComponent: {fileID: 0}
-  removeComponent: {fileID: 0}
+  removeComponent: {fileID: 1644664251}
   foundComponents:
-  - {fileID: 9215063378857821938, guid: c76b665cebcf4bd478d15cf833d20f33, type: 3}
-  - {fileID: 3769535869663102263, guid: 601bc1c138cf37d4e924aeee6aa70020, type: 3}
-  - {fileID: 9215063378857821938, guid: 721211b1c02b1134d8b5e86f1a7f7238, type: 3}
-  - {fileID: 9215063378857821938, guid: f6c0a9bc28ba2c04eb583c6a79c6208a, type: 3}
-  - {fileID: 3769535869663102263, guid: 95c79e13db999da4a83e76b9e2b273aa, type: 3}
-  - {fileID: 5518924279983056713, guid: 601bc1c138cf37d4e924aeee6aa70020, type: 3}
-  - {fileID: 9215063378857821938, guid: f854aee07d753f945ad2422fd65d510a, type: 3}
+  - {fileID: 3489473770951568585, guid: f854aee07d753f945ad2422fd65d510a, type: 3}
+  - {fileID: -1396033754690449619, guid: 95c79e13db999da4a83e76b9e2b273aa, type: 3}
+  - {fileID: -8169114541977365031, guid: f6c0a9bc28ba2c04eb583c6a79c6208a, type: 3}
+  - {fileID: -8743946757396827575, guid: 721211b1c02b1134d8b5e86f1a7f7238, type: 3}
+  - {fileID: -4591474055911891504, guid: 601bc1c138cf37d4e924aeee6aa70020, type: 3}
+  - {fileID: 8818434471937033433, guid: c76b665cebcf4bd478d15cf833d20f33, type: 3}
   addedComponents: []
   removedComponentsGameObjects: []
 --- !u!114 &1644664250
@@ -255,7 +255,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1644664246}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b416732bead1714d8b1f7844c184922, type: 3}
+  m_Script: {fileID: 11500000, guid: f5425ba304f6ea54f89ea7c2e72b7d54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilities: []
+  ruleSets: []
+--- !u!114 &1644664251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644664246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dbb34bdc9fc63f41a859d4e6c6ae4c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  damagableTypes: 
+  damageOnTrigger: 1
+  damageOnCollide: 1
+  damageFriendlies: 0

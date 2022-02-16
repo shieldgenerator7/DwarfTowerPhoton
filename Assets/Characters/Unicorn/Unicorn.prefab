@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 8232621178371220598}
   - component: {fileID: 6160328844216468952}
   - component: {fileID: 1567083782174426373}
-  - component: {fileID: 1589231887393888136}
   - component: {fileID: -3142032430437744260}
   - component: {fileID: -1396033754690449619}
   m_Layer: 0
@@ -331,23 +330,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateEveryFrame: 1
---- !u!114 &1589231887393888136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532201618779257096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbb34bdc9fc63f41a859d4e6c6ae4c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
-  damagableTypes: 00000000
-  damageOnTrigger: 1
-  damageOnCollide: 1
-  damageFriendlies: 0
 --- !u!114 &-3142032430437744260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,6 +357,7 @@ MonoBehaviour:
   ruleSets:
   - {fileID: 11400000, guid: edb795e8b31046f4698dda4618fa38ef, type: 2}
   - {fileID: 11400000, guid: 61bd4fd6b45a9b74ca343e444d74d595, type: 2}
+  - {fileID: 11400000, guid: 1e4c3f521228ae64487113fe474a9d73, type: 2}
 --- !u!1 &3887385788853543116
 GameObject:
   m_ObjectHideFlags: 0
