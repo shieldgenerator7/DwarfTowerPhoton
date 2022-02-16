@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "SimpleCondition", menuName = "Characters/Rule/SimpleCondition", order = 0)]
+[CreateAssetMenu(fileName = "SimpleCondition", menuName = "Rule/Condition/SimpleCondition", order = 0)]
 public class SimpleConditionSet : ConditionSet
 {
     public enum Option

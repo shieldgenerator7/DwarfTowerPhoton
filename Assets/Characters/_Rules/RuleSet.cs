@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RuleSet", menuName = "Characters/Rule/RuleSet", order = 0)]
+[CreateAssetMenu(fileName = "RuleSet", menuName = "Rule/RuleSet", order = 0)]
 
 public class RuleSet : ScriptableObject
 {

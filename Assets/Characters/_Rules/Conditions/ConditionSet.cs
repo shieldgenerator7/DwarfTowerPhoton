@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ConditionSet", menuName = "Characters/Rule/ConditionSet", order = 0)]
+[CreateAssetMenu(fileName = "ConditionSet", menuName = "Rule/Condition/ConditionSet", order = 0)]
 public class ConditionSet : RuleCondition
 {
     public enum CombineOption

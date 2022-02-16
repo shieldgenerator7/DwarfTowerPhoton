@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Rule", menuName = "Characters/Rule/Rule", order = 0)]
+[CreateAssetMenu(fileName = "Rule", menuName = "Rule/Rule", order = 0)]
 public class Rule : ScriptableObject
 {
     public RuleSettings settings;

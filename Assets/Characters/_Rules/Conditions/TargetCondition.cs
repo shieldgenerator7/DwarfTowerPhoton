@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "TargetCondition", menuName = "Characters/Rule/TargetCondition", order = 0)]
+[CreateAssetMenu(fileName = "TargetCondition", menuName = "Rule/Condition/TargetCondition", order = 0)]
 public class TargetCondition : RuleCondition
 {
     public List<EntityType> entityTypes;
