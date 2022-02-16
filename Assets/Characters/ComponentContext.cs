@@ -17,6 +17,7 @@ public class ComponentContext : MonoBehaviour
     public PlayerInput playerInput { get; private set; }
     public PlayerController playerController { get; private set; }
     public PlayerMovement playerMovement { get; private set; }
+    public Rigidbody2D rb2d { get; private set; }
     public StatKeeper statKeeper { get; private set; }
     public StatusKeeper statusKeeper { get; private set; }
     public StatusAutoEnder statusAutoEnder { get; private set; }
@@ -32,6 +33,7 @@ public class ComponentContext : MonoBehaviour
     private void InitializeComponents()
     {
         PV = gameObject.FindComponent<PhotonView>();
+        rb2d = gameObject.FindComponent<Rigidbody2D>();
         playerInput = gameObject.FindComponent<PlayerInput>();
         playerController = gameObject.FindComponent<PlayerController>();
         playerMovement = gameObject.FindComponent<PlayerMovement>();

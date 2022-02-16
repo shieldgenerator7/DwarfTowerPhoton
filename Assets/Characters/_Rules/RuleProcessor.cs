@@ -144,16 +144,16 @@ public class RuleProcessor : MonoBehaviour
 
     private void TakeAction(RuleAction action, RuleSettings settings, RuleContext context)
     {
-        Rigidbody2D rb2d = gameObject.FindComponent<Rigidbody2D>();
-        StatKeeper statKeeper = gameObject.FindComponent<StatKeeper>();
-        StatLayer stats = statKeeper.selfStats.Stats;
+        ComponentContext compContext = context.self.FindComponent<ComponentContext>()
+            ?? throw new System.ArgumentException($"compContext cannot be null! gameObject: {context.self.name}");
+        StatLayer stats = compContext.statKeeper?.selfStats.Stats ?? new StatLayer(-1);
         switch (action)
         {
             case RuleAction.MOVE_IN_TARGET_DIR:
-                rb2d.velocity = context.targetDir * stats.moveSpeed;
+                compContext.rb2d.velocity = context.targetDir * stats.moveSpeed;
                 break;
             case RuleAction.MOVE_TOWARDS_TARGET_POS:
-                rb2d.velocity = (context.targetPos - (Vector2)gameObject.transform.position).normalized * stats.moveSpeed;
+                compContext.rb2d.velocity = (context.targetPos - (Vector2)context.self.transform.position).normalized * stats.moveSpeed;
                 break;
             case RuleAction.DAMAGE:
                 {
@@ -163,21 +163,18 @@ public class RuleProcessor : MonoBehaviour
                 }
                 break;
             case RuleAction.DAMAGE_SELF:
-                {
-                    //TODO: make damage over time amount a variable
-                    HealthPool hp = gameObject.FindComponent<HealthPool>();
-                    hp.Health += -1 * context.deltaTime;
-                }
+                //TODO: make damage over time amount a variable
+                compContext.healthPool.Health += -1 * context.deltaTime;
                 break;
             case RuleAction.CREATE_OBJECT:
-                Vector2 spawnCenter = gameObject.FindComponent<PlayerController>().SpawnCenter;
+                Vector2 spawnCenter = compContext.playerController.SpawnCenter;
                 Vector2 targetPos = Utility.MouseWorldPos;
                 Vector2 targetDir = (targetPos - spawnCenter).normalized;
-                RuleProcessor newObj = gameObject.FindComponent<ObjectSpawner>()
+                RuleProcessor newObj = compContext.objectSpawner
                     .spawnObject<RuleProcessor>(
-                    settings.Get(RuleSetting.Option.SPAWN_INDEX),
-                    spawnCenter,
-                    targetDir
+                        settings.Get(RuleSetting.Option.SPAWN_INDEX),
+                        spawnCenter,
+                        targetDir
                     );
                 newObj.Init(targetDir, targetPos);
                 break;
@@ -192,44 +189,32 @@ public class RuleProcessor : MonoBehaviour
                 lastDeactivatedRuleSet = currentRuleSet;
                 break;
             case RuleAction.USE_AMINA:
-                {
-                    AminaPool aminaPool = context.self.FindComponent<AminaPool>();
-                    bool acceptPartialAmount = settings
-                        .Try(RuleSetting.Option.ACCEPT_PARTIAL_AMOUNT)
-                        ?? true;
-                    float amina = aminaPool.requestAmina(
-                        settings.Get(RuleSetting.Option.AMINA_COST),
-                        acceptPartialAmount
-                        );
-                }
+                bool acceptPartialAmount = settings
+                    .Try(RuleSetting.Option.ACCEPT_PARTIAL_AMOUNT)
+                    ?? true;
+                float amina = compContext.aminaPool.requestAmina(
+                    settings.Get(RuleSetting.Option.AMINA_COST),
+                    acceptPartialAmount
+                    );
                 break;
             case RuleAction.USE_AMINA_PER_SECOND:
-                {
-                    AminaPool aminaPool = context.self.FindComponent<AminaPool>();
-                    bool acceptPartialAmount = settings
-                        .Try(RuleSetting.Option.ACCEPT_PARTIAL_AMOUNT)
-                        ?? true;
-                    float amina = aminaPool.requestAmina(
-                        settings.Get(RuleSetting.Option.AMINA_COST_PER_SECOND) * context.deltaTime,
-                        acceptPartialAmount
-                        );
-                }
+                bool acceptPartialAmountPerSecond = settings
+                    .Try(RuleSetting.Option.ACCEPT_PARTIAL_AMOUNT)
+                    ?? true;
+                float aminaPerSecond = compContext.aminaPool.requestAmina(
+                    settings.Get(RuleSetting.Option.AMINA_COST_PER_SECOND) * context.deltaTime,
+                    acceptPartialAmountPerSecond
+                    );
                 break;
             case RuleAction.RECHARGE_AMINA:
-                {
-                    AminaPool aminaPool = context.self.FindComponent<AminaPool>();
-                    aminaPool.rechargeAmina(
-                        settings.Get(RuleSetting.Option.AMINA_COST)
-                        );
-                }
+                compContext.aminaPool.rechargeAmina(
+                    settings.Get(RuleSetting.Option.AMINA_COST)
+                    );
                 break;
             case RuleAction.RECHARGE_AMINA_PER_SECOND:
-                {
-                    AminaPool aminaPool = context.self.FindComponent<AminaPool>();
-                    aminaPool.rechargeAmina(
-                        settings.Get(RuleSetting.Option.AMINA_COST_PER_SECOND) * context.deltaTime
-                        );
-                }
+                compContext.aminaPool.rechargeAmina(
+                    settings.Get(RuleSetting.Option.AMINA_COST_PER_SECOND) * context.deltaTime
+                    );
                 break;
             default:
                 throw new System.ArgumentException($"Unknown action: {action}");
