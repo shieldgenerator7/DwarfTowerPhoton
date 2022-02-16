@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 1242758000075440754}
   - component: {fileID: -3464993547012377175}
   - component: {fileID: 2544135161647910422}
+  - component: {fileID: 4340440457477611963}
   m_Layer: 0
   m_Name: Sniper
   m_TagString: Player
@@ -116,8 +117,8 @@ MonoBehaviour:
   characterInfo: {fileID: 11400000, guid: a91988f801f29bf418ddc93cfe96db07, type: 2}
   stunDuration: 2
   knockbackSpeed: 5
-  aminaReloader: {fileID: 3369071877670158181}
   abilityContext: {fileID: 9215063378857821938}
+  context: {fileID: 4340440457477611963}
   laser: {fileID: 5940706724890032380}
   tallGrassLauncher: {fileID: 8666854124826083951}
   tallGrassMap:
@@ -350,6 +351,18 @@ MonoBehaviour:
   damageOnTrigger: 1
   damageOnCollide: 1
   damageFriendlies: 0
+--- !u!114 &4340440457477611963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532201618779257096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be985794bfe9a54abe79c147869abd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2299017120802892305
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,13 +17,13 @@ GameObject:
   - component: {fileID: 3854592228582004885}
   - component: {fileID: -2602285597255277064}
   - component: {fileID: -6763877186653517758}
-  - component: {fileID: 3106570158898748710}
   - component: {fileID: 628463848740268033}
   - component: {fileID: 3158633092025413174}
   - component: {fileID: 9144531418077418824}
   - component: {fileID: 1242758000075440754}
   - component: {fileID: -3464993547012377175}
   - component: {fileID: 8323170343674787915}
+  - component: {fileID: 1241004919996168816}
   m_Layer: 0
   m_Name: Dwarf
   m_TagString: Player
@@ -45,6 +45,7 @@ Transform:
   m_Children:
   - {fileID: 1913788795788701171}
   - {fileID: 8736292213951035431}
+  - {fileID: 5932135345306362245}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -115,8 +116,8 @@ MonoBehaviour:
   characterInfo: {fileID: 11400000, guid: ba874eaf7ebd1c442b578cafc6e0b469, type: 2}
   stunDuration: 2
   knockbackSpeed: 5
-  aminaReloader: {fileID: 0}
   abilityContext: {fileID: 9215063378857821938}
+  context: {fileID: 1241004919996168816}
 --- !u!114 &8326234248601270164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,18 +209,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   entityType: 2
---- !u!114 &3106570158898748710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532201618779257096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf1d5e3f79e1da94884919a30c2202e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &628463848740268033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,6 +321,62 @@ MonoBehaviour:
   damageOnTrigger: 1
   damageOnCollide: 1
   damageFriendlies: 0
+--- !u!114 &1241004919996168816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532201618779257096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be985794bfe9a54abe79c147869abd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1892541511819298660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5932135345306362245}
+  - component: {fileID: 6912173477655317962}
+  m_Layer: 0
+  m_Name: Effects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5932135345306362245
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892541511819298660}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1073061482865175048}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6912173477655317962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892541511819298660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf1d5e3f79e1da94884919a30c2202e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2299017120802892305
 GameObject:
   m_ObjectHideFlags: 0

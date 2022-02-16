@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 6160328844216468952}
   - component: {fileID: 1567083782174426373}
   - component: {fileID: 1589231887393888136}
+  - component: {fileID: -3142032430437744260}
   m_Layer: 0
   m_Name: Unicorn
   m_TagString: Player
@@ -117,8 +118,8 @@ MonoBehaviour:
   characterInfo: {fileID: 11400000, guid: 2a669681d75b3a448bd48183355d7958, type: 2}
   stunDuration: 2
   knockbackSpeed: 5
-  aminaReloader: {fileID: 6368753068641259655}
   abilityContext: {fileID: 3769535869663102263}
+  context: {fileID: -3142032430437744260}
   rainbowPathAbility: {fileID: 2613285986018779774}
 --- !u!114 &307085991090335124
 MonoBehaviour:
@@ -366,6 +367,18 @@ MonoBehaviour:
   damageOnTrigger: 1
   damageOnCollide: 1
   damageFriendlies: 0
+--- !u!114 &-3142032430437744260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532201618779257096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be985794bfe9a54abe79c147869abd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3887385788853543116
 GameObject:
   m_ObjectHideFlags: 0
