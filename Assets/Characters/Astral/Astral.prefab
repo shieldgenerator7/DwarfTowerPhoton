@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: -3403154782630320674}
   - component: {fileID: 3848396828403213075}
   - component: {fileID: -2150186336925186957}
+  - component: {fileID: -4591474055911891504}
   m_Layer: 0
   m_Name: Astral
   m_TagString: Player
@@ -377,6 +378,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5be985794bfe9a54abe79c147869abd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-4591474055911891504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532201618779257096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5425ba304f6ea54f89ea7c2e72b7d54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ruleSets: []
 --- !u!1 &3103024714437739674
 GameObject:
   m_ObjectHideFlags: 0

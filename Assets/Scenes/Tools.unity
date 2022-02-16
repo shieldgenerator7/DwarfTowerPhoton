@@ -198,6 +198,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1644664247}
   - component: {fileID: 1644664249}
+  - component: {fileID: 1644664252}
+  - component: {fileID: 1644664251}
+  - component: {fileID: 1644664250}
   m_Layer: 0
   m_Name: Find & Edit
   m_TagString: Untagged
@@ -232,8 +235,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7fadf2a77a121240ac5a2de54dc015b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  findComponent: {fileID: 0}
-  addComponent: {fileID: 0}
+  findComponent: {fileID: 1644664252}
+  addComponent: {fileID: 1644664250}
   removeComponent: 
-  foundComponents: []
+  foundComponents:
+  - {fileID: 2520919749369739181, guid: c76b665cebcf4bd478d15cf833d20f33, type: 3}
+  - {fileID: 82471828905087746, guid: 601bc1c138cf37d4e924aeee6aa70020, type: 3}
+  - {fileID: 6643005841248314942, guid: 69f122fe10f37864bb52a35fc112ba76, type: 3}
+  - {fileID: 6977388227850359899, guid: 721211b1c02b1134d8b5e86f1a7f7238, type: 3}
+  - {fileID: 5750100801595415204, guid: f6c0a9bc28ba2c04eb583c6a79c6208a, type: 3}
+  - {fileID: 8891596049456344743, guid: 95c79e13db999da4a83e76b9e2b273aa, type: 3}
   addedComponents: []
+--- !u!114 &1644664250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644664246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be985794bfe9a54abe79c147869abd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1644664251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644664246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5425ba304f6ea54f89ea7c2e72b7d54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ruleSets: []
+--- !u!114 &1644664252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644664246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23da9a48fa26f9543ac4db8ff387053f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterInfo: {fileID: 0}
+  stunDuration: 2
+  knockbackSpeed: 5
+  abilityContext: {fileID: 0}
+  context: {fileID: 0}
