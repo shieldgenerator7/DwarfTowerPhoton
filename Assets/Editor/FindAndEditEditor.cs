@@ -14,6 +14,10 @@ public class FindAndEditEditor : Editor
         {
             (target as FindAndEdit).FindMonoBehaviours();
         }
+        if (GUILayout.Button("Select"))
+        {
+            (target as FindAndEdit).SelectGameObjects();
+        }
         if (GUILayout.Button("Add"))
         {
             (target as FindAndEdit).AddComponent();
@@ -21,6 +25,10 @@ public class FindAndEditEditor : Editor
         if (GUILayout.Button("Remove"))
         {
             (target as FindAndEdit).RemoveComponent();
+        }
+        if (GUILayout.Button("Clear Settings"))
+        {
+            (target as FindAndEdit).ClearSettings();
         }
     }
 }

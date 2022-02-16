@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public class FindAndEdit : MonoBehaviour
@@ -25,6 +26,11 @@ public class FindAndEdit : MonoBehaviour
         return foundComponents;
     }
 
+    public void SelectGameObjects()
+    {
+        Selection.objects = foundComponents.ToArray();
+    }
+
     public void AddComponent()
     {
         Type type = addComponent.GetType();
@@ -41,6 +47,21 @@ public class FindAndEdit : MonoBehaviour
             .ConvertAll(mb => mb.gameObject);
         removedComponentsGameObjects
             .ForEach(go => DestroyImmediate(go.GetComponent(type), true));
+    }
+
+    public void ClearSettings()
+    {
+        //Search settings
+        DestroyImmediate(findComponent, true);
+        findComponent = null;
+        DestroyImmediate(addComponent, true);
+        addComponent = null;
+        DestroyImmediate(removeComponent, true);
+        removeComponent = null;
+        //Search results
+        foundComponents.Clear();
+        addedComponents.Clear();
+        removedComponentsGameObjects.Clear();
     }
 }
 #endif
