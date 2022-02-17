@@ -69,6 +69,11 @@ public class RuleProcessor : MonoBehaviour
             aminaPool.onAminaEmpty += OnAminaEmpty;
             aminaPool.onAminaFull += OnAminaFull;
         }
+        StatKeeper statKeeper = componentContext.statKeeper;
+        if (statKeeper)
+        {
+            statKeeper.selfStats.onStatChanged += (stat) => ProcessRules(RuleTrigger.OnStatsChanged);
+        }
     }
     #endregion
 

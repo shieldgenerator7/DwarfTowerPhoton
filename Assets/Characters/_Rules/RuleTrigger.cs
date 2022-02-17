@@ -25,4 +25,6 @@ public enum RuleTrigger
     OnAminaEmpty,
     //Input
     OnInputChanged,
+    //Stats
+    OnStatsChanged,
 }
