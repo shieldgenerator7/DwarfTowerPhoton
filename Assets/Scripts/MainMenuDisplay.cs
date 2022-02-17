@@ -19,7 +19,10 @@ public class MainMenuDisplay : MenuDisplay
         txtMapName.text = PlayerInfo.instance.mapName;
         txtMapName.onValueChanged.AddListener((mapName) => playerInfo.mapName = mapName);
         playerInfo.characterSelection.onIndexChanged += updateCharacterImage;
-        playerInfo.SelectRandomCharacter();
+        if (playerInfo.characterSelection.Index < 0)
+        {
+            playerInfo.SelectRandomCharacter();
+        }
         updateCharacterImage(playerInfo.characterSelection.Index);
         playerInfo.onColorChanged += updateColorImage;
         updateColorImage(playerInfo.DefaultColor);

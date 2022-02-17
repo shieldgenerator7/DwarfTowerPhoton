@@ -28,7 +28,10 @@ public class CharacterSelectMenuDisplay : MenuDisplay
     {
         PlayerInfo playerInfo = PlayerInfo.instance;
         playerInfo.characterSelection.onIndexChanged += updateCharacterImage;
-        playerInfo.SelectRandomCharacter();
+        if (playerInfo.characterSelection.Index < 0)
+        {
+            playerInfo.SelectRandomCharacter();
+        }
         updateCharacterImage(playerInfo.characterSelection.Index);
         playerInfo.onColorChanged += updateColorImage;
         updateColorImage(playerInfo.DefaultColor);
