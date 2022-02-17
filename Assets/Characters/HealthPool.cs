@@ -16,17 +16,20 @@ public class HealthPool : MonoBehaviour
             //TODO: What does it mean for max health to be 0??
             maxHealth = Mathf.Clamp(value, 0, value);
             float diff = maxHealth - prevMaxHealth;
-            if (diff > 0)
+            if (diff != 0)
             {
-                //Increase health with max health increase
-                Health += diff;
+                if (diff > 0)
+                {
+                    //Increase health with max health increase
+                    Health += diff;
+                }
+                else
+                {
+                    //Make sure health doesn't end up above max health
+                    Health += 0;
+                }
+                onMaxHealthChanged?.Invoke(maxHealth);
             }
-            else
-            {
-                //Make sure health doesn't end up above max health
-                Health += 0;
-            }
-            onMaxHealthChanged?.Invoke(maxHealth);
         }
     }
     public event HealthEvent onMaxHealthChanged;
