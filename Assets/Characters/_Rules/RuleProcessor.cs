@@ -146,8 +146,7 @@ public class RuleProcessor : MonoBehaviour
     }
     private void ProcessRules(RuleTrigger trigger, RuleContext context)
     {
-        ruleSets
-            .FindAll(ruleSet => activeRuleSets.Contains(ruleSet))
+        activeRuleSets.ToList()
             .ForEach(ruleSet =>
         {
             RuleContext currentContext = new RuleContext(context)
