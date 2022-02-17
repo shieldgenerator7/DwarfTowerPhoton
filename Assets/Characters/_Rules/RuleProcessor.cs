@@ -74,6 +74,11 @@ public class RuleProcessor : MonoBehaviour
         {
             statKeeper.selfStats.onStatChanged += (stat) => ProcessRules(RuleTrigger.OnStatsChanged);
         }
+        StatusKeeper statusKeeper = componentContext.statusKeeper;
+        if (statusKeeper)
+        {
+            statusKeeper.onStatusChanged += (status) => ProcessRules(RuleTrigger.OnStatusChanged);
+        }
     }
     #endregion
 
