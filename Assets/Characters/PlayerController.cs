@@ -76,16 +76,15 @@ public abstract class PlayerController : MonoBehaviour
 
     protected virtual void InitializeSettings()
     {
-        if (context.damager)
-        {
-            context.damager.damage = context.healthPool.MaxHealth;
-        }
+        context.statKeeper.selfStats.addLayerAdd(
+            context.PV.ViewID,
+            new StatLayer(0) { damage = context.healthPool.MaxHealth - 1, }
+            );
     }
     protected virtual void RegisterDelegates()
     {
         //Set local variables
         HealthPool healthPool = context.healthPool;
-        Damager damager = context.damager;
         StatusKeeper statusKeeper = context.statusKeeper;
         PhotonView PV = context.PV;
         AminaPool aminaPool = context.aminaPool;
@@ -96,7 +95,13 @@ public abstract class PlayerController : MonoBehaviour
         StatKeeper statKeeper = context.statKeeper;
         ObjectSpawner objectSpawner = context.objectSpawner;
         //Hook up Stunnable with HealthPool
-        healthPool.onMaxHealthChanged += (hp) => { damager.damage = hp; };
+        healthPool.onMaxHealthChanged += (hp) =>
+        {
+            statKeeper.selfStats.addLayerAdd(
+                PV.ViewID,
+                new StatLayer(0) { damage = hp - 1, }
+                );
+        };
         healthPool.onDied += (hp) =>
         {
             statusKeeper.addLayer(PV.ViewID, new StatusLayer(StatusEffect.STUNNED));
@@ -122,9 +127,6 @@ public abstract class PlayerController : MonoBehaviour
             if (stunned)
             {
                 cancelAbilities();
-                //Damage other players while stunned
-                damager.damagableTypes.Add(EntityType.PLAYER);
-                damager.damageFriendlies = true;
                 //Move while stunned
                 Vector2 stunVelocity =
                     (SpawnCenter - (Vector2)CaravanController.Caravan.transform.position).normalized
@@ -148,9 +150,6 @@ public abstract class PlayerController : MonoBehaviour
             {
                 //Restore health after unstunned
                 healthPool.Health = healthPool.MaxHealth;
-                //Stop damaging other players upon recovering
-                damager.damagableTypes.Remove(EntityType.PLAYER);
-                damager.damageFriendlies = false;
             }
             //Stealthed
             bool stealthed = status.Has(StatusEffect.STEALTHED);
@@ -180,7 +179,6 @@ public abstract class PlayerController : MonoBehaviour
         {
             playerMovement.MovementSpeed = stats.moveSpeed;
             healthPool.MaxHealth = stats.maxHits;
-            damager.damage = stats.damage;
             transform.localScale = Vector3.one * stats.size;
             //Update status stealthed
             StatusLayer status = statusKeeper.AllowedStatus;

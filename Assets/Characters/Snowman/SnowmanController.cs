@@ -17,8 +17,9 @@ public class SnowmanController : PlayerController, IPunObservable
 
     public StatLayer rollingLayer;
 
-    public List<EntityType> standDamageTypes;
-    public List<EntityType> rollingDamageTypes;
+    //TODO: Re-implement snowman damaging players when he rolls into them
+    //public List<EntityType> standDamageTypes;
+    //public List<EntityType> rollingDamageTypes;
 
     [Header("Components")]
 
@@ -41,7 +42,6 @@ public class SnowmanController : PlayerController, IPunObservable
     {
         base.RegisterDelegates();
         HealthPool healthPool = context.healthPool;
-        Damager damager = context.damager;
         StatKeeper statKeeper = context.statKeeper;
         PhotonView PV = context.PV;
         //Roll
@@ -53,13 +53,11 @@ public class SnowmanController : PlayerController, IPunObservable
             {
                 maxRollLayer.damage = maxRollLayer.maxHits;
                 statKeeper.selfStats.addLayer(rollAbility.abilityID, rollingLayer);
-                damager.damagableTypes = rollingDamageTypes;
             }
             else
             {
                 maxRollLayer.damage = -1;
                 statKeeper.selfStats.removeLayer(rollAbility.abilityID);
-                damager.damagableTypes = standDamageTypes;
             }
         };
         //Health

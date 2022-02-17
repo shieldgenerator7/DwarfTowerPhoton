@@ -20,10 +20,8 @@ GameObject:
   - component: {fileID: 628463848740268033}
   - component: {fileID: 9144531418077418824}
   - component: {fileID: 3158633092025413174}
-  - component: {fileID: 3369071877670158181}
   - component: {fileID: 1242758000075440754}
   - component: {fileID: -3464993547012377175}
-  - component: {fileID: 2055934592331103579}
   - component: {fileID: 6856880451898062845}
   m_Layer: 0
   m_Name: Template
@@ -134,6 +132,7 @@ MonoBehaviour:
   ruleSets:
   - {fileID: 11400000, guid: edb795e8b31046f4698dda4618fa38ef, type: 2}
   - {fileID: 11400000, guid: 61bd4fd6b45a9b74ca343e444d74d595, type: 2}
+  - {fileID: 11400000, guid: 2b952a39899126d40b758d7e524e16bc, type: 2}
 --- !u!114 &307085991090335124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +163,6 @@ MonoBehaviour:
   - {fileID: 7133168848261502530}
   - {fileID: 4034267826870480475}
   - {fileID: 5500888993561376432}
-  - {fileID: 3369071877670158181}
 --- !u!114 &3854592228582004885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,24 +275,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.62, y: 0.87}
   m_EdgeRadius: 0
---- !u!114 &3369071877670158181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532201618779257096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00b3994f5d6328d4ea5a2534d14ad54b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityName: Amina Reloader
-  aminaCost: 0
-  abilitySlot: 3
-  hidesOtherInputs: 1
-  abilityID: 1
-  reloadDuration: 2
 --- !u!114 &1242758000075440754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,23 +305,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateEveryFrame: 1
---- !u!114 &2055934592331103579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532201618779257096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbb34bdc9fc63f41a859d4e6c6ae4c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
-  damagableTypes: 00000000
-  damageOnTrigger: 1
-  damageOnCollide: 1
-  damageFriendlies: 0
 --- !u!114 &6856880451898062845
 MonoBehaviour:
   m_ObjectHideFlags: 0

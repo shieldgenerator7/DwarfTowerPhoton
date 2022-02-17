@@ -9,7 +9,7 @@ public class RuleProcessor : MonoBehaviour
     public List<RuleSet> ruleSets;
 
     public RuleContext initialContext;
-    public ComponentContext componentContext;
+    private ComponentContext componentContext;
 
     private HashSet<RuleSet> activeRuleSets = new HashSet<RuleSet>();
     private RuleSet lastDeactivatedRuleSet;

@@ -12,7 +12,6 @@ public class ComponentContext : MonoBehaviour
     public PhotonView PV { get; private set; }
     public AminaPool aminaPool { get; private set; }
     public HealthPool healthPool { get; private set; }
-    public Damager damager { get; private set; }
     public PlayerInput playerInput { get; private set; }
     public PlayerController playerController { get; private set; }
     public PlayerMovement playerMovement { get; private set; }
@@ -38,7 +37,6 @@ public class ComponentContext : MonoBehaviour
         playerMovement = gameObject.FindComponent<PlayerMovement>();
         playerMovement?.Start();
         sr = gameObject.FindComponent<SpriteRenderer>();
-        damager = gameObject.FindComponent<Damager>();
         healthPool = gameObject.FindComponent<HealthPool>();
         aminaPool = gameObject.FindComponent<AminaPool>();
         objectSpawner = gameObject.FindComponent<ObjectSpawner>();
