@@ -214,6 +214,14 @@ public class RuleProcessor : MonoBehaviour
                 activeRuleSets.Add(targetRuleSet);
                 lastDeactivatedRuleSet = currentRuleSet;
                 break;
+            case RuleAction.ADD_RULESET:
+                RuleSet addRuleSet = settings.targetRuleSet;
+                activeRuleSets.Add(addRuleSet);
+                break;
+            case RuleAction.REMOVE_RULESET:
+                RuleSet removeRuleSet = settings.targetRuleSet;
+                activeRuleSets.Remove(removeRuleSet);
+                break;
             case RuleAction.USE_AMINA:
                 bool acceptPartialAmount = settings
                     .Try(RuleSetting.Option.ACCEPT_PARTIAL_AMOUNT)
