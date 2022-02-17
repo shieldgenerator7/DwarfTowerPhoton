@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(ComponentContext))]
 public class RuleProcessor : MonoBehaviour
 {
     public List<RuleSet> ruleSets;
 
     public RuleContext initialContext;
+    public ComponentContext componentContext;
 
     private HashSet<RuleSet> activeRuleSets = new HashSet<RuleSet>();
     private RuleSet lastDeactivatedRuleSet;
+
+    private void Awake()
+    {
+        InitializeContext();
+    }
 
     public void Init(Vector2 dir, Vector2 pos)
     {
@@ -25,20 +32,22 @@ public class RuleProcessor : MonoBehaviour
     #region Initialization
     private void InitializeContext()
     {
+        //Component context
+        componentContext = gameObject.FindComponent<ComponentContext>();
         //Initialize context
         initialContext.deltaTime = 1;
-        initialContext.self = gameObject;
+        initialContext.componentContext = componentContext;
     }
 
     private void RegisterDelegates()
     {
-        PlayerInput playerInput = gameObject.FindComponent<PlayerInput>();
+        PlayerInput playerInput = componentContext.playerInput;
         if (playerInput)
         {
             playerInput.onInputChanged -= OnInputChanged;
             playerInput.onInputChanged += OnInputChanged;
         }
-        AminaPool aminaPool = gameObject.FindComponent<AminaPool>();
+        AminaPool aminaPool = componentContext.aminaPool;
         if (aminaPool)
         {
             aminaPool.onAminaEmpty -= OnAminaEmpty;
@@ -144,8 +153,7 @@ public class RuleProcessor : MonoBehaviour
 
     private void TakeAction(RuleAction action, RuleSettings settings, RuleContext context)
     {
-        ComponentContext compContext = context.self.FindComponent<ComponentContext>()
-            ?? throw new System.ArgumentException($"compContext cannot be null! gameObject: {context.self.name}");
+        ComponentContext compContext = context.componentContext;
         StatLayer stats = compContext.statKeeper?.selfStats.Stats ?? new StatLayer(-1);
         switch (action)
         {
@@ -153,7 +161,7 @@ public class RuleProcessor : MonoBehaviour
                 compContext.rb2d.velocity = context.targetDir * stats.moveSpeed;
                 break;
             case RuleAction.MOVE_TOWARDS_TARGET_POS:
-                compContext.rb2d.velocity = (context.targetPos - (Vector2)context.self.transform.position).normalized * stats.moveSpeed;
+                compContext.rb2d.velocity = (context.targetPos - (Vector2)compContext.transform.position).normalized * stats.moveSpeed;
                 break;
             case RuleAction.DAMAGE:
                 {

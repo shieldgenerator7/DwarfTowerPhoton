@@ -5,7 +5,7 @@ using UnityEngine;
 public struct RuleContext
 {
     //Self
-    public GameObject self;
+    public ComponentContext componentContext;
     public RuleSet currentRuleSet;
     //Movement
     public Vector2 targetDir;
@@ -22,7 +22,7 @@ public struct RuleContext
     public RuleContext(RuleContext template)
     {
         //Self
-        this.self = template.self;
+        this.componentContext = template.componentContext;
         this.currentRuleSet = template.currentRuleSet;
         //Movement
         this.targetDir = template.targetDir;

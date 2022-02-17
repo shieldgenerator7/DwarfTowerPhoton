@@ -16,7 +16,10 @@ public class TargetCondition : RuleCondition
 
     public override bool Check(RuleSettings settings, RuleContext context)
     {
-        bool onSameTeam = TeamToken.onSameTeam(context.self, context.target);
+        bool onSameTeam = TeamToken.onSameTeam(
+            context.componentContext.gameObject,
+            context.target
+            );
         if (onAlly && onSameTeam || onEnemy && !onSameTeam)
         {
             if (onTrigger && context.isTrigger || onCollision && context.isCollision)

@@ -22,32 +22,27 @@ public class SimpleConditionSet : ConditionSet
         {
             return null;
         }
+        ComponentContext compContext = context.componentContext;
         foreach (Option condition in simpleConditions)
         {
             switch (condition)
             {
                 case Option.AMINA_COST:
-                    {
-                        AminaPool aminaPool = context.self.FindComponent<AminaPool>();
                         bool acceptPartialAmount = settings
                             .Try(RuleSetting.Option.ACCEPT_PARTIAL_AMOUNT)
                             ?? true;
-                        return aminaPool.hasAmina(
+                        return compContext.aminaPool.hasAmina(
                             settings.Get(RuleSetting.Option.AMINA_COST),
                             acceptPartialAmount
                             );
-                    }
                 case Option.AMINA_COST_PER_SECOND:
-                    {
-                        AminaPool aminaPool = context.self.FindComponent<AminaPool>();
-                        bool acceptPartialAmount = settings
+                        bool acceptPartialAmountPerSecond = settings
                             .Try(RuleSetting.Option.ACCEPT_PARTIAL_AMOUNT)
                             ?? true;
-                        return aminaPool.hasAmina(
+                        return compContext.aminaPool.hasAmina(
                             settings.Get(RuleSetting.Option.AMINA_COST_PER_SECOND) * context.deltaTime,
-                            acceptPartialAmount
+                            acceptPartialAmountPerSecond
                             );
-                    }
                 case Option.TIMER:
                     if (timer == null)
                     {
