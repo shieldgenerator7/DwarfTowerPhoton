@@ -15,6 +15,6 @@ MonoBehaviour:
   settings:
     settings: []
     targetRuleSet: {fileID: 0}
-  trigger: 0
+  trigger: 2
   condition: {fileID: 0}
-  actions: 
+  actions: 07000000

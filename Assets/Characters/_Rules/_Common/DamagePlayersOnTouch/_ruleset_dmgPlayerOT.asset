@@ -15,3 +15,4 @@ MonoBehaviour:
   activeAtStart: 0
   rules:
   - {fileID: 11400000, guid: a339bce5b8db09344a069a17dd043206, type: 2}
+  - {fileID: 11400000, guid: bae80c59b4f3b20408ab6e1c72fd63bb, type: 2}
