@@ -39,20 +39,25 @@ public class RuleProcessor : MonoBehaviour
         initialContext.componentContext = componentContext;
     }
 
+    private bool _registeredDelegates = false;
     private void RegisterDelegates()
     {
+        //Only allow being called once
+        if (_registeredDelegates)
+        {
+            throw new UnityException($"RuleProcessor.registerDelegates called more than once! gameObject: {gameObject.name}");
+        }
+        _registeredDelegates = true;
+        //Register delegates
         PlayerInput playerInput = componentContext.playerInput;
         if (playerInput)
         {
-            playerInput.onInputChanged -= OnInputChanged;
             playerInput.onInputChanged += OnInputChanged;
         }
         AminaPool aminaPool = componentContext.aminaPool;
         if (aminaPool)
         {
-            aminaPool.onAminaEmpty -= OnAminaEmpty;
             aminaPool.onAminaEmpty += OnAminaEmpty;
-            aminaPool.onAminaFull -= OnAminaFull;
             aminaPool.onAminaFull += OnAminaFull;
         }
     }
@@ -126,6 +131,10 @@ public class RuleProcessor : MonoBehaviour
     #endregion
 
     #region Rule Processing
+    private void ProcessRules(RuleTrigger trigger)
+    {
+        ProcessRules(trigger, initialContext);
+    }
     private void ProcessRules(RuleTrigger trigger, RuleContext context)
     {
         ruleSets
