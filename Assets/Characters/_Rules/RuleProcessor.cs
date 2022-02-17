@@ -54,6 +54,15 @@ public class RuleProcessor : MonoBehaviour
         {
             playerInput.onInputChanged += OnInputChanged;
         }
+        HealthPool healthPool = componentContext.healthPool;
+        if (healthPool)
+        {
+            //healthPool.onChanged += (hp) => ProcessRules(RuleTrigger.onHealthChanged);
+            healthPool.onHealed += (hp) => ProcessRules(RuleTrigger.OnHealed);
+            healthPool.onHealedFull += (hp) => ProcessRules(RuleTrigger.OnHealthFull);
+            healthPool.onDamaged += (hp) => ProcessRules(RuleTrigger.OnDamaged);
+            healthPool.onDied += (hp) => ProcessRules(RuleTrigger.OnDied);
+        }
         AminaPool aminaPool = componentContext.aminaPool;
         if (aminaPool)
         {

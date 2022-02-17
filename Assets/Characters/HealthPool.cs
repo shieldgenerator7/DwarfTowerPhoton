@@ -44,15 +44,31 @@ public class HealthPool : MonoBehaviour
             if (prevHealth != health)
             {
                 onChanged?.Invoke(health);
+                //Healed
                 if (health > prevHealth)
                 {
-                    onHealed?.Invoke(health);
+                    if (health > 0)
+                    {
+                        onHealed?.Invoke(health);
+                    }
+                    if (health >= maxHealth)
+                    {
+                        onHealedFull?.Invoke(health);
+                    }
                 }
+                //Damaged (or max health decreased)
                 else if (health < prevHealth)
                 {
                     if (health < maxHealth)
                     {
                         onDamaged?.Invoke(health);
+                    }
+                    else
+                    {
+                        //when decreasing max health,
+                        //can make health equal to max health,
+                        //thus healing to full
+                        onHealedFull?.Invoke(health);
                     }
                     if (health <= 0)
                     {
@@ -66,6 +82,7 @@ public class HealthPool : MonoBehaviour
     public delegate void HealthEvent(float health);
     public event HealthEvent onChanged;
     public event HealthEvent onHealed;
+    public event HealthEvent onHealedFull;
     public event HealthEvent onDamaged;
     public event HealthEvent onDied;
 
