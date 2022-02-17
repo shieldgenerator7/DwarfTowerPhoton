@@ -236,7 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   findComponent: {fileID: 1644664250}
   addComponent: {fileID: 0}
-  removeComponent: {fileID: 1644664251}
+  removeComponent: {fileID: 0}
   foundComponents:
   - {fileID: 3489473770951568585, guid: f854aee07d753f945ad2422fd65d510a, type: 3}
   - {fileID: -1396033754690449619, guid: 95c79e13db999da4a83e76b9e2b273aa, type: 3}
@@ -268,11 +268,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1644664246}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbb34bdc9fc63f41a859d4e6c6ae4c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 5be985794bfe9a54abe79c147869abd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  damagableTypes: 
-  damageOnTrigger: 1
-  damageOnCollide: 1
-  damageFriendlies: 0
