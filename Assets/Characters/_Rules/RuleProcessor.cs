@@ -218,7 +218,8 @@ public class RuleProcessor : MonoBehaviour
                 activeRuleSets.Add(addRuleSet);
                 break;
             case RuleAction.REMOVE_RULESET:
-                RuleSet removeRuleSet = settings.targetRuleSet;
+                RuleSet removeRuleSet = settings.targetRuleSet
+                    ?? context.currentRuleSet;
                 activeRuleSets.Remove(removeRuleSet);
                 break;
             case RuleAction.USE_AMINA:
