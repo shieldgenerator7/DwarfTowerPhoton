@@ -14,6 +14,8 @@ public class RuleProcessor : MonoBehaviour
     private HashSet<RuleSet> activeRuleSets = new HashSet<RuleSet>();
     private RuleSet lastDeactivatedRuleSet;
 
+    private RuleProcessor controller;
+
     private void Awake()
     {
         InitializeContext();
@@ -79,6 +81,24 @@ public class RuleProcessor : MonoBehaviour
         {
             statusKeeper.onStatusChanged += (status) => ProcessRules(RuleTrigger.OnStatusChanged);
         }
+        //Controller
+        componentContext.teamToken.onControllerGainedControl += setController;
+        setController(componentContext.teamToken.controller);
+    }
+
+    private void setController(TeamToken ttController)
+    {
+        //Unregister prev delegates
+        if (controller)
+        {
+            controller.componentContext.playerInput.onInputChanged -= OnControllerInputChanged;
+        }
+        controller = ttController.gameObject.FindComponent<RuleProcessor>();
+        //Register new delegates
+        if (controller)
+        {
+            controller.componentContext.playerInput.onInputChanged += OnControllerInputChanged;
+        }
     }
     #endregion
 
@@ -111,6 +131,15 @@ public class RuleProcessor : MonoBehaviour
         {
         };
         ProcessRules(RuleTrigger.OnInputChanged, context);
+    }
+
+    private void OnControllerInputChanged(InputState input)
+    {
+        RuleContext context = new RuleContext(initialContext)
+        {
+            inputState = input,
+        };
+        ProcessRules(RuleTrigger.OnControllerInputChanged, context);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -202,7 +231,7 @@ public class RuleProcessor : MonoBehaviour
                 compContext.healthPool.Health += -1 * context.deltaTime;
                 break;
             case RuleAction.CREATE_OBJECT:
-                Vector2 spawnCenter = compContext.playerController.SpawnCenter;
+                Vector2 spawnCenter = compContext.playerController?.SpawnCenter ?? compContext.transform.position;
                 Vector2 targetPos = Utility.MouseWorldPos;
                 Vector2 targetDir = (targetPos - spawnCenter).normalized;
                 RuleProcessor newObj = compContext.objectSpawner
