@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: -5566637511157483798}
   - component: {fileID: -467081536067993098}
   - component: {fileID: 4613447591160090760}
+  - component: {fileID: 949640961860288447}
   m_Layer: 0
   m_Name: PlayerAvatar
   m_TagString: Player
@@ -211,6 +212,19 @@ MonoBehaviour:
     maxDuration: 10
   - statusEffect: 2
     maxDuration: 10
+--- !u!114 &949640961860288447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb973cf662265d54eb7e3bd8ef298f6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cheatkey: 27
 --- !u!1 &2960372005727759236
 GameObject:
   m_ObjectHideFlags: 0

@@ -82,4 +82,10 @@ public class StatusKeeper : MonoBehaviour
         }
         updateStatus();
     }
+
+    public void Clear()
+    {
+        stacks.Clear();
+        updateStatus();
+    }
 }
