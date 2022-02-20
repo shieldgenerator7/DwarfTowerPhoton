@@ -249,7 +249,9 @@ public class CustomMenu
         Debug.Log("=== Beginning session ===");
         string oldVersion = PlayerSettings.bundleVersion;
         string[] split = oldVersion.Split('.');
-        int versionNumber = int.Parse(split[1]) + 1;
+        string versionName = System.Text.RegularExpressions.Regex
+            .Replace( split[1],"[^0-9.]","");
+        int versionNumber = int.Parse(versionName) + 1;
         string newVersion = split[0] + "."
             + ((versionNumber < 100) ? "0" : "")
             + versionNumber;
