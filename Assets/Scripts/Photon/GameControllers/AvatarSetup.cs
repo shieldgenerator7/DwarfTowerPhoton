@@ -43,10 +43,6 @@ public class AvatarSetup : MonoBehaviour
         shadowSR.color = shadowSR.color.setRGB(
             teamToken.teamCaptain.teamColor
             );
-        //Player Color
-        myCharacter.FindComponent<PlayerController>().playerColor =
-            PlayerInfo.instance.colorGroups[teamToken.teamCaptain.colorGroupIndex]
-            .SelectedItem;
         //RPC
         if (PV && PV.IsMine || this.isPhotonViewMine())
         {
@@ -76,6 +72,23 @@ public class AvatarSetup : MonoBehaviour
         myCharacter.GetComponent<StatusKeeper>().onStatusChanged +=
             (status) => GetComponent<BlinkEffect>().Blinking = status.Has(StatusEffect.STUNNED);
         GetComponent<BlinkEffect>().Start();
+    }
+
+    public void updatePlayerInfo(int colorIndex, string playerName)
+    {
+        PV.RPC("RPC_UpdatePlayerInfo", RpcTarget.AllBuffered, colorIndex, playerName);
+    }
+
+    [PunRPC]
+    private void RPC_UpdatePlayerInfo(int colorIndex, string playerName)
+    {
+        PlayerController playerController = myCharacter.FindComponent<PlayerController>();
+        //Player Color
+        int colorGroupIndex = teamToken.teamCaptain.colorGroupIndex;
+        playerController.playerColor = PlayerInfo.instance
+             .colorGroups[colorGroupIndex][colorIndex];
+        //Player Name
+        playerController.PlayerName = playerName;
     }
 
     #region RPC Forwarding Methods

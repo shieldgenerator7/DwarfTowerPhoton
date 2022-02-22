@@ -24,6 +24,8 @@ public abstract class PlayerController : MonoBehaviour
         }
     }
 
+    public string PlayerName { get; set; }
+
     [SerializeField]
     private AbilityContext abilityContext;
     public AbilityContext AbilityContext

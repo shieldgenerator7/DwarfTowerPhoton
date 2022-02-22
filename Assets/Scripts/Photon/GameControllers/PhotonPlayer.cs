@@ -46,7 +46,13 @@ public class PhotonPlayer : MonoBehaviour
             yield return null;
         }
         rb2d.isKinematic = false;
-        myAvatar.GetComponent<AvatarSetup>().setTeamIndicator();
+        PlayerInfo playerInfo = PlayerInfo.instance;
+        AvatarSetup avatarSetup = myAvatar.GetComponent<AvatarSetup>();
+        avatarSetup.setTeamIndicator();
+        avatarSetup.updatePlayerInfo(
+            playerInfo.colorGroups[teamToken.teamCaptain.colorGroupIndex].Index,
+            playerInfo.playerName
+            );
         yield return null;
     }
 }
