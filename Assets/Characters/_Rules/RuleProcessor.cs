@@ -37,6 +37,7 @@ public class RuleProcessor : MonoBehaviour
     {
         //Component context
         componentContext = gameObject.FindComponent<ComponentContext>();
+        componentContext.InitializeComponents();
         //Initialize context
         initialContext.deltaTime = 1;
         initialContext.componentContext = componentContext;
@@ -89,16 +90,24 @@ public class RuleProcessor : MonoBehaviour
 
     private void setController(TeamToken ttController)
     {
+        //Defaults
+        ttController = ttController ?? componentContext.teamToken;
         //Unregister prev delegates
         if (controller)
         {
-            controller.componentContext.playerInput.onInputChanged -= OnControllerInputChanged;
+            if (controller.componentContext.playerInput)
+            {
+                controller.componentContext.playerInput.onInputChanged -= OnControllerInputChanged;
+            }
         }
         controller = ttController.gameObject.FindComponent<RuleProcessor>();
         //Register new delegates
         if (controller)
         {
-            controller.componentContext.playerInput.onInputChanged += OnControllerInputChanged;
+            if (controller.componentContext.playerInput)
+            {
+                controller.componentContext.playerInput.onInputChanged += OnControllerInputChanged;
+            }
         }
     }
     #endregion
