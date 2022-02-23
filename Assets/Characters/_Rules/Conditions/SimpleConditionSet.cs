@@ -28,21 +28,21 @@ public class SimpleConditionSet : ConditionSet
             switch (condition)
             {
                 case Option.AMINA_COST:
-                        bool acceptPartialAmount = settings
-                            .Try(RuleSetting.Option.ACCEPT_PARTIAL_AMOUNT)
-                            ?? true;
-                        return compContext.aminaPool.hasAmina(
-                            settings.Get(RuleSetting.Option.AMINA_COST),
-                            acceptPartialAmount
-                            );
+                    bool acceptPartialAmount = settings
+                        .Try(RuleSetting.Option.ACCEPT_PARTIAL_AMOUNT)
+                        ?? true;
+                    return compContext.aminaPool.hasAmina(
+                        settings.Get(RuleSetting.Option.AMINA_COST),
+                        acceptPartialAmount
+                        );
                 case Option.AMINA_COST_PER_SECOND:
-                        bool acceptPartialAmountPerSecond = settings
-                            .Try(RuleSetting.Option.ACCEPT_PARTIAL_AMOUNT)
-                            ?? true;
-                        return compContext.aminaPool.hasAmina(
-                            settings.Get(RuleSetting.Option.AMINA_COST_PER_SECOND) * context.deltaTime,
-                            acceptPartialAmountPerSecond
-                            );
+                    bool acceptPartialAmountPerSecond = settings
+                        .Try(RuleSetting.Option.ACCEPT_PARTIAL_AMOUNT)
+                        ?? true;
+                    return compContext.aminaPool.hasAmina(
+                        settings.Get(RuleSetting.Option.AMINA_COST_PER_SECOND) * context.deltaTime,
+                        acceptPartialAmountPerSecond
+                        );
                 case Option.TIMER:
                     if (timer == null)
                     {
