@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilities:
-  - {fileID: 7133168848261502530}
+  - {fileID: 382404231828546236}
   - {fileID: 4034267826870480475}
 --- !u!114 &3854592228582004885
 MonoBehaviour:
@@ -369,7 +369,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1913788795788701171}
-  - component: {fileID: 7133168848261502530}
+  - component: {fileID: 382404231828546236}
   m_Layer: 0
   m_Name: Turret Launcher
   m_TagString: Untagged
@@ -392,7 +392,7 @@ Transform:
   m_Father: {fileID: 1073061482865175048}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7133168848261502530
+--- !u!114 &382404231828546236
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -401,7 +401,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2299017120802892305}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 410d7b1fe69fd9248838e7e67f6ada50, type: 3}
+  m_Script: {fileID: 11500000, guid: c1146f130182c8b468babded8c5cb840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   abilityName: Build Turret
@@ -417,7 +417,6 @@ MonoBehaviour:
   previewPrefab: {fileID: 3363737750353282456, guid: c61aa5d8c6dad3f43806362e06c103e5,
     type: 3}
   upgradeRange: 2
-  turretFireTrigger: {fileID: 0}
 --- !u!1 &3107006109710722385
 GameObject:
   m_ObjectHideFlags: 0
