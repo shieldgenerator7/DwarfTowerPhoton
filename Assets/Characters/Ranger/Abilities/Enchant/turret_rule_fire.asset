@@ -10,18 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 103c9701c2e720d40975a17d87d69018, type: 3}
-  m_Name: arrow_ability
+  m_Name: turret_rule_fire
   m_EditorClassIdentifier: 
   settings:
     settings:
-    - setting: 0
-      value: 5
-    - setting: 2
-      value: 1
     - setting: 3
       value: 0.5
     - setting: 4
       value: 0
-  trigger: 14
-  condition: {fileID: 11400000, guid: a141bb06eb932064eb87180ac2966fc2, type: 2}
-  actions: 0400000008000000
+    targetRuleSet: {fileID: 0}
+  trigger: 17
+  condition: {fileID: 11400000, guid: 8b6530f171f323f42a3a2ba33a9be554, type: 2}
+  actions: 04000000
