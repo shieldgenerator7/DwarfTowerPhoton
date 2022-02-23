@@ -19,6 +19,7 @@ public class RuleProcessor : MonoBehaviour
     private void Awake()
     {
         InitializeContext();
+        RegisterDelegates();
     }
 
     public void Init(Vector2 dir, Vector2 pos)
@@ -106,8 +107,6 @@ public class RuleProcessor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitializeContext();
-        RegisterDelegates();
         ruleSets.FindAll(rs => rs.activeAtStart)
             .ForEach(rs => activeRuleSets.Add(rs));
         //Process rules
