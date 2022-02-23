@@ -21,8 +21,11 @@ public abstract class PlayerController : MonoBehaviour
             context.objectSpawner.PlayerColor = _playerColor;
             gameObject.FindComponents<SpriteRenderer>()
                 .ForEach(sr => sr.color = _playerColor);
+            onColorChanged?.Invoke(_playerColor);
         }
     }
+    public delegate void OnColorChanged(Color color);
+    public event OnColorChanged onColorChanged;
 
     public string PlayerName { get; set; }
 
