@@ -50,7 +50,7 @@ public class PhotonPlayer : MonoBehaviour
         AvatarSetup avatarSetup = myAvatar.GetComponent<AvatarSetup>();
         avatarSetup.setTeamIndicator();
         avatarSetup.updatePlayerInfo(
-            playerInfo.colorGroups[teamToken.teamCaptain.colorGroupIndex].Index,
+            playerInfo.colorGroups[teamToken.teamCaptain.colorGroupIndex].SelectedIndex,
             playerInfo.playerName
             );
         yield return null;

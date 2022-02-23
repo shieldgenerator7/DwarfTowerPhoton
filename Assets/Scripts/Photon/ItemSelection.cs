@@ -18,6 +18,8 @@ public class ItemSelection<T>
     public delegate void OnIndexChanged(int index);
     public event OnIndexChanged onIndexChanged;
 
+    public int SelectedIndex => Mathf.Max(index, 0);
+
     public T SelectedItem
     {
         get => (index >= 0)
