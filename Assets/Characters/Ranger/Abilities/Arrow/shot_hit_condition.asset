@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ea2da8821bc0354396985b4972da9a3, type: 3}
-  m_Name: shot_spawn_info 1
+  m_Script: {fileID: 11500000, guid: 6fb941b79e5b732459d3ba1beec518a2, type: 3}
+  m_Name: shot_hit_condition
   m_EditorClassIdentifier: 
-  objectName: shot
-  spawnBuffer: 1.5
-  spawnOffset: {x: 0, y: 0}
-  rotateShot: 1
-  inheritTeamToken: 1
-  inheritColor: 1
+  entityTypes: 0200000001000000
+  onAlly: 0
+  onEnemy: 1
+  onTrigger: 1
+  onCollision: 1
