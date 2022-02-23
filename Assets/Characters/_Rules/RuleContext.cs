@@ -18,6 +18,8 @@ public struct RuleContext
     public float deltaTime;
     //Input
     public InputState inputState;
+    //Multiplier
+    public float statMultiplier;
 
     public RuleContext(RuleContext template)
     {
@@ -35,5 +37,7 @@ public struct RuleContext
         this.deltaTime = template.deltaTime;
         //Input
         this.inputState = template.inputState;
+        //Multiplier
+        this.statMultiplier = template.statMultiplier;
     }
 }

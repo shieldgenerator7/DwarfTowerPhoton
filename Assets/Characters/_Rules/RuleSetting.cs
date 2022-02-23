@@ -15,6 +15,8 @@ public struct RuleSetting
         ACTIVATE_DELAY,
         //Spawn Index
         SPAWN_INDEX,
+        //Ability ID
+        ABILITY_ID,
     }
     public Option setting;
     public float value;

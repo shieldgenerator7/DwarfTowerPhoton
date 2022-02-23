@@ -41,6 +41,7 @@ public class RuleProcessor : MonoBehaviour
         //Initialize context
         initialContext.deltaTime = 1;
         initialContext.componentContext = componentContext;
+        initialContext.statMultiplier = 1;
     }
 
     private bool _registeredDelegates = false;
