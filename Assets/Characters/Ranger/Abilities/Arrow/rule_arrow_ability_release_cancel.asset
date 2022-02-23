@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 103c9701c2e720d40975a17d87d69018, type: 3}
-  m_Name: rule_arrow_ability_release
+  m_Name: rule_arrow_ability_release_cancel
   m_EditorClassIdentifier: 
   settings:
     targetRuleSet: {fileID: 0}
@@ -22,15 +22,7 @@ MonoBehaviour:
       size: 0
     statusLayer:
       statusList: 
-    settings:
-    - setting: 0
-      value: 5
-    - setting: 2
-      value: 1
-    - setting: 3
-      value: 0.5
-    - setting: 4
-      value: 0
+    settings: []
   trigger: 14
-  condition: {fileID: 11400000, guid: a141bb06eb932064eb87180ac2966fc2, type: 2}
-  actions: 0f00000004000000110000000d000000
+  condition: {fileID: 11400000, guid: 8e848074084909a418cc1b138316f29f, type: 2}
+  actions: 0e000000

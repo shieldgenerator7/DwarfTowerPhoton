@@ -15,4 +15,4 @@ MonoBehaviour:
   combineOption: 0
   conditions:
   - {fileID: 11400000, guid: 8e848074084909a418cc1b138316f29f, type: 2}
-  simpleConditions: 0200000000000000
+  simpleConditions: 0200000003000000

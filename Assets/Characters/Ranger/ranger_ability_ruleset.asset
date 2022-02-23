@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeAtStart: 1
   rules:
+  - {fileID: 11400000, guid: 24dc6fc4b210ca1489465357d7cf1bc0, type: 2}
   - {fileID: 11400000, guid: 38809cc73d65b9341b6b744f90881af0, type: 2}
+  - {fileID: 11400000, guid: 0e3f63ebe4407954b865fc5571336199, type: 2}
   - {fileID: 11400000, guid: 4c0e700519c05a943ac280258677a508, type: 2}
   - {fileID: 11400000, guid: 6339980c3209c884ea5d8a2bafa0839d, type: 2}
