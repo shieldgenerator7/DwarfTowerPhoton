@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 103c9701c2e720d40975a17d87d69018, type: 3}
-  m_Name: arrow_start_rule
+  m_Name: rule_arrow_hit
   m_EditorClassIdentifier: 
   settings:
     targetRuleSet: {fileID: 0}
@@ -23,6 +23,6 @@ MonoBehaviour:
     statusLayer:
       statusList: 
     settings: []
-  trigger: 0
-  condition: {fileID: 0}
-  actions: 00000000
+  trigger: 6
+  condition: {fileID: 11400000, guid: 76e21185dbab3b94999e3dc7a6330c98, type: 2}
+  actions: 02000000

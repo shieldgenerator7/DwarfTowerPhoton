@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1859e47cb5d6b345b8fdd6e5f4f820b, type: 3}
-  m_Name: arrow_ability_condition
+  m_Name: cond_turret_fire
   m_EditorClassIdentifier: 
   combineOption: 0
   conditions:
   - {fileID: 11400000, guid: 8e848074084909a418cc1b138316f29f, type: 2}
-  simpleConditions: 0200000000000000
+  simpleConditions: 02000000
