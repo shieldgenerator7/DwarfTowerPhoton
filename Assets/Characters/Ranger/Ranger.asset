@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf34fadc6362aa4e82e683a827b45e1, type: 3}
   m_Name: Ranger
   m_EditorClassIdentifier: 
-  characterName: Template
-  sprite: {fileID: 21300000, guid: 5bd36c3d3d43f3c40a3e1f5abf017540, type: 3}
-  defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  portrait: {fileID: 21300000, guid: 5bd36c3d3d43f3c40a3e1f5abf017540, type: 3}
-  prefab: {fileID: 532201618779257096, guid: f854aee07d753f945ad2422fd65d510a, type: 3}
+  characterName: Ranger
+  sprite: {fileID: 21300000, guid: 06a7286ebd463cf40b19893b1215ef58, type: 3}
+  defaultColor: {r: 0.2784314, g: 0.6392157, b: 0.5176471, a: 1}
+  portrait: {fileID: 21300000, guid: 06a7286ebd463cf40b19893b1215ef58, type: 3}
+  prefab: {fileID: 532201618779257096, guid: d286b8b8bdeccce44ba4450ddf5e26a6, type: 3}
   difficulty: 1
-  typeList: 
+  typeList: 0000000001000000

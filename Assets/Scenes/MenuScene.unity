@@ -882,6 +882,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: ac72904e4a3b45f4787eda499468ee71, type: 2}
     - {fileID: 11400000, guid: 7fea9959ab8a51645a83774371fe55f9, type: 2}
     - {fileID: 11400000, guid: ba874eaf7ebd1c442b578cafc6e0b469, type: 2}
+    - {fileID: 11400000, guid: 9abe31b6583ddb44b82b2248ea1f4f99, type: 2}
     - {fileID: 11400000, guid: a91988f801f29bf418ddc93cfe96db07, type: 2}
     - {fileID: 11400000, guid: 9b40627ecf3b35a4a84117116e0e2f8d, type: 2}
     - {fileID: 11400000, guid: 2a669681d75b3a448bd48183355d7958, type: 2}
@@ -893,6 +894,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a91988f801f29bf418ddc93cfe96db07, type: 2}
   - {fileID: 11400000, guid: 9b40627ecf3b35a4a84117116e0e2f8d, type: 2}
   - {fileID: 11400000, guid: 2a669681d75b3a448bd48183355d7958, type: 2}
+  - {fileID: 11400000, guid: 9abe31b6583ddb44b82b2248ea1f4f99, type: 2}
   unlockAtStartCount: 6
   warmColorSelection:
     itemList:
@@ -902,6 +904,7 @@ MonoBehaviour:
   coolColorSelection:
     itemList:
     - {r: 0.08959598, g: 0.5283019, b: 0.002491996, a: 1}
+    - {r: 0.2784314, g: 0.6392157, b: 0.5176471, a: 1}
     - {r: 0.16470589, g: 0.61960787, b: 1, a: 1}
     - {r: 0.52156866, g: 0.023529412, b: 0.7254902, a: 1}
 --- !u!1 &1218232031 stripped
