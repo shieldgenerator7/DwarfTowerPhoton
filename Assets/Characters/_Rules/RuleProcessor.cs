@@ -299,6 +299,33 @@ public class RuleProcessor : MonoBehaviour
                     settings.Get(RuleSetting.Option.AMINA_COST_PER_SECOND) * context.deltaTime
                     );
                 break;
+            case RuleAction.RESERVE_AMINA_PER_SECOND:
+                compContext.aminaPool.reserveAmina(
+                    settings.Get(RuleSetting.Option.AMINA_COST_PER_SECOND) * context.deltaTime
+                    );
+                break;
+            case RuleAction.USE_RESERVED_AMINA:
+                compContext.aminaPool.collectReservedAmina();
+                break;
+            case RuleAction.CANCEL_RESERVED_AMINA:
+                compContext.aminaPool.cancelReservedAmina();
+                break;
+            case RuleAction.SET_STAT_MULTIPLIER_FROM_RESERVED_AMINA:
+                float reservedAmina = compContext.aminaPool.ReservedAmina;
+                float minAmina = settings.Get(RuleSetting.Option.AMINA_COST);
+                float factor = reservedAmina / minAmina;
+                context.statMultiplier = factor;
+                break;
+            case RuleAction.ADD_STAT_LAYER_TO_SELF:
+                StatLayer statLayer = settings.statLayer.Multiply(context.statMultiplier);
+                int abilityID = settings.Get(RuleSetting.Option.ABILITY_ID);
+                compContext.statKeeper.selfStats.addLayer(abilityID, statLayer);
+                break;
+            case RuleAction.ADD_STAT_LAYER_TO_CREATED_OBJECT:
+                StatLayer statLayerObj = settings.statLayer.Multiply(context.statMultiplier);
+                int abilityIDObj = settings.Get(RuleSetting.Option.ABILITY_ID);
+                context.lastCreatedObject.statKeeper.selfStats.addLayer(abilityIDObj, statLayerObj);
+                break;
             default:
                 throw new System.ArgumentException($"Unknown action: {action}");
         }
