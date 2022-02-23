@@ -26,7 +26,7 @@ MonoBehaviour:
     - setting: 0
       value: 5
     - setting: 3
-      value: 0.5
+      value: 1
     - setting: 4
       value: 0
     - setting: 5
