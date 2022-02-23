@@ -20,6 +20,8 @@ public struct RuleContext
     public InputState inputState;
     //Multiplier
     public float statMultiplier;
+    //Created object
+    public ComponentContext lastCreatedObject;
 
     public RuleContext(RuleContext template)
     {
@@ -39,5 +41,7 @@ public struct RuleContext
         this.inputState = template.inputState;
         //Multiplier
         this.statMultiplier = template.statMultiplier;
+        //Created object
+        lastCreatedObject = template.lastCreatedObject;
     }
 }

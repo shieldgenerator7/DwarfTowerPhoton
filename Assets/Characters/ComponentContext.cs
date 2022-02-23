@@ -12,6 +12,7 @@ public class ComponentContext : MonoBehaviour
     public PhotonView PV { get; private set; }
     public AminaPool aminaPool { get; private set; }
     public HealthPool healthPool { get; private set; }
+    public RuleProcessor ruleProcessor { get; private set; }
     public PlayerInput playerInput { get; private set; }
     public PlayerController playerController { get; private set; }
     public PlayerMovement playerMovement { get; private set; }
@@ -39,6 +40,7 @@ public class ComponentContext : MonoBehaviour
         sr = gameObject.FindComponent<SpriteRenderer>();
         healthPool = gameObject.FindComponent<HealthPool>();
         aminaPool = gameObject.FindComponent<AminaPool>();
+        ruleProcessor = gameObject.FindComponent<RuleProcessor>();
         objectSpawner = gameObject.FindComponent<ObjectSpawner>();
         statKeeper = gameObject.FindComponent<StatKeeper>();
         statusKeeper = gameObject.FindComponent<StatusKeeper>();

@@ -243,13 +243,14 @@ public class RuleProcessor : MonoBehaviour
                 Vector2 spawnCenter = compContext.playerController?.SpawnCenter ?? compContext.transform.position;
                 Vector2 targetPos = Utility.MouseWorldPos;
                 Vector2 targetDir = (targetPos - spawnCenter).normalized;
-                RuleProcessor newObj = compContext.objectSpawner
-                    .spawnObject<RuleProcessor>(
+                ComponentContext newObj = compContext.objectSpawner
+                    .spawnObject<ComponentContext>(
                         settings.Get(RuleSetting.Option.SPAWN_INDEX),
                         spawnCenter,
                         targetDir
                     );
-                newObj.Init(targetDir, targetPos);
+                newObj.ruleProcessor.Init(targetDir, targetPos);
+                context.lastCreatedObject = newObj;
                 break;
             case RuleAction.SWITCH_RULESET:
                 RuleSet currentRuleSet = context.currentRuleSet;
