@@ -895,7 +895,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9b40627ecf3b35a4a84117116e0e2f8d, type: 2}
   - {fileID: 11400000, guid: 2a669681d75b3a448bd48183355d7958, type: 2}
   - {fileID: 11400000, guid: 9abe31b6583ddb44b82b2248ea1f4f99, type: 2}
-  unlockAtStartCount: 6
+  unlockAtStartCount: 7
   warmColorSelection:
     itemList:
     - {r: 0.8392157, g: 0.07058824, b: 0, a: 1}

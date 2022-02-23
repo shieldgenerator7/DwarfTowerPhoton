@@ -42,7 +42,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6220889621231917683}
   - {fileID: 1913788795788701171}
   - {fileID: 8736292213951035431}
   m_Father: {fileID: 0}
@@ -130,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ruleSets:
-  - {fileID: 11400000, guid: edb795e8b31046f4698dda4618fa38ef, type: 2}
+  - {fileID: 11400000, guid: 840ffeea5bcb5264cb9fa6aa9bbcec13, type: 2}
   - {fileID: 11400000, guid: 61bd4fd6b45a9b74ca343e444d74d595, type: 2}
   - {fileID: 11400000, guid: 2b952a39899126d40b758d7e524e16bc, type: 2}
 --- !u!114 &307085991090335124
@@ -160,9 +159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilities:
-  - {fileID: 7133168848261502530}
-  - {fileID: 4034267826870480475}
-  - {fileID: 5500888993561376432}
+  - {fileID: 5094414773864938943}
+  - {fileID: 3169596084233402762}
 --- !u!114 &3854592228582004885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,9 +324,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1913788795788701171}
-  - component: {fileID: 7133168848261502530}
+  - component: {fileID: 5094414773864938943}
   m_Layer: 0
-  m_Name: Ability2
+  m_Name: Enchant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -347,9 +345,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1073061482865175048}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7133168848261502530
+--- !u!114 &5094414773864938943
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -358,10 +356,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2299017120802892305}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 410d7b1fe69fd9248838e7e67f6ada50, type: 3}
+  m_Script: {fileID: 11500000, guid: c1146f130182c8b468babded8c5cb840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityName: Ability 2
+  abilityName: Build Turret
   aminaCost: 0
   abilitySlot: 1
   hidesOtherInputs: 1
@@ -370,11 +368,10 @@ MonoBehaviour:
   expectedAnimaReserved: 10
   minAminaReserved: 5.1
   chargedShotIndex: 1
-  maxSpawnBufferExtension: 0
+  maxSpawnBufferExtension: 2
   previewPrefab: {fileID: 3363737750353282456, guid: c61aa5d8c6dad3f43806362e06c103e5,
     type: 3}
-  upgradeRange: 0
-  turretFireTrigger: {fileID: 5500888993561376432}
+  upgradeRange: 2
 --- !u!1 &3107006109710722385
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,9 +381,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8736292213951035431}
-  - component: {fileID: 4034267826870480475}
+  - component: {fileID: 3169596084233402762}
   m_Layer: 0
-  m_Name: Ability3
+  m_Name: Leap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -405,9 +402,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1073061482865175048}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4034267826870480475
+--- !u!114 &3169596084233402762
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -416,71 +413,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3107006109710722385}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1146f130182c8b468babded8c5cb840, type: 3}
+  m_Script: {fileID: 11500000, guid: ffb3005b132eaa840861a6b0b1f72844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityName: Ability 3
-  aminaCost: 0
-  abilitySlot: 2
-  hidesOtherInputs: 1
-  abilityID: 4
-  aminaReservedPerSecond: 10
-  expectedAnimaReserved: 10
-  minAminaReserved: 0.1
-  chargedShotIndex: 2
-  maxSpawnBufferExtension: 0
-  previewPrefab: {fileID: 4883769523225080588, guid: b262c7e4978b83d4da6bd142ea06f830,
-    type: 3}
-  upgradeRange: 0
---- !u!1 &7577088886736187312
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6220889621231917683}
-  - component: {fileID: 5500888993561376432}
-  m_Layer: 0
-  m_Name: Ability1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6220889621231917683
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7577088886736187312}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1073061482865175048}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5500888993561376432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7577088886736187312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83413c13fefadf64bab9596e5332f75f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityName: Ability 1
+  abilityName: Leap
   aminaCost: 5
-  abilitySlot: 0
+  abilitySlot: 2
   hidesOtherInputs: 0
-  abilityID: 2
-  fireDelay: 0.5
-  angle: 0
-  shotIndex: 0
+  abilityID: 0
+  dashDistance: 5
+  dashDuration: 0.1
