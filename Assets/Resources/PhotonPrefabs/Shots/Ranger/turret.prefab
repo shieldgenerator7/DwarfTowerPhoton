@@ -359,9 +359,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 135c219b73c067049a173809b5bfe32f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  folderName: Shots/Dwarf
+  folderName: Shots/Ranger
   objectSpawnInfoList:
-  - {fileID: 11400000, guid: 08a9426390ca6b04fa30b8300e014ada, type: 2}
+  - {fileID: 11400000, guid: dba3de87070e34d4390bb05f7881c9d0, type: 2}
 --- !u!114 &2548912992347303718
 MonoBehaviour:
   m_ObjectHideFlags: 0
