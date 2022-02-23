@@ -11,6 +11,7 @@ public class SimpleConditionSet : ConditionSet
         AMINA_COST,
         AMINA_COST_PER_SECOND,
         TIMER,
+        RESERVED_AMINA_COST,
     }
     public List<Option> simpleConditions;
 
@@ -43,6 +44,9 @@ public class SimpleConditionSet : ConditionSet
                         settings.Get(RuleSetting.Option.AMINA_COST_PER_SECOND) * context.deltaTime,
                         acceptPartialAmountPerSecond
                         );
+                case Option.RESERVED_AMINA_COST:
+                    float minReservedAmina = settings.Get(RuleSetting.Option.AMINA_COST);
+                    return compContext.aminaPool.ReservedAmina >= minReservedAmina;
                 case Option.TIMER:
                     if (timer == null)
                     {
