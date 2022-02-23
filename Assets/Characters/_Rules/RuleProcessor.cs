@@ -212,11 +212,11 @@ public class RuleProcessor : MonoBehaviour
         bool canProcess = rule.condition?.Check(rule.settings, context) ?? true;
         if (canProcess)
         {
-            rule.actions.ForEach(action => TakeAction(action, settings, context));
+            rule.actions.ForEach(action => TakeAction(action, settings, ref context));
         }
     }
 
-    private void TakeAction(RuleAction action, RuleSettings settings, RuleContext context)
+    private void TakeAction(RuleAction action, RuleSettings settings, ref RuleContext context)
     {
         ComponentContext compContext = context.componentContext;
         StatLayer stats = compContext.statKeeper?.selfStats.Stats ?? new StatLayer(-1);
@@ -305,7 +305,7 @@ public class RuleProcessor : MonoBehaviour
                     );
                 break;
             case RuleAction.USE_RESERVED_AMINA:
-                compContext.aminaPool.collectReservedAmina();
+                float collectedAmina = compContext.aminaPool.collectReservedAmina();
                 break;
             case RuleAction.CANCEL_RESERVED_AMINA:
                 compContext.aminaPool.cancelReservedAmina();
