@@ -316,6 +316,9 @@ public class RuleProcessor : MonoBehaviour
                 float factor = reservedAmina / minAmina;
                 context.statMultiplier = factor;
                 break;
+            case RuleAction.RESET_STAT_MULTIPLIER:
+                context.statMultiplier = 1;
+                break;
             case RuleAction.ADD_STAT_LAYER_TO_SELF:
                 StatLayer statLayer = settings.statLayer.Multiply(context.statMultiplier);
                 int abilityID = settings.Get(RuleSetting.Option.ABILITY_ID);
