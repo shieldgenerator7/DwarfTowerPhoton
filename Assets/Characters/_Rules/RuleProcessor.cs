@@ -220,6 +220,7 @@ public class RuleProcessor : MonoBehaviour
     {
         ComponentContext compContext = context.componentContext;
         StatLayer stats = compContext.statKeeper?.selfStats.Stats ?? new StatLayer(-1);
+        int abilityID = settings.AbilityID(compContext.PV.ViewID);
         switch (action)
         {
             case RuleAction.MOVE_IN_TARGET_DIR:
@@ -320,14 +321,27 @@ public class RuleProcessor : MonoBehaviour
                 context.statMultiplier = 1;
                 break;
             case RuleAction.ADD_STAT_LAYER_TO_SELF:
-                StatLayer statLayer = settings.statLayer.Multiply(context.statMultiplier);
-                int abilityID = settings.Get(RuleSetting.Option.ABILITY_ID);
-                compContext.statKeeper.selfStats.addLayer(abilityID, statLayer);
+                {
+                    StatLayer statLayer = settings.statLayer.Multiply(context.statMultiplier);
+                    compContext.statKeeper.selfStats.addLayer(abilityID, statLayer);
+                }
                 break;
             case RuleAction.ADD_STAT_LAYER_TO_CREATED_OBJECT:
-                StatLayer statLayerObj = settings.statLayer.Multiply(context.statMultiplier);
-                int abilityIDObj = settings.Get(RuleSetting.Option.ABILITY_ID);
-                context.lastCreatedObject.statKeeper.selfStats.addLayer(abilityIDObj, statLayerObj);
+                {
+                    StatLayer statLayer = settings.statLayer.Multiply(context.statMultiplier);
+                    context.lastCreatedObject.statKeeper.selfStats.addLayer(abilityID, statLayer);
+                }
+                break;
+            case RuleAction.ADD_STATUS_LAYER_TO_SELF:
+                {
+                    StatusLayer statusLayer = new StatusLayer(settings.statusLayer.StatusEffects);
+                    compContext.statusKeeper.addLayer(abilityID, statusLayer);
+                }
+                break;
+            case RuleAction.REMOVE_STATUS_LAYER_FROM_SELF:
+                {
+                    compContext.statusKeeper.removeLayer(abilityID);
+                }
                 break;
             default:
                 throw new System.ArgumentException($"Unknown action: {action}");

@@ -27,4 +27,8 @@ public struct RuleSettings
             return null;
         }
     }
+
+    public int AbilityID(int viewID)
+        => viewID * 10
+        + (Try(RuleSetting.Option.ABILITY_ID) ?? 0);
 }
