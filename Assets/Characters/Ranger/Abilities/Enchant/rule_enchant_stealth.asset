@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 103c9701c2e720d40975a17d87d69018, type: 3}
-  m_Name: rule_enchant
+  m_Name: rule_enchant_stealth
   m_EditorClassIdentifier: 
   settings:
     targetRuleSet: {fileID: 0}
