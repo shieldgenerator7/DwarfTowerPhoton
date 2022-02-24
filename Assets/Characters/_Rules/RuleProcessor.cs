@@ -332,6 +332,12 @@ public class RuleProcessor : MonoBehaviour
                     context.lastCreatedObject.statKeeper.selfStats.addLayer(abilityID, statLayer);
                 }
                 break;
+            case RuleAction.REMOVE_STAT_LAYER_FROM_SELF:
+                compContext.statKeeper.selfStats.removeLayer(abilityID);
+                break;
+            case RuleAction.REMOVE_STAT_LAYER_FROM_CREATED_OBJECT:
+                context.lastCreatedObject.statKeeper.selfStats.removeLayer(abilityID);
+                break;
             case RuleAction.ADD_STATUS_LAYER_TO_SELF:
                 {
                     StatusLayer statusLayer = new StatusLayer(settings.statusLayer.StatusEffects);
