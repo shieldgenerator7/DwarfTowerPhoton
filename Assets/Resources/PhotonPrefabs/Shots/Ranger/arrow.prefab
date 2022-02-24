@@ -252,7 +252,7 @@ MonoBehaviour:
   selfStats:
     statBase:
       moveSpeed: 4
-      maxHits: 1
+      maxHits: 2
       fireRate: -1
       damage: 1
       size: 1

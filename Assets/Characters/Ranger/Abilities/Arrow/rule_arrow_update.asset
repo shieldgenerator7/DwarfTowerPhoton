@@ -10,27 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 103c9701c2e720d40975a17d87d69018, type: 3}
-  m_Name: rule_arrow_ability_release
+  m_Name: rule_arrow_update
   m_EditorClassIdentifier: 
   settings:
     targetRuleSet: {fileID: 0}
     statLayer:
-      moveSpeed: 1
-      maxHits: -1
-      fireRate: -1
-      damage: -1
-      size: -1
+      moveSpeed: 0
+      maxHits: 0
+      fireRate: 0
+      damage: 0
+      size: 0
     statusLayer:
       statusList: 
-    settings:
-    - setting: 0
-      value: 5
-    - setting: 3
-      value: 1
-    - setting: 4
-      value: 0
-    - setting: 5
-      value: 1
-  trigger: 14
-  condition: {fileID: 11400000, guid: a141bb06eb932064eb87180ac2966fc2, type: 2}
-  actions: 0f00000004000000130000000d00000010000000
+    settings: []
+  trigger: 1
+  condition: {fileID: 0}
+  actions: 03000000
