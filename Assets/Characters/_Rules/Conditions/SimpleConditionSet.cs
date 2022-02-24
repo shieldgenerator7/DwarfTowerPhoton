@@ -12,6 +12,8 @@ public class SimpleConditionSet : ConditionSet
         AMINA_COST_PER_SECOND,
         TIMER,
         RESERVED_AMINA_COST,
+        STATIONARY,
+        MOVING,
     }
     public List<Option> simpleConditions;
 
@@ -57,6 +59,10 @@ public class SimpleConditionSet : ConditionSet
                         return true;
                     }
                     return false;
+                case Option.STATIONARY:
+                    return !compContext.rb2d.isMoving();
+                case Option.MOVING:
+                    return compContext.rb2d.isMoving();
                 default:
                     throw new System.ArgumentException($"Condition not recognized: {condition}");
             }
