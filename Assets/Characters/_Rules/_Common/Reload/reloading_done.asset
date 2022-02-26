@@ -25,5 +25,5 @@ MonoBehaviour:
     settings: []
   trigger: 10
   condition: {fileID: 0}
-  actionEnums: 05000000
+  actionEnums: 03000000
   actions: []

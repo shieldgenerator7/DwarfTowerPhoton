@@ -25,5 +25,5 @@ MonoBehaviour:
     settings: []
   trigger: 16
   condition: {fileID: 11400000, guid: 445376d594d52244f8976fb9674b8760, type: 2}
-  actionEnums: 07000000
+  actionEnums: 05000000
   actions: []
