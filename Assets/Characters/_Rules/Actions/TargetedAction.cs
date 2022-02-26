@@ -56,7 +56,8 @@ public class TargetedAction : RuleAction
                 targetObj.healthPool.Health += stats.damage * context.deltaTime;
                 break;
             case Action.ADD_STAT_LAYER:
-                targetObj.statKeeper.selfStats.addLayer(abilityID, settings.statLayer);
+                StatLayer multiplierLayer = settings.statLayer.Multiply(context.statMultiplier);
+                targetObj.statKeeper.selfStats.addLayer(abilityID, multiplierLayer);
                 break;
             case Action.REMOVE_STAT_LAYER:
                 targetObj.statKeeper.selfStats.removeLayer(abilityID);
