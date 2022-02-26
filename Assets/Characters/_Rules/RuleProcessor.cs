@@ -234,7 +234,6 @@ public class RuleProcessor : MonoBehaviour
     {
         ComponentContext compContext = context.componentContext;
         StatLayer stats = compContext.statKeeper?.selfStats.Stats ?? new StatLayer(-1);
-        int abilityID = settings.AbilityID(compContext.PV.ViewID);
         switch (action)
         {
             case RuleActionEnum.MOVE_IN_TARGET_DIR:
@@ -255,20 +254,6 @@ public class RuleProcessor : MonoBehaviour
                     );
                 newObj.ruleProcessor.Init(targetDir, targetPos);
                 context.lastCreatedObject = newObj;
-                break;
-            case RuleActionEnum.SET_STAT_MULTIPLIER_FROM_RESERVED_AMINA:
-                float reservedAmina = compContext.aminaPool.ReservedAmina;
-                float minAmina = settings.Get(RuleSetting.Option.AMINA_COST);
-                float factor = reservedAmina / minAmina;
-                float? maxFactor = settings.Try(RuleSetting.Option.MAX_MULTIPLIER);
-                if (maxFactor != null)
-                {
-                    factor = Mathf.Min(factor, maxFactor.Value);
-                }
-                context.statMultiplier = factor;
-                break;
-            case RuleActionEnum.RESET_STAT_MULTIPLIER:
-                context.statMultiplier = 1;
                 break;
             default:
                 throw new System.ArgumentException($"Unknown action: {action}");

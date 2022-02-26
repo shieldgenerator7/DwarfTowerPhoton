@@ -13,7 +13,4 @@ public enum RuleActionEnum
 
     [Tooltip("Create object (using the SPAWN_INDEX setting and ObjectSpawner component).")]
     CREATE_OBJECT,
-
-    SET_STAT_MULTIPLIER_FROM_RESERVED_AMINA,
-    RESET_STAT_MULTIPLIER,
 }
