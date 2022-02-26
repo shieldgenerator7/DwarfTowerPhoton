@@ -212,35 +212,35 @@ public class RuleProcessor : MonoBehaviour
         bool canProcess = rule.condition?.Check(rule.settings, context) ?? true;
         if (canProcess)
         {
-            rule.actions.ForEach(action => TakeAction(action, settings, ref context));
+            rule.actionEnums.ForEach(action => TakeAction(action, settings, ref context));
         }
     }
 
-    private void TakeAction(RuleAction action, RuleSettings settings, ref RuleContext context)
+    private void TakeAction(RuleActionEnum action, RuleSettings settings, ref RuleContext context)
     {
         ComponentContext compContext = context.componentContext;
         StatLayer stats = compContext.statKeeper?.selfStats.Stats ?? new StatLayer(-1);
         int abilityID = settings.AbilityID(compContext.PV.ViewID);
         switch (action)
         {
-            case RuleAction.MOVE_IN_TARGET_DIR:
+            case RuleActionEnum.MOVE_IN_TARGET_DIR:
                 compContext.rb2d.velocity = context.targetDir * stats.moveSpeed;
                 break;
-            case RuleAction.MOVE_TOWARDS_TARGET_POS:
+            case RuleActionEnum.MOVE_TOWARDS_TARGET_POS:
                 compContext.rb2d.velocity = (context.targetPos - (Vector2)compContext.transform.position).normalized * stats.moveSpeed;
                 break;
-            case RuleAction.DAMAGE:
+            case RuleActionEnum.DAMAGE:
                 {
                     //TODO: make delegate: onDamageDealt
                     HealthPool hp = context.target.FindComponent<HealthPool>();
                     hp.Health += -stats.damage * context.deltaTime;
                 }
                 break;
-            case RuleAction.DAMAGE_SELF:
+            case RuleActionEnum.DAMAGE_SELF:
                 //TODO: make damage over time amount a variable
                 compContext.healthPool.Health += -1 * context.deltaTime;
                 break;
-            case RuleAction.CREATE_OBJECT:
+            case RuleActionEnum.CREATE_OBJECT:
                 Vector2 spawnCenter = compContext.playerController?.SpawnCenter ?? compContext.transform.position;
                 Vector2 targetPos = Utility.MouseWorldPos;
                 Vector2 targetDir = (targetPos - spawnCenter).normalized;
@@ -253,7 +253,7 @@ public class RuleProcessor : MonoBehaviour
                 newObj.ruleProcessor.Init(targetDir, targetPos);
                 context.lastCreatedObject = newObj;
                 break;
-            case RuleAction.SWITCH_RULESET:
+            case RuleActionEnum.SWITCH_RULESET:
                 RuleSet currentRuleSet = context.currentRuleSet;
                 RuleSet targetRuleSet = settings.targetRuleSet
                     ?? lastDeactivatedRuleSet;
@@ -263,16 +263,16 @@ public class RuleProcessor : MonoBehaviour
                 activeRuleSets.Add(targetRuleSet);
                 lastDeactivatedRuleSet = currentRuleSet;
                 break;
-            case RuleAction.ADD_RULESET:
+            case RuleActionEnum.ADD_RULESET:
                 RuleSet addRuleSet = settings.targetRuleSet;
                 activeRuleSets.Add(addRuleSet);
                 break;
-            case RuleAction.REMOVE_RULESET:
+            case RuleActionEnum.REMOVE_RULESET:
                 RuleSet removeRuleSet = settings.targetRuleSet
                     ?? context.currentRuleSet;
                 activeRuleSets.Remove(removeRuleSet);
                 break;
-            case RuleAction.USE_AMINA:
+            case RuleActionEnum.USE_AMINA:
                 bool acceptPartialAmount = settings
                     .Try(RuleSetting.Option.ACCEPT_PARTIAL_AMOUNT)
                     ?? true;
@@ -281,7 +281,7 @@ public class RuleProcessor : MonoBehaviour
                     acceptPartialAmount
                     );
                 break;
-            case RuleAction.USE_AMINA_PER_SECOND:
+            case RuleActionEnum.USE_AMINA_PER_SECOND:
                 bool acceptPartialAmountPerSecond = settings
                     .Try(RuleSetting.Option.ACCEPT_PARTIAL_AMOUNT)
                     ?? true;
@@ -290,28 +290,28 @@ public class RuleProcessor : MonoBehaviour
                     acceptPartialAmountPerSecond
                     );
                 break;
-            case RuleAction.RECHARGE_AMINA:
+            case RuleActionEnum.RECHARGE_AMINA:
                 compContext.aminaPool.rechargeAmina(
                     settings.Get(RuleSetting.Option.AMINA_COST)
                     );
                 break;
-            case RuleAction.RECHARGE_AMINA_PER_SECOND:
+            case RuleActionEnum.RECHARGE_AMINA_PER_SECOND:
                 compContext.aminaPool.rechargeAmina(
                     settings.Get(RuleSetting.Option.AMINA_COST_PER_SECOND) * context.deltaTime
                     );
                 break;
-            case RuleAction.RESERVE_AMINA_PER_SECOND:
+            case RuleActionEnum.RESERVE_AMINA_PER_SECOND:
                 compContext.aminaPool.reserveAmina(
                     settings.Get(RuleSetting.Option.AMINA_COST_PER_SECOND) * context.deltaTime
                     );
                 break;
-            case RuleAction.USE_RESERVED_AMINA:
+            case RuleActionEnum.USE_RESERVED_AMINA:
                 float collectedAmina = compContext.aminaPool.collectReservedAmina();
                 break;
-            case RuleAction.CANCEL_RESERVED_AMINA:
+            case RuleActionEnum.CANCEL_RESERVED_AMINA:
                 compContext.aminaPool.cancelReservedAmina();
                 break;
-            case RuleAction.SET_STAT_MULTIPLIER_FROM_RESERVED_AMINA:
+            case RuleActionEnum.SET_STAT_MULTIPLIER_FROM_RESERVED_AMINA:
                 float reservedAmina = compContext.aminaPool.ReservedAmina;
                 float minAmina = settings.Get(RuleSetting.Option.AMINA_COST);
                 float factor = reservedAmina / minAmina;
@@ -322,34 +322,34 @@ public class RuleProcessor : MonoBehaviour
                 }
                 context.statMultiplier = factor;
                 break;
-            case RuleAction.RESET_STAT_MULTIPLIER:
+            case RuleActionEnum.RESET_STAT_MULTIPLIER:
                 context.statMultiplier = 1;
                 break;
-            case RuleAction.ADD_STAT_LAYER_TO_SELF:
+            case RuleActionEnum.ADD_STAT_LAYER_TO_SELF:
                 {
                     StatLayer statLayer = settings.statLayer.Multiply(context.statMultiplier);
                     compContext.statKeeper.selfStats.addLayer(abilityID, statLayer);
                 }
                 break;
-            case RuleAction.ADD_STAT_LAYER_TO_CREATED_OBJECT:
+            case RuleActionEnum.ADD_STAT_LAYER_TO_CREATED_OBJECT:
                 {
                     StatLayer statLayer = settings.statLayer.Multiply(context.statMultiplier);
                     context.lastCreatedObject.statKeeper.selfStats.addLayer(abilityID, statLayer);
                 }
                 break;
-            case RuleAction.REMOVE_STAT_LAYER_FROM_SELF:
+            case RuleActionEnum.REMOVE_STAT_LAYER_FROM_SELF:
                 compContext.statKeeper.selfStats.removeLayer(abilityID);
                 break;
-            case RuleAction.REMOVE_STAT_LAYER_FROM_CREATED_OBJECT:
+            case RuleActionEnum.REMOVE_STAT_LAYER_FROM_CREATED_OBJECT:
                 context.lastCreatedObject.statKeeper.selfStats.removeLayer(abilityID);
                 break;
-            case RuleAction.ADD_STATUS_LAYER_TO_SELF:
+            case RuleActionEnum.ADD_STATUS_LAYER_TO_SELF:
                 {
                     StatusLayer statusLayer = new StatusLayer(settings.statusLayer.StatusEffects);
                     compContext.statusKeeper.addLayer(abilityID, statusLayer);
                 }
                 break;
-            case RuleAction.REMOVE_STATUS_LAYER_FROM_SELF:
+            case RuleActionEnum.REMOVE_STATUS_LAYER_FROM_SELF:
                 {
                     compContext.statusKeeper.removeLayer(abilityID);
                 }

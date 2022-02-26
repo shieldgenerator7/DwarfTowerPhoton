@@ -4,7 +4,7 @@
 
 using UnityEngine;
 
-public enum RuleAction
+public enum RuleActionEnum
 {
     [Tooltip("Move this entity in the target direction.")]
     MOVE_IN_TARGET_DIR,
