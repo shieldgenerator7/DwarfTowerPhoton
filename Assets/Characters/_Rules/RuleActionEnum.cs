@@ -22,18 +22,6 @@ public enum RuleActionEnum
     [Tooltip("NotImplemented")]
     REMOVE_RULESET,
 
-    [Tooltip("Use amina (setting: AMINA_COST).")]
-    USE_AMINA,
-    [Tooltip("Use amina over time (setting: AMINA_COST_PER_SECOND).")]
-    USE_AMINA_PER_SECOND,
-    [Tooltip("Recharge amina (setting: AMINA_COST).")]
-    RECHARGE_AMINA,
-    [Tooltip("Recharge amina over time (setting: AMINA_COST_PER_SECOND).")]
-    RECHARGE_AMINA_PER_SECOND,
-    RESERVE_AMINA_PER_SECOND,
-    USE_RESERVED_AMINA,
-    CANCEL_RESERVED_AMINA,
-
     SET_STAT_MULTIPLIER_FROM_RESERVED_AMINA,
     RESET_STAT_MULTIPLIER,
 }

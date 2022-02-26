@@ -274,45 +274,6 @@ public class RuleProcessor : MonoBehaviour
                     ?? context.currentRuleSet;
                 activeRuleSets.Remove(removeRuleSet);
                 break;
-            case RuleActionEnum.USE_AMINA:
-                bool acceptPartialAmount = settings
-                    .Try(RuleSetting.Option.ACCEPT_PARTIAL_AMOUNT)
-                    ?? true;
-                float amina = compContext.aminaPool.requestAmina(
-                    settings.Get(RuleSetting.Option.AMINA_COST),
-                    acceptPartialAmount
-                    );
-                break;
-            case RuleActionEnum.USE_AMINA_PER_SECOND:
-                bool acceptPartialAmountPerSecond = settings
-                    .Try(RuleSetting.Option.ACCEPT_PARTIAL_AMOUNT)
-                    ?? true;
-                float aminaPerSecond = compContext.aminaPool.requestAmina(
-                    settings.Get(RuleSetting.Option.AMINA_COST_PER_SECOND) * context.deltaTime,
-                    acceptPartialAmountPerSecond
-                    );
-                break;
-            case RuleActionEnum.RECHARGE_AMINA:
-                compContext.aminaPool.rechargeAmina(
-                    settings.Get(RuleSetting.Option.AMINA_COST)
-                    );
-                break;
-            case RuleActionEnum.RECHARGE_AMINA_PER_SECOND:
-                compContext.aminaPool.rechargeAmina(
-                    settings.Get(RuleSetting.Option.AMINA_COST_PER_SECOND) * context.deltaTime
-                    );
-                break;
-            case RuleActionEnum.RESERVE_AMINA_PER_SECOND:
-                compContext.aminaPool.reserveAmina(
-                    settings.Get(RuleSetting.Option.AMINA_COST_PER_SECOND) * context.deltaTime
-                    );
-                break;
-            case RuleActionEnum.USE_RESERVED_AMINA:
-                float collectedAmina = compContext.aminaPool.collectReservedAmina();
-                break;
-            case RuleActionEnum.CANCEL_RESERVED_AMINA:
-                compContext.aminaPool.cancelReservedAmina();
-                break;
             case RuleActionEnum.SET_STAT_MULTIPLIER_FROM_RESERVED_AMINA:
                 float reservedAmina = compContext.aminaPool.ReservedAmina;
                 float minAmina = settings.Get(RuleSetting.Option.AMINA_COST);
