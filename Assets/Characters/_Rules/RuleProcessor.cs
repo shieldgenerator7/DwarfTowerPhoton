@@ -233,15 +233,8 @@ public class RuleProcessor : MonoBehaviour
     private void TakeAction(RuleActionEnum action, RuleSettings settings, ref RuleContext context)
     {
         ComponentContext compContext = context.componentContext;
-        StatLayer stats = compContext.statKeeper?.selfStats.Stats ?? new StatLayer(-1);
         switch (action)
         {
-            case RuleActionEnum.MOVE_IN_TARGET_DIR:
-                compContext.rb2d.velocity = context.targetDir * stats.moveSpeed;
-                break;
-            case RuleActionEnum.MOVE_TOWARDS_TARGET_POS:
-                compContext.rb2d.velocity = (context.targetPos - (Vector2)compContext.transform.position).normalized * stats.moveSpeed;
-                break;
             case RuleActionEnum.CREATE_OBJECT:
                 Vector2 spawnCenter = compContext.playerController?.SpawnCenter ?? compContext.transform.position;
                 Vector2 targetPos = Utility.MouseWorldPos;
