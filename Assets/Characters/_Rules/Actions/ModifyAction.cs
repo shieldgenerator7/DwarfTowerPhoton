@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "TargetedAction", menuName = "Rule/Action/TargetedAction", order = 0)]
-public class TargetedAction : RuleAction
+[CreateAssetMenu(fileName = "ModifyAction", menuName = "Rule/Action/ModifyAction", order = 0)]
+public class ModifyAction : RuleAction
 {
     public enum Target
     {
@@ -24,7 +24,7 @@ public class TargetedAction : RuleAction
     }
     public Action action;
 
-    public override void TakeAction(RuleSettings settings, ref RuleContext context)
+    public sealed override void TakeAction(RuleSettings settings, ref RuleContext context)
     {
         //Find target to take an action on
         ComponentContext targetObj;
