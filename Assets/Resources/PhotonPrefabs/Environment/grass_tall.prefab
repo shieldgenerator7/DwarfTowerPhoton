@@ -306,6 +306,7 @@ GameObject:
   - component: {fileID: -3001207946568339372}
   - component: {fileID: -1091187635678684241}
   - component: {fileID: 1368454942004881522}
+  - component: {fileID: 4314538183691608835}
   m_Layer: 0
   m_Name: grass_tall
   m_TagString: Untagged
@@ -394,3 +395,15 @@ MonoBehaviour:
   statusToGrant:
     statusList: 01000000
   requirePositionInTrigger: 1
+--- !u!114 &4314538183691608835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7269731009769640609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be985794bfe9a54abe79c147869abd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -239,10 +239,21 @@ MonoBehaviour:
   addComponent: {fileID: 0}
   removeComponent: {fileID: 0}
   foundComponents:
-  - {fileID: 1964478566673901166, guid: c61aa5d8c6dad3f43806362e06c103e5, type: 3}
-  - {fileID: 7777102039012136962, guid: 8fb036b3fe6588f49a8e7bb4d54142fc, type: 3}
-  - {fileID: 7777102039012136962, guid: 7cf179f01b502244fb6782e6a1aebca5, type: 3}
-  - {fileID: 7777102039012136962, guid: 88411134843f8c249b264f047f3a8b89, type: 3}
+  - {fileID: 5805177630514372063, guid: 7f9045df571f5b44cb1ab08b5c55b501, type: 3}
+  - {fileID: 748800143414026977, guid: 5817b41b881aa6a438dae4afac09a8fb, type: 3}
+  - {fileID: -4979544592182036967, guid: 273897e5033d5224a95146f2e2b433f0, type: 3}
+  - {fileID: -1091187635678684241, guid: 40851f577f85ffa4ebc4b37813162d96, type: 3}
+  - {fileID: 1720445580077732220, guid: bd0f509d9854d284c8144c6bbe49f6e3, type: 3}
+  - {fileID: 5124396774317201690, guid: 0667a44a39e72e04eb67f9b51997f1f2, type: 3}
+  - {fileID: 5124396774317201690, guid: 2abd6d903199a4c4894d0118de77cb33, type: 3}
+  - {fileID: 5124396774317201690, guid: 669ed7e5fb0801948a8eaa72518bbd13, type: 3}
+  - {fileID: 7644985127634344394, guid: 3da9e3f45dc0e754b987418ffca1ccf9, type: 3}
+  - {fileID: 5124396774317201690, guid: 35794b50e5a68614cb697673a713d54f, type: 3}
+  - {fileID: 7912892047191950911, guid: b4db36474afea9a40af9e9e93f0f8853, type: 3}
+  - {fileID: -1091187635678684241, guid: 492622cf4eafcdc40ad91969b51493de, type: 3}
+  - {fileID: 4307792898633907598, guid: 18486eb8f9d03814ea6a8098c2151b92, type: 3}
+  - {fileID: -1091187635678684241, guid: 067340080bf552540817d1ffb520918c, type: 3}
+  - {fileID: -3205413340617204497, guid: 82fcc4c4b7954cb4084cd71485cfe5c9, type: 3}
   addedComponents: []
   removedComponentsGameObjects: []
 --- !u!114 &1644664250
@@ -257,8 +268,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5be985794bfe9a54abe79c147869abd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!58 &1644664251
-CircleCollider2D:
+--- !u!61 &1644664251
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -271,5 +282,15 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
