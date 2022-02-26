@@ -31,6 +31,8 @@ MonoBehaviour:
       value: 0
     - setting: 5
       value: 1
+    - setting: 6
+      value: 4
   trigger: 14
   condition: {fileID: 11400000, guid: a141bb06eb932064eb87180ac2966fc2, type: 2}
   actions: 0f00000004000000130000000d00000010000000
