@@ -286,8 +286,6 @@ MonoBehaviour:
   folderName: Shots/Ranger
   objectSpawnInfoList:
   - {fileID: 11400000, guid: dba3de87070e34d4390bb05f7881c9d0, type: 2}
-  - {fileID: 11400000, guid: d682e5faad624fa4482ee30a419b27a4, type: 2}
-  - {fileID: 11400000, guid: 4a1d62476983408419a5ad453f1e2a63, type: 2}
 --- !u!114 &-3464993547012377175
 MonoBehaviour:
   m_ObjectHideFlags: 0
