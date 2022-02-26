@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7364934948941974036}
   - component: {fileID: 1964478566673901166}
   - component: {fileID: 6620249081908924832}
+  - component: {fileID: -6494276717850925433}
   m_Layer: 0
   m_Name: turret_preview
   m_TagString: Untagged
@@ -119,3 +120,15 @@ MonoBehaviour:
   destroyColor: {r: 1, g: 0, b: 0, a: 1}
   upgradeColor: {r: 0, g: 1, b: 0, a: 1}
   faceMousePointer: 0
+--- !u!114 &-6494276717850925433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3363737750353282456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be985794bfe9a54abe79c147869abd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

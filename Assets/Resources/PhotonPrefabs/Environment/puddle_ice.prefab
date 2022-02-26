@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 7777102039012136962}
   - component: {fileID: 3870084304518914006}
   - component: {fileID: 2798772098909453385}
+  - component: {fileID: 9072731915961070218}
   m_Layer: 0
   m_Name: puddle_ice
   m_TagString: Untagged
@@ -228,3 +229,15 @@ MonoBehaviour:
     fireRate: -1
     damage: -1
     size: -1
+--- !u!114 &9072731915961070218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7269731009769640609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be985794bfe9a54abe79c147869abd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
