@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3470866178012958282}
   - component: {fileID: 2478690509286323385}
   - component: {fileID: -4160430732991234955}
+  - component: {fileID: 5145350091335000564}
   m_Layer: 0
   m_Name: horseshoe_cracked
   m_TagString: Untagged
@@ -207,3 +208,15 @@ MonoBehaviour:
   m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
   m_UseLocal: 0
+--- !u!114 &5145350091335000564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421722330341077747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be985794bfe9a54abe79c147869abd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
