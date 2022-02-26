@@ -30,7 +30,10 @@ public class FindAndEdit : MonoBehaviour
         //Remove null components
         foundComponents.RemoveAll(mb => mb == null);
         //Remove objects that have the notThereComponent
-        foundComponents.RemoveAll(mb => mb.GetComponent(notThereComponent.GetType()));
+        if (notThereComponent)
+        {
+            foundComponents.RemoveAll(mb => mb.GetComponent(notThereComponent.GetType()));
+        }
         //Remove this gameobject
         foundComponents.RemoveAll(mb => mb.gameObject == gameObject);
         //Return found components
