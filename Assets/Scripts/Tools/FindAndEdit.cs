@@ -21,9 +21,14 @@ public class FindAndEdit : MonoBehaviour
     public List<Component> FindMonoBehaviours()
     {
         //Find all objects that have the find component
-        foundComponents = Resources.FindObjectsOfTypeAll(findComponent.GetType())
-            .ToList()
-            .ConvertAll(obj => (Component)obj);
+        foundComponents = AssetDatabase.FindAssets("t:prefab").ToList()
+            .ConvertAll(guiID => AssetDatabase.LoadAssetAtPath<GameObject>(
+                AssetDatabase.GUIDToAssetPath(guiID)
+                )
+            )
+            .ConvertAll(go => go.GetComponent(findComponent.GetType()));
+        //Remove null components
+        foundComponents.RemoveAll(mb => mb == null);
         //Remove objects that have the notThereComponent
         foundComponents.RemoveAll(mb => mb.GetComponent(notThereComponent.GetType()));
         //Remove this gameobject
