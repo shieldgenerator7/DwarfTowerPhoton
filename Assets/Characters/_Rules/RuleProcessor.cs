@@ -213,6 +213,7 @@ public class RuleProcessor : MonoBehaviour
         if (canProcess)
         {
             rule.actionEnums.ForEach(action => TakeAction(action, settings, ref context));
+            rule.actions.ForEach(action => action.TakeAction(settings, ref context));
         }
     }
 

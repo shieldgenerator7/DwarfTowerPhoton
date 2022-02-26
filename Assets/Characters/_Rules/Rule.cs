@@ -10,4 +10,5 @@ public class Rule : ScriptableObject
     public RuleTrigger trigger;
     public RuleCondition condition;
     public List<RuleActionEnum> actionEnums;
+    public List<RuleAction> actions;
 }
