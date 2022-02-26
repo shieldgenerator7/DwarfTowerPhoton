@@ -1,5 +1,6 @@
 
 
+using System.Collections.Generic;
 using UnityEngine;
 
 public struct RuleContext
@@ -22,6 +23,16 @@ public struct RuleContext
     public float statMultiplier;
     //Created object
     public ComponentContext lastCreatedObject;
+    //RuleSet
+    public RuleSet lastDeactivatedRuleSet;
+    public Dictionary<RuleSet, RuleSetAction> ruleSetActions;
+    public enum RuleSetAction
+    {
+        ACTIVATE,
+        DEACTIVATE,
+        ADD,
+        REMOVE,
+    }
 
     public RuleContext(RuleContext template)
     {
@@ -43,5 +54,8 @@ public struct RuleContext
         this.statMultiplier = template.statMultiplier;
         //Created object
         lastCreatedObject = template.lastCreatedObject;
+        //RuleSet
+        lastDeactivatedRuleSet = template.lastDeactivatedRuleSet;
+        ruleSetActions = template.ruleSetActions;
     }
 }

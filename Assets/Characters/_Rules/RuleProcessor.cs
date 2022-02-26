@@ -12,7 +12,6 @@ public class RuleProcessor : MonoBehaviour
     private ComponentContext componentContext;
 
     private HashSet<RuleSet> activeRuleSets = new HashSet<RuleSet>();
-    private RuleSet lastDeactivatedRuleSet;
 
     private RuleProcessor controller;
 
@@ -42,6 +41,7 @@ public class RuleProcessor : MonoBehaviour
         initialContext.deltaTime = 1;
         initialContext.componentContext = componentContext;
         initialContext.statMultiplier = 1;
+        initialContext.ruleSetActions = new Dictionary<RuleSet, RuleContext.RuleSetAction>();
     }
 
     private bool _registeredDelegates = false;
@@ -227,6 +227,7 @@ public class RuleProcessor : MonoBehaviour
             rule.actionEnums.ForEach(action => TakeAction(action, settings, ref context));
             rule.actions.ForEach(action => action.TakeAction(settings, ref context));
         }
+        UpdateRuleSets(ref context);
     }
 
     private void TakeAction(RuleActionEnum action, RuleSettings settings, ref RuleContext context)
@@ -255,25 +256,6 @@ public class RuleProcessor : MonoBehaviour
                 newObj.ruleProcessor.Init(targetDir, targetPos);
                 context.lastCreatedObject = newObj;
                 break;
-            case RuleActionEnum.SWITCH_RULESET:
-                RuleSet currentRuleSet = context.currentRuleSet;
-                RuleSet targetRuleSet = settings.targetRuleSet
-                    ?? lastDeactivatedRuleSet;
-                ValidateRuleSet(currentRuleSet);
-                ValidateRuleSet(targetRuleSet);
-                activeRuleSets.Remove(currentRuleSet);
-                activeRuleSets.Add(targetRuleSet);
-                lastDeactivatedRuleSet = currentRuleSet;
-                break;
-            case RuleActionEnum.ADD_RULESET:
-                RuleSet addRuleSet = settings.targetRuleSet;
-                activeRuleSets.Add(addRuleSet);
-                break;
-            case RuleActionEnum.REMOVE_RULESET:
-                RuleSet removeRuleSet = settings.targetRuleSet
-                    ?? context.currentRuleSet;
-                activeRuleSets.Remove(removeRuleSet);
-                break;
             case RuleActionEnum.SET_STAT_MULTIPLIER_FROM_RESERVED_AMINA:
                 float reservedAmina = compContext.aminaPool.ReservedAmina;
                 float minAmina = settings.Get(RuleSetting.Option.AMINA_COST);
@@ -291,6 +273,41 @@ public class RuleProcessor : MonoBehaviour
             default:
                 throw new System.ArgumentException($"Unknown action: {action}");
         }
+    }
+
+    private void UpdateRuleSets(ref RuleContext context)
+    {
+        foreach (var action in context.ruleSetActions)
+        {
+            RuleSet ruleSet = action.Key;
+            RuleContext.RuleSetAction ruleSetAction = action.Value;
+            switch (ruleSetAction)
+            {
+                case RuleContext.RuleSetAction.ACTIVATE:
+                    ValidateRuleSet(ruleSet);
+                    activeRuleSets.Add(ruleSet);
+                    if (context.lastDeactivatedRuleSet == ruleSet)
+                    {
+                        context.lastDeactivatedRuleSet = null;
+                    }
+                    break;
+                case RuleContext.RuleSetAction.DEACTIVATE:
+                    ValidateRuleSet(ruleSet);
+                    activeRuleSets.Remove(ruleSet);
+                    context.lastDeactivatedRuleSet = ruleSet;
+                    break;
+                case RuleContext.RuleSetAction.ADD:
+                    activeRuleSets.Add(ruleSet);
+                    break;
+                case RuleContext.RuleSetAction.REMOVE:
+                    activeRuleSets.Remove(ruleSet);
+                    break;
+                default:
+                    throw new System.ArgumentException($"RuleSetAction not known: {action.Value}");
+            }
+        }
+        context.ruleSetActions.Clear();
+        initialContext.lastDeactivatedRuleSet = context.lastDeactivatedRuleSet;
     }
     #endregion
 
