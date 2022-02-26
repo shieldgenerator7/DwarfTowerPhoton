@@ -7,8 +7,6 @@ public class ModifyAction : TargetedAction
 {
     public enum Action
     {
-        DAMAGE,
-        HEAL,
         ADD_STAT_LAYER,
         REMOVE_STAT_LAYER,
         ADD_STATUS_LAYER,
@@ -20,17 +18,10 @@ public class ModifyAction : TargetedAction
     {
         //Initialize variables
         ComponentContext compContext = context.componentContext;
-        StatLayer stats = compContext.statKeeper?.selfStats.Stats ?? new StatLayer(-1);
         int abilityID = settings.AbilityID(compContext.PV.ViewID);
         //Take the selected action
         switch (action)
         {
-            case Action.DAMAGE:
-                target.healthPool.Health += -stats.damage * context.deltaTime;
-                break;
-            case Action.HEAL:
-                target.healthPool.Health += stats.damage * context.deltaTime;
-                break;
             case Action.ADD_STAT_LAYER:
                 StatLayer multiplierLayer = settings.statLayer.Multiply(context.statMultiplier);
                 target.statKeeper.selfStats.addLayer(abilityID, multiplierLayer);
