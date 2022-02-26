@@ -63,7 +63,8 @@ public class TargetedAction : RuleAction
                 targetObj.statKeeper.selfStats.removeLayer(abilityID);
                 break;
             case Action.ADD_STATUS_LAYER:
-                targetObj.statusKeeper.addLayer(abilityID, settings.statusLayer);
+                StatusLayer statusLayer = new StatusLayer(settings.statusLayer.StatusEffects);
+                targetObj.statusKeeper.addLayer(abilityID, statusLayer);
                 break;
             case Action.REMOVE_STATUS_LAYER:
                 targetObj.statusKeeper.removeLayer(abilityID);
