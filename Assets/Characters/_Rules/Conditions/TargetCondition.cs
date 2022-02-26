@@ -16,6 +16,14 @@ public class TargetCondition : RuleCondition
 
     public override bool Check(RuleSettings settings, RuleContext context)
     {
+        if (!context.target)
+        {
+            Debug.LogError(
+                $"TargetCondition called on a context without a target! " +
+                $"RuleProcessor: {context.componentContext.gameObject.name}"
+                );
+            return false;
+        }
         bool onSameTeam = TeamToken.onSameTeam(
             context.componentContext.teamToken,
             context.target.teamToken

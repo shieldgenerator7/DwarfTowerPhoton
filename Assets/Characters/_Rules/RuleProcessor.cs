@@ -158,6 +158,12 @@ public class RuleProcessor : MonoBehaviour
             target = collision.gameObject.FindComponent<ComponentContext>(),
             isCollision = true,
         };
+        if (!context.target)
+        {
+            throw new UnityException(
+                $"GameObject {collision.gameObject.name} does not have a ComponentContext!"
+                );
+        }
         ProcessRules(RuleTrigger.OnHit, context);
     }
 
@@ -168,6 +174,12 @@ public class RuleProcessor : MonoBehaviour
             target = coll2d.gameObject.FindComponent<ComponentContext>(),
             isTrigger = true,
         };
+        if (!context.target)
+        {
+            throw new UnityException(
+                $"GameObject {coll2d.gameObject.name} does not have a ComponentContext!"
+                );
+        }
         ProcessRules(RuleTrigger.OnHit, context);
     }
 
