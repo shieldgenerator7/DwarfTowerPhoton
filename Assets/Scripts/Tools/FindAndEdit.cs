@@ -9,21 +9,21 @@ using UnityEngine;
 public class FindAndEdit : MonoBehaviour
 {
     [Header("Search Settings")]
-    public MonoBehaviour findComponent;
-    public MonoBehaviour notThereComponent;
-    public MonoBehaviour addComponent;
-    public MonoBehaviour removeComponent;
+    public Component findComponent;
+    public Component notThereComponent;
+    public Component addComponent;
+    public Component removeComponent;
     [Header("Search Results")]
-    public List<MonoBehaviour> foundComponents;
-    public List<MonoBehaviour> addedComponents;
+    public List<Component> foundComponents;
+    public List<Component> addedComponents;
     public List<GameObject> removedComponentsGameObjects;
 
-    public List<MonoBehaviour> FindMonoBehaviours()
+    public List<Component> FindMonoBehaviours()
     {
         //Find all objects that have the find component
         foundComponents = Resources.FindObjectsOfTypeAll(findComponent.GetType())
             .ToList()
-            .ConvertAll(obj => (MonoBehaviour)obj);
+            .ConvertAll(obj => (Component)obj);
         //Remove objects that have the notThereComponent
         foundComponents.RemoveAll(mb => mb.GetComponent(notThereComponent.GetType()));
         //Remove this gameobject
@@ -48,7 +48,7 @@ public class FindAndEdit : MonoBehaviour
         Type type = addComponent.GetType();
         addedComponents = foundComponents
             .FindAll(mb => !mb.gameObject.GetComponent(type))
-            .ConvertAll(mb => (MonoBehaviour)mb.gameObject.AddComponent(type));
+            .ConvertAll(mb => (Component)mb.gameObject.AddComponent(type));
     }
 
     public void RemoveComponent()
