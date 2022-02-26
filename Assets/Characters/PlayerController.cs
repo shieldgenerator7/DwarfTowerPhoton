@@ -125,7 +125,7 @@ public abstract class PlayerController : MonoBehaviour
         statusKeeper.onStatusChanged += (status) =>
         {
             //Status Auto Ender
-            statusAutoEnder.CheckStatusTimers(status);
+            statusAutoEnder?.CheckStatusTimers(status);
             //Stunned
             bool stunned = status.Has(StatusEffect.STUNNED);
             this.enabled = !stunned;

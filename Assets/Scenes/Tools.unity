@@ -198,7 +198,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1644664247}
   - component: {fileID: 1644664249}
-  - component: {fileID: 1644664251}
   - component: {fileID: 1644664250}
   m_Layer: 0
   m_Name: Find & Edit
@@ -234,20 +233,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7fadf2a77a121240ac5a2de54dc015b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  findComponent: {fileID: 1644664251}
-  notThereComponent: {fileID: 1644664250}
+  findComponent: {fileID: 1644664250}
+  notThereComponent: {fileID: 0}
   addComponent: {fileID: 0}
-  removeComponent: {fileID: 0}
+  removeComponent: {fileID: 1644664250}
   foundComponents:
-  - {fileID: 505, guid: 6234bb2caba6802468a6fca70a82e0fd, type: 3}
-  - {fileID: 505, guid: 7c88fe486ff870b408a48d0f1d559b11, type: 3}
-  - {fileID: 505, guid: 52a8dc6d35283a847a65375ed39349b2, type: 3}
-  - {fileID: 505, guid: 43da61f45e49bb248bfcba02d7365f60, type: 3}
-  - {fileID: 505, guid: a4ac5c1a170ed6f41ba93ac53cc4fd8a, type: 3}
-  - {fileID: 505, guid: 2a200bcf6d5ff1047b3700c4d479cb3a, type: 3}
-  - {fileID: 6261132995686225316, guid: 71028c10081a89f4da86dd1e3f3c6971, type: 3}
+  - {fileID: 0}
   addedComponents: []
-  removedComponentsGameObjects: []
+  removedComponentsGameObjects:
+  - {fileID: 109, guid: 563093da69a82d74498e57f263418803, type: 3}
 --- !u!114 &1644664250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,22 +251,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1644664246}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5be985794bfe9a54abe79c147869abd1, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a6561c195ae6ac48b63455ba5652948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!58 &1644664251
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1644664246}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  defaultMaxDuration: 10
+  statusDurations: []
