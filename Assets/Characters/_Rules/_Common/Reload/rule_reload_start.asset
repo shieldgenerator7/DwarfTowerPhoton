@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 103c9701c2e720d40975a17d87d69018, type: 3}
-  m_Name: reloading_done
+  m_Name: rule_reload_start
   m_EditorClassIdentifier: 
   settings:
-    targetRuleSet: {fileID: 0}
+    targetRuleSet: {fileID: 11400000, guid: 61bd4fd6b45a9b74ca343e444d74d595, type: 2}
     statLayer:
       moveSpeed: 0
       maxHits: 0
@@ -23,7 +23,7 @@ MonoBehaviour:
     statusLayer:
       statusList: 
     settings: []
-  trigger: 10
+  trigger: 13
   condition: {fileID: 0}
   actionEnums: 
   actions:

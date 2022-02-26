@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 103c9701c2e720d40975a17d87d69018, type: 3}
-  m_Name: shot_ability
+  m_Name: rule_shot_start
   m_EditorClassIdentifier: 
   settings:
     targetRuleSet: {fileID: 0}
@@ -22,17 +22,8 @@ MonoBehaviour:
       size: 0
     statusLayer:
       statusList: 
-    settings:
-    - setting: 0
-      value: 5
-    - setting: 2
-      value: 1
-    - setting: 3
-      value: 0.5
-    - setting: 4
-      value: 0
-  trigger: 1
-  condition: {fileID: 11400000, guid: ee22213f125118d4b9cdaca41c137f83, type: 2}
-  actionEnums: 02000000
-  actions:
-  - {fileID: 11400000, guid: aaba098c015a8b8478b8178735005143, type: 2}
+    settings: []
+  trigger: 0
+  condition: {fileID: 0}
+  actionEnums: 00000000
+  actions: []

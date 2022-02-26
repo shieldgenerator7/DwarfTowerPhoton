@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 103c9701c2e720d40975a17d87d69018, type: 3}
-  m_Name: shot_hit_rule
+  m_Name: rule_reload_start_manually
   m_EditorClassIdentifier: 
   settings:
-    targetRuleSet: {fileID: 0}
+    targetRuleSet: {fileID: 11400000, guid: 61bd4fd6b45a9b74ca343e444d74d595, type: 2}
     statLayer:
       moveSpeed: 0
       maxHits: 0
@@ -23,8 +23,8 @@ MonoBehaviour:
     statusLayer:
       statusList: 
     settings: []
-  trigger: 6
-  condition: {fileID: 11400000, guid: 86433349a1115384088135e72c20cf0d, type: 2}
+  trigger: 14
+  condition: {fileID: 11400000, guid: 1b5c6768f02ba9c4895e70745fd44e4c, type: 2}
   actionEnums: 
   actions:
-  - {fileID: 11400000, guid: 7c8f0c01ddbbff84ca3041db63a2ef32, type: 2}
+  - {fileID: 11400000, guid: b653a8173e5ef8442b46b584ed3f65a5, type: 2}

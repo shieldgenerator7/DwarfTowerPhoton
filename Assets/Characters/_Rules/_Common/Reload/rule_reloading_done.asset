@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 103c9701c2e720d40975a17d87d69018, type: 3}
-  m_Name: turret_rule_fire
+  m_Name: rule_reloading_done
   m_EditorClassIdentifier: 
   settings:
     targetRuleSet: {fileID: 0}
@@ -22,12 +22,9 @@ MonoBehaviour:
       size: 0
     statusLayer:
       statusList: 
-    settings:
-    - setting: 3
-      value: 0.5
-    - setting: 4
-      value: 0
-  trigger: 17
-  condition: {fileID: 11400000, guid: d0f277e07e631da4583cea0e06d0aa7d, type: 2}
-  actionEnums: 02000000
-  actions: []
+    settings: []
+  trigger: 10
+  condition: {fileID: 0}
+  actionEnums: 
+  actions:
+  - {fileID: 11400000, guid: b653a8173e5ef8442b46b584ed3f65a5, type: 2}

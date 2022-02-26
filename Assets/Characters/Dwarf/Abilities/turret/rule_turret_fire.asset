@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 103c9701c2e720d40975a17d87d69018, type: 3}
-  m_Name: reload_start_manually
+  m_Name: rule_turret_fire
   m_EditorClassIdentifier: 
   settings:
-    targetRuleSet: {fileID: 11400000, guid: 61bd4fd6b45a9b74ca343e444d74d595, type: 2}
+    targetRuleSet: {fileID: 0}
     statLayer:
       moveSpeed: 0
       maxHits: 0
@@ -22,9 +22,12 @@ MonoBehaviour:
       size: 0
     statusLayer:
       statusList: 
-    settings: []
-  trigger: 14
-  condition: {fileID: 11400000, guid: 1b5c6768f02ba9c4895e70745fd44e4c, type: 2}
-  actionEnums: 
-  actions:
-  - {fileID: 11400000, guid: b653a8173e5ef8442b46b584ed3f65a5, type: 2}
+    settings:
+    - setting: 3
+      value: 0.5
+    - setting: 4
+      value: 0
+  trigger: 17
+  condition: {fileID: 11400000, guid: d0f277e07e631da4583cea0e06d0aa7d, type: 2}
+  actionEnums: 02000000
+  actions: []
