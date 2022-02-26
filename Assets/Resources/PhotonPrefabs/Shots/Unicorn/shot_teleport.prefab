@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4563028908691043183}
   - component: {fileID: 3980440854220922252}
   - component: {fileID: -370048005802176888}
+  - component: {fileID: 8362348758207814150}
   m_Layer: 0
   m_Name: shot_teleport
   m_TagString: Untagged
@@ -273,3 +274,15 @@ MonoBehaviour:
   damageOnTrigger: 1
   damageOnCollide: 1
   damageFriendlies: 0
+--- !u!114 &8362348758207814150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6261132995686225064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be985794bfe9a54abe79c147869abd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
