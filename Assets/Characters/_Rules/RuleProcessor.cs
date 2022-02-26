@@ -315,6 +315,11 @@ public class RuleProcessor : MonoBehaviour
                 float reservedAmina = compContext.aminaPool.ReservedAmina;
                 float minAmina = settings.Get(RuleSetting.Option.AMINA_COST);
                 float factor = reservedAmina / minAmina;
+                float? maxFactor = settings.Try(RuleSetting.Option.MAX_MULTIPLIER);
+                if (maxFactor != null)
+                {
+                    factor = Mathf.Min(factor, maxFactor.Value);
+                }
                 context.statMultiplier = factor;
                 break;
             case RuleAction.RESET_STAT_MULTIPLIER:

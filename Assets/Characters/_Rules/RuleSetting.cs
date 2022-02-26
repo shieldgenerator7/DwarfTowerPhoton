@@ -17,6 +17,8 @@ public struct RuleSetting
         SPAWN_INDEX,
         //Ability ID
         ABILITY_ID,
+        //Max multiplier
+        MAX_MULTIPLIER,
     }
     public Option setting;
     public float value;
