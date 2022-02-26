@@ -10,6 +10,7 @@ public class FindAndEdit : MonoBehaviour
 {
     [Header("Search Settings")]
     public MonoBehaviour findComponent;
+    public MonoBehaviour notThereComponent;
     public MonoBehaviour addComponent;
     public MonoBehaviour removeComponent;
     [Header("Search Results")]
@@ -19,16 +20,27 @@ public class FindAndEdit : MonoBehaviour
 
     public List<MonoBehaviour> FindMonoBehaviours()
     {
+        //Find all objects that have the find component
         foundComponents = Resources.FindObjectsOfTypeAll(findComponent.GetType())
             .ToList()
             .ConvertAll(obj => (MonoBehaviour)obj);
+        //Remove objects that have the notThereComponent
+        foundComponents.RemoveAll(mb => mb.GetComponent(notThereComponent.GetType()));
+        //Remove this gameobject
         foundComponents.RemoveAll(mb => mb.gameObject == gameObject);
+        //Return found components
         return foundComponents;
+    }
+
+    public void SelectComponents()
+    {
+        Selection.objects = foundComponents.ToArray();
     }
 
     public void SelectGameObjects()
     {
-        Selection.objects = foundComponents.ToArray();
+        Selection.objects = foundComponents
+            .ConvertAll(comp => comp.gameObject).ToArray();
     }
 
     public void AddComponent()
@@ -54,6 +66,8 @@ public class FindAndEdit : MonoBehaviour
         //Search settings
         DestroyImmediate(findComponent, true);
         findComponent = null;
+        DestroyImmediate(notThereComponent, true);
+        notThereComponent = null;
         DestroyImmediate(addComponent, true);
         addComponent = null;
         DestroyImmediate(removeComponent, true);

@@ -21,6 +21,12 @@ public class FindAndEditEditor : Editor
         GUI.enabled = findAndEdit.foundComponents.Count > 0;
         if (GUILayout.Button("Select"))
         {
+            findAndEdit.SelectComponents();
+        }
+
+        GUI.enabled = findAndEdit.foundComponents.Count > 0;
+        if (GUILayout.Button("Select GameObjects"))
+        {
             findAndEdit.SelectGameObjects();
         }
 
