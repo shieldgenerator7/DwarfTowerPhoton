@@ -155,7 +155,7 @@ public class RuleProcessor : MonoBehaviour
     {
         RuleContext context = new RuleContext(initialContext)
         {
-            target = collision.gameObject,
+            target = collision.gameObject.FindComponent<ComponentContext>(),
             isCollision = true,
         };
         ProcessRules(RuleTrigger.OnHit, context);
@@ -165,7 +165,7 @@ public class RuleProcessor : MonoBehaviour
     {
         RuleContext context = new RuleContext(initialContext)
         {
-            target = coll2d.gameObject,
+            target = coll2d.gameObject.FindComponent<ComponentContext>(),
             isTrigger = true,
         };
         ProcessRules(RuleTrigger.OnHit, context);
@@ -232,7 +232,7 @@ public class RuleProcessor : MonoBehaviour
             case RuleActionEnum.DAMAGE:
                 {
                     //TODO: make delegate: onDamageDealt
-                    HealthPool hp = context.target.FindComponent<HealthPool>();
+                    HealthPool hp = context.target.healthPool;
                     hp.Health += -stats.damage * context.deltaTime;
                 }
                 break;

@@ -11,7 +11,7 @@ public struct RuleContext
     public Vector2 targetDir;
     public Vector2 targetPos;
     //OnHit
-    public GameObject target;
+    public ComponentContext target;
     public bool isTrigger;
     public bool isCollision;
     //Update

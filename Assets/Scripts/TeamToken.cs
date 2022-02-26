@@ -151,6 +151,10 @@ public class TeamToken : MonoBehaviour
     {
         TeamToken tt1 = getTeamToken(go1);
         TeamToken tt2 = getTeamToken(go2);
+        return onSameTeam(tt1, tt2);
+    }
+    public static bool onSameTeam(TeamToken tt1, TeamToken tt2)
+    {
         //If both have a team token
         if (tt1 && tt2)
         {

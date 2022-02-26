@@ -17,14 +17,14 @@ public class TargetCondition : RuleCondition
     public override bool Check(RuleSettings settings, RuleContext context)
     {
         bool onSameTeam = TeamToken.onSameTeam(
-            context.componentContext.gameObject,
-            context.target
+            context.componentContext.teamToken,
+            context.target.teamToken
             );
         if (onAlly && onSameTeam || onEnemy && !onSameTeam)
         {
             if (onTrigger && context.isTrigger || onCollision && context.isCollision)
             {
-                HealthPool hp = context.target.FindComponent<HealthPool>();
+                HealthPool hp = context.target.healthPool;
                 if (hp)
                 {
                     if (entityTypes.Contains(hp.entityType))
