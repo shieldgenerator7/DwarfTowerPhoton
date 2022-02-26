@@ -242,17 +242,6 @@ public class RuleProcessor : MonoBehaviour
             case RuleActionEnum.MOVE_TOWARDS_TARGET_POS:
                 compContext.rb2d.velocity = (context.targetPos - (Vector2)compContext.transform.position).normalized * stats.moveSpeed;
                 break;
-            case RuleActionEnum.DAMAGE:
-                {
-                    //TODO: make delegate: onDamageDealt
-                    HealthPool hp = context.target.healthPool;
-                    hp.Health += -stats.damage * context.deltaTime;
-                }
-                break;
-            case RuleActionEnum.DAMAGE_SELF:
-                //TODO: make damage over time amount a variable
-                compContext.healthPool.Health += -1 * context.deltaTime;
-                break;
             case RuleActionEnum.CREATE_OBJECT:
                 Vector2 spawnCenter = compContext.playerController?.SpawnCenter ?? compContext.transform.position;
                 Vector2 targetPos = Utility.MouseWorldPos;
@@ -337,35 +326,6 @@ public class RuleProcessor : MonoBehaviour
                 break;
             case RuleActionEnum.RESET_STAT_MULTIPLIER:
                 context.statMultiplier = 1;
-                break;
-            case RuleActionEnum.ADD_STAT_LAYER_TO_SELF:
-                {
-                    StatLayer statLayer = settings.statLayer.Multiply(context.statMultiplier);
-                    compContext.statKeeper.selfStats.addLayer(abilityID, statLayer);
-                }
-                break;
-            case RuleActionEnum.ADD_STAT_LAYER_TO_CREATED_OBJECT:
-                {
-                    StatLayer statLayer = settings.statLayer.Multiply(context.statMultiplier);
-                    context.lastCreatedObject.statKeeper.selfStats.addLayer(abilityID, statLayer);
-                }
-                break;
-            case RuleActionEnum.REMOVE_STAT_LAYER_FROM_SELF:
-                compContext.statKeeper.selfStats.removeLayer(abilityID);
-                break;
-            case RuleActionEnum.REMOVE_STAT_LAYER_FROM_CREATED_OBJECT:
-                context.lastCreatedObject.statKeeper.selfStats.removeLayer(abilityID);
-                break;
-            case RuleActionEnum.ADD_STATUS_LAYER_TO_SELF:
-                {
-                    StatusLayer statusLayer = new StatusLayer(settings.statusLayer.StatusEffects);
-                    compContext.statusKeeper.addLayer(abilityID, statusLayer);
-                }
-                break;
-            case RuleActionEnum.REMOVE_STATUS_LAYER_FROM_SELF:
-                {
-                    compContext.statusKeeper.removeLayer(abilityID);
-                }
                 break;
             default:
                 throw new System.ArgumentException($"Unknown action: {action}");
