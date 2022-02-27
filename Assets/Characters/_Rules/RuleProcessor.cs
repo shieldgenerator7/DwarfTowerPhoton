@@ -224,20 +224,9 @@ public class RuleProcessor : MonoBehaviour
         bool canProcess = rule.condition?.Check(rule.settings, context) ?? true;
         if (canProcess)
         {
-            rule.actionEnums.ForEach(action => TakeAction(action, settings, ref context));
             rule.actions.ForEach(action => action.TakeAction(settings, ref context));
         }
         UpdateRuleSets(ref context);
-    }
-
-    private void TakeAction(RuleActionEnum action, RuleSettings settings, ref RuleContext context)
-    {
-        ComponentContext compContext = context.componentContext;
-        switch (action)
-        {
-            default:
-                throw new System.ArgumentException($"Unknown action: {action}");
-        }
     }
 
     private void UpdateRuleSets(ref RuleContext context)
