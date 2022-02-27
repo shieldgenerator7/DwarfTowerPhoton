@@ -235,19 +235,6 @@ public class RuleProcessor : MonoBehaviour
         ComponentContext compContext = context.componentContext;
         switch (action)
         {
-            case RuleActionEnum.CREATE_OBJECT:
-                Vector2 spawnCenter = compContext.playerController?.SpawnCenter ?? compContext.transform.position;
-                Vector2 targetPos = Utility.MouseWorldPos;
-                Vector2 targetDir = (targetPos - spawnCenter).normalized;
-                ComponentContext newObj = compContext.objectSpawner
-                    .spawnObject<ComponentContext>(
-                        settings.Get(RuleSetting.Option.SPAWN_INDEX),
-                        spawnCenter,
-                        targetDir
-                    );
-                newObj.ruleProcessor.Init(targetDir, targetPos);
-                context.lastCreatedObject = newObj;
-                break;
             default:
                 throw new System.ArgumentException($"Unknown action: {action}");
         }
