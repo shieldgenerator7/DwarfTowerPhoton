@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Created_Object_Stat_Add
   m_EditorClassIdentifier: 
   target: 2
-  action: 2
+  action: 0

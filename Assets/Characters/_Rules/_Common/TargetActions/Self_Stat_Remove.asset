@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Self_Stat_Remove
   m_EditorClassIdentifier: 
   target: 0
-  action: 3
+  action: 1

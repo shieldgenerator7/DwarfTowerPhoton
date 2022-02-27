@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Self_Status_Add
   m_EditorClassIdentifier: 
   target: 0
-  action: 4
+  action: 2
