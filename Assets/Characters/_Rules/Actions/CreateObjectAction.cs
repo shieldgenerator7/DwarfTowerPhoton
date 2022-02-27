@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "CreateObjectAction", menuName = "Rule/Action/CreateObjectAction", order = 0)]
+
 public class CreateObjectAction : RuleAction
 {
     public enum Action
