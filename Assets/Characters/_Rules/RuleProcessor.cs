@@ -261,7 +261,8 @@ public class RuleProcessor : MonoBehaviour
             }
         }
         context.ruleSetActions.Clear();
-        initialContext.lastDeactivatedRuleSet = context.lastDeactivatedRuleSet;
+        initialContext.lastDeactivatedRuleSet = initialContext.lastDeactivatedRuleSet
+            ?? context.lastDeactivatedRuleSet;
     }
     #endregion
 

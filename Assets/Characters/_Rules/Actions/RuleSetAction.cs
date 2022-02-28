@@ -26,13 +26,19 @@ public class RuleSetAction : TargetedAction
                 RuleSet currentRuleSet = context.currentRuleSet;
                 RuleSet targetRuleSet = settings.targetRuleSet
                     ?? context.lastDeactivatedRuleSet;
-                context.ruleSetActions.Add(
-                    currentRuleSet,
-                    RuleContext.RuleSetAction.DEACTIVATE
-                    );
+                if (!targetRuleSet)
+                {
+                    throw new UnityException(
+                        $"targetRuleSet is invalid: {targetRuleSet}, action: {this.name}"
+                        );
+                }
                 context.ruleSetActions.Add(
                     targetRuleSet,
                     RuleContext.RuleSetAction.ACTIVATE
+                    );
+                context.ruleSetActions.Add(
+                    currentRuleSet,
+                    RuleContext.RuleSetAction.DEACTIVATE
                     );
                 break;
             case Action.ADD_RULESET:
