@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MultiplierAction", menuName = "Rule/Action/MultiplierAction", order = 0)]
-public class MultiplierAction : RuleAction
+public class VariableAction : RuleAction
 {
     public enum Action
     {
