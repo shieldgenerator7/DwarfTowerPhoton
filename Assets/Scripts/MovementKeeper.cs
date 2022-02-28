@@ -27,7 +27,14 @@ public class MovementKeeper : MonoBehaviour
 
     public void AddLayer(int id, MovementLayer layer)
     {
-        layers.Add(id, layer);
+        if (!layers.ContainsKey(id))
+        {
+            layers.Add(id, layer);
+        }
+        else
+        {
+            layers[id] = layer;
+        }
         UpdateMovement();
     }
 
