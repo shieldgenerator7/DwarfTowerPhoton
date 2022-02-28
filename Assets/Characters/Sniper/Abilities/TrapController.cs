@@ -39,7 +39,7 @@ public class TrapController : ShotController
             new StatusLayer(StatusEffect.ROOTED)
             );
         trappedPlayer = componentContext;
-        trappedPlayer.playerMovement.rb2d.transform.position = transform.position;
+        trappedPlayer.rb2d.transform.position = transform.position;
         //Map marker
         MapMarkerManager.CreateMapMarker(
             PV,

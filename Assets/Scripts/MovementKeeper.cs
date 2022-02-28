@@ -37,6 +37,12 @@ public class MovementKeeper : MonoBehaviour
         UpdateMovement();
     }
 
+    public void Clear()
+    {
+        layers.Clear();
+        UpdateMovement();
+    }
+
     private void UpdateMovement()
     {
         MovementLayer layer = new MovementLayer();

@@ -20,15 +20,16 @@ public class PlayerMovement : MonoBehaviour, IPunObservable
     private bool forceMovementInput = false;
     public bool ForcingMovement => forceMovementInput;
 
+    private Vector2 moveVelocity = Vector2.zero;
     private Vector2 prevVelocity;
     public Vector2 LastMoveDirection { get; private set; }
 
-    public Rigidbody2D rb2d { get; private set; }
+    private ComponentContext compContext;
 
     // Start is called before the first frame update
     public void Start()
     {
-        rb2d = gameObject.FindComponent<Rigidbody2D>();
+        compContext = gameObject.FindComponent<ComponentContext>();
     }
 
     public void BasicMovement(InputState inputState)
@@ -63,22 +64,29 @@ public class PlayerMovement : MonoBehaviour, IPunObservable
         if (floaty)
         {
             //Lerp velocity
-            rb2d.velocity = Vector2.Lerp(rb2d.velocity, desiredVelocity, lerpSpeed * Time.deltaTime);
-            if (Vector2.Distance(rb2d.velocity, desiredVelocity) < 0.01f)
+            moveVelocity = Vector2.Lerp(moveVelocity, desiredVelocity, lerpSpeed * Time.deltaTime);
+            if (Vector2.Distance(moveVelocity, desiredVelocity) < 0.01f)
             {
-                rb2d.velocity = desiredVelocity;
+                moveVelocity = desiredVelocity;
             }
         }
         else
         {
             //Give exactly desired velocity
-            rb2d.velocity = desiredVelocity;
+            moveVelocity = desiredVelocity;
         }
         //Record current velocity for next frame
-        prevVelocity = rb2d.velocity;
-        if (rb2d.velocity != Vector2.zero)
+        if (prevVelocity != moveVelocity)
         {
-            LastMoveDirection = rb2d.velocity;
+            compContext.movementKeeper.AddLayer(
+                compContext.PV.ViewID,
+                new MovementLayer(moveVelocity)
+                );
+        }
+        prevVelocity = moveVelocity;
+        if (moveVelocity != Vector2.zero)
+        {
+            LastMoveDirection = moveVelocity;
         }
     }
 

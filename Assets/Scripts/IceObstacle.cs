@@ -15,46 +15,41 @@ public class IceObstacle : MonoBehaviour
         PV = gameObject.FindComponent<PhotonView>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerMovement playerMovement = collision.gameObject.FindComponent<PlayerMovement>();
-        if (playerMovement && playerMovement.isPhotonViewMine())
+        ComponentContext compContext = collision.gameObject.FindComponent<ComponentContext>();
+        if (compContext.playerMovement && compContext.PV.IsMine)
         {
-            slipPlayer(playerMovement, true);
+            slipPlayer(compContext, true);
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        PlayerMovement playerMovement = collision.gameObject.FindComponent<PlayerMovement>();
-        if (playerMovement && playerMovement.isPhotonViewMine())
+        ComponentContext compContext = collision.gameObject.FindComponent<ComponentContext>();
+        if (compContext.playerMovement && compContext.PV.IsMine)
         {
-            slipPlayer(playerMovement, true);
-            if (Mathf.Approximately(0, playerMovement.rb2d.velocity.magnitude))
+            slipPlayer(compContext, true);
+            if (Mathf.Approximately(0, compContext.rb2d.velocity.magnitude))
             {
-                slipPlayer(playerMovement, false);
+                slipPlayer(compContext, false);
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        PlayerMovement playerMovement = collision.gameObject.FindComponent<PlayerMovement>();
-        if (playerMovement && playerMovement.isPhotonViewMine())
+        ComponentContext compContext = collision.gameObject.FindComponent<ComponentContext>();
+        if (compContext.playerMovement && compContext.PV.IsMine)
         {
-            slipPlayer(playerMovement, false);
+            slipPlayer(compContext, false);
         }
     }
 
-    void slipPlayer(PlayerMovement playerMovement, bool slip)
+    void slipPlayer(ComponentContext compContext, bool slip)
     {
-        StatKeeper statKeeper = playerMovement.gameObject.FindComponent<StatKeeper>();
+        PlayerMovement playerMovement = compContext.playerMovement;
+        StatKeeper statKeeper = compContext.statKeeper;
         if (slip)
         {
             playerMovement.forceMovement(playerMovement.LastMoveDirection);

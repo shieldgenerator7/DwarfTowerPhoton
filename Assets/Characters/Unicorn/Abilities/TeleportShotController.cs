@@ -17,7 +17,7 @@ public class TeleportShotController : ShotController
         if (Controller)
         {
             rb2d.velocity = rb2d.velocity.normalized
-                * Controller.context.playerMovement.rb2d.velocity.magnitude;
+                * Controller.context.rb2d.velocity.magnitude;
         }
     }
 

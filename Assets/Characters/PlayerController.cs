@@ -137,7 +137,11 @@ public abstract class PlayerController : MonoBehaviour
                     (SpawnCenter - (Vector2)CaravanController.Caravan.transform.position).normalized
                     * knockbackSpeed;
                 playerMovement.forceMovement(stunVelocity, true);
-                playerMovement.rb2d.velocity = stunVelocity;
+                context.movementKeeper.Clear();
+                context.movementKeeper.AddLayer(
+                    PV.ViewID,
+                    new MovementLayer(stunVelocity)
+                    );
                 //Start timer to unstun
                 TimerManager.StartTimer(
                     stunDuration,
@@ -168,7 +172,7 @@ public abstract class PlayerController : MonoBehaviour
                 {
                     playerMovement.forceMovement(Vector2.zero, rooted);
                     cancelAbilities();
-                    playerMovement.rb2d.velocity = Vector2.zero;
+                    context.movementKeeper.Clear();
                 }
                 else
                 {

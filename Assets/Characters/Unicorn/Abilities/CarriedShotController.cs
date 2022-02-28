@@ -96,13 +96,13 @@ public class CarriedShotController : ShotController
 
     public void release()
     {
-        rb2d.velocity = PointDirection.normalized * Controller.context.playerMovement.rb2d.velocity.magnitude;
+        rb2d.velocity = PointDirection.normalized * Controller.context.rb2d.velocity.magnitude;
         destroyOnIndestructible = true;
         released = true;
     }
 
     Vector2 PointDirection
-        => (Controller.context.playerMovement.rb2d.isMoving())
+        => (Controller.context.rb2d.isMoving())
         ? Controller.context.playerMovement.LastMoveDirection
         : Controller.LookDirection;
 }
