@@ -879,13 +879,13 @@ MonoBehaviour:
   mapName: 
   characterSelection:
     itemList:
-    - {fileID: 11400000, guid: ac72904e4a3b45f4787eda499468ee71, type: 2}
-    - {fileID: 11400000, guid: 7fea9959ab8a51645a83774371fe55f9, type: 2}
     - {fileID: 11400000, guid: ba874eaf7ebd1c442b578cafc6e0b469, type: 2}
-    - {fileID: 11400000, guid: 9abe31b6583ddb44b82b2248ea1f4f99, type: 2}
+    - {fileID: 11400000, guid: 7fea9959ab8a51645a83774371fe55f9, type: 2}
+    - {fileID: 11400000, guid: 2a669681d75b3a448bd48183355d7958, type: 2}
     - {fileID: 11400000, guid: a91988f801f29bf418ddc93cfe96db07, type: 2}
     - {fileID: 11400000, guid: 9b40627ecf3b35a4a84117116e0e2f8d, type: 2}
-    - {fileID: 11400000, guid: 2a669681d75b3a448bd48183355d7958, type: 2}
+    - {fileID: 11400000, guid: ac72904e4a3b45f4787eda499468ee71, type: 2}
+    - {fileID: 11400000, guid: 9abe31b6583ddb44b82b2248ea1f4f99, type: 2}
   unlockedCharacters: []
   unlockableAtStart:
   - {fileID: 11400000, guid: ac72904e4a3b45f4787eda499468ee71, type: 2}

@@ -20,11 +20,22 @@ public class PlayerInfoEditor : Editor
 
     void checkPlayerInfo(PlayerInfo info)
     {
+        List<CharacterInfo> characters = info.characterSelection.itemList;
+        //Ensure all characters have unique IDs
+        foreach (CharacterInfo charInfo in characters)
+        {
+            if (characters.Any(chr =>
+                chr != charInfo && chr.characterID == charInfo.characterID
+            ))
+            {
+                Debug.LogWarning($"Character {charInfo.name} has a duplicate ID: {charInfo.characterID}");
+            }
+        }
         //Sort character list
-        info.characterSelection.itemList = info.characterSelection.itemList
-            .OrderBy(charInfo => charInfo.characterName).ToList();
+        info.characterSelection.itemList = characters = characters
+            .OrderBy(charInfo => charInfo.characterID).ToList();
         //Ensure color list has all character default colors
-        foreach (CharacterInfo charInfo in info.characterSelection.itemList)
+        foreach (CharacterInfo charInfo in characters)
         {
             if (!info.warmColorSelection.Contains(charInfo.defaultColor)
                 && !info.coolColorSelection.Contains(charInfo.defaultColor)
