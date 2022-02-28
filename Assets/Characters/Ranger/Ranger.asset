@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Ranger
   m_EditorClassIdentifier: 
   characterName: Ranger
+  characterID: 7
   sprite: {fileID: 21300000, guid: 06a7286ebd463cf40b19893b1215ef58, type: 3}
   defaultColor: {r: 0.2784314, g: 0.6392157, b: 0.5176471, a: 1}
   portrait: {fileID: 21300000, guid: 06a7286ebd463cf40b19893b1215ef58, type: 3}

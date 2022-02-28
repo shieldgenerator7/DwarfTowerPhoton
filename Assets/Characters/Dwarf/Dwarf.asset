@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Dwarf
   m_EditorClassIdentifier: 
   characterName: Dwarf
+  characterID: 1
   sprite: {fileID: 21300000, guid: cc004020a081e484186724007bd0a077, type: 3}
   defaultColor: {r: 0.65882355, g: 0.3254902, b: 0.17254902, a: 1}
   portrait: {fileID: 21300000, guid: cc004020a081e484186724007bd0a077, type: 3}

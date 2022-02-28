@@ -6,6 +6,7 @@ using UnityEngine;
 public class CharacterInfo : ScriptableObject
 {
     public string characterName;
+    public int characterID;
     public Sprite sprite;
     public Color defaultColor = Color.white;
     public Sprite portrait;
