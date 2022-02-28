@@ -22,8 +22,10 @@ MonoBehaviour:
       size: 0
     statusLayer:
       statusList: 
-    settings: []
+    settings:
+    - setting: 0
+      value: 0
   trigger: 1
   condition: {fileID: 0}
   actions:
-  - {fileID: 11400000, guid: 504a17c126fbc534e869f4239be74768, type: 2}
+  - {fileID: 11400000, guid: bec41db34fbf9d04c94ab62751885460, type: 2}
