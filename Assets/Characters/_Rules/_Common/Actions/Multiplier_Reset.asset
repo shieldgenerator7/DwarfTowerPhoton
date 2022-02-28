@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f80e06485bd26546aa3f6695de9cb16, type: 3}
   m_Name: Multiplier_Reset
   m_EditorClassIdentifier: 
-  action: 1
+  variable: 0
+  source: 0
