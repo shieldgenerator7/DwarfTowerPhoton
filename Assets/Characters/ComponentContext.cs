@@ -20,6 +20,7 @@ public class ComponentContext : MonoBehaviour
     public StatKeeper statKeeper { get; private set; }
     public StatusKeeper statusKeeper { get; private set; }
     public StatusAutoEnder statusAutoEnder { get; private set; }
+    public MovementKeeper movementKeeper { get; private set; }
     public ObjectSpawner objectSpawner { get; private set; }
     public SpriteRenderer sr { get; private set; }
     public TeamToken teamToken { get; private set; }
@@ -49,6 +50,7 @@ public class ComponentContext : MonoBehaviour
             statusAutoEnder = gameObject.FindComponent<StatusAutoEnder>();
             statusAutoEnder?.Init(statusKeeper);
         }
+        movementKeeper = gameObject.FindComponent<MovementKeeper>();
         teamToken = gameObject.FindComponent<TeamToken>();
     }
 }
