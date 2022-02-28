@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: -8089562267027945512}
   - component: {fileID: -4825811880647701801}
   - component: {fileID: 8244142121089355730}
+  - component: {fileID: 8084598822697241869}
   m_Layer: 0
   m_Name: scythe_arm_left
   m_TagString: Untagged
@@ -339,5 +340,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5be985794bfe9a54abe79c147869abd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8084598822697241869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7945890412803988767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a41cbc6ba290faa48853f8638d8bd852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
