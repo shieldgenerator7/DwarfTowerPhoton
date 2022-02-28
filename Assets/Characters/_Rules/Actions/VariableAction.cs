@@ -16,6 +16,9 @@ public class VariableAction : RuleAction
     {
         RESET,
         RESERVED_AMINA,
+        CONTROLLER_POS,
+        CONTROLLER_LOOK_DIR,
+        CURSOR_POS,
     }
     public Source source;
 
@@ -41,6 +44,18 @@ public class VariableAction : RuleAction
                     factor = Mathf.Min(factor, maxFactor.Value);
                 }
                 sourceFloat = factor;
+                break;
+            case Source.CONTROLLER_POS:
+                sourceVector = compContext.teamToken.controller.transform.position;
+                break;
+            case Source.CONTROLLER_LOOK_DIR:
+                sourceVector = compContext.teamToken.controller
+                    .gameObject.FindComponent<PlayerController>()?
+                    .LookDirection
+                    ?? compContext.teamToken.controller.transform.up;
+                break;
+            case Source.CURSOR_POS:
+                sourceVector = Utility.MouseWorldPos;
                 break;
             default:
                 throw new System.ArgumentException($"Unknown source enum: {source}");
