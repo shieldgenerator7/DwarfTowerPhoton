@@ -10,7 +10,11 @@ public class MovementKeeper : MonoBehaviour
     public Vector2 MovementVector
     {
         get => moveV;
-        private set => moveV = value;
+        private set
+        {
+            moveV = value;
+            compContext.rb2d.velocity = moveV;
+        }
     }
 
     private ComponentContext compContext;
@@ -21,20 +25,16 @@ public class MovementKeeper : MonoBehaviour
         compContext = gameObject.FindComponent<ComponentContext>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        compContext.rb2d.velocity = Vector2.zero;
-    }
-
     public void AddLayer(int id, MovementLayer layer)
     {
         layers.Add(id, layer);
+        UpdateMovement();
     }
 
     public void RemoveLayer(int id)
     {
         layers.Remove(id);
+        UpdateMovement();
     }
 
     private void UpdateMovement()
