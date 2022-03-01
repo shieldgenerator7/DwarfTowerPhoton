@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "VariableAction", menuName = "Rule/Action/VariableAction", order = 0)]
-public class FloatVariableAction : RuleAction
+public class FloatVariableAction : VariableAction
 {
     public enum Variable
     {
@@ -22,7 +22,7 @@ public class FloatVariableAction : RuleAction
     }
     public Source source;
 
-    public override void TakeAction(RuleSettings settings, ref RuleContext context)
+    protected override object GetSource(RuleSettings settings, RuleContext context)
     {
         Vector2 sourceVector = Vector2.zero;
         float sourceFloat = 0;
@@ -60,6 +60,13 @@ public class FloatVariableAction : RuleAction
             default:
                 throw new System.ArgumentException($"Unknown source enum: {source}");
         }
+        return sourceFloat;
+    }
+
+    protected override void SetVariable(object source, RuleSettings settings, ref RuleContext context)
+    {
+        float sourceFloat = (float)source;
+        Vector2 sourceVector = (Vector2)source;
         switch (variable)
         {
             case Variable.MULTIPLIER:
