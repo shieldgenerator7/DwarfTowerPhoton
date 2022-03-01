@@ -26,6 +26,9 @@ public struct RuleContext
     //RuleSet
     public RuleSet lastDeactivatedRuleSet;
     public Dictionary<RuleSet, RuleSetAction> ruleSetActions;
+    //Build Option
+    public BuildAction buildAction;
+
     public enum RuleSetAction
     {
         ACTIVATE,
@@ -57,5 +60,7 @@ public struct RuleContext
         //RuleSet
         lastDeactivatedRuleSet = template.lastDeactivatedRuleSet;
         ruleSetActions = template.ruleSetActions;
+        //Build Option
+        buildAction = template.buildAction;
     }
 }
