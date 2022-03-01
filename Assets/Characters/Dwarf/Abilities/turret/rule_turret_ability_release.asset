@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 103c9701c2e720d40975a17d87d69018, type: 3}
+  m_Name: rule_turret_ability_release
+  m_EditorClassIdentifier: 
+  settings:
+    targetRuleSet: {fileID: 0}
+    statLayer:
+      moveSpeed: -1
+      maxHits: 2
+      fireRate: -1
+      damage: -1
+      size: -1
+    statusLayer:
+      statusList: 
+    settings:
+    - setting: 0
+      value: 5
+    - setting: 3
+      value: 1
+    - setting: 4
+      value: 1
+    - setting: 5
+      value: 2
+    - setting: 6
+      value: 4
+  trigger: 14
+  condition: {fileID: 11400000, guid: 01f71cb7546e749448ffa594e0cb254c, type: 2}
+  actions:
+  - {fileID: 11400000, guid: de1a005dcf8c2c349b5cd7c96572dcc8, type: 2}
+  - {fileID: 11400000, guid: f7b0c8998809ede4ca957271b5e88497, type: 2}
+  - {fileID: 11400000, guid: 3e0344af5e1ea3742929975d0ab8c81d, type: 2}
+  - {fileID: 11400000, guid: 237ac064e9c9c9641a4137785b0654f4, type: 2}
+  - {fileID: 11400000, guid: 7d3d60ff281051041b1da0de83665712, type: 2}

@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 045d8cb26bfa18d4da24cfafe6d3aa77, type: 3}
-  m_Name: _ruleset_turret
+  m_Script: {fileID: 11500000, guid: b96b25e5e59379e45b0df3fb4232ee23, type: 3}
+  m_Name: Ability2_Up
   m_EditorClassIdentifier: 
-  activeAtStart: 1
-  rules:
-  - {fileID: 11400000, guid: e6fb4f6fbab5a474784c13ab2aa4e25a, type: 2}
-  - {fileID: 11400000, guid: b56c3ffd89f48614bad985aecdf6621e, type: 2}
+  inputButton: 1
+  buttonState: 3

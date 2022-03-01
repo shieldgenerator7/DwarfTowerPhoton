@@ -97,7 +97,6 @@ GameObject:
   - component: {fileID: 5266211150224624211}
   - component: {fileID: 9054219935922080546}
   - component: {fileID: 28949713375621149}
-  - component: {fileID: 8900848068500719195}
   - component: {fileID: 8462698113836878803}
   - component: {fileID: -3971592130311145016}
   - component: {fileID: 7080481937592657129}
@@ -106,10 +105,10 @@ GameObject:
   - component: {fileID: 5458094202363891010}
   - component: {fileID: 2548912992347303718}
   - component: {fileID: -4729380061343258715}
-  - component: {fileID: -9017585992711736872}
   - component: {fileID: 5337272002444169371}
   - component: {fileID: 7093554871414525080}
   - component: {fileID: -7450158364701454185}
+  - component: {fileID: 1604381972977192157}
   m_Layer: 0
   m_Name: turret
   m_TagString: Untagged
@@ -247,33 +246,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.75, y: 0.56}
   m_EdgeRadius: 0
---- !u!114 &8900848068500719195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8932977619223931669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 839612296d1b84f40bdcaa568ab44222, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statBase:
-    moveSpeed: 0
-    maxHits: 5
-    fireRate: -1
-    damage: 1
-    size: 1
-  destroyOnIndestructible: 1
-  multiplierLayer:
-    moveSpeed: -1
-    maxHits: 2
-    fireRate: -1
-    damage: 1
-    size: 1
-  previewSprite: {fileID: 21300000, guid: 367e31a78900a534185e5da7b8525f6d, type: 3}
-  aminaRefund: 20
 --- !u!114 &8462698113836878803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,23 +363,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24076d868ace5cb44bd253f181ccc375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-9017585992711736872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8932977619223931669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbb34bdc9fc63f41a859d4e6c6ae4c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
-  damagableTypes: 00000000
-  damageOnTrigger: 1
-  damageOnCollide: 1
-  damageFriendlies: 0
 --- !u!114 &5337272002444169371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -446,3 +401,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a41cbc6ba290faa48853f8638d8bd852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1604381972977192157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932977619223931669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f96f42a2284699644a5ecf1072c16723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selfStats:
+    statBase:
+      moveSpeed: 0
+      maxHits: 1
+      fireRate: 0.5
+      damage: 1
+      size: 1
