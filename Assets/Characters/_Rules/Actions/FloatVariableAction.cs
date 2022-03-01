@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "VariableAction", menuName = "Rule/Action/VariableAction", order = 0)]
-public class VariableAction : RuleAction
+public class FloatVariableAction : RuleAction
 {
     public enum Variable
     {
