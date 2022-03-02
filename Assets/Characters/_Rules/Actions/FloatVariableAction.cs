@@ -24,7 +24,7 @@ public class FloatVariableAction : VariableAction
         {
             case Source.RESET:
                 //TODO: make specific resets for each variable (need separate if statement)
-                return 1;
+                return 1.0f;
             case Source.RESERVED_AMINA:
                 float reservedAmina = compContext.aminaPool.ReservedAmina;
                 float minAmina = settings.Get(RuleSetting.Option.AMINA_COST);

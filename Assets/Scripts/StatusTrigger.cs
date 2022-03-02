@@ -12,10 +12,12 @@ public class StatusTrigger : MonoBehaviour
 
     private PhotonView PV;
     private Collider2D coll2d;
+    private int viewId;
 
     private void Start()
     {
         PV = gameObject.FindComponent<PhotonView>();
+        viewId = PV.ViewID;
         coll2d = GetComponent<Collider2D>();
     }
 
@@ -40,14 +42,15 @@ public class StatusTrigger : MonoBehaviour
         if (statusKeeper)
         {
             bool posReq = !requirePositionInTrigger
+                || !coll2d
                 || coll2d.OverlapPoint(go.transform.position);
             if (grant && posReq)
             {
-                statusKeeper.addLayer(PV.ViewID, statusToGrant.Copy());
+                statusKeeper.addLayer(viewId, statusToGrant.Copy());
             }
             else
             {
-                statusKeeper.removeLayer(PV.ViewID);
+                statusKeeper.removeLayer(viewId);
             }
         }
     }

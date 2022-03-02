@@ -85,8 +85,11 @@ public class RuleProcessor : MonoBehaviour
             statusKeeper.onStatusChanged += (status) => ProcessRules(RuleTrigger.OnStatusChanged);
         }
         //Controller
-        componentContext.teamToken.onControllerGainedControl += setController;
-        setController(componentContext.teamToken.controller);
+        if (componentContext.teamToken)
+        {
+            componentContext.teamToken.onControllerGainedControl += setController;
+            setController(componentContext.teamToken.controller);
+        }
     }
 
     private void setController(TeamToken ttController)

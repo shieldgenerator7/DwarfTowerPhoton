@@ -84,25 +84,25 @@ public class MapMarkerManager : MonoBehaviour
         return marker;
     }
 
-    public static void DestroyMapMarker(PhotonView placer)
+    public static void DestroyMapMarker(int viewID)
     {
-        instance.DestroyMapMarkerNow(placer);
+        instance.DestroyMapMarkerNow(viewID);
         //RPC
         instance.PV.RPC(
             "RPC_DestroyMapMarker",
             RpcTarget.Others,
-            placer.ViewID
+            viewID
             );
     }
 
-    private void DestroyMapMarkerNow(PhotonView placer)
+    private void DestroyMapMarkerNow(int viewID)
     {
-        if (mapMarkerMap.ContainsKey(placer.ViewID))
+        if (mapMarkerMap.ContainsKey(viewID))
         {
             //Destroy marker
-            Destroy(mapMarkerMap[placer.ViewID].gameObject);
+            Destroy(mapMarkerMap[viewID].gameObject);
             //Remove from list
-            mapMarkerMap.Remove(placer.ViewID);
+            mapMarkerMap.Remove(viewID);
         }
     }
 
@@ -127,6 +127,10 @@ public class MapMarkerManager : MonoBehaviour
 
     private bool CanCreateMapMarker(PhotonView placerPV, MapMarkerPermission permission)
     {
+        if (!placerPV)
+        {
+            return false;
+        }
         TeamToken placer = TeamToken.getTeamToken(placerPV.gameObject);
         switch (permission)
         {
@@ -174,8 +178,6 @@ public class MapMarkerManager : MonoBehaviour
     [PunRPC]
     void RPC_DestroyMapMarker(int placerId)
     {
-        DestroyMapMarkerNow(
-            PhotonView.Find(placerId)
-            );
+        DestroyMapMarkerNow(placerId);
     }
 }

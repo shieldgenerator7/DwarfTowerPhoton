@@ -26,7 +26,7 @@ public class ComponentContext : MonoBehaviour
     public TeamToken teamToken { get; private set; }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         InitializeComponents();
     }

@@ -46,21 +46,23 @@ public class TrapController : ShotController
             (Vector2)transform.position + (Vector2.up * 0.5f),
             trapMarkerInfo
             );
+        int viewID = PV.ViewID;
+        bool pvMine = PV.IsMine;
         TimerManager.StartTimer(trapDuration, () =>
         {
             //untrap player
-            trappedPlayer.statusKeeper.removeLayer(PV.ViewID);
+            trappedPlayer.statusKeeper.removeLayer(viewID);
             //destroy trap
-            if (PV.IsMine)
+            if (pvMine && gameObject)
             {
                 health.Health = 0;
+                //Make it disappear even if it doesn't actually get destroyed
+                gameObject.FindComponent<SpriteRenderer>().enabled = false;
+                gameObject.FindComponent<Collider2D>().enabled = false;
+                this.enabled = false;
             }
-            //Make it disappear even if it doesn't actually get destroyed
-            gameObject.FindComponent<SpriteRenderer>().enabled = false;
-            gameObject.FindComponent<Collider2D>().enabled = false;
-            this.enabled = false;
             //Destroy marker
-            MapMarkerManager.DestroyMapMarker(PV);
+            MapMarkerManager.DestroyMapMarker(viewID);
         });
     }
 }
