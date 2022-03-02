@@ -81,6 +81,12 @@ public class CaravanController : MonoBehaviour
             if (rchGO.CompareTag("Player"))
             {
                 TeamToken tt = TeamToken.getTeamToken(rchGO);
+                if (!tt.teamCaptain)
+                {
+                    //don't process players who have just spawned in
+                    //and who have not been assigned a team yet
+                    continue;
+                }
                 HealthPool healthPool = rchGO.GetComponentInChildren<HealthPool>();
                 if (healthPool)
                 {
