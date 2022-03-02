@@ -163,25 +163,6 @@ public abstract class PlayerController : MonoBehaviour
             //Stealthed
             bool stealthed = status.Has(StatusEffect.STEALTHED);
             sr.color = sr.color.setAlpha((stealthed) ? 0.1f : 1);
-            //Rooted
-            bool rooted = status.Has(StatusEffect.ROOTED);
-            if (playerMovement.ForcingMovement != rooted
-            || rooted && playerMovement.ForceMoveDirection.magnitude > 0)
-            {
-                if (rooted)
-                {
-                    playerMovement.forceMovement(Vector2.zero, rooted);
-                    cancelAbilities();
-                    context.movementKeeper.Clear();
-                }
-                else
-                {
-                    if (playerMovement.ForceMoveDirection == Vector2.zero)
-                    {
-                        playerMovement.forceMovement(false);
-                    }
-                }
-            }
         };
         //StatKeeper
         statKeeper.selfStats.onStatChanged += (stats) =>
