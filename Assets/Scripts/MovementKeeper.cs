@@ -17,6 +17,17 @@ public class MovementKeeper : MonoBehaviour
         }
     }
 
+    private bool movementAllowed = true;
+    public bool MovementAllowed
+    {
+        get => movementAllowed;
+        set
+        {
+            movementAllowed = value;
+            UpdateMovement();
+        }
+    }
+
     private ComponentContext compContext;
 
     // Start is called before the first frame update
@@ -52,11 +63,18 @@ public class MovementKeeper : MonoBehaviour
 
     private void UpdateMovement()
     {
-        MovementLayer layer = new MovementLayer();
-        foreach (var entry in layers)
+        if (movementAllowed)
         {
-            layer = layer.Add(entry.Value);
+            MovementLayer layer = new MovementLayer();
+            foreach (var entry in layers)
+            {
+                layer = layer.Add(entry.Value);
+            }
+            MovementVector = layer.movementVector;
         }
-        MovementVector = layer.movementVector;
+        else
+        {
+            MovementVector = Vector2.zero;
+        }
     }
 }
