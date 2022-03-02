@@ -63,7 +63,7 @@ public class BuildVariableAction : VariableAction
         }
         if (variables.Contains(Variable.BUILD_TARGET))
         {
-            context.target = sourceObj.Item2.FindComponent<ComponentContext>();
+            context.target = sourceObj.Item2?.FindComponent<ComponentContext>() ?? null;
         }
         if (variables.Contains(Variable.BUILD_ACTION))
         {
@@ -139,7 +139,7 @@ public class BuildVariableAction : VariableAction
             }
         }
 
-        return (targetObject.transform.position, targetObject, buildAction);
+        return (targetObject?.transform.position ?? position, targetObject, buildAction);
     }
 
     private GameObject getClosestObject(Vector2 position, float range, Predicate<GameObject> searchFunc)
@@ -159,7 +159,13 @@ public class BuildVariableAction : VariableAction
             return hp && !entityTypesToDetect.Contains(hp.entityType);
         });
         goList.RemoveAll(go => !searchFunc(go));
-        return goList.Aggregate((closest, current) => closestGameObject(position, closest, current));
+        if (goList.Count > 0)
+        {
+            return goList.Aggregate(
+                (closest, current) => closestGameObject(position, closest, current)
+                );
+        }
+        return null;
     }
 
     private GameObject closestGameObject(Vector2 position, GameObject go1, GameObject go2)
