@@ -161,6 +161,7 @@ public class RuleProcessor : MonoBehaviour
             target = collision.gameObject.FindComponent<ComponentContext>(),
             isCollision = true,
         };
+        initialContext.target = context.target;
         if (!context.target)
         {
             throw new UnityException(
@@ -177,6 +178,7 @@ public class RuleProcessor : MonoBehaviour
             target = coll2d.gameObject.FindComponent<ComponentContext>(),
             isTrigger = true,
         };
+        initialContext.target = context.target;
         if (!context.target)
         {
             throw new UnityException(

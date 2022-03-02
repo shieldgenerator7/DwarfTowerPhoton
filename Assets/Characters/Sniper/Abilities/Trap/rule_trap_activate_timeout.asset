@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 103c9701c2e720d40975a17d87d69018, type: 3}
+  m_Name: rule_trap_activate_timeout
+  m_EditorClassIdentifier: 
+  settings:
+    targetRuleSet: {fileID: 0}
+    statLayer:
+      moveSpeed: 0
+      maxHits: 0
+      fireRate: 0
+      damage: 0
+      size: 0
+    statusLayer:
+      statusList: 02000000
+    settings:
+    - setting: 3
+      value: 2
+    - setting: 5
+      value: 2
+  trigger: 1
+  condition: {fileID: 11400000, guid: 60e2c2238f3a92248a85bc8cdb4edb57, type: 2}
+  actions:
+  - {fileID: 11400000, guid: 2dbbff54a7f8a434db3141442dece153, type: 2}
+  - {fileID: 11400000, guid: 504a17c126fbc534e869f4239be74768, type: 2}

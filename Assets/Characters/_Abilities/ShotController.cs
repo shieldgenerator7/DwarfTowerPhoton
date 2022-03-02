@@ -129,7 +129,7 @@ public class ShotController : MonoBehaviour
             }
         }
         //Damage
-        if (statLayer.damage != StatLayer.STAT_IGNORE)
+        if (damager && statLayer.damage != StatLayer.STAT_IGNORE)
         {
             damager.damage = statLayer.damage;
         }

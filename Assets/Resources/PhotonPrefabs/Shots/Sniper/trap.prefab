@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 385}
   - component: {fileID: 521}
   - component: {fileID: 505}
-  - component: {fileID: 2772918707457722282}
   - component: {fileID: -845759806725884248}
   - component: {fileID: 8607324368715294403}
   - component: {fileID: -6234418246032743369}
@@ -20,9 +19,10 @@ GameObject:
   - component: {fileID: 508065936224665636}
   - component: {fileID: -1605777544747620558}
   - component: {fileID: 1514994493904205255}
-  - component: {fileID: 7406342495784987469}
   - component: {fileID: -80605263858932597}
   - component: {fileID: -5951891357194967242}
+  - component: {fileID: 2822505425075554077}
+  - component: {fileID: -3397103630570215110}
   m_Layer: 0
   m_Name: trap
   m_TagString: Untagged
@@ -113,28 +113,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.7
---- !u!114 &2772918707457722282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b771344368955d47973f4b1f6b0c285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statBase:
-    moveSpeed: 0
-    maxHits: 1
-    fireRate: -1
-    damage: 1
-    size: 1
-  destroyOnIndestructible: 1
-  trapDuration: 5
-  trapTypes: 02000000
-  trapMarkerInfo: {fileID: 11400000, guid: 57a5943aa6615d744ba6754db8b30a9f, type: 2}
 --- !u!114 &-845759806725884248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,23 +235,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24076d868ace5cb44bd253f181ccc375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7406342495784987469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbb34bdc9fc63f41a859d4e6c6ae4c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
-  damagableTypes: 0100000000000000
-  damageOnTrigger: 1
-  damageOnCollide: 1
-  damageFriendlies: 0
 --- !u!114 &-80605263858932597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,3 +259,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a41cbc6ba290faa48853f8638d8bd852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2822505425075554077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5425ba304f6ea54f89ea7c2e72b7d54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ruleSets:
+  - {fileID: 11400000, guid: 2834e0191ba40ea41bbbc7a60c03b7ba, type: 2}
+  - {fileID: 11400000, guid: 2b952a39899126d40b758d7e524e16bc, type: 2}
+  - {fileID: 11400000, guid: f1f14f1f5499ea54d985e9727ed244d8, type: 2}
+--- !u!114 &-3397103630570215110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f96f42a2284699644a5ecf1072c16723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selfStats:
+    statBase:
+      moveSpeed: 0
+      maxHits: 1
+      fireRate: -1
+      damage: 1
+      size: 1
