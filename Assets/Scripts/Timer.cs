@@ -9,6 +9,7 @@ public class Timer
     private float time;
 
     private bool shouldReset = false;
+    private bool shouldCancel = false;
 
     public bool Completed => time >= startTime + duration;
 
@@ -31,6 +32,12 @@ public class Timer
         {
             onTimerCompleted?.Invoke();
         }
+        if (shouldCancel)
+        {
+            this.time = time;
+            this.startTime = time;
+            this.duration = 0;
+        }
     }
     public delegate void OnTimerCompleted();
     public event OnTimerCompleted onTimerCompleted;
@@ -38,5 +45,10 @@ public class Timer
     public void reset()
     {
         shouldReset = true;
+    }
+
+    public void cancel()
+    {
+        shouldCancel = true;
     }
 }

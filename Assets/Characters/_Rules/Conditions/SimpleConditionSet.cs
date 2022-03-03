@@ -10,14 +10,13 @@ public class SimpleConditionSet : ConditionSet
     {
         AMINA_COST,
         AMINA_COST_PER_SECOND,
+        [Tooltip("[deprecated] Use TimerAction and TimerCondition instead")]
         TIMER,
         RESERVED_AMINA_COST,
         STATIONARY,
         MOVING,
     }
     public List<Option> simpleConditions;
-
-    private Timer timer;
 
     public override bool? CheckAdditional(RuleSettings settings, RuleContext context)
     {
@@ -49,16 +48,6 @@ public class SimpleConditionSet : ConditionSet
                 case Option.RESERVED_AMINA_COST:
                     float minReservedAmina = settings.Get(RuleSetting.Option.AMINA_COST);
                     return compContext.aminaPool.ReservedAmina >= minReservedAmina;
-                case Option.TIMER:
-                    if (timer == null)
-                    {
-                        timer = TimerManager.StartTimer(
-                            settings.Get(RuleSetting.Option.ACTIVATE_DELAY),
-                            () => timer = null
-                            );
-                        return true;
-                    }
-                    return false;
                 case Option.STATIONARY:
                     return !compContext.rb2d.isMoving();
                 case Option.MOVING:

@@ -17,6 +17,7 @@ public struct RuleContext
     public bool isCollision;
     //Update
     public float deltaTime;
+    public Timer timer;
     //Input
     public InputState inputState;
     //Multiplier
@@ -51,6 +52,7 @@ public struct RuleContext
         this.isCollision = template.isCollision;
         //Update
         this.deltaTime = template.deltaTime;
+        this.timer = template.timer;
         //Input
         this.inputState = template.inputState;
         //Multiplier
