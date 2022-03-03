@@ -44,7 +44,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6220889621231917683}
-  - {fileID: 1913788795788701171}
   - {fileID: 8736292213951035431}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -157,7 +156,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilities:
   - {fileID: 5940706724890032380}
-  - {fileID: 7965155679531435341}
   - {fileID: 8666854124826083951}
 --- !u!114 &3854592228582004885
 MonoBehaviour:
@@ -339,62 +337,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ruleSets:
-  - {fileID: 11400000, guid: edb795e8b31046f4698dda4618fa38ef, type: 2}
+  - {fileID: 11400000, guid: 64ba9da2ea67ca0449dc97b6a25676e2, type: 2}
   - {fileID: 11400000, guid: 61bd4fd6b45a9b74ca343e444d74d595, type: 2}
   - {fileID: 11400000, guid: 2b952a39899126d40b758d7e524e16bc, type: 2}
   - {fileID: 11400000, guid: f1f14f1f5499ea54d985e9727ed244d8, type: 2}
---- !u!1 &2299017120802892305
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1913788795788701171}
-  - component: {fileID: 7965155679531435341}
-  m_Layer: 0
-  m_Name: Trap
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1913788795788701171
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2299017120802892305}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1073061482865175048}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7965155679531435341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2299017120802892305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83413c13fefadf64bab9596e5332f75f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityName: Trap
-  aminaCost: 10
-  abilitySlot: 1
-  hidesOtherInputs: 0
-  abilityID: 3
-  fireDelay: 0.5
-  angle: 0
-  shotIndex: 1
 --- !u!1 &3107006109710722385
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,7 +371,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1073061482865175048}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8666854124826083951
 MonoBehaviour:
