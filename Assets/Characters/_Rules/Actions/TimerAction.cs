@@ -17,16 +17,9 @@ public class TimerAction : RuleAction
         switch (option)
         {
             case Option.START:
-                if (context.timer == null)
-                {
-                    context.timer = TimerManager.StartTimer(
-                        settings.Get(RuleSetting.Option.ACTIVATE_DELAY)
-                        );
-                }
-                else
-                {
-                    context.timer.reset();
-                }
+                context.timer = TimerManager.StartTimer(
+                    settings.Get(RuleSetting.Option.ACTIVATE_DELAY)
+                    );
                 break;
             case Option.CANCEL:
                 context.timer?.cancel();
