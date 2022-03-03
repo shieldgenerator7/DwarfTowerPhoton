@@ -8,7 +8,7 @@ public class RuleProcessor : MonoBehaviour
 {
     public List<RuleSet> ruleSets;
 
-    public RuleContext initialContext;
+    public RuleContext ruleContext;
     private ComponentContext componentContext;
 
     private HashSet<RuleSet> activeRuleSets = new HashSet<RuleSet>();
@@ -23,7 +23,7 @@ public class RuleProcessor : MonoBehaviour
 
     public void Init(Vector2 dir, Vector2 pos)
     {
-        initialContext = new RuleContext()
+        ruleContext = new RuleContext()
         {
             targetDir = dir.normalized,
             targetPos = pos,
@@ -38,10 +38,10 @@ public class RuleProcessor : MonoBehaviour
         componentContext = gameObject.FindComponent<ComponentContext>();
         componentContext.InitializeComponents();
         //Initialize context
-        initialContext.deltaTime = 1;
-        initialContext.componentContext = componentContext;
-        initialContext.statMultiplier = 1;
-        initialContext.ruleSetActions = new Dictionary<RuleSet, RuleContext.RuleSetAction>();
+        ruleContext.deltaTime = 1;
+        ruleContext.componentContext = componentContext;
+        ruleContext.statMultiplier = 1;
+        ruleContext.ruleSetActions = new Dictionary<RuleSet, RuleContext.RuleSetAction>();
     }
 
     private bool _registeredDelegates = false;
@@ -123,120 +123,92 @@ public class RuleProcessor : MonoBehaviour
         ruleSets.FindAll(rs => rs.activeAtStart)
             .ForEach(rs => activeRuleSets.Add(rs));
         //Process rules
-        ProcessRules(RuleTrigger.OnStart, initialContext);
+        ProcessRules(RuleTrigger.OnStart);
     }
 
     // Update is called once per frame
     void Update()
     {
-        RuleContext context = new RuleContext(initialContext)
-        {
-            deltaTime = Time.deltaTime,
-        };
-        ProcessRules(RuleTrigger.OnUpdate, context);
+        ruleContext.deltaTime = Time.deltaTime;
+        ProcessRules(RuleTrigger.OnUpdate);
     }
 
     private void OnInputChanged(InputState input)
     {
-        initialContext.inputState = input;
-        RuleContext context = new RuleContext(initialContext)
-        {
-        };
-        ProcessRules(RuleTrigger.OnInputChanged, context);
+        ruleContext.inputState = input;
+        ProcessRules(RuleTrigger.OnInputChanged);
     }
 
     private void OnControllerInputChanged(InputState input)
     {
-        RuleContext context = new RuleContext(initialContext)
-        {
-            inputState = input,
-        };
-        ProcessRules(RuleTrigger.OnControllerInputChanged, context);
+        ruleContext.inputState = input;
+        ProcessRules(RuleTrigger.OnControllerInputChanged);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        RuleContext context = new RuleContext(initialContext)
-        {
-            target = collision.gameObject.FindComponent<ComponentContext>(),
-            isCollision = true,
-        };
-        initialContext.target = context.target;
-        if (!context.target)
+        ruleContext.target = collision.gameObject.FindComponent<ComponentContext>();
+        ruleContext.isCollision = true;
+        if (!ruleContext.target)
         {
             throw new UnityException(
                 $"GameObject {collision.gameObject.name} does not have a ComponentContext!"
                 );
         }
-        ProcessRules(RuleTrigger.OnHit, context);
+        ProcessRules(RuleTrigger.OnHit);
     }
 
     private void OnTriggerEnter2D(Collider2D coll2d)
     {
-        RuleContext context = new RuleContext(initialContext)
-        {
-            target = coll2d.gameObject.FindComponent<ComponentContext>(),
-            isTrigger = true,
-        };
-        initialContext.target = context.target;
-        if (!context.target)
+        ruleContext.target = coll2d.gameObject.FindComponent<ComponentContext>();
+        ruleContext.isTrigger = true;
+        if (!ruleContext.target)
         {
             throw new UnityException(
                 $"GameObject {coll2d.gameObject.name} does not have a ComponentContext!"
                 );
         }
-        ProcessRules(RuleTrigger.OnHit, context);
+        ProcessRules(RuleTrigger.OnHit);
     }
 
     private void OnAminaEmpty(float amina)
     {
-        RuleContext context = new RuleContext(initialContext)
-        {
-        };
-        ProcessRules(RuleTrigger.OnAminaEmpty, context);
+        ProcessRules(RuleTrigger.OnAminaEmpty);
     }
     private void OnAminaFull(float amina)
     {
-        RuleContext context = new RuleContext(initialContext)
-        {
-        };
-        ProcessRules(RuleTrigger.OnAminaFull, context);
+        ProcessRules(RuleTrigger.OnAminaFull);
     }
     #endregion
 
     #region Rule Processing
     private void ProcessRules(RuleTrigger trigger)
     {
-        ProcessRules(trigger, initialContext);
-    }
-    private void ProcessRules(RuleTrigger trigger, RuleContext context)
-    {
         activeRuleSets.ToList()
             .ForEach(ruleSet =>
         {
-            RuleContext currentContext = new RuleContext(context)
-            {
-                currentRuleSet = ruleSet,
-            };
+            ruleContext.currentRuleSet = ruleSet;
             ruleSet.rules
                 .FindAll(rule => rule.trigger == trigger)
-                .ForEach(rule => ProcessRule(rule, rule.settings, currentContext));
+                .ForEach(rule => ProcessRule(rule));
         });
     }
 
-    private void ProcessRule(Rule rule, RuleSettings settings, RuleContext context)
+    private void ProcessRule(Rule rule)
     {
-        bool canProcess = rule.condition?.Check(rule.settings, context) ?? true;
+        bool canProcess = rule.condition?.Check(rule.settings, ruleContext) ?? true;
         if (canProcess)
         {
-            rule.actions.ForEach(action => action.TakeAction(settings, ref context));
+            rule.actions.ForEach(
+                action => action.TakeAction(rule.settings, ref ruleContext)
+                );
         }
-        UpdateRuleSets(ref context);
+        UpdateRuleSets();
     }
 
-    private void UpdateRuleSets(ref RuleContext context)
+    private void UpdateRuleSets()
     {
-        foreach (var action in context.ruleSetActions)
+        foreach (var action in ruleContext.ruleSetActions)
         {
             RuleSet ruleSet = action.Key;
             RuleContext.RuleSetAction ruleSetAction = action.Value;
@@ -245,15 +217,15 @@ public class RuleProcessor : MonoBehaviour
                 case RuleContext.RuleSetAction.ACTIVATE:
                     ValidateRuleSet(ruleSet);
                     activeRuleSets.Add(ruleSet);
-                    if (context.lastDeactivatedRuleSet == ruleSet)
+                    if (ruleContext.lastDeactivatedRuleSet == ruleSet)
                     {
-                        context.lastDeactivatedRuleSet = null;
+                        ruleContext.lastDeactivatedRuleSet = null;
                     }
                     break;
                 case RuleContext.RuleSetAction.DEACTIVATE:
                     ValidateRuleSet(ruleSet);
                     activeRuleSets.Remove(ruleSet);
-                    context.lastDeactivatedRuleSet = ruleSet;
+                    ruleContext.lastDeactivatedRuleSet = ruleSet;
                     break;
                 case RuleContext.RuleSetAction.ADD:
                     activeRuleSets.Add(ruleSet);
@@ -265,9 +237,7 @@ public class RuleProcessor : MonoBehaviour
                     throw new System.ArgumentException($"RuleSetAction not known: {action.Value}");
             }
         }
-        context.ruleSetActions.Clear();
-        initialContext.lastDeactivatedRuleSet = initialContext.lastDeactivatedRuleSet
-            ?? context.lastDeactivatedRuleSet;
+        ruleContext.ruleSetActions.Clear();
     }
     #endregion
 
