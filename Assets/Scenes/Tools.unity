@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8c16f44b148984794dce4178755e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterIndex: 3
+  characterIndex: 0
   warmColorIndex: 1
   coolColorIndex: 0
   mapName: 14417

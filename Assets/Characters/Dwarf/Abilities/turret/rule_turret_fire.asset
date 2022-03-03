@@ -31,3 +31,4 @@ MonoBehaviour:
   condition: {fileID: 11400000, guid: d0f277e07e631da4583cea0e06d0aa7d, type: 2}
   actions:
   - {fileID: 11400000, guid: f7b0c8998809ede4ca957271b5e88497, type: 2}
+  - {fileID: 11400000, guid: 392639938c571264ebb6d8b03927936f, type: 2}
