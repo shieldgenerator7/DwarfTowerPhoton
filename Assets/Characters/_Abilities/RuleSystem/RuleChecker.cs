@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RuleChecker : MonoBehaviour
@@ -12,6 +14,36 @@ public class RuleChecker : MonoBehaviour
     public void checkRule()
     {
         errorList.Clear();
-        errorList.Add("Everything looks good");
+        Lines.ForEach(line => processLine(line));
+        if (errorList.Count == 0)
+        {
+            errorList.Add("Everything looks good");
+        }
+        else
+        {
+            errorList.Insert(0, $"{errorList.Count} Errors Found:");
+        }
+    }
+
+    private List<string> Lines
+        => rule.ruleText.Trim().Split('\n').ToList()
+            .ConvertAll(line => line.Trim());
+
+    private void processLine(string line)
+    {
+        if (line.EndsWith(":"))
+        {
+            processTrigger(line);
+        }
+    }
+
+    private void processTrigger(string line)
+    {
+        string triggerName = line.Split(":")[0];
+        RuleTrigger trigger;
+        if (!Enum.TryParse(triggerName, out trigger))
+        {
+            errorList.Add($"Unknown trigger: {triggerName}");
+        }
     }
 }

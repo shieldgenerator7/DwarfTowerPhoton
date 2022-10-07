@@ -27,7 +27,7 @@ public enum RuleTrigger
     OnStatsChanged,
     OnStatusChanged,
     //Input
-    OnInputChanged,
+    OnInput,
     //Controller Input
     //TODO: reorder these so they're grouped better
     OnControllerInputChanged,
