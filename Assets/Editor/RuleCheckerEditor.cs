@@ -12,7 +12,11 @@ public class RuleCheckerEditor : Editor
 
         RuleChecker rc = (target as RuleChecker);
 
-        if (GUILayout.Button("Test"))
+        if (GUILayout.Button("Find Rules"))
+        {
+            rc.findRule();
+        }
+        if (GUILayout.Button("Check for Errors"))
         {
             rc.checkRule();
         }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public class RuleChecker : MonoBehaviour
@@ -10,6 +11,24 @@ public class RuleChecker : MonoBehaviour
 
     private List<string> errorList;
     public List<string> ErrorList => errorList;
+
+    public void findRule()
+    {
+        //2022-10-07: copied from https://stackoverflow.com/a/56168544/2336212
+        List<Rule> ruleList = new List<Rule>();
+
+        string[] assetNames = AssetDatabase.FindAssets("");
+        foreach (string SOName in assetNames)
+        {
+            string SOpath = AssetDatabase.GUIDToAssetPath(SOName);
+            Rule rule = AssetDatabase.LoadAssetAtPath<Rule>(SOpath);
+            if (rule)
+            {
+                ruleList.Add(rule);
+            }
+        }
+        this.rule = ruleList.FirstOrDefault();
+    }
 
     public void checkRule()
     {
