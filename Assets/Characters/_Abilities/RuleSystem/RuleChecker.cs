@@ -7,7 +7,7 @@ using UnityEngine;
 public class RuleChecker : MonoBehaviour
 {
     public Rule rule;
-    
+
     private List<string> errorList;
     public List<string> ErrorList => errorList;
 
@@ -31,19 +31,33 @@ public class RuleChecker : MonoBehaviour
 
     private void processLine(string line)
     {
-        if (line.EndsWith(":"))
+        if (line.EndsWith(':'))
         {
             processTrigger(line);
+        }
+        if (line.EndsWith('?'))
+        {
+            processCondition(line);
         }
     }
 
     private void processTrigger(string line)
     {
-        string triggerName = line.Split(":")[0];
+        string triggerName = line.Split(':')[0];
         RuleTrigger trigger;
         if (!Enum.TryParse(triggerName, out trigger))
         {
             errorList.Add($"Unknown trigger: {triggerName}");
+        }
+    }
+
+    private void processCondition(string line)
+    {
+        string conditionName = line.Split('?', ' ')[0];
+        RuleCondition condition;
+        if (!Enum.TryParse(conditionName, out condition))
+        {
+            errorList.Add($"Unknown condition: {conditionName}");
         }
     }
 }
