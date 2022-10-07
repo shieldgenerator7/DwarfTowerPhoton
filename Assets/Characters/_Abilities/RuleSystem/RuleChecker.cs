@@ -31,6 +31,11 @@ public class RuleChecker : MonoBehaviour
 
     private void processLine(string line)
     {
+        if (line.StartsWith("//"))
+        {
+            //it's a comment, don't process it
+            return;
+        }
         if (line.EndsWith(':'))
         {
             processTrigger(line);
