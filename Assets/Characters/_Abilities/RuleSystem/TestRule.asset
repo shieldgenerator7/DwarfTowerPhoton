@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ability: {fileID: 11400000, guid: 95baccd883ba6e14983591a104e3fe17, type: 2}
   trigger: 16
-  ruleText: "onInput:\r\n    held Ability1?\r\n    timerOff?\r\n    amina?\r\n   
-    createObject\r\n    aminaUse\r\n    timerStart"
+  ruleText: "OnInput:\r\n    buttonHeld Ability1?\r\n    timerOff?\r\n    amina?\r\n   
+    createObject\r\n    aminaUse\r\n    timerStart\n    //setVar test 1\n    //getVar
+    test"
