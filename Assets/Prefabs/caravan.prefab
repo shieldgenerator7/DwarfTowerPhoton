@@ -384,6 +384,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 5805177630514372058}
     m_Modifications:
     - target: {fileID: 384031015222071944, guid: 34772a93e9992724b8ca94fef07cfb80,
@@ -487,6 +488,7 @@ PrefabInstance:
       value: CaravanMapMarkerBalloons
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 34772a93e9992724b8ca94fef07cfb80, type: 3}
 --- !u!4 &1169430140411286908 stripped
 Transform:

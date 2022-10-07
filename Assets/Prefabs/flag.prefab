@@ -562,6 +562,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: -253382281
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -722,6 +723,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 2786384882001015361}
     m_Modifications:
     - target: {fileID: 6676477719515564740, guid: 6d5780e7bf644764287281614e68f5b8,
@@ -790,6 +792,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d5780e7bf644764287281614e68f5b8, type: 3}
 --- !u!4 &5338754381130160366 stripped
 Transform:
@@ -802,6 +805,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 2786384882001015361}
     m_Modifications:
     - target: {fileID: 6676477719515564740, guid: 6d5780e7bf644764287281614e68f5b8,
@@ -865,6 +869,7 @@ PrefabInstance:
       value: Pedestal (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d5780e7bf644764287281614e68f5b8, type: 3}
 --- !u!114 &132774096999542089 stripped
 MonoBehaviour:
@@ -889,6 +894,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 2786384882001015361}
     m_Modifications:
     - target: {fileID: 6676477719515564740, guid: 6d5780e7bf644764287281614e68f5b8,
@@ -957,6 +963,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d5780e7bf644764287281614e68f5b8, type: 3}
 --- !u!4 &7245718594423349409 stripped
 Transform:
@@ -969,6 +976,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 2786384882001015361}
     m_Modifications:
     - target: {fileID: 6676477719515564740, guid: 6d5780e7bf644764287281614e68f5b8,
@@ -1032,6 +1040,7 @@ PrefabInstance:
       value: Pedestal (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d5780e7bf644764287281614e68f5b8, type: 3}
 --- !u!4 &2257776281823348936 stripped
 Transform:
@@ -1056,6 +1065,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 2786384882001015361}
     m_Modifications:
     - target: {fileID: 6676477719515564740, guid: 6d5780e7bf644764287281614e68f5b8,
@@ -1119,6 +1129,7 @@ PrefabInstance:
       value: Pedestal (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d5780e7bf644764287281614e68f5b8, type: 3}
 --- !u!4 &3134027041171449066 stripped
 Transform:
