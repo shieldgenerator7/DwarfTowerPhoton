@@ -35,9 +35,13 @@ public class RuleChecker : MonoBehaviour
         {
             processTrigger(line);
         }
-        if (line.EndsWith('?'))
+        else if (line.EndsWith('?'))
         {
             processCondition(line);
+        }
+        else
+        {
+            processAction(line);
         }
     }
 
@@ -58,6 +62,16 @@ public class RuleChecker : MonoBehaviour
         if (!Enum.TryParse(conditionName, out condition))
         {
             errorList.Add($"Unknown condition: {conditionName}");
+        }
+    }
+
+    private void processAction(string line)
+    {
+        string actionName = line.Split(' ')[0];
+        RuleAction action;
+        if (!Enum.TryParse(actionName, out action))
+        {
+            errorList.Add($"Unknown action: {actionName}");
         }
     }
 }
