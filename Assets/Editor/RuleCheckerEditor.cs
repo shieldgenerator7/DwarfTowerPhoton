@@ -6,15 +6,17 @@ using UnityEngine;
 [CustomEditor(typeof(RuleChecker))]
 public class RuleCheckerEditor : Editor
 {
-    static bool testOn = false;
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
 
+        RuleChecker rc = (target as RuleChecker);
+
         if (GUILayout.Button("Test"))
         {
-            RuleChecker rc = (target as RuleChecker);
-            rc.testOn = !rc.testOn;
+            rc.checkRule();
         }
+        GUILayout.Label("Errors:");
+        rc.ErrorList.ForEach(error => GUILayout.Label(error));
     }
 }

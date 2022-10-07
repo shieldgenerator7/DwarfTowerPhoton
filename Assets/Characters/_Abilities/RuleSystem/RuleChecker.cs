@@ -4,21 +4,14 @@ using UnityEngine;
 
 public class RuleChecker : MonoBehaviour
 {
-    public string test = "helloyesthsworks";
-    public AbilitySettings settings;
     public Rule rule;
+    
+    private List<string> errorList;
+    public List<string> ErrorList => errorList;
 
-    public bool testOn = false;
-
-    // Start is called before the first frame update
-    void Start()
+    public void checkRule()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        errorList.Clear();
+        errorList.Add("Everything looks good");
     }
 }
