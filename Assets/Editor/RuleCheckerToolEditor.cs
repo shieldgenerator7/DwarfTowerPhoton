@@ -8,9 +8,20 @@ public class RuleCheckerToolEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        DrawDefaultInspector();
-
         RuleCheckerTool rct = (target as RuleCheckerTool);
+
+        if (GUILayout.Button("Select Folder"))
+        {
+            Selection.selectionChanged -= OnSelectFolder;
+            Selection.selectionChanged += OnSelectFolder;
+        }
+        if (GUILayout.Button("Clear Folder"))
+        {
+            Selection.selectionChanged -= OnSelectFolder;
+            rct.folderToSearch = "";
+        }
+
+        DrawDefaultInspector();
 
         if (GUILayout.Button("Find Rules"))
         {
@@ -22,5 +33,16 @@ public class RuleCheckerToolEditor : Editor
         }
         GUILayout.Label("Errors:");
         rct.ErrorList.ForEach(error => GUILayout.Label(error));
+    }
+
+    private void OnSelectFolder()
+    {
+        RuleCheckerTool rct = (target as RuleCheckerTool);
+        string path = AssetDatabase.GetAssetPath(Selection.activeInstanceID);
+        rct.folderToSearch = path;
+        //
+        Selection.selectionChanged -= OnSelectFolder;
+        //Selection.SetActiveObjectWithContext(rct, rct.gameObject);
+        //Selection.activeGameObject = rct.gameObject;
     }
 }
