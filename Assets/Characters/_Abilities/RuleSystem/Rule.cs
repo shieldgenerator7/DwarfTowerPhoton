@@ -8,6 +8,6 @@ public class Rule : ScriptableObject
     public AbilitySettings ability;
     public TargetSettings target;
     public RuleTrigger trigger;
-    [Multiline(20)]
+    [Multiline(50)]
     public string ruleText;
 }

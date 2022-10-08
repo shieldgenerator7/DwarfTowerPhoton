@@ -14,7 +14,7 @@ public static class RuleChecker
         errorList.RemoveAll(err => String.IsNullOrWhiteSpace(err));
         if (errorList.Count > 0)
         {
-            errorList.Insert(0, $"Rule {rule.name}: {errorList.Count} Errors Found:");
+            errorList.Insert(0, $"===  {errorList.Count}  --  {rule.name}  ===");
         }
         return errorList;
     }
