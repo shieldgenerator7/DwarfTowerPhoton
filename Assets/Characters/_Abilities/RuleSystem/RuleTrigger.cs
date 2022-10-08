@@ -28,7 +28,6 @@ public enum RuleTrigger
     OnStatusChanged,
     //Input
     OnInput,
-    //Controller Input
-    //TODO: reorder these so they're grouped better
-    OnControllerInputChanged,
+    //Controller Input (as in the player who controls this object)
+    OnInputController,
 }

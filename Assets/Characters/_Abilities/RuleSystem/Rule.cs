@@ -6,7 +6,8 @@ using UnityEngine;
 public class Rule : ScriptableObject
 {
     public AbilitySettings ability;
+    public TargetSettings target;
     public RuleTrigger trigger;
-    [Multiline(10)]
+    [Multiline(20)]
     public string ruleText;
 }
