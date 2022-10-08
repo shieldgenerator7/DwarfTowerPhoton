@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a656b64ecfeb8640ad17cd459fc2767, type: 3}
-  m_Name: TestRule
+  m_Name: Rule_shot_start
   m_EditorClassIdentifier: 
-  ability: {fileID: 11400000, guid: 95baccd883ba6e14983591a104e3fe17, type: 2}
-  trigger: 16
-  ruleText: "OnInput:\r\n\n    buttonHeld Ability1?\r\n    timerOff?\r\n    amina?\r\n\n   
-    createObject\r\n    aminaUse\r\n    timerStart\n    //setVar test 1\n    //getVar
-    test"
+  ability: {fileID: 11400000, guid: 1a9881fe0964545429112c38fb06ee4c, type: 2}
+  trigger: 0
+  ruleText: 'OnStart:
+
+
+    moveDir'
