@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a656b64ecfeb8640ad17cd459fc2767, type: 3}
-  m_Name: Rule_shot_update
+  m_Script: {fileID: 11500000, guid: 17efe355a09d9e1459aeb7a0c8e56717, type: 3}
+  m_Name: Target_damageShotOT
   m_EditorClassIdentifier: 
-  ability: {fileID: 11400000, guid: 1a9881fe0964545429112c38fb06ee4c, type: 2}
-  trigger: 1
-  ruleText: 'OnUpdate:
-
-
-    damagePerSecond self'
+  entityTypes: 00000000
+  onAlly: 0
+  onEnemy: 1
+  onTrigger: 1
+  onCollision: 1

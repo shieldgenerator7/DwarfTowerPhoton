@@ -10,11 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a656b64ecfeb8640ad17cd459fc2767, type: 3}
-  m_Name: Rule_shot_update
+  m_Name: Rule_turret_ability_charge
   m_EditorClassIdentifier: 
-  ability: {fileID: 11400000, guid: 1a9881fe0964545429112c38fb06ee4c, type: 2}
-  trigger: 1
-  ruleText: 'OnUpdate:
+  ability: {fileID: 11400000, guid: 29485a5d380f223438895b3575f876c3, type: 2}
+  target: {fileID: 0}
+  trigger: 16
+  ruleText: 'OnInput:
 
 
-    damagePerSecond self'
+    buttonHeld Ability2?
+
+
+    aminaReservePerSecond
+
+    showEffect
+    0'

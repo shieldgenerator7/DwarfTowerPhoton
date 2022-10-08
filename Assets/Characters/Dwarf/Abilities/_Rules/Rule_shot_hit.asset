@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Rule_shot_hit
   m_EditorClassIdentifier: 
   ability: {fileID: 11400000, guid: 1a9881fe0964545429112c38fb06ee4c, type: 2}
-  trigger: 1
-  ruleText: 'OnUpdate
+  trigger: 6
+  ruleText: 'OnHit:
 
 
-    damagePerSecond self'
+    targetValid?
+
+
+    damage target'

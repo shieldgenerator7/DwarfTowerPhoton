@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a656b64ecfeb8640ad17cd459fc2767, type: 3}
-  m_Name: Rule_shot_update
+  m_Script: {fileID: 11500000, guid: d9a7fb3624b05b347b1572fe56a765df, type: 3}
+  m_Name: Ability_Turret
   m_EditorClassIdentifier: 
-  ability: {fileID: 11400000, guid: 1a9881fe0964545429112c38fb06ee4c, type: 2}
-  trigger: 1
-  ruleText: 'OnUpdate:
-
-
-    damagePerSecond self'
+  name: Turret
+  id: 1
