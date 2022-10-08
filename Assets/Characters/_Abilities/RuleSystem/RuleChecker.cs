@@ -2,100 +2,78 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
-public class RuleChecker : MonoBehaviour
+public static class RuleChecker
 {
-    public Rule rule;
 
-    private List<string> errorList;
-    public List<string> ErrorList => errorList;
-
-    public void findRule()
+    public static List<string> checkRule(Rule rule)
     {
-        //2022-10-07: copied from https://stackoverflow.com/a/56168544/2336212
-        List<Rule> ruleList = new List<Rule>();
-
-        string[] assetNames = AssetDatabase.FindAssets("");
-        foreach (string SOName in assetNames)
+        List<string> errorList = new List<string>();
+        getLines(rule).ForEach(line => errorList.Add(processLine(line)));
+        errorList.RemoveAll(err => String.IsNullOrEmpty(err));
+        if (errorList.Count > 0)
         {
-            string SOpath = AssetDatabase.GUIDToAssetPath(SOName);
-            Rule rule = AssetDatabase.LoadAssetAtPath<Rule>(SOpath);
-            if (rule)
-            {
-                ruleList.Add(rule);
-            }
+            errorList.Insert(0, $"Rule {rule.name}: {errorList.Count} Errors Found:");
         }
-        this.rule = ruleList.FirstOrDefault();
+        return errorList;
     }
 
-    public void checkRule()
-    {
-        errorList.Clear();
-        Lines.ForEach(line => processLine(line));
-        if (errorList.Count == 0)
-        {
-            errorList.Add("Everything looks good");
-        }
-        else
-        {
-            errorList.Insert(0, $"{errorList.Count} Errors Found:");
-        }
-    }
-
-    private List<string> Lines
+    private static List<string> getLines(Rule rule)
         => rule.ruleText.Trim().Split('\n').ToList()
             .ConvertAll(line => line.Trim());
 
-    private void processLine(string line)
+    private static string processLine(string line)
     {
         if (line.StartsWith("//"))
         {
             //it's a comment, don't process it
-            return;
+            return "";
         }
         if (line.EndsWith(':'))
         {
-            processTrigger(line);
+            return processTrigger(line);
         }
         else if (line.EndsWith('?'))
         {
-            processCondition(line);
+            return processCondition(line);
         }
         else
         {
-            processAction(line);
+            return processAction(line);
         }
     }
 
-    private void processTrigger(string line)
+    private static string processTrigger(string line)
     {
         string triggerName = line.Split(':')[0];
         RuleTrigger trigger;
         if (!Enum.TryParse(triggerName, out trigger))
         {
-            errorList.Add($"Unknown trigger: {triggerName}");
+            return $"Unknown trigger: {triggerName}";
         }
+        return "";
     }
 
-    private void processCondition(string line)
+    private static string processCondition(string line)
     {
         string conditionName = line.Split('?', ' ')[0];
         RuleCondition condition;
         if (!Enum.TryParse(conditionName, out condition))
         {
-            errorList.Add($"Unknown condition: {conditionName}");
+            return $"Unknown condition: {conditionName}";
         }
+        return "";
     }
 
-    private void processAction(string line)
+    private static string processAction(string line)
     {
         string actionName = line.Split(' ')[0];
         RuleAction action;
         if (!Enum.TryParse(actionName, out action))
         {
-            errorList.Add($"Unknown action: {actionName}");
+            return $"Unknown action: {actionName}";
         }
+        return "";
     }
 }

@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(RuleChecker))]
-public class RuleCheckerEditor : Editor
+[CustomEditor(typeof(RuleCheckerTool))]
+public class RuleCheckerToolEditor : Editor
 {
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
 
-        RuleChecker rc = (target as RuleChecker);
+        RuleCheckerTool rct = (target as RuleCheckerTool);
 
         if (GUILayout.Button("Find Rules"))
         {
-            rc.findRule();
+            rct.findRules();
         }
         if (GUILayout.Button("Check for Errors"))
         {
-            rc.checkRule();
+            rct.checkRules();
         }
         GUILayout.Label("Errors:");
-        rc.ErrorList.ForEach(error => GUILayout.Label(error));
+        rct.ErrorList.ForEach(error => GUILayout.Label(error));
     }
 }
