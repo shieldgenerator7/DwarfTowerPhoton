@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a7fb3624b05b347b1572fe56a765df, type: 3}
   m_Name: Ability_Barricade
   m_EditorClassIdentifier: 
-  name: Turret
-  id: 1
+  name: Barricade
+  id: 2
