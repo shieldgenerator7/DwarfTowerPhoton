@@ -66,7 +66,8 @@ public class CustomMenu
     [MenuItem("SG7/Editor/Show or Hide All Colliders %&c")]
     public static void showHideAllColliders()
     {
-        Physics2D.alwaysShowColliders = !Physics2D.alwaysShowColliders;
+        //Physics2D.alwaysShowColliders = !Physics2D.alwaysShowColliders;
+        Debug.LogWarning("This feature needs reimplemented after Physics2D.alwaysShowColliders was deprecated");
     }
 
     [MenuItem("SG7/Build/Build Windows %w")]
