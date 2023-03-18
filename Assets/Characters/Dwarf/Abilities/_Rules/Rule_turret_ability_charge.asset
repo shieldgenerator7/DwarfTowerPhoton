@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ability: {fileID: 11400000, guid: 29485a5d380f223438895b3575f876c3, type: 2}
   target: {fileID: 0}
-  trigger: 16
-  ruleText: 'OnInput:
+  trigger: 1
+  ruleText: 'OnUpdate:
 
 
     buttonHeld Ability2?
