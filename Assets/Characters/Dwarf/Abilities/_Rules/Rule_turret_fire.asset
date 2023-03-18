@@ -17,13 +17,13 @@ MonoBehaviour:
   trigger: 16
   ruleText: 'OnInputController:
 
-    
+
 
     buttonDown Ability1?
 
     timerOff?
 
-    
+
 
     createObject
 

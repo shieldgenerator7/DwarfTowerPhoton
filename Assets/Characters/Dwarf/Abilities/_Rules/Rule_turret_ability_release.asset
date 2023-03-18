@@ -17,13 +17,13 @@ MonoBehaviour:
   trigger: 16
   ruleText: 'OnInput:
 
-    
+
 
     buttonUp Ability2?
 
     timerOff?
 
-    
+
 
     multiplierSet
     aminaReserved
