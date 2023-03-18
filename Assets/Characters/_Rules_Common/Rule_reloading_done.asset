@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ability: {fileID: 0}
   target: {fileID: 0}
-  trigger: 1
-  ruleText: 'OnUpdate:
+  trigger: 10
+  ruleText: 'OnAminaFull:
 
 
-    aminaRechargePerSecond'
+    ruleSetSwitch'
